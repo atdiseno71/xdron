@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Session;
+use App\Providers\RouteServiceProvider;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Traits\Backup;
 
 class LoginController extends Controller
 {
@@ -19,7 +22,12 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, Backup;
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
 
     /**
      * Where to redirect users after login.
@@ -37,4 +45,25 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /* public function username()
+    {
+        return 'cedula';
+    } */
+
+    //cerrar la sesion creada
+    public function logout()
+    {
+
+        // Creamos una copia de seguridad de la base de datos
+        $this->generate();
+
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('/');
+
+    }
+
 }
