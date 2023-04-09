@@ -3,6 +3,7 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
+    <link rel="stylesheet" href="{{ asset('css/plugins/select2.min.css') }}">
     @stack('css')
     @yield('css')
 @stop
@@ -52,6 +53,19 @@
 @stop
 
 @section('adminlte_js')
+    <!-- Sweetalert2 for alerts more nice -->
+    <script src="{{ asset('js/plugins/sweetalert2@11.js') }}"></script>
+    <!-- Load plugins -->
+    <script src="{{ asset('js/plugins/select2.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/patternomaly.js') }}"></script>
+    <script src="{{ asset('js/plugins/chart.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/parsley.min.js') }}"></script>
+    <script language="JavaScript">
+        $(document).ready(() => {
+            $('.select2').select2();
+        });
+        history.forward();
+    </script>
     @stack('js')
     @yield('js')
 @stop

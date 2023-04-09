@@ -20,6 +20,8 @@
     </title>
 
     {{-- Custom stylesheets (pre AdminLTE) --}}
+    <link rel="stylesheet" href="{{ asset('css/plugins/datatables.min.css') }}">
+
     @yield('adminlte_css_pre')
 
     {{-- Base Stylesheets --}}
@@ -103,6 +105,7 @@
     @endif
 
     {{-- Custom Scripts --}}
+    <script src="{{ asset('js/plugins/datatables.min.js') }}"></script>
     @yield('adminlte_js')
 
 </body>
