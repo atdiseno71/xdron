@@ -30,6 +30,9 @@
                     @include('layouts.message')
 
                     <div class="card-body">
+                        <div class="pagination-div">
+                            {{ $users->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
@@ -64,7 +67,9 @@
                                 </tbody>
                             </table>
                             <br>
-                            {{ $users->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                            <div class="pagination-div">
+                                {{ $users->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                            </div>
                         </div>
                     </div>
                 </div>

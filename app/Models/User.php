@@ -29,7 +29,7 @@ class User extends Authenticatable
 		'email' => 'required',
     ];
 
-    protected $perPage = 20;
+    protected $perPage = 50;
 
     /**
      * The attributes that should be hidden for serialization.
