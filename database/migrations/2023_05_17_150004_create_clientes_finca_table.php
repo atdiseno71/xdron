@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('calibracion', function (Blueprint $table) {
+        Schema::create('clientes_finca', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('id_cliente')->nullable()->constrained()->onDelete('cascade');
@@ -19,16 +19,15 @@ return new class extends Migration
                 ->references('id')
                 ->on('cliente');
 
-            $table->date('fecha');
-            $table->string('archivo1')->nullable();
-            $table->string('observacion_piloto')->nullable();
-            $table->string('observacion_cliente')->nullable();
-            $table->string('archivo2');
-            $table->string('archivo3');
-            $table->unsignedBigInteger('id_user')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('id_user')
+            $table->unsignedBigInteger('id_finca')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('id_finca')
                 ->references('id')
-                ->on('users');
+                ->on('finca');
+
+            $table->unsignedBigInteger('zona_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('zona_id')
+                ->references('id')
+                ->on('zonas');
 
             $table->timestamps();
             $table->softDeletes();
@@ -40,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calibracion');
+        Schema::dropIfExists('clientes_finca_zonas');
     }
 };

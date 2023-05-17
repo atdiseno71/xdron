@@ -25,6 +25,11 @@ return new class extends Migration
             $table->string('email2');
             $table->string('email3');
 
+            $table->unsignedBigInteger('id_finca')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('id_finca')
+                ->references('id')
+                ->on('finca');
+
             $table->timestamps();
             $table->softDeletes();
         });

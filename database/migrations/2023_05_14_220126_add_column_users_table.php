@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grupo_inventario', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('cuenta_puc');
-
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('username');
+            $table->string('lastname');
         });
     }
 
@@ -26,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grupo_inventario');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('username');
+            $table->dropColumn('lastname');
+        });
     }
 };
