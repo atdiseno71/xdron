@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
         // Demo usuario
         User::create([
             'name' => fake()->name(),
+            'username' => fake()->username(),
+            'lastname' => fake()->lastname(),
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),

@@ -6,20 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Cliente
+ * Class Zona
  *
  * @property $id
- * @property $nit
- * @property $nombre
- * @property $contacto
- * @property $email
- * @property $campos_nuevos
- * @property $direccion
- * @property $telefono
- * @property $email_encargado
- * @property $email1
- * @property $email2
- * @property $email3
+ * @property $name
  * @property $id_finca
  * @property $created_at
  * @property $updated_at
@@ -31,18 +21,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Cliente extends Model
+class Zona extends Model
 {
     use SoftDeletes;
 
     static $rules = [
-		'nit' => 'required',
-		'nombre' => 'required',
-		'email' => 'required',
-		'email_encargado' => 'required',
-		'email1' => 'required',
-		'email2' => 'required',
-		'email3' => 'required',
+		'name' => 'required',
     ];
 
     protected $perPage = 20;
@@ -52,7 +36,7 @@ class Cliente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nit','nombre','contacto','email','campos_nuevos','direccion','telefono','email_encargado','email1','email2','email3','id_finca'];
+    protected $fillable = ['name','id_finca'];
 
 
     /**
@@ -60,7 +44,7 @@ class Cliente extends Model
      */
     public function clientesFincas()
     {
-        return $this->hasMany('App\Models\ClientesFinca', 'id_cliente', 'id');
+        return $this->hasMany('App\Models\ClientesFinca', 'zona_id', 'id');
     }
     
     /**
@@ -76,7 +60,7 @@ class Cliente extends Model
      */
     public function operacions()
     {
-        return $this->hasMany('App\Models\Operacion', 'id_cliente', 'id');
+        return $this->hasMany('App\Models\Operacion', 'zona_id', 'id');
     }
     
 
