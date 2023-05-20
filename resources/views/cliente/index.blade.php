@@ -47,6 +47,7 @@
 										<th>Email1</th>
 										<th>Email2</th>
 										<th>Email3</th>
+										<th>Id Finca</th>
 
                                         <th></th>
                                     </tr>
@@ -67,6 +68,7 @@
 											<td>{{ $cliente->email1 }}</td>
 											<td>{{ $cliente->email2 }}</td>
 											<td>{{ $cliente->email3 }}</td>
+											<td>{{ $cliente->id_finca }}</td>
 
                                             <td>
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">

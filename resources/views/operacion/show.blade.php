@@ -21,28 +21,44 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Fecha:</strong>
-                            {{ $operacion->fecha }}
+                            <strong>Id Servicio:</strong>
+                            {{ $operacion->id_servicio }}
                         </div>
                         <div class="form-group">
-                            <strong>Horas Voladas:</strong>
-                            {{ $operacion->horas_voladas }}
+                            <strong>Descarga:</strong>
+                            {{ $operacion->descarga }}
                         </div>
                         <div class="form-group">
-                            <strong>Consumo Combustible:</strong>
-                            {{ $operacion->consumo_combustible }}
+                            <strong>Fecha Ejecucion:</strong>
+                            {{ $operacion->fecha_ejecucion }}
                         </div>
                         <div class="form-group">
-                            <strong>Motivo:</strong>
-                            {{ $operacion->motivo }}
+                            <strong>Id Cliente:</strong>
+                            {{ $operacion->id_cliente }}
                         </div>
                         <div class="form-group">
-                            <strong>Aterrizajes:</strong>
-                            {{ $operacion->aterrizajes }}
+                            <strong>Id Finca:</strong>
+                            {{ $operacion->id_finca }}
                         </div>
                         <div class="form-group">
-                            <strong>Matricula:</strong>
-                            {{ $operacion->matricula }}
+                            <strong>Zona Id:</strong>
+                            {{ $operacion->zona_id }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Id Piloto:</strong>
+                            {{ $operacion->id_piloto }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Evidencia Record:</strong>
+                            {{ $operacion->evidencia_record }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Evidencia Track:</strong>
+                            {{ $operacion->evidencia_track }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Evidencia Gps:</strong>
+                            {{ $operacion->evidencia_gps }}
                         </div>
 
                     </div>

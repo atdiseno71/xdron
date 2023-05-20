@@ -7,10 +7,16 @@ return [
         'icon' => 'fas fa-fw fa-users',
         // 'can' => 'principal.admin.home'
     ],
-    /* [
-        'text' => 'clientes',
-        'url' => 'clientes',
-        'icon' => 'fas fa-fw fa-user',
+    [
+        'text' => 'Fincas',
+        'url' => 'fincas',
+        'icon' => 'fa fa-street-view',
         //'can' => 'principal.admin.home'
-    ] */
+    ],
+    [
+        'text' => 'Zonas',
+        'url' => 'zonas',
+        'icon' => 'fa fa-map',
+        //'can' => 'principal.admin.home'
+    ],
 ];

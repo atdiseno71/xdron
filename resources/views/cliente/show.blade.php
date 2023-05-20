@@ -64,6 +64,10 @@
                             <strong>Email3:</strong>
                             {{ $cliente->email3 }}
                         </div>
+                        <div class="form-group">
+                            <strong>Id Finca:</strong>
+                            {{ $cliente->id_finca }}
+                        </div>
 
                     </div>
                 </div>

@@ -56,6 +56,11 @@
             {{ Form::text('email3', $cliente->email3, ['class' => 'form-control' . ($errors->has('email3') ? ' is-invalid' : ''), 'placeholder' => 'Email3']) }}
             {!! $errors->first('email3', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('id_finca') }}
+            {{ Form::text('id_finca', $cliente->id_finca, ['class' => 'form-control' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => 'Id Finca']) }}
+            {!! $errors->first('id_finca', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
 
     </div>
     <div class="box-footer mt20">

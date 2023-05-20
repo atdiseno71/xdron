@@ -36,12 +36,16 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Fecha</th>
-										<th>Horas Voladas</th>
-										<th>Consumo Combustible</th>
-										<th>Motivo</th>
-										<th>Aterrizajes</th>
-										<th>Matricula</th>
+										<th>Id Servicio</th>
+										<th>Descarga</th>
+										<th>Fecha Ejecucion</th>
+										<th>Id Cliente</th>
+										<th>Id Finca</th>
+										<th>Zona Id</th>
+										<th>Id Piloto</th>
+										<th>Evidencia Record</th>
+										<th>Evidencia Track</th>
+										<th>Evidencia Gps</th>
 
                                         <th></th>
                                     </tr>
@@ -51,12 +55,16 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $operacion->fecha }}</td>
-											<td>{{ $operacion->horas_voladas }}</td>
-											<td>{{ $operacion->consumo_combustible }}</td>
-											<td>{{ $operacion->motivo }}</td>
-											<td>{{ $operacion->aterrizajes }}</td>
-											<td>{{ $operacion->matricula }}</td>
+											<td>{{ $operacion->id_servicio }}</td>
+											<td>{{ $operacion->descarga }}</td>
+											<td>{{ $operacion->fecha_ejecucion }}</td>
+											<td>{{ $operacion->id_cliente }}</td>
+											<td>{{ $operacion->id_finca }}</td>
+											<td>{{ $operacion->zona_id }}</td>
+											<td>{{ $operacion->id_piloto }}</td>
+											<td>{{ $operacion->evidencia_record }}</td>
+											<td>{{ $operacion->evidencia_track }}</td>
+											<td>{{ $operacion->evidencia_gps }}</td>
 
                                             <td>
                                                 <form action="{{ route('operacions.destroy',$operacion->id) }}" method="POST">

@@ -20,13 +20,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property $email1
  * @property $email2
  * @property $email3
+ * @property $id_finca
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
  *
- * @property Aeronave[] $aeronaves
- * @property Aplicacion[] $aplicacions
- * @property Calibracion[] $calibracions
+ * @property ClientesFinca[] $clientesFincas
+ * @property Finca $finca
+ * @property Operacion[] $operacions
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -51,31 +52,31 @@ class Cliente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nit','nombre','contacto','email','campos_nuevos','direccion','telefono','email_encargado','email1','email2','email3'];
+    protected $fillable = ['nit','nombre','contacto','email','campos_nuevos','direccion','telefono','email_encargado','email1','email2','email3','id_finca'];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function aeronaves()
+    public function clientesFincas()
     {
-        return $this->hasMany('App\Models\Aeronave', 'id_cliente', 'id');
+        return $this->hasMany('App\Models\ClientesFinca', 'id_cliente', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function finca()
+    {
+        return $this->hasOne('App\Models\Finca', 'id', 'id_finca');
     }
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function aplicacions()
+    public function operacions()
     {
-        return $this->hasMany('App\Models\Aplicacion', 'id_cliente', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function calibracions()
-    {
-        return $this->hasMany('App\Models\Calibracion', 'id_cliente', 'id');
+        return $this->hasMany('App\Models\Operacion', 'id_cliente', 'id');
     }
     
 
