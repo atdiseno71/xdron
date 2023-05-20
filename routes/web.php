@@ -6,6 +6,11 @@ use App\Http\Controllers\FincaController;
 use App\Http\Controllers\ZonaController;
 use Illuminate\Support\Facades\Route;
 
+/* RUTA DE INICIO PARA LAS PWA */
+Route::get('/', function () {
+    return redirect()->route('home');
+});
+
 //En caso de que no este logeado no le muestre nada
 Route::group(['middleware' => 'auth'], function () {
 
