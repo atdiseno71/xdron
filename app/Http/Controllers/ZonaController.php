@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Finca;
 use App\Models\Zona;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,9 @@ class ZonaController extends Controller
      */
     public function create()
     {
+        $fincas = Finca::pluck('name', 'id');
         $zona = new Zona();
-        return view('zona.create', compact('zona'));
+        return view('zona.create', compact('zona', 'fincas'));
     }
 
     /**

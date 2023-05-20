@@ -2,29 +2,24 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\V1\UserController;
+use App\Http\Controllers\FincaController;
+use App\Http\Controllers\ZonaController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 //En caso de que no este logeado no le muestre nada
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-/* USUARIOS */
-Route::resource('users', UserController::class);
-
+    /* USUARIOS */
+    Route::resource('users', UserController::class);
+    /* FINCAS */
+    Route::resource('fincas', FincaController::class);
+    /* ZONAS */
+    Route::resource('zonas', ZonaController::class);
 });
 
 // Auth::routes();

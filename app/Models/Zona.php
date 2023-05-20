@@ -25,6 +25,8 @@ class Zona extends Model
 {
     use SoftDeletes;
 
+    protected $tables = "zonas";
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -46,7 +48,7 @@ class Zona extends Model
     {
         return $this->hasMany('App\Models\ClientesFinca', 'zona_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -54,7 +56,7 @@ class Zona extends Model
     {
         return $this->hasOne('App\Models\Finca', 'id', 'id_finca');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -62,6 +64,6 @@ class Zona extends Model
     {
         return $this->hasMany('App\Models\Operacion', 'zona_id', 'id');
     }
-    
+
 
 }
