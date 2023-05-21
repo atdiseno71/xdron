@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('servicio', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('observaciones')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

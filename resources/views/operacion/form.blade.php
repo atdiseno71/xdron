@@ -51,6 +51,11 @@
             {{ Form::text('evidencia_gps', $operacion->evidencia_gps, ['class' => 'form-control' . ($errors->has('evidencia_gps') ? ' is-invalid' : ''), 'placeholder' => 'Evidencia Gps']) }}
             {!! $errors->first('evidencia_gps', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('observaciones') }}
+            {{ Form::text('observaciones', $operacion->observaciones, ['class' => 'form-control' . ($errors->has('observaciones') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
+            {!! $errors->first('observaciones', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
 
     </div>
     <div class="box-footer mt20">

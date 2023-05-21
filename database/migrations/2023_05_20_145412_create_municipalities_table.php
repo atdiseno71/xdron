@@ -8,13 +8,15 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('finca', function (Blueprint $table) {
+        Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('observaciones')->nullable();
+            $table->foreignId('department_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();
@@ -23,9 +25,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('finca');
+        Schema::dropIfExists('municipalities');
     }
 };

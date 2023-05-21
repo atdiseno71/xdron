@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('zonas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('observaciones')->nullable();
 
             $table->unsignedBigInteger('id_finca')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('id_finca')

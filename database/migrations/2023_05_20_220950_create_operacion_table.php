@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('evidencia_record')->nullable();
             $table->string('evidencia_track')->nullable();
             $table->string('evidencia_gps')->nullable();
+            $table->text('observaciones')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property $evidencia_record
  * @property $evidencia_track
  * @property $evidencia_gps
+ * @property $observaciones
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
@@ -46,7 +47,7 @@ class Operacion extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_servicio','descarga','fecha_ejecucion','id_cliente','id_finca','zona_id','id_piloto','evidencia_record','evidencia_track','evidencia_gps'];
+    protected $fillable = ['id_servicio','descarga','fecha_ejecucion','id_cliente','id_finca','zona_id','id_piloto','evidencia_record','evidencia_track','evidencia_gps','observaciones'];
 
 
     /**

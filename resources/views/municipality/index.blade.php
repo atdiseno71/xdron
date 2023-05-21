@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Operacion
+    Municipality
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Operacion') }}
+                                {{ __('Municipality') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('operacions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('municipalities.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,42 +36,22 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Id Servicio</th>
-										<th>Descarga</th>
-										<th>Fecha Ejecucion</th>
-										<th>Id Cliente</th>
-										<th>Id Finca</th>
-										<th>Zona Id</th>
-										<th>Id Piloto</th>
-										<th>Evidencia Record</th>
-										<th>Evidencia Track</th>
-										<th>Evidencia Gps</th>
-										<th>Observaciones</th>
+										<th>Name</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($operacions as $operacion)
+                                    @foreach ($municipalities as $municipality)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $operacion->id_servicio }}</td>
-											<td>{{ $operacion->descarga }}</td>
-											<td>{{ $operacion->fecha_ejecucion }}</td>
-											<td>{{ $operacion->id_cliente }}</td>
-											<td>{{ $operacion->id_finca }}</td>
-											<td>{{ $operacion->zona_id }}</td>
-											<td>{{ $operacion->id_piloto }}</td>
-											<td>{{ $operacion->evidencia_record }}</td>
-											<td>{{ $operacion->evidencia_track }}</td>
-											<td>{{ $operacion->evidencia_gps }}</td>
-											<td>{{ $operacion->observaciones }}</td>
+											<td>{{ $municipality->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('operacions.destroy',$operacion->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('operacions.show',$operacion->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('operacions.edit',$operacion->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('municipalities.destroy',$municipality->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('municipalities.show',$municipality->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('municipalities.edit',$municipality->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -84,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $operacions->links() !!}
+                {!! $municipalities->links() !!}
             </div>
         </div>
     </div>

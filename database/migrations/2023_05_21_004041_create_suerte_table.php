@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('finca', function (Blueprint $table) {
+        Schema::create('suerte', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('observaciones')->nullable();
+
+            $table->unsignedBigInteger('id_zona')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('id_zona')
+                ->references('id')
+                ->on('zonas');
 
             $table->timestamps();
             $table->softDeletes();
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('finca');
+        Schema::dropIfExists('suerte');
     }
 };
