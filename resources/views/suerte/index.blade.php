@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Name</th>
 										<th>Observaciones</th>
 										<th>Id Zona</th>
@@ -47,13 +47,13 @@
                                     @foreach ($suertes as $suerte)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $suerte->name }}</td>
 											<td>{{ $suerte->observaciones }}</td>
 											<td>{{ $suerte->id_zona }}</td>
 
                                             <td>
-                                                <form action="{{ route('suertes.destroy',$suerte->id) }}" method="POST">
+                                                <form action="{{ route('suertes.destroy',$suerte->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('suertes.show',$suerte->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('suertes.edit',$suerte->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
@@ -68,8 +68,15 @@
                         </div>
                     </div>
                 </div>
-                {!! $suertes->links() !!}
+                {{ $suertes->appends(request()->except('page'))->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

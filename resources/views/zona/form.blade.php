@@ -2,10 +2,10 @@
     <div class="box-body">
 
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12">
                 <div class="form-group">
                     {{ Form::label('id_finca', 'Fincas') }}
-                    {{ Form::select('id_finca', $fincas, $zona->id_finca, ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => __('Select the category')]) }}
+                    {{ Form::select('id_finca', $fincas, $zona->id_finca, ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una finca']) }}
                     {!! $errors->first('id_finca', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

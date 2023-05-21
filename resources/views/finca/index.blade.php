@@ -51,7 +51,7 @@
 											<td>{{ $finca->created_at }}</td>
 
                                             <td>
-                                                <form action="{{ route('fincas.destroy',$finca->id) }}" method="POST"  class="form-delete">
+                                                <form action="{{ route('fincas.destroy',$finca->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('fincas.show',$finca->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('fincas.edit',$finca->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
                                                     @csrf

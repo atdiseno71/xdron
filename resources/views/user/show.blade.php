@@ -36,6 +36,10 @@
                             <strong>Lastname:</strong>
                             {{ $user->lastname }}
                         </div>
+                        <div class="form-group">
+                            <strong>Active:</strong>
+                            {{ $user->active }}
+                        </div>
 
                     </div>
                 </div>

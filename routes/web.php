@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\FincaController;
+use App\Http\Controllers\SuerteController;
 use App\Http\Controllers\ZonaController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('fincas', FincaController::class);
     /* ZONAS */
     Route::resource('zonas', ZonaController::class);
+    /* SUERTES */
+    Route::resource('suertes', SuerteController::class);
 });
 
 // Auth::routes();

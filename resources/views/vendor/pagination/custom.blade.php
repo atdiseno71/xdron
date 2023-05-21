@@ -1,4 +1,4 @@
-<ul class="pagination">
+<ul class="pagination" style="justify-content: center;">
     <li class="page-item {{ $paginator->onFirstPage() ? 'disabled' : '' }}">
         <a class="page-link" href="{{ $paginator->previousPageUrl() }}">Anterior</a>
     </li>

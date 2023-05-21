@@ -24,6 +24,8 @@ class Suerte extends Model
 {
     use SoftDeletes;
 
+    protected $table = "suerte";
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -45,6 +47,6 @@ class Suerte extends Model
     {
         return $this->hasOne('App\Models\Zona', 'id', 'id_zona');
     }
-    
+
 
 }

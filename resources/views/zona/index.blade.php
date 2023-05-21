@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $zonas->links() !!}
+                {{ $zonas->appends(request()->except('page'))->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>

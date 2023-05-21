@@ -19,4 +19,10 @@ return [
         'icon' => 'fa fa-map',
         //'can' => 'principal.admin.home'
     ],
+    [
+        'text' => 'Suerte',
+        'url' => 'suertes',
+        'icon' => 'fa fa-map',
+        //'can' => 'principal.admin.home'
+    ],
 ];

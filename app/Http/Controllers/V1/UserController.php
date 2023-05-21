@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -36,8 +37,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $roles = Role::pluck('name', 'id');
         $user = new User();
-        return view('user.create', compact('user'));
+        return view('user.create', compact('user', 'roles'));
     }
 
     /**
