@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\V1\SuerteController;
+use App\Http\Controllers\V1\FincaController;
+use App\Http\Controllers\V1\ZonaController;
 use App\Http\Controllers\V1\UserController;
-use App\Http\Controllers\FincaController;
-use App\Http\Controllers\SuerteController;
-use App\Http\Controllers\ZonaController;
 use Illuminate\Support\Facades\Route;
 
 /* RUTA DE INICIO PARA LAS PWA */
@@ -15,10 +15,10 @@ Route::get('/', function () {
 //En caso de que no este logeado no le muestre nada
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('home.welcome');
 
     /* USUARIOS */
     Route::resource('users', UserController::class);

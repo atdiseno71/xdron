@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
-use App\Models\Finca;
 use App\Models\Zona;
+use App\Models\Finca;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class ZonaController
@@ -74,9 +75,10 @@ class ZonaController extends Controller
      */
     public function edit($id)
     {
+        $fincas = Finca::pluck('name', 'id');
         $zona = Zona::find($id);
 
-        return view('zona.edit', compact('zona'));
+        return view('zona.edit', compact('zona','fincas'));
     }
 
     /**

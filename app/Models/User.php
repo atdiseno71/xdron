@@ -37,6 +37,7 @@ class User extends Authenticatable
 		'username' => 'required',
 		'lastname' => 'required',
 		'active' => 'required',
+		'id_role' => 'required',
     ];
 
     protected $perPage = 20;

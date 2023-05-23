@@ -5,24 +5,24 @@ return [
         'text' => 'Usuarios',
         'url' => 'users',
         'icon' => 'fas fa-fw fa-users',
-        // 'can' => 'principal.admin.home'
+        'can' => 'users.index'
     ],
     [
         'text' => 'Fincas',
         'url' => 'fincas',
         'icon' => 'fa fa-street-view',
-        //'can' => 'principal.admin.home'
+        'can' => 'fincas.index'
     ],
     [
         'text' => 'Zonas',
         'url' => 'zonas',
         'icon' => 'fa fa-map',
-        //'can' => 'principal.admin.home'
+        'can' => 'zonas.index'
     ],
     [
         'text' => 'Suerte',
         'url' => 'suertes',
         'icon' => 'fa fa-map',
-        //'can' => 'principal.admin.home'
+        'can' => 'suertes.index'
     ],
 ];

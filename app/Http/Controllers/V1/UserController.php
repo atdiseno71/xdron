@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\V1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserController
@@ -13,6 +16,12 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
+    private $model;
+
+    function __construct()
+    {
+        $this->model = new User();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,9 +59,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         request()->validate(User::$rules);
 
-        $user = User::create($request->all());
+        $request['password'] = Hash::make($request['username']);
+        $new_user = $this->model->create($request->all());
+
+        Log::info($new_user);
+
+        // $user = User::create($request->all());
+
+        $role = DB::table('roles')->where('id', '=', $request['id_role'])->get();
+        Log::info($role);
+        $new_user->roles()->attach($role[0]->id);
 
         return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
@@ -79,9 +98,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::pluck('name', 'id');
         $user = User::find($id);
 
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user', 'roles'));
     }
 
     /**
