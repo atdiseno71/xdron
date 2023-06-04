@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\TypeDocument;
 use Illuminate\Support\Facades\Log;
+
+use Livewire\WithPagination;
 
 /**
  * Class UserController
@@ -16,6 +19,11 @@ use Illuminate\Support\Facades\Log;
  */
 class UserController extends Controller
 {
+
+    use WithPagination;
+
+    protected $paginationTheme = "bootstrap";
+
     private $model;
 
     function __construct()
@@ -29,14 +37,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $searchFor = $request->get('searchFor');
-
-        if ($searchFor == null) $productos = User::paginate();
-
-        $users = User::where('name','like','%' . $searchFor . '%')->paginate();
-
-        return view('user.index', compact('users','searchFor'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        $users = User::paginate();
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -46,9 +48,13 @@ class UserController extends Controller
      */
     public function create()
     {
+
+        $type_documents = TypeDocument::pluck('name', 'id');
         $roles = Role::pluck('name', 'id');
+
         $user = new User();
-        return view('user.create', compact('user', 'roles'));
+
+        return view('user.create', compact('user', 'type_documents', 'roles'));
     }
 
     /**
@@ -63,18 +69,13 @@ class UserController extends Controller
         request()->validate(User::$rules);
 
         $request['password'] = Hash::make($request['username']);
+
         $new_user = $this->model->create($request->all());
 
-        Log::info($new_user);
-
-        // $user = User::create($request->all());
-
-        $role = DB::table('roles')->where('id', '=', $request['id_role'])->get();
-        Log::info($role);
-        $new_user->roles()->attach($role[0]->id);
+        $new_user->assignRole($request->id_role);
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'Usuario creado con éxito.');
     }
 
     /**
@@ -83,11 +84,11 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
+        $roles = Role::whereNotIn('id', [1])->get();
 
-        return view('user.show', compact('user'));
+        return view('user.editrol', compact('user', 'roles'));
     }
 
     /**
@@ -96,12 +97,15 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $roles = Role::pluck('name', 'id');
-        $user = User::find($id);
 
-        return view('user.edit', compact('user', 'roles'));
+        $type_documents = TypeDocument::pluck('name as label', 'id as value');
+        $roles = Role::pluck('name as label', 'id as value');
+
+        $user = $this->model->find($user->id);
+
+        return view('user.edit', compact('user', 'type_documents', 'roles'));
     }
 
     /**
@@ -117,8 +121,10 @@ class UserController extends Controller
 
         $user->update($request->all());
 
+        $user->assignRole($request->id_role);
+
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Usuario actualizado con éxito.');
     }
 
     /**
@@ -128,9 +134,28 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        $user = $this->model->find($id)->delete();
 
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Usuario eliminado con éxito.');
     }
+
+    /* Activar usuario en la plataforma */
+    public function active(Request $request, $id) {
+        $user = $this->model->find($id);
+        $user->active = $request->active == 'on' ? 1 : 0;
+        $user->save();
+        $action = $user->active == 1 ? 'activado' : 'desactivado';
+        $message = "Usuario {$action} con éxito.";
+
+        return redirect()->route('users.index')
+            ->with('success', $message);
+    }
+
+    public function updateRol(Request $request, User $user)
+    {
+        $user->assignRole($request->roles);
+        return redirect()->route('users.asignar', $user)->with('info', 'Se asignaron los roles correctamente');
+    }
+
 }

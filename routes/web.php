@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\V1\SuerteController;
 use App\Http\Controllers\V1\FincaController;
 use App\Http\Controllers\V1\ZonaController;
@@ -21,7 +22,15 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('home.welcome');
 
     /* USUARIOS */
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)
+        ->only(['index','create','store','edit','update','destroy'])
+        ->names('users');
+    // Asignar roles a usuarios
+    Route::post('users/{id}', [UserController::class, 'active'])->name('users.active');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.asignar');
+    Route::put('users/{user}', [UserController::class, 'updateRol']);
+    /* USUARIOS */
+    Route::resource('clientes', ClienteController::class);
     /* FINCAS */
     Route::resource('fincas', FincaController::class);
     /* ZONAS */
