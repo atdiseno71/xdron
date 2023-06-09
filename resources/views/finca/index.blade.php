@@ -37,8 +37,11 @@
                                         <th>No</th>
 
 										<th>Nombre</th>
-										<th>Fecha creado</th>
 
+										<th>Zonas</th>
+										<th>Suertes</th>
+										<th>Clientes</th>
+										<th>Fecha creado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -48,6 +51,15 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $finca->name }}</td>
+											<td>
+                                                <a class="btn btn-sm btn-success " href="{{ route('zonas.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                            </td>
+											<td>
+                                                <a class="btn btn-sm btn-success " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-success " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                            </td>
 											<td>{{ $finca->created_at }}</td>
 
                                             <td>

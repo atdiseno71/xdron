@@ -14,15 +14,15 @@ return [
         'can' => 'fincas.index'
     ],
     [
-        'text' => 'Zonas',
+        'text' => 'Operaciones',
         'url' => 'zonas',
         'icon' => 'fa fa-map',
         'can' => 'zonas.index'
     ],
-    [
+    /* [
         'text' => 'Suerte',
         'url' => 'suertes',
         'icon' => 'fa fa-map',
         'can' => 'suertes.index'
-    ],
+    ], */
 ];

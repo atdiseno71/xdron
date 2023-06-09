@@ -36,8 +36,9 @@ class User extends Authenticatable
 		'email' => 'required',
 		'username' => 'required',
 		'lastname' => 'required',
-		'active' => 'required',
 		'id_role' => 'required',
+		'id_type_document' => 'required',
+		'document_number' => 'required',
     ];
 
     protected $perPage = 20;
@@ -47,8 +48,17 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name','email','username','lastname','active'];
-
+    protected $fillable = [
+        'name',
+        'email',
+        'username',
+        'lastname',
+        'active',
+        'password',
+        'id_type_document',
+        'document_number',
+        'id_role',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

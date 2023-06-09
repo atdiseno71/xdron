@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'XGron',
+    'title' => 'XGRON',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -110,7 +110,7 @@ return [
         'enabled' => true,
         'img' => [
             'path' => 'images/icon.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'alt' => 'Cargando...',
             'effect' => 'animation__shake',
             'width' => 80,
             'height' => 80,

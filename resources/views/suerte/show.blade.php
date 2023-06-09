@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $suerte->name ?? "{{ __('Show') Suerte" }}
+    {{ $suerte->name ?? "__('Show') Suerte" }}
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $suerte->name }}
