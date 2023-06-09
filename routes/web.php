@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\V1\OperacionController;
+use App\Http\Controllers\V1\ClienteController;
 use App\Http\Controllers\V1\SuerteController;
 use App\Http\Controllers\V1\FincaController;
 use App\Http\Controllers\V1\ZonaController;
@@ -29,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{id}', [UserController::class, 'active'])->name('users.active');
     Route::get('users/{user}', [UserController::class, 'show'])->name('users.asignar');
     Route::put('users/{user}', [UserController::class, 'updateRol']);
-    /* USUARIOS */
+    /* CLIENTES */
     Route::resource('clientes', ClienteController::class);
     /* FINCAS */
     Route::resource('fincas', FincaController::class);
@@ -37,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('zonas', ZonaController::class);
     /* SUERTES */
     Route::resource('suertes', SuerteController::class);
+    /* SUERTES */
+    Route::resource('operaciones', OperacionController::class)->names('operaciones');
 });
 
 // Auth::routes();

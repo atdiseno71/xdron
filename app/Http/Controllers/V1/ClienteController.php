@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
+use App\Models\User;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class ClienteController
@@ -32,7 +34,10 @@ class ClienteController extends Controller
     public function create()
     {
         $cliente = new Cliente();
-        return view('cliente.create', compact('cliente'));
+
+        $users = User::where('id_role', config('roles.cliente'))->pluck('name', 'id');
+
+        return view('cliente.create', compact('cliente', 'users'));
     }
 
     /**
@@ -74,7 +79,9 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
 
-        return view('cliente.edit', compact('cliente'));
+        $users = User::where('id_role', config('roles.cliente'))->pluck('name', 'id');
+
+        return view('cliente.edit', compact('cliente', 'users'));
     }
 
     /**

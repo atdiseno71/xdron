@@ -38,16 +38,10 @@
 										<th>Nombre</th>
 										<th>Contacto</th>
 										<th>Email</th>
-										<th>Campos Nuevos</th>
-										<th>Direccion</th>
-										<th>Telefono</th>
-										<th>Email Encargado</th>
-										<th>Email1</th>
-										<th>Email2</th>
-										<th>Email3</th>
-										<th>Id Finca</th>
+										<th>Finca</th>
+										<th>Creación</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,26 +49,20 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $cliente->nit }}</td>
-											<td>{{ $cliente->nombre }}</td>
+											<td>{{ $cliente->user?->document_number }}</td>
+											<td>{{ $cliente->user?->name }}</td>
 											<td>{{ $cliente->contacto }}</td>
-											<td>{{ $cliente->email }}</td>
-											<td>{{ $cliente->campos_nuevos }}</td>
-											<td>{{ $cliente->direccion }}</td>
-											<td>{{ $cliente->telefono }}</td>
-											<td>{{ $cliente->email_encargado }}</td>
-											<td>{{ $cliente->email1 }}</td>
-											<td>{{ $cliente->email2 }}</td>
-											<td>{{ $cliente->email3 }}</td>
-											<td>{{ $cliente->id_finca }}</td>
+											<td>{{ $cliente->user?->email }}</td>
+											<td>{{ $cliente->finca?->name }}</td>
+											<td>{{ $cliente->created_at }}</td>
 
                                             <td>
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('clientes.show',$cliente->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('clientes.edit',$cliente->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('clientes.show',$cliente->id) }}"><i class="fa fa-fw fa-eye"></i></a> --}}
+                                                    <a class="btn btn-sm btn-success" href="{{ route('clientes.edit',$cliente->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -83,8 +71,10 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $clientes->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $clientes->links() !!}
             </div>
         </div>
     </div>

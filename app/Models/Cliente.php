@@ -35,14 +35,14 @@ class Cliente extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'cliente';
+
     static $rules = [
-		'nit' => 'required',
-		'nombre' => 'required',
-		'email' => 'required',
-		'email_encargado' => 'required',
-		'email1' => 'required',
-		'email2' => 'required',
-		'email3' => 'required',
+		'contacto' => 'required',
+		'direccion' => 'required',
+        'id_user' => 'required',
+        'id_finca' => 'required',
+        'contacto' => 'required',
     ];
 
     protected $perPage = 20;
@@ -52,7 +52,22 @@ class Cliente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nit','nombre','contacto','email','campos_nuevos','direccion','telefono','email_encargado','email1','email2','email3','id_finca'];
+    protected $fillable = [
+        // 'nit',
+        // 'nombre',
+        // 'email',
+        'id_user',
+        'contacto',
+        'campos_nuevos',
+        'direccion',
+        'telefono',
+        'email_encargado',
+        'email1',
+        'email2',
+        'email3',
+        'id_finca',
+        'observaciones',
+    ];
 
 
     /**
@@ -62,7 +77,7 @@ class Cliente extends Model
     {
         return $this->hasMany('App\Models\ClientesFinca', 'id_cliente', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -70,7 +85,15 @@ class Cliente extends Model
     {
         return $this->hasOne('App\Models\Finca', 'id', 'id_finca');
     }
-    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'id_user');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -78,6 +101,6 @@ class Cliente extends Model
     {
         return $this->hasMany('App\Models\Operacion', 'id_cliente', 'id');
     }
-    
+
 
 }
