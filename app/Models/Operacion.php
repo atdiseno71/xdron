@@ -36,6 +36,8 @@ class Operacion extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'operacion';
+
     static $rules = [
 		'fecha_ejecucion' => 'required',
     ];
@@ -57,7 +59,7 @@ class Operacion extends Model
     {
         return $this->hasOne('App\Models\Cliente', 'id', 'id_cliente');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -65,7 +67,7 @@ class Operacion extends Model
     {
         return $this->hasOne('App\Models\Finca', 'id', 'id_finca');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -73,7 +75,7 @@ class Operacion extends Model
     {
         return $this->hasOne('App\Models\Servicio', 'id', 'id_servicio');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -81,7 +83,7 @@ class Operacion extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_piloto');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -89,6 +91,6 @@ class Operacion extends Model
     {
         return $this->hasOne('App\Models\Zona', 'id', 'zona_id');
     }
-    
+
 
 }

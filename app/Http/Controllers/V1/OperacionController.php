@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
 use App\Models\Operacion;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class OperacionController
@@ -18,10 +19,10 @@ class OperacionController extends Controller
      */
     public function index()
     {
-        $operacions = Operacion::paginate();
+        $operaciones = Operacion::paginate();
 
-        return view('operacion.index', compact('operacions'))
-            ->with('i', (request()->input('page', 1) - 1) * $operacions->perPage());
+        return view('operacion.index', compact('operaciones'))
+            ->with('i', (request()->input('page', 1) - 1) * $operaciones->perPage());
     }
 
     /**
@@ -47,7 +48,7 @@ class OperacionController extends Controller
 
         $operacion = Operacion::create($request->all());
 
-        return redirect()->route('operacions.index')
+        return redirect()->route('operaciones.index')
             ->with('success', 'Operacion created successfully.');
     }
 
@@ -90,7 +91,7 @@ class OperacionController extends Controller
 
         $operacion->update($request->all());
 
-        return redirect()->route('operacions.index')
+        return redirect()->route('operaciones.index')
             ->with('success', 'Operacion updated successfully');
     }
 
@@ -103,7 +104,7 @@ class OperacionController extends Controller
     {
         $operacion = Operacion::find($id)->delete();
 
-        return redirect()->route('operacions.index')
+        return redirect()->route('operaciones.index')
             ->with('success', 'Operacion deleted successfully');
     }
 }

@@ -8,6 +8,12 @@ return [
         'can' => 'users.index'
     ],
     [
+        'text' => 'Clientes',
+        'url' => 'clientes',
+        'icon' => 'fas fa-fw fa-user',
+        'can' => 'clientes.index'
+    ],
+    [
         'text' => 'Fincas',
         'url' => 'fincas',
         'icon' => 'fa fa-street-view',
@@ -15,14 +21,20 @@ return [
     ],
     [
         'text' => 'Operaciones',
+        'url' => 'operaciones',
+        'icon' => 'fa fa-tasks',
+        'can' => 'zonas.index'
+    ],
+    [
+        'text' => 'Zonas',
         'url' => 'zonas',
         'icon' => 'fa fa-map',
         'can' => 'zonas.index'
     ],
-    /* [
+    [
         'text' => 'Suerte',
         'url' => 'suertes',
         'icon' => 'fa fa-map',
         'can' => 'suertes.index'
-    ], */
+    ],
 ];
