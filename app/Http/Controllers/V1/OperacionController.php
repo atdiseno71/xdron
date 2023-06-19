@@ -5,6 +5,10 @@ namespace App\Http\Controllers\V1;
 use App\Models\Operacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Finca;
+use App\Models\Servicio;
+use App\Models\User;
+use App\Models\Zona;
 
 /**
  * Class OperacionController
@@ -33,7 +37,18 @@ class OperacionController extends Controller
     public function create()
     {
         $operacion = new Operacion();
-        return view('operacion.create', compact('operacion'));
+
+        $servicios = Servicio::pluck('name as label', 'id as value');
+
+        $clientes = User::pluck('name as label', 'id as value')->where('id_role', config('roles.cliente'));
+
+        $fincas = Finca::pluck('name as label', 'id as value');
+
+        $zonas = Zona::pluck('name as label', 'id as value');
+
+        $pilotos = User::pluck('name as label', 'id as value')->where('id_role', config('roles.piloto'));
+
+        return view('operacion.create', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos'));
     }
 
     /**

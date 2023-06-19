@@ -36,19 +36,15 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Id Servicio</th>
-										<th>Descarga</th>
-										<th>Fecha Ejecucion</th>
-										<th>Id Cliente</th>
-										<th>Id Finca</th>
-										<th>Zona Id</th>
-										<th>Id Piloto</th>
-										<th>Evidencia Record</th>
-										<th>Evidencia Track</th>
-										<th>Evidencia Gps</th>
-										<th>Observaciones</th>
+										<th>Servicio</th>
+										<th>Fecha</th>
+										<th>Cliente</th>
+										<th>Finca</th>
+										<th>Zona</th>
+										<th>Piloto</th>
+										<th>Fecha creación</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,25 +52,21 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $operacion->id_servicio }}</td>
-											<td>{{ $operacion->descarga }}</td>
+											<td>{{ $operacion->servicio?->name }}</td>
 											<td>{{ $operacion->fecha_ejecucion }}</td>
 											<td>{{ $operacion->id_cliente }}</td>
 											<td>{{ $operacion->id_finca }}</td>
 											<td>{{ $operacion->zona_id }}</td>
 											<td>{{ $operacion->id_piloto }}</td>
-											<td>{{ $operacion->evidencia_record }}</td>
-											<td>{{ $operacion->evidencia_track }}</td>
-											<td>{{ $operacion->evidencia_gps }}</td>
-											<td>{{ $operacion->observaciones }}</td>
+											<td>{{ $operacion->created_at }}</td>
 
                                             <td>
-                                                <form action="{{ route('operaciones.destroy',$operacion->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('operaciones.show',$operacion->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('operaciones.edit',$operacion->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('operaciones.destroy',$operacion->id) }}" method="POST" class="form-delete">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('operaciones.show',$operacion->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('operaciones.edit',$operacion->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  {{ __('Delete') }} --}}</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -84,8 +76,15 @@
                         </div>
                     </div>
                 </div>
-                {!! $operaciones->links() !!}
+                {{ $operaciones->appends(request()->except('page'))->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1;
 use App\Models\Suerte;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Zona;
 
 /**
  * Class SuerteController
@@ -33,7 +34,10 @@ class SuerteController extends Controller
     public function create()
     {
         $suerte = new Suerte();
-        return view('suerte.create', compact('suerte'));
+
+        $zonas = Zona::pluck('name', 'id');
+
+        return view('suerte.create', compact('suerte', 'zonas'));
     }
 
     /**
@@ -49,7 +53,7 @@ class SuerteController extends Controller
         $suerte = Suerte::create($request->all());
 
         return redirect()->route('suertes.index')
-            ->with('success', 'Suerte created successfully.');
+            ->with('success', 'Suerte creada con éxito.');
     }
 
     /**
@@ -75,7 +79,9 @@ class SuerteController extends Controller
     {
         $suerte = Suerte::find($id);
 
-        return view('suerte.edit', compact('suerte'));
+        $zonas = Zona::pluck('name', 'id');
+
+        return view('suerte.edit', compact('suerte', 'zonas'));
     }
 
     /**
@@ -92,7 +98,7 @@ class SuerteController extends Controller
         $suerte->update($request->all());
 
         return redirect()->route('suertes.index')
-            ->with('success', 'Suerte updated successfully');
+            ->with('success', 'Suerte actualizada con éxito.');
     }
 
     /**
@@ -105,6 +111,6 @@ class SuerteController extends Controller
         $suerte = Suerte::find($id)->delete();
 
         return redirect()->route('suertes.index')
-            ->with('success', 'Suerte deleted successfully');
+            ->with('success', 'Suerte eliminada con éxito.');
     }
 }

@@ -23,11 +23,9 @@
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,9 +34,8 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Name</th>
-										<th>Observaciones</th>
-										<th>Id Zona</th>
+										<th>Nombre</th>
+										<th>Zona</th>
 
                                         <th></th>
                                     </tr>
@@ -49,8 +46,7 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $suerte->name }}</td>
-											<td>{{ $suerte->observaciones }}</td>
-											<td>{{ $suerte->id_zona }}</td>
+											<td>{{ $suerte->zona?->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('suertes.destroy',$suerte->id) }}" method="POST" class="form-delete">

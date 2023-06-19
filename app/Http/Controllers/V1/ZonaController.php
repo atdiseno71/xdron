@@ -110,4 +110,13 @@ class ZonaController extends Controller
         return redirect()->route('zonas.index')
             ->with('success', 'Zona deleted successfully');
     }
+
+    public function zonaFinca($id) {
+
+        $zonas = Zona::where('id_finca', $id)->pluck('name', 'id');
+
+        return $zonas;
+
+    }
+
 }

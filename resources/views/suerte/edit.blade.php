@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ __('Update') }} Suerte
+    Actualizar Suerte
 @endsection
 
 @section('content')
@@ -13,7 +13,10 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Suerte</span>
+                        <span class="card-title">Actualizar Suerte</span>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('suertes.index') }}"> Cancelar</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('suertes.update', $suerte->id) }}"  role="form" enctype="multipart/form-data">

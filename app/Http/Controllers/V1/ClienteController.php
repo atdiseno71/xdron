@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Models\User;
+use App\Models\Finca;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::paginate();
+        $clientes = User::where('id_role', config('roles.cliente'))->paginate();
 
         return view('cliente.index', compact('clientes'))
             ->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
@@ -36,8 +37,9 @@ class ClienteController extends Controller
         $cliente = new Cliente();
 
         $users = User::where('id_role', config('roles.cliente'))->pluck('name', 'id');
+        $fincas = Finca::where('id_role', config('roles.cliente'))->pluck('name', 'id');
 
-        return view('cliente.create', compact('cliente', 'users'));
+        return view('cliente.create', compact('cliente', 'users', 'fincas'));
     }
 
     /**
@@ -53,7 +55,7 @@ class ClienteController extends Controller
         $cliente = Cliente::create($request->all());
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente created successfully.');
+            ->with('success', 'Cliente creado con éxito.');
     }
 
     /**
@@ -77,11 +79,13 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $cliente = Cliente::find($id);
+        $user = User::find($id);
 
-        $users = User::where('id_role', config('roles.cliente'))->pluck('name', 'id');
+        $cliente = Cliente::where('id_user', $user->id)->first() ?? '';
 
-        return view('cliente.edit', compact('cliente', 'users'));
+        $fincas = Finca::pluck('name', 'id');
+
+        return view('cliente.edit', compact('user', 'fincas', 'cliente'));
     }
 
     /**
@@ -91,14 +95,18 @@ class ClienteController extends Controller
      * @param  Cliente $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, User $cliente)
     {
         request()->validate(Cliente::$rules);
 
-        $cliente->update($request->all());
+        $data = $request->all();
+
+        $data['id_user'] = $cliente->id;
+
+        $new_client = Cliente::create($data);
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente updated successfully');
+            ->with('success', 'Cliente actualizado con éxito.');
     }
 
     /**
@@ -108,9 +116,11 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Cliente::find($id)->delete();
+        $cliente = Cliente::where('id_user', $id)->delete();
+
+        $user = User::find($id)->delete();
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente deleted successfully');
+            ->with('success', 'Cliente eliminado con éxito.');
     }
 }

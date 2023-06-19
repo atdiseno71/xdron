@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class ServicioController
@@ -48,7 +49,7 @@ class ServicioController extends Controller
         $servicio = Servicio::create($request->all());
 
         return redirect()->route('servicios.index')
-            ->with('success', 'Servicio created successfully.');
+            ->with('success', 'Servicio creado con éxito.');
     }
 
     /**
@@ -91,7 +92,7 @@ class ServicioController extends Controller
         $servicio->update($request->all());
 
         return redirect()->route('servicios.index')
-            ->with('success', 'Servicio updated successfully');
+            ->with('success', 'Servicio actualizado con éxito.');
     }
 
     /**
@@ -104,6 +105,6 @@ class ServicioController extends Controller
         $servicio = Servicio::find($id)->delete();
 
         return redirect()->route('servicios.index')
-            ->with('success', 'Servicio deleted successfully');
+            ->with('success', 'Servicio eliminado con éxito.');
     }
 }

@@ -20,15 +20,15 @@ return [
         'can' => 'fincas.index'
     ],
     [
+        'text' => 'Servicios',
+        'url' => 'servicios',
+        'icon' => 'fa fa-rocket',
+        'can' => 'servicios.index'
+    ],
+    [
         'text' => 'Operaciones',
         'url' => 'operaciones',
         'icon' => 'fa fa-tasks',
-        'can' => 'zonas.index'
-    ],
-    [
-        'text' => 'Zonas',
-        'url' => 'zonas',
-        'icon' => 'fa fa-map',
         'can' => 'zonas.index'
     ],
     [
