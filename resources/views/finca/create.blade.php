@@ -13,7 +13,10 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Finca</span>
+                        <span class="card-title">Crear Finca</span>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('fincas.index') }}"> Cancelar</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('fincas.store') }}"  role="form" enctype="multipart/form-data">

@@ -5,22 +5,21 @@ use App\Http\Controllers\V1\OperacionController;
 use App\Http\Controllers\V1\ClienteController;
 use App\Http\Controllers\V1\SuerteController;
 use App\Http\Controllers\V1\FincaController;
+use App\Http\Controllers\V1\ServicioController;
 use App\Http\Controllers\V1\ZonaController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 /* RUTA DE INICIO PARA LAS PWA */
 Route::get('/', function () {
-    return redirect()->route('home');
+    return redirect()->route('home.welcome');
 });
 
 //En caso de que no este logeado no le muestre nada
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home.welcome');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.welcome');
 
     /* USUARIOS */
     Route::resource('users', UserController::class)
@@ -34,12 +33,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('clientes', ClienteController::class);
     /* FINCAS */
     Route::resource('fincas', FincaController::class);
-    /* ZONAS */
-    Route::resource('zonas', ZonaController::class);
     /* SUERTES */
     Route::resource('suertes', SuerteController::class);
-    /* SUERTES */
+    /* OPERACIONES */
     Route::resource('operaciones', OperacionController::class)->names('operaciones');
+    /* SERVICIOS */
+    Route::resource('servicios', ServicioController::class)->names('servicios');
 });
 
 // Auth::routes();

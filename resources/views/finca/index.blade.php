@@ -38,7 +38,6 @@
 
 										<th>Nombre</th>
 
-										<th>Zonas</th>
 										<th>Suertes</th>
 										<th>Clientes</th>
 										<th>Fecha creado</th>
@@ -52,13 +51,10 @@
 
 											<td>{{ $finca->name }}</td>
 											<td>
-                                                <a class="btn btn-sm btn-success " href="{{ route('zonas.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
-                                            </td>
-											<td>
-                                                <a class="btn btn-sm btn-success " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                <a class="btn btn-sm btn-primary " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-success " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                <a class="btn btn-sm btn-success " href="{{ route('clientes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
                                             </td>
 											<td>{{ $finca->created_at }}</td>
 

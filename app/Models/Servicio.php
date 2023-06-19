@@ -22,6 +22,8 @@ class Servicio extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'servicio';
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -43,6 +45,6 @@ class Servicio extends Model
     {
         return $this->hasMany('App\Models\Operacion', 'id_servicio', 'id');
     }
-    
+
 
 }

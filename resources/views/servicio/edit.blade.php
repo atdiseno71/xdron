@@ -13,7 +13,10 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Servicio</span>
+                        <span class="card-title">Actualizar Servicio</span>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('servicios.index') }}"> Cancelar</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('servicios.update', $servicio->id) }}"  role="form" enctype="multipart/form-data">

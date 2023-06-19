@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('clientes.update', $cliente->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('clientes.update', $user->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

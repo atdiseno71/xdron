@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\User;
 use App\Models\Venta;
+use App\Models\Zona;
 use Illuminate\Http\Request;
 
 trait Template
@@ -61,12 +62,12 @@ trait Template
         return $codigo;
     }
     //Calculamos el codigo de cada producto
-    public function codigoVenta(){
+    /* public function codigoVenta(){
         $codigo = 1001;
         $ventas = Venta::count();
         if($ventas!=0)$codigo=$codigo+$ventas;
         return $codigo;
-    }
+    } */
     /**
     * It takes a JSON string and returns an array
     *
@@ -154,18 +155,18 @@ trait Template
         return json_encode($labels);
     }
     //Traemos y retornamos los nombres en JSON, segun la libreria Chart.js
-    public function graficaVentaData(){
+    /* public function graficaVentaData(){
         $data = [];
         for ($i=1;$i<13;$i++){
             array_push($data,Venta::whereMonth('fecha',$i)->count());
         }
         return json_encode($data);
-    }
+    } */
     //Buscar producto en las ventas
-    public function traerVentaProducto($id){
+    /* public function traerVentaProducto($id){
         $contador = Venta::where('productos','like','%'.'"id":"'.$id.'"%')->count();
         return $contador;
-    }
+    } */
     /**
      * It takes a JSON string as an argument, decodes it, loops through the decoded array, and returns
      * an array of the stock values of the products in the decoded array
@@ -181,4 +182,35 @@ trait Template
         }
         return $stocks;
     }
+
+    public function createZones($id) {
+        $zonas = [
+            'NORTE',
+            'NORESTE',
+            'ESTE',
+            'SURESTE',
+            'SUR',
+            'SUROESTE',
+            'OESTE',
+            'NOROESTE',
+        ];
+
+        foreach ($zonas as $zona) {
+            Zona::create([
+                'name' => $zona,
+                'id_finca' => $id,
+            ]);
+        }
+    }
+
+    public function deleteZones($id) {
+
+        $zonas = Zona::where('id_finca', $id)->get();
+
+        foreach ($zonas as $zona) {
+            $zona->delete();
+        }
+
+    }
+
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\V1;
 use App\Models\Finca;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Suerte;
+use App\Models\Zona;
+use App\Traits\Template;
 
 /**
  * Class FincaController
@@ -12,6 +15,9 @@ use App\Http\Controllers\Controller;
  */
 class FincaController extends Controller
 {
+
+    use Template;
+
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +54,10 @@ class FincaController extends Controller
 
         $finca = Finca::create($request->all());
 
+        $this->createZones($finca->id);
+
         return redirect()->route('fincas.index')
-            ->with('success', 'Finca created successfully.');
+            ->with('success', 'Finca creada con éxito.');
     }
 
     /**
@@ -91,8 +99,12 @@ class FincaController extends Controller
 
         $finca->update($request->all());
 
+        $this->deleteZones($finca->id);
+
+        $this->createZones($finca->id);
+
         return redirect()->route('fincas.index')
-            ->with('success', 'Finca updated successfully');
+            ->with('success', 'Finca actualizada con éxito');
     }
 
     /**
@@ -104,7 +116,14 @@ class FincaController extends Controller
     {
         $finca = Finca::find($id)->delete();
 
+        $zonas = Zona::where('id_finca', $id)->get();
+
+        foreach ($zonas as $zona) {
+            $suerte = Suerte::where('id_zona', $zona->id)->delete();
+            $zona->delete();
+        }
+
         return redirect()->route('fincas.index')
-            ->with('success', 'Finca deleted successfully');
+            ->with('success', 'Finca eliminada con éxito');
     }
 }

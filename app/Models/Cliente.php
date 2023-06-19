@@ -40,7 +40,6 @@ class Cliente extends Model
     static $rules = [
 		'contacto' => 'required',
 		'direccion' => 'required',
-        'id_user' => 'required',
         'id_finca' => 'required',
         'contacto' => 'required',
     ];
@@ -53,9 +52,6 @@ class Cliente extends Model
      * @var array
      */
     protected $fillable = [
-        // 'nit',
-        // 'nombre',
-        // 'email',
         'id_user',
         'contacto',
         'campos_nuevos',
