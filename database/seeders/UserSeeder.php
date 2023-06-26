@@ -27,6 +27,6 @@ class UserSeeder extends Seeder
             'active' => 1,
         ])->assignRole('super.root');
         // Usuarios falsos para pruebas
-        User::factory()->count(5000)->create();
+        // User::factory()->count(5000)->create();
     }
 }
