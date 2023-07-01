@@ -97,7 +97,7 @@ class LoginController extends Controller
     {
 
         // Creamos una copia de seguridad de la base de datos
-        $this->generate();
+        // $this->generate();
 
         Session::flush();
 
