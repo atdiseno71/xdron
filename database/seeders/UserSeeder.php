@@ -25,8 +25,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'remember_token' => Str::random(10),
             'active' => 1,
+            'id_role' => 1,
         ])->assignRole('super.root');
         // Usuarios falsos para pruebas
-        // User::factory()->count(5000)->create();
+        User::factory()->count(5000)->create();
     }
 }
