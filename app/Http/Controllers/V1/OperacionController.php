@@ -40,7 +40,7 @@ class OperacionController extends Controller
 
         $servicios = Servicio::pluck('name as label', 'id as value');
 
-        $clientes = User::pluck('name as label', 'id as value')->where('id_role', config('roles.cliente'));
+        $clientes = User::pluck('name as label', 'id as value')->where('id_role', 4);
 
         $fincas = Finca::pluck('name as label', 'id as value');
 
@@ -90,7 +90,17 @@ class OperacionController extends Controller
     {
         $operacion = Operacion::find($id);
 
-        return view('operacion.edit', compact('operacion'));
+        $servicios = Servicio::pluck('name as label', 'id as value');
+
+        $clientes = User::pluck('name as label', 'id as value')->where('id_role', config('roles.cliente'));
+
+        $fincas = Finca::pluck('name as label', 'id as value');
+
+        $zonas = Zona::pluck('name as label', 'id as value');
+
+        $pilotos = User::pluck('name as label', 'id as value')->where('id_role', config('roles.piloto'));
+
+        return view('operacion.edit', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos'));
     }
 
     /**
