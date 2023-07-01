@@ -40,7 +40,7 @@ class OperacionController extends Controller
 
         $servicios = Servicio::pluck('name as label', 'id as value');
 
-        $clientes = User::pluck('name as label', 'id as value')->where('id_role', 4)->get();
+        $clientes = User::pluck('name as label', 'id as value')->where('id_role', config('roles.cliente'));
 
         $fincas = Finca::pluck('name as label', 'id as value');
 
