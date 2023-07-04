@@ -39,7 +39,7 @@ class Operacion extends Model
     protected $table = 'operacion';
 
     static $rules = [
-		'fecha_ejecucion' => 'required',
+        'fecha_ejecucion' => 'required',
     ];
 
     protected $perPage = 20;
@@ -49,7 +49,19 @@ class Operacion extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_servicio','descarga','fecha_ejecucion','id_cliente','id_finca','zona_id','id_piloto','evidencia_record','evidencia_track','evidencia_gps','observaciones'];
+    protected $fillable = [
+        'id_servicio',
+        'descarga',
+        'fecha_ejecucion',
+        'id_cliente',
+        'id_finca',
+        'zona_id',
+        'id_piloto',
+        'evidencia_record',
+        'evidencia_track',
+        'evidencia_gps',
+        'observaciones'
+    ];
 
 
     /**
@@ -91,6 +103,4 @@ class Operacion extends Model
     {
         return $this->hasOne('App\Models\Zona', 'id', 'zona_id');
     }
-
-
 }

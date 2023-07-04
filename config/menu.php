@@ -27,7 +27,7 @@ return [
     ],
     [
         'text' => 'Operaciones',
-        'url' => 'operaciones',
+        'url' => 'operacion',
         'icon' => 'fa fa-tasks',
         'can' => 'zonas.index'
     ],

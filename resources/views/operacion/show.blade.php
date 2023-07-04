@@ -14,12 +14,12 @@
                             <span class="card-title">{{ __('Show') }} Operacion</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('operacions.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('operaciones.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Id Servicio:</strong>
                             {{ $operacion->id_servicio }}

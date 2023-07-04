@@ -23,11 +23,9 @@
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -40,7 +38,6 @@
 										<th>Fecha</th>
 										<th>Cliente</th>
 										<th>Finca</th>
-										<th>Zona</th>
 										<th>Piloto</th>
 										<th>Fecha creación</th>
 
@@ -54,11 +51,10 @@
 
 											<td>{{ $operacion->servicio?->name }}</td>
 											<td>{{ $operacion->fecha_ejecucion }}</td>
-											<td>{{ $operacion->id_cliente }}</td>
-											<td>{{ $operacion->id_finca }}</td>
-											<td>{{ $operacion->zona_id }}</td>
-											<td>{{ $operacion->id_piloto }}</td>
-											<td>{{ $operacion->created_at }}</td>
+											<td>{{ $operacion->cliente?->user?->name }}</td>
+											<td>{{ $operacion->finca?->name }}</td>
+											<td>{{ $operacion->piloto?->name }}</td>
+											<td>{{ $operacion->created_at?->format('Y-m-d') }}</td>
 
                                             <td>
                                                 <form action="{{ route('operaciones.destroy',$operacion->id) }}" method="POST" class="form-delete">

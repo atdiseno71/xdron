@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* SUERTES */
     Route::resource('suertes', SuerteController::class);
     /* OPERACIONES */
-    Route::resource('operaciones', OperacionController::class)->names('operaciones');
+    Route::resource('operacion', OperacionController::class)->names('operaciones');
     /* SERVICIOS */
     Route::resource('servicios', ServicioController::class)->names('servicios');
 });

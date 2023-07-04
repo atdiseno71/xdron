@@ -18,6 +18,13 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
+                    {{ Form::label('id_piloto', 'Piloto:') }}
+                    {{ Form::select('id_piloto', $pilotos, $operacion->id_piloto, ['class' => 'form-control select2' . ($errors->has('id_piloto') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un piloto']) }}
+                    {!! $errors->first('id_piloto', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
                     {{ Form::label('id_finca', 'Finca:') }}
                     {{ Form::select('id_finca', $fincas, $operacion->id_finca, ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una finca']) }}
                     {!! $errors->first('id_finca', '<div class="invalid-feedback">:message</div>') !!}
@@ -28,13 +35,6 @@
                     {{ Form::label('zona_id', 'Zona:') }}
                     {{ Form::select('zona_id', $zonas, $operacion->zona_id, ['class' => 'form-control select2' . ($errors->has('zona_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una zona']) }}
                     {!! $errors->first('zona_id', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    {{ Form::label('id_piloto', 'Piloto:') }}
-                    {{ Form::select('id_piloto', $pilotos, $operacion->id_piloto, ['class' => 'form-control select2' . ($errors->has('id_piloto') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un piloto']) }}
-                    {!! $errors->first('id_piloto', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -57,7 +57,7 @@
                     <label for="input-logo">Evidencia de registro:</label>
                     <div class="card img-logo">
                         <input type="file" name="evidencia_record" class="input-img-logo" id="input-icono" value="{{$operacion->evidencia_record ?? 'images/img/default.png'}}"/>
-                        <img id="img-icono" src="{{asset($operacion->evidencia_record ?? 'images/img/default.png')}}" />
+                        <img id="img-icono" src="{{ asset($operacion->evidencia_record ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
@@ -71,7 +71,7 @@
                     <label for="input-logo">Evidencia track:</label>
                     <div class="card img-logo">
                         <input type="file" name="evidencia_track" class="input-img-logo" id="input-icono" value="{{$operacion->evidencia_track ?? 'images/img/default.png'}}"/>
-                        <img id="img-icono" src="{{asset($operacion->evidencia_track ?? 'images/img/default.png')}}" />
+                        <img id="img-icono" src="{{ asset($operacion->evidencia_track ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
@@ -85,7 +85,7 @@
                     <label for="input-logo">Evidencia de gps:</label>
                     <div class="card img-logo">
                         <input type="file" name="evidencia_gps" class="input-img-logo" id="input-icono" value="{{$operacion->evidencia_gps ?? 'images/img/default.png'}}"/>
-                        <img id="img-icono" src="{{asset($operacion->evidencia_gps ?? 'images/img/default.png')}}" />
+                        <img id="img-icono" src="{{ asset($operacion->evidencia_gps ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>

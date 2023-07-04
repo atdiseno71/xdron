@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\V1;
 
-use App\Models\Operacion;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Finca;
+use App\Models\Cliente;
+use Illuminate\Http\Request;
+use App\Models\Operacion;
 use App\Models\Servicio;
+use App\Traits\Template;
+use App\Models\Finca;
 use App\Models\User;
 use App\Models\Zona;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperacionController
@@ -16,6 +20,9 @@ use App\Models\Zona;
  */
 class OperacionController extends Controller
 {
+
+    use Template;
+
     /**
      * Display a listing of the resource.
      *
@@ -40,13 +47,13 @@ class OperacionController extends Controller
 
         $servicios = Servicio::pluck('name as label', 'id as value');
 
-        $clientes = User::pluck('name as label', 'id as value')->where('id_role', config('roles.cliente'));
+        $clientes = Cliente::with('user')->get()->pluck('user.name', 'id');
 
         $fincas = Finca::pluck('name as label', 'id as value');
 
         $zonas = Zona::pluck('name as label', 'id as value');
 
-        $pilotos = User::pluck('name as label', 'id as value')->where('id_role', config('roles.piloto'));
+        $pilotos = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
         return view('operacion.create', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos'));
     }
@@ -61,10 +68,36 @@ class OperacionController extends Controller
     {
         request()->validate(Operacion::$rules);
 
-        $operacion = Operacion::create($request->all());
+        $operacion = new Operacion();
+
+        /* Pasamos los valores */
+        $operacion->id_servicio = $request['id_servicio'];
+        $operacion->descarga = $request['descarga'];
+        $operacion->fecha_ejecucion = $request['fecha_ejecucion'];
+        $operacion->id_cliente = $request['id_cliente'];
+        $operacion->id_finca = $request['id_finca'];
+        $operacion->zona_id = $request['zona_id'];
+        $operacion->id_piloto = $request['id_piloto'];
+        $operacion->observaciones = $request['observaciones'];
+
+        $save = $operacion->save();
+
+        if ($save) {
+            /* Le decimos donde queremos que se guarde la operacion */
+            $carpeta = 'evidencias/' . $operacion->id . '/';
+            /* Guardamos la primera evidencia */
+            $handle_1 = $this->moveImage($request, 'evidencia_record', 'evidencia_record', $carpeta);
+            $operacion->update(['evidencia_record' => $handle_1]);
+            /* Guardamos la segunda evidencia */
+            $handle_2 = $this->moveImage($request, 'evidencia_track', 'evidencia_track', $carpeta);
+            $operacion->update(['evidencia_track' => $handle_2]);
+            /* Guardamos la tercera evidencia */
+            $handle_3 = $this->moveImage($request, 'evidencia_gps', 'evidencia_gps', $carpeta);
+            $operacion->update(['evidencia_gps' => $handle_3]);
+        }
 
         return redirect()->route('operaciones.index')
-            ->with('success', 'Operacion created successfully.');
+            ->with('success', 'Operacion registrada con éxito.');
     }
 
     /**
@@ -112,12 +145,48 @@ class OperacionController extends Controller
      */
     public function update(Request $request, Operacion $operacion)
     {
-        request()->validate(Operacion::$rules);
+        try {
+            request()->validate(Operacion::$rules);
+            /* Pasamos los valores */
+            $operacion->id_servicio = $request['id_servicio'];
+            $operacion->descarga = $request['descarga'];
+            $operacion->fecha_ejecucion = $request['fecha_ejecucion'];
+            $operacion->id_cliente = $request['id_cliente'];
+            $operacion->id_finca = $request['id_finca'];
+            $operacion->zona_id = $request['zona_id'];
+            $operacion->id_piloto = $request['id_piloto'];
+            $operacion->observaciones = $request['observaciones'];
 
-        $operacion->update($request->all());
+            $save = $operacion->save();
 
-        return redirect()->route('operaciones.index')
-            ->with('success', 'Operacion updated successfully');
+            /* Le decimos donde queremos que se guarde la operacion */
+            $carpeta = 'evidencias/' . $operacion->id . '/';
+
+            if ($request->hasFile('evidencia_record')) {
+                /* Guardamos la primera evidencia */
+                $handle_1 = $this->moveImage($request, 'evidencia_record', 'evidencia_record', $carpeta);
+                $operacion->update(['evidencia_record' => $handle_1]);
+            }
+
+            if ($request->hasFile('evidencia_track')) {
+                /* Guardamos la segunda evidencia */
+                $handle_2 = $this->moveImage($request, 'evidencia_track', 'evidencia_track', $carpeta);
+                $operacion->update(['evidencia_track' => $handle_2]);
+            }
+
+            if ($request->hasFile('evidencia_gps')) {
+                /* Guardamos la tercera evidencia */
+                $handle_3 = $this->moveImage($request, 'evidencia_gps', 'evidencia_gps', $carpeta);
+                $operacion->update(['evidencia_gps' => $handle_3]);
+            }
+
+            return redirect()->route('operaciones.index')
+            ->with('success', 'Operacion guardada con éxito.');
+
+        } catch (Exception $th) {
+            return redirect()->route('operaciones.index')
+                ->with('error', 'Hubo un error al actualizar la operacion.');
+        }
     }
 
     /**
@@ -130,6 +199,6 @@ class OperacionController extends Controller
         $operacion = Operacion::find($id)->delete();
 
         return redirect()->route('operaciones.index')
-            ->with('success', 'Operacion deleted successfully');
+            ->with('success', 'Operacion eliminada con éxito.');
     }
 }

@@ -12,11 +12,10 @@ use Illuminate\Http\Request;
 trait Template
 {
     //script para subir o mover la imagen
-    public static function moveImage(Request $request, $filename, $endFilename){
+    public static function moveImage(Request $request, $filename, $endFilename, $basePath){
 
         if (!empty($request->hasFile($filename))) {
             $image = $request->file($filename);
-            $basePath = "img/config/";
             $file = $endFilename ?? $filename;
             $path = "$basePath$file." . $image->guessExtension();
             if (file_exists($path)) unlink($path);
