@@ -16,11 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('observaciones')->nullable();
 
-            $table->unsignedBigInteger('id_finca')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('id_finca')
-                ->references('id')
-                ->on('finca');
-
             $table->timestamps();
             $table->softDeletes();
         });
