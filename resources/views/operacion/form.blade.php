@@ -56,8 +56,8 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia de registro:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_record" class="input-img-logo" id="input-icono" value="{{$operacion->evidencia_record ?? 'images/img/default.png'}}"/>
-                        <img id="img-icono" src="{{ asset($operacion->evidencia_record ?? 'images/img/default.png') }}" />
+                        <input type="file" name="evidencia_record" class="input-img-logo" id="input-record" value="{{$operacion->evidencia_record ?? 'images/img/default.png'}}"  data-preview-id="preview-record" onchange="previewFile(event)" onchange="previewFile(event)"/>
+                        <img id="preview-record" src="{{ asset($operacion->evidencia_record ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
@@ -70,8 +70,8 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia track:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_track" class="input-img-logo" id="input-icono" value="{{$operacion->evidencia_track ?? 'images/img/default.png'}}"/>
-                        <img id="img-icono" src="{{ asset($operacion->evidencia_track ?? 'images/img/default.png') }}" />
+                        <input type="file" name="evidencia_track" class="input-img-logo" id="input-track" value="{{$operacion->evidencia_track ?? 'images/img/default.png'}}" data-preview-id="preview-track" onchange="previewFile(event)"/>
+                        <img id="preview-track" src="{{ asset($operacion->evidencia_track ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
@@ -84,8 +84,8 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia de gps:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_gps" class="input-img-logo" id="input-icono" value="{{$operacion->evidencia_gps ?? 'images/img/default.png'}}"/>
-                        <img id="img-icono" src="{{ asset($operacion->evidencia_gps ?? 'images/img/default.png') }}" />
+                        <input type="file" name="evidencia_gps" class="input-img-logo" id="input-gps" value="{{$operacion->evidencia_gps ?? 'images/img/default.png'}}" data-preview-id="preview-gps" onchange="previewFile(event)"/>
+                        <img id="preview-gps" src="{{ asset($operacion->evidencia_gps ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
