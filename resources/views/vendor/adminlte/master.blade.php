@@ -22,13 +22,13 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="PWA">
+    <meta name="application-name" content="XGRON">
     <link rel="icon" sizes="512x512" href="/images/icons/icon-512x512.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="PWA">
+    <meta name="apple-mobile-web-app-title" content="XGRON">
     <link rel="apple-touch-icon" href="/images/icons/icon-512x512.png">
 
     <link href="/images/icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
@@ -53,10 +53,10 @@
                 scope: '.'
             }).then(function (registration) {
                 // Registration was successful
-                console.log('Laravel PWA: ServiceWorker registration successful with scope: ', registration.scope);
+                console.log('Laravel XGRON: ServiceWorker registration successful with scope: ', registration.scope);
             }, function (err) {
                 // registration failed :(
-                console.log('Laravel PWA: ServiceWorker registration failed: ', err);
+                console.log('Laravel XGRON: ServiceWorker registration failed: ', err);
             });
         }
     </script>
