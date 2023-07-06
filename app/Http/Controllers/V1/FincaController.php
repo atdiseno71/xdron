@@ -54,8 +54,6 @@ class FincaController extends Controller
 
         $finca = Finca::create($request->all());
 
-        $this->createZones($finca->id);
-
         return redirect()->route('fincas.index')
             ->with('success', 'Finca creada con éxito.');
     }
@@ -99,10 +97,6 @@ class FincaController extends Controller
 
         $finca->update($request->all());
 
-        $this->deleteZones($finca->id);
-
-        $this->createZones($finca->id);
-
         return redirect()->route('fincas.index')
             ->with('success', 'Finca actualizada con éxito');
     }
@@ -115,13 +109,6 @@ class FincaController extends Controller
     public function destroy($id)
     {
         $finca = Finca::find($id)->delete();
-
-        $zonas = Zona::where('id_finca', $id)->get();
-
-        foreach ($zonas as $zona) {
-            $suerte = Suerte::where('id_zona', $zona->id)->delete();
-            $zona->delete();
-        }
 
         return redirect()->route('fincas.index')
             ->with('success', 'Finca eliminada con éxito');
