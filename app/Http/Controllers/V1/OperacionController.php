@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Models\Operacion;
 use App\Models\Servicio;
 use App\Traits\Template;
+use App\Models\Cliente;
 use App\Models\Finca;
 use App\Models\User;
 use App\Models\Zona;
+use Dompdf\Dompdf;
 use Exception;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperacionController
@@ -110,7 +110,27 @@ class OperacionController extends Controller
     {
         $operacion = Operacion::find($id);
 
-        return view('operacion.show', compact('operacion'));
+        // Crea una instancia de Dompdf
+        $dompdf = new Dompdf();
+
+        // Renderiza la vista 'pdf.ejemplo' en HTML
+        $html = view('pdf.report.operation', [
+            'evidencia_record' => $operacion->evidencia_record,
+            'evidencia_track' => $operacion->evidencia_track,
+            'evidencia_gps' => $operacion->evidencia_gps,
+        ])->render();
+
+        // Carga el contenido HTML en Dompdf
+        $dompdf->loadHtml($html);
+
+        // Renderiza el PDF
+        $dompdf->render();
+
+        // Genera el nombre del archivo PDF
+        $filename = 'ejemplo.pdf';
+
+        // Descarga el archivo PDF generado
+        return $dompdf->stream($filename);
     }
 
     /**
