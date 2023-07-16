@@ -16,11 +16,13 @@
                                 {{ __('Zona') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('zonas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
+                            <div class="float-right">
+                                @can('zonas.create')
+                                    <a href="{{ route('zonas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                        {{ __('Create New') }}
+                                    </a>
+                                @endcan
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -52,11 +54,17 @@
 
                                             <td>
                                                 <form action="{{ route('zonas.destroy',$zona->id) }}" method="POST" class="form-delete">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('zonas.show',$zona->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('zonas.edit',$zona->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  {{ __('Delete') }} --}}</button>
+                                                    @can('zonas.show')
+                                                        <a class="btn btn-sm btn-primary " href="{{ route('zonas.show',$zona->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                    @endcan
+                                                    @can('zonas.edit')
+                                                        <a class="btn btn-sm btn-success" href="{{ route('zonas.edit',$zona->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
+                                                    @endcan
+                                                    @can('zonas.destroy')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  {{ __('Delete') }} --}}</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>
