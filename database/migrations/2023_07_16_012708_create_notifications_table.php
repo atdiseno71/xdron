@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,27 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Cambiar el motor de almacenamiento temporalmente a MyISAM
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->engine = 'MyISAM';
-        });
-
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('type', 100); // Reducir la longitud de la columna 'type' a VARCHAR(100)
-            $table->morphs('notifiable');
-            $table->text('data');
-            $table->timestamp('read_at')->nullable();
-            $table->timestamps();
-
-            // Agregar un índice prefix para notifiable_type y notifiable_id
-            $table->index(['notifiable_type', 'notifiable_id'], 'notifications_notifiable_index', 'btree', 190)->collation('utf8mb4_bin');
-        });
-
-        // Cambiar de vuelta a InnoDB
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-        });
+        DB::statement('
+            CREATE TABLE IF NOT EXISTS `notifications` (
+                `id` char(36) NOT NULL,
+                `type` varchar(255) NOT NULL,
+                `notifiable_type` varchar(255) NOT NULL,
+                `notifiable_id` bigint(20) unsigned NOT NULL,
+                `data` text NOT NULL,
+                `read_at` timestamp NULL DEFAULT NULL,
+                `created_at` timestamp NULL DEFAULT NULL,
+                `updated_at` timestamp NULL DEFAULT NULL,
+                PRIMARY KEY (`id`),
+                KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+        ');
     }
 
     /**
