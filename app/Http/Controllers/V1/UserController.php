@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\TypeDocument;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 use Livewire\WithPagination;
@@ -161,6 +162,16 @@ class UserController extends Controller
     {
         $user->assignRole($request->roles);
         return redirect()->route('users.asignar', $user)->with('info', 'Se asignaron los roles correctamente');
+    }
+
+    /* TRAER NOTIFICACIONES USUARIO LOGEADO */
+    public function getNotification()
+    {
+
+        $user = User::find(Auth::id());
+
+        return response()->json(count($user->notifications));
+
     }
 
 }
