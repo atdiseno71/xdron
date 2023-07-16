@@ -11,8 +11,10 @@ use App\Models\Cliente;
 use App\Models\Finca;
 use App\Models\User;
 use App\Models\Zona;
+use App\Notifications\OperationNotification;
 use Dompdf\Dompdf;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class OperacionController
@@ -104,6 +106,9 @@ class OperacionController extends Controller
             $handle_3 = $this->moveImage($request, 'evidencia_gps', 'evidencia_gps', $carpeta);
             $operacion->update(['evidencia_gps' => $handle_3]);
         }
+
+        /* CREAMOS LA NOTIFICACION */
+        $this->make_operation_notification($operacion);
 
         return redirect()->route('operaciones.index')
             ->with('success', 'Operacion registrada con éxito.');
@@ -209,6 +214,9 @@ class OperacionController extends Controller
                 $operacion->update(['evidencia_gps' => $handle_3]);
             }
 
+            /* CREAMOS LA NOTIFICACION */
+            $this->make_operation_notification($operacion);
+
             return redirect()->route('operaciones.index')
             ->with('success', 'Operacion guardada con éxito.');
 
@@ -230,4 +238,18 @@ class OperacionController extends Controller
         return redirect()->route('operaciones.index')
             ->with('success', 'Operacion eliminada con éxito.');
     }
+
+    /* MANEJAR NOTIFICACIONES */
+    public function make_operation_notification($operation) {
+        try {
+            /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
+            User::findOrField($operation->id_piloto)
+                ->each(function(User $user) use ($operation){
+                    $user->notify(new OperationNotification($operation));
+                });
+        } catch (\Exception $ex) {
+            return response()->json('Error al generar la notificacion', 422);
+        }
+    }
+
 }
