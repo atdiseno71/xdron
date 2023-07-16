@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\TypeDocument;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 use Livewire\WithPagination;
@@ -29,6 +30,11 @@ class UserController extends Controller
     function __construct()
     {
         $this->model = new User();
+        $this->middleware('can:users.index')->only('index');
+        $this->middleware('can:users.create')->only('create', 'store');
+        $this->middleware('can:users.show')->only('show');
+        $this->middleware('can:users.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:users.destroy')->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -156,6 +162,16 @@ class UserController extends Controller
     {
         $user->assignRole($request->roles);
         return redirect()->route('users.asignar', $user)->with('info', 'Se asignaron los roles correctamente');
+    }
+
+    /* TRAER NOTIFICACIONES USUARIO LOGEADO */
+    public function getNotification()
+    {
+
+        $user = User::find(Auth::id());
+
+        return response()->json(count($user->notifications));
+
     }
 
 }

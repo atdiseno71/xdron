@@ -17,10 +17,12 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('fincas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
+                                @can('fincas.create')
+                                    <a href="{{ route('fincas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                        {{ __('Create New') }}
+                                    </a>
+                                @endcan
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -64,6 +66,15 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('fincas.edit',$finca->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
                                                     @csrf
                                                     @method('DELETE')
+                                                    @can('fincas.show')
+
+                                                    @endcan
+                                                    @can('fincas.edit')
+
+                                                    @endcan
+                                                    @can('fincas.destroy')
+
+                                                    @endcan
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  {{ __('Delete') }} --}}</button>
                                                 </form>
                                             </td>

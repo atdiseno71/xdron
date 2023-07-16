@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Operacion
@@ -34,7 +35,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Operacion extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     protected $table = 'operacion';
 

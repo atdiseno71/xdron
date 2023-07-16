@@ -11,8 +11,11 @@ use App\Models\Cliente;
 use App\Models\Finca;
 use App\Models\User;
 use App\Models\Zona;
+use App\Notifications\OperationNotification;
 use Dompdf\Dompdf;
 use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperacionController
@@ -22,6 +25,15 @@ class OperacionController extends Controller
 {
 
     use Template;
+
+    function __construct()
+    {
+        $this->middleware('can:operaciones.index')->only('index');
+        $this->middleware('can:operaciones.create')->only('create', 'store');
+        $this->middleware('can:operaciones.show')->only('show');
+        $this->middleware('can:operaciones.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:operaciones.destroy')->only('destroy');
+    }
 
     /**
      * Display a listing of the resource.
@@ -96,8 +108,11 @@ class OperacionController extends Controller
             $operacion->update(['evidencia_gps' => $handle_3]);
         }
 
-        return redirect()->route('operaciones.index')
-            ->with('success', 'Operacion registrada con éxito.');
+        /* CREAMOS LA NOTIFICACION */
+        $this->make_operation_notification($operacion);
+
+        /* return redirect()->route('operaciones.index')
+            ->with('success', 'Operacion registrada con éxito.'); */
     }
 
     /**
@@ -145,13 +160,13 @@ class OperacionController extends Controller
 
         $servicios = Servicio::pluck('name as label', 'id as value');
 
-        $clientes = User::pluck('name as label', 'id as value')->where('id_role', config('roles.cliente'));
+        $clientes = Cliente::with('user')->get()->pluck('user.name', 'id');
 
         $fincas = Finca::pluck('name as label', 'id as value');
 
         $zonas = Zona::pluck('name as label', 'id as value');
 
-        $pilotos = User::pluck('name as label', 'id as value')->where('id_role', config('roles.piloto'));
+        $pilotos = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
         return view('operacion.edit', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos'));
     }
@@ -200,6 +215,9 @@ class OperacionController extends Controller
                 $operacion->update(['evidencia_gps' => $handle_3]);
             }
 
+            /* CREAMOS LA NOTIFICACION */
+            $this->make_operation_notification($operacion);
+
             return redirect()->route('operaciones.index')
             ->with('success', 'Operacion guardada con éxito.');
 
@@ -221,4 +239,19 @@ class OperacionController extends Controller
         return redirect()->route('operaciones.index')
             ->with('success', 'Operacion eliminada con éxito.');
     }
+
+    /* MANEJAR NOTIFICACIONES */
+    public function make_operation_notification($operation) {
+        try {
+            /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
+            Log::info($operation->id_piloto);
+            $user = User::find($operation->id_piloto);
+            if ($user) {
+                $user->notify(new OperationNotification($operation));
+            }
+        } catch (\Exception $ex) {
+            return response()->json('Error al generar la notificacion', 422);
+        }
+    }
+
 }

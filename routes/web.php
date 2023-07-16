@@ -6,7 +6,6 @@ use App\Http\Controllers\V1\ClienteController;
 use App\Http\Controllers\V1\SuerteController;
 use App\Http\Controllers\V1\FincaController;
 use App\Http\Controllers\V1\ServicioController;
-use App\Http\Controllers\V1\ZonaController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +17,8 @@ Route::get('/', function () {
 //En caso de que no este logeado no le muestre nada
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.welcome');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('can:home.index')->name('home.index');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('can:home.index')->name('home.welcome');
 
     /* USUARIOS */
     Route::resource('users', UserController::class)
@@ -39,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('operacion', OperacionController::class)->names('operaciones');
     /* SERVICIOS */
     Route::resource('servicios', ServicioController::class)->names('servicios');
+    /* NOTIFICACIONES */
+    Route::get('getNotifications', [UserController::class, 'getNotification']);
 });
 
 // Auth::routes();

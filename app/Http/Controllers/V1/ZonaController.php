@@ -13,6 +13,14 @@ use App\Http\Controllers\Controller;
  */
 class ZonaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('can:zonas.index')->only('index');
+        $this->middleware('can:zonas.create')->only('create', 'store');
+        $this->middleware('can:zonas.show')->only('show');
+        $this->middleware('can:zonas.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:zonas.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

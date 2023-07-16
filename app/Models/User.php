@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -30,7 +31,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasApiTokens, HasFactory, HasRoles, SoftDeletes, Notifiable;
 
     static $rules = [
 		'name' => 'required',
@@ -67,6 +68,11 @@ class User extends Authenticatable
     public function operacions()
     {
         return $this->hasMany('App\Models\Operacion', 'id_piloto', 'id');
+    }
+
+    public function count_notificacion() {
+        $user = User::find(Auth::id());
+        return count($user->notifications);
     }
 
 }

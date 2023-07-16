@@ -12,6 +12,14 @@ use App\Http\Controllers\Controller;
  */
 class ServicioController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('can:servicios.index')->only('index');
+        $this->middleware('can:servicios.create')->only('create', 'store');
+        $this->middleware('can:servicios.show')->only('show');
+        $this->middleware('can:servicios.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:servicios.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

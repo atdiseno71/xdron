@@ -18,6 +18,15 @@ class FincaController extends Controller
 
     use Template;
 
+    function __construct()
+    {
+        $this->middleware('can:fincas.index')->only('index');
+        $this->middleware('can:fincas.create')->only('create', 'store');
+        $this->middleware('can:fincas.show')->only('show');
+        $this->middleware('can:fincas.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:fincas.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
