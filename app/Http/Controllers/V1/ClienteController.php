@@ -14,6 +14,16 @@ use App\Http\Controllers\Controller;
  */
 class ClienteController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:clientes.index')->only('index');
+        $this->middleware('can:clientes.create')->only('create', 'store');
+        $this->middleware('can:clientes.show')->only('show');
+        $this->middleware('can:clientes.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:clientes.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

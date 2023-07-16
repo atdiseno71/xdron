@@ -23,6 +23,15 @@ class OperacionController extends Controller
 
     use Template;
 
+    function __construct()
+    {
+        $this->middleware('can:operaciones.index')->only('index');
+        $this->middleware('can:operaciones.create')->only('create', 'store');
+        $this->middleware('can:operaciones.show')->only('show');
+        $this->middleware('can:operaciones.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:operaciones.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -13,6 +13,14 @@ use App\Models\Zona;
  */
 class SuerteController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('can:suertes.index')->only('index');
+        $this->middleware('can:suertes.create')->only('create', 'store');
+        $this->middleware('can:suertes.show')->only('show');
+        $this->middleware('can:suertes.edit')->only('edit', 'update', 'active', 'updateRol');
+        $this->middleware('can:suertes.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
