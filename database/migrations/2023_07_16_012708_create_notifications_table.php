@@ -19,8 +19,8 @@ return new class extends Migration
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
 
-            // Add an index with specified key length for notifiable_type and notifiable_id
-            $table->index(['notifiable_type', 'notifiable_id'], 'notifications_notifiable_index', 'btree', 190);
+            // Add a prefix index for notifiable_type and notifiable_id
+            $table->index(['notifiable_type', 'notifiable_id'], 'notifications_notifiable_index')->collation('utf8mb4_bin');
         });
     }
 
