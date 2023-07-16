@@ -18,8 +18,10 @@ return new class extends Migration
             $table->text('data');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
+        });
 
-            // Add a prefix index for notifiable_type and notifiable_id
+        // Add a prefix index for notifiable_type and notifiable_id
+        Schema::table('notifications', function (Blueprint $table) {
             $table->index(['notifiable_type', 'notifiable_id'], 'notifications_notifiable_index')->collation('utf8mb4_bin');
         });
     }
