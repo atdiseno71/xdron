@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Notifications\OperationNotification;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Operacion;
 use App\Models\Servicio;
@@ -11,11 +13,7 @@ use App\Models\Cliente;
 use App\Models\Finca;
 use App\Models\User;
 use App\Models\Zona;
-use App\Notifications\OperationNotification;
-use Dompdf\Dompdf;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperacionController
@@ -111,8 +109,8 @@ class OperacionController extends Controller
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operacion);
 
-        /* return redirect()->route('operaciones.index')
-            ->with('success', 'Operacion registrada con éxito.'); */
+        return redirect()->route('operaciones.index')
+            ->with('success', 'Operacion registrada con éxito.');
     }
 
     /**
@@ -125,27 +123,17 @@ class OperacionController extends Controller
     {
         $operacion = Operacion::find($id);
 
-        // Crea una instancia de Dompdf
-        $dompdf = new Dompdf();
+        /* GUARDAMOS LAS IMAGENES */
+        $evidencia_record = $operacion->evidencia_record;
+        $evidencia_track = $operacion->evidencia_track;
+        $evidencia_gps = $operacion->evidencia_gps;
 
-        // Renderiza la vista 'pdf.ejemplo' en HTML
-        $html = view('pdf.report.operation', [
-            'evidencia_record' => $operacion->evidencia_record,
-            'evidencia_track' => $operacion->evidencia_track,
-            'evidencia_gps' => $operacion->evidencia_gps,
-        ])->render();
+        //Generamos el pdf
+        set_time_limit(300);
+        $pdf = PDF::loadview('pdf.report.operation', compact('evidencia_record', 'evidencia_track', 'evidencia_gps'), ['dpi' => '200']);
 
-        // Carga el contenido HTML en Dompdf
-        $dompdf->loadHtml($html);
-
-        // Renderiza el PDF
-        $dompdf->render();
-
-        // Genera el nombre del archivo PDF
-        $filename = 'ejemplo.pdf';
-
-        // Descarga el archivo PDF generado
-        return $dompdf->stream($filename);
+        $pdf->set_paper('letter', 'landscape');
+        return $pdf->stream('reporte.pdf');
     }
 
     /**
@@ -244,7 +232,6 @@ class OperacionController extends Controller
     public function make_operation_notification($operation) {
         try {
             /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
-            Log::info($operation->id_piloto);
             $user = User::find($operation->id_piloto);
             if ($user) {
                 $user->notify(new OperationNotification($operation));
