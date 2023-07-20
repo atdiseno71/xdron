@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('can:home.index')->name('home.index');
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('can:home.index')->name('home.welcome');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('can:home.welcome')->name('home.welcome');
 
     /* USUARIOS */
     Route::resource('users', UserController::class)

@@ -170,7 +170,11 @@ class UserController extends Controller
 
         $user = User::find(Auth::id());
 
-        return response()->json(count($user->notifications));
+        return response()
+            ->json([
+                'countPage' => count($user->notifications),
+                'data' => json_decode($user->notifications),
+            ]);
 
     }
 

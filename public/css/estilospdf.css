@@ -156,7 +156,7 @@ tr {
 .table>:not(caption)>*>* {
     padding: 0.5rem 0.5rem;
     background-color: #212529;
-    border-bottom-width: 1px;
+    border-bottom-width: 0px;
     box-shadow: inset 0 0 0 9999px transparent;
 }
 th {
@@ -202,7 +202,7 @@ ul {
 table,
 td,
 th {
-    border: 1px solid #595959;
+    border: 0px solid #595959;
     border-collapse: collapse;
 }
 
@@ -233,3 +233,32 @@ p {
     background: #6133AF !important;
 }
 
+/* ESTILOS IMAGENES */
+.img-evidencia_record {
+    width: 100%;
+    height: 100vh;
+    padding: 0.5rem 0.5rem;
+    margin-left: 2rem;
+    border-bottom-width: 0px;
+    box-shadow: inset 0 0 0 9999px transparent;
+}
+
+.img-evidencia_track {
+    width: 100%;
+    height: 100vh;
+    padding: 0.5rem 0.5rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    border-bottom-width: 0px;
+    box-shadow: inset 0 0 0 9999px transparent;
+}
+
+.img-evidencia_gps {
+    width: 100%;
+    height: 100vh;
+    padding: 0.5rem 0.5rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    border-bottom-width: 0px;
+    box-shadow: inset 0 0 0 9999px transparent;
+}

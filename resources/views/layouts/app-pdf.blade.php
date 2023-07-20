@@ -13,8 +13,7 @@
         <link rel="shortcut icon" href="{{ public_path('img/config/favicon.ico') }}" />
         {{-- Custom Stylesheets --}}
         @yield('css')
-        {{-- <link href="{{ public_path('css/estilospdf.css') }}" rel="stylesheet" type="text/css" media="screen"/> --}}
-        <link href="{{ public_path('css/stylePDF.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="{{ public_path('css/estilospdf.css') }}" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
         <!-- Document body -->
@@ -23,7 +22,7 @@
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0
             </div>
-            <strong>Copyright©2022.</strong> All rights reserved. <strong>ATS</strong>
+            <strong>Copyright©2023.</strong> All rights reserved. <strong>ATSU</strong>
         </footer>
         {{-- Custom Scripts --}}
         @yield('js')
