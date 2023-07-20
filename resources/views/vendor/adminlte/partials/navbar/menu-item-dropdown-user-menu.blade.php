@@ -111,8 +111,9 @@
 </li>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-  // Agregar evento de clic al logo para mostrar más detalles
+    // Agregar evento de clic al logo para mostrar más detalles
     $('#notification-logo').on('click', function() {
         // Realiza una solicitud AJAX para obtener los detalles de las notificaciones
         $.ajax({
@@ -123,8 +124,63 @@
             // Aquí puedes mostrar los detalles de las notificaciones en una ventana emergente o en una sección dedicada de tu PWA
             // Por ejemplo, puedes usar un modal de Bootstrap o cualquier otra librería para mostrar la información.
             // Aquí hay un ejemplo básico para mostrar las notificaciones en un alert():
-            // alert(JSON.stringify(response.notifications));
-            console.log(response)
+            // Creamos el contenido del modal con la información que necesitas
+            var modalContent = '';
+
+
+            response.data.forEach(function(item) {
+
+                // Convertimos el valor JSON en un objeto JavaScript
+                var itemObj = JSON.parse(JSON.stringify(item));
+
+                // Accedemos a la respuesta dentro del objeto
+                var respuesta = itemObj.data;
+
+                // Ahora puedes acceder a cada propiedad de la respuesta
+                var idServicio = respuesta.id_servicio;
+                var descarga = respuesta.descarga;
+                var fechaEjecucion = respuesta.fecha_ejecucion;
+
+                console.log(idServicio); // Mostrará: "servicio 1"
+                console.log(descarga); // Mostrará: "asd"
+                console.log(fechaEjecucion); // Mostrará: "2023-07-18"
+
+                modalContent += `
+                    <p>Se te asignó el servicio ${idServicio}, con una descarga ${descarga} y con la fecha de ejecución de ${fechaEjecucion}</p>
+                    <hr>
+                `;
+            });
+
+            // Creamos el modal usando Bootstrap y mostramos el contenido dentro de él
+            var modal = `
+            <div class="modal fade" id="notificationModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Tus notificaciones</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ${modalContent}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            // Agregamos el modal al final del body
+            $('body').append(modal);
+
+            // Mostramos el modal
+            $('#notificationModal').modal('show');
+
+            // Eliminamos el modal del DOM cuando se cierre
+            $('#notificationModal').on('hidden.bs.modal', function() {
+            $(this).remove();
+            });
         },
         error: function(error) {
             console.error(error);
