@@ -13,11 +13,13 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        Role::truncate();
         $role1 = Role::create(['name' => 'super.root']);
         $role2 = Role::create(['name' => 'root']);
         $role3 = Role::create(['name' => 'piloto']);
         $role4 = Role::create(['name' => 'cliente']);
 
+        Permission::truncate();
         /* GENERALES */
         Permission::create(['name' => 'home.index'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'home.welcome'])->syncRoles([$role1, $role2, $role3, $role4]);
