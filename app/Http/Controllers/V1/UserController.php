@@ -74,7 +74,7 @@ class UserController extends Controller
 
         request()->validate(User::$rules);
 
-        $request['password'] = Hash::make($request['username']);
+        $request['password'] = Hash::make($request['document_number']);
 
         $new_user = $this->model->create($request->all());
 
