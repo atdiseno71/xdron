@@ -18,7 +18,7 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('document_number', 'Número documento') }}
+                    {{ Form::label('document_number', 'Número documento / Contraseña') }}
                     {{ Form::text('document_number', $user->document_number, ['class' => 'form-control' . ($errors->has('document_number') ? ' is-invalid' : ''), 'placeholder' => 'Número documento']) }}
                     {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('lastname', 'Apellido') }}
+                    {{ Form::label('lastname', 'Apellido de usuario') }}
                     {{ Form::text('lastname', $user->lastname, ['class' => 'form-control' . ($errors->has('lastname') ? ' is-invalid' : ''), 'placeholder' => 'Apellido']) }}
                     {!! $errors->first('lastname', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
