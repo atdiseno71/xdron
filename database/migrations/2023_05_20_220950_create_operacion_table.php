@@ -37,6 +37,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('zonas');
 
+            $table->unsignedBigInteger('id_suerte')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('id_suerte')
+                ->references('id')
+                ->on('suerte');
+
             $table->unsignedBigInteger('id_piloto')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('id_piloto')
                 ->references('id')

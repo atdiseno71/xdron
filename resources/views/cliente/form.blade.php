@@ -4,7 +4,16 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('id_finca', 'Finca') }}
-                    {{ Form::select('id_finca', $fincas, $cliente->id_finca ?? '', ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una finca']) }}
+                    @php
+                        // Convertir el JSON en un arreglo de PHP
+                        $selectedFincas = [];
+                        if (!empty($cliente->clientesFincas)) {
+                            $selectedFincas = json_decode($cliente->clientesFincas, true);
+                            // Obtener los valores de 'id_finca' para el atributo 'value' del select
+                            $selectedFincas = array_column($selectedFincas, 'id_finca');
+                        }
+                    @endphp
+                    {{ Form::select('id_finca[]', $fincas, $selectedFincas, ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'multiple' => 'multiple']) }}
                     {!! $errors->first('id_finca', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -25,14 +34,14 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('email') }}
-                    {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'readonly', 'placeholder' => 'Email']) }}
+                    {{ Form::email('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'readonly', 'placeholder' => 'Email']) }}
                     {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('contacto') }}
-                    {{ Form::text('contacto', $cliente->contacto ?? '', ['class' => 'form-control' . ($errors->has('contacto') ? ' is-invalid' : ''), 'placeholder' => 'Contacto']) }}
+                    {{ Form::number('contacto', $cliente->contacto ?? '', ['class' => 'form-control' . ($errors->has('contacto') ? ' is-invalid' : ''), 'placeholder' => 'Contacto']) }}
                     {!! $errors->first('contacto', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -46,35 +55,35 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('telefono', 'Teléfono ') }}
-                    {{ Form::text('telefono', $cliente->telefono ?? '', ['class' => 'form-control' . ($errors->has('telefono') ? ' is-invalid' : ''), 'placeholder' => 'Teléfono']) }}
+                    {{ Form::number('telefono', $cliente->telefono ?? '', ['class' => 'form-control' . ($errors->has('telefono') ? ' is-invalid' : ''), 'placeholder' => 'Teléfono']) }}
                     {!! $errors->first('telefono', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('email_encargado', 'Email del encargado') }}
-                    {{ Form::text('email_encargado', $cliente->email_encargado ?? '', ['class' => 'form-control' . ($errors->has('email_encargado') ? ' is-invalid' : ''), 'placeholder' => 'Email del encargado']) }}
+                    {{ Form::email('email_encargado', $cliente->email_encargado ?? '', ['class' => 'form-control' . ($errors->has('email_encargado') ? ' is-invalid' : ''), 'placeholder' => 'Email del encargado']) }}
                     {!! $errors->first('email_encargado', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('email1', 'Email #1') }}
-                    {{ Form::text('email1', $cliente->email1 ?? '', ['class' => 'form-control' . ($errors->has('email1') ? ' is-invalid' : ''), 'placeholder' => 'Email #1']) }}
+                    {{ Form::email('email1', $cliente->email1 ?? '', ['class' => 'form-control' . ($errors->has('email1') ? ' is-invalid' : ''), 'placeholder' => 'Email #1']) }}
                     {!! $errors->first('email1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('email2', 'Email #2') }}
-                    {{ Form::text('email2', $cliente->email2 ?? '', ['class' => 'form-control' . ($errors->has('email2') ? ' is-invalid' : ''), 'placeholder' => 'Email #2']) }}
+                    {{ Form::email('email2', $cliente->email2 ?? '', ['class' => 'form-control' . ($errors->has('email2') ? ' is-invalid' : ''), 'placeholder' => 'Email #2']) }}
                     {!! $errors->first('email2', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('email3', 'Email #3') }}
-                    {{ Form::text('email3', $cliente->email3 ?? '', ['class' => 'form-control' . ($errors->has('email3') ? ' is-invalid' : ''), 'placeholder' => 'Email #3']) }}
+                    {{ Form::email('email3', $cliente->email3 ?? '', ['class' => 'form-control' . ($errors->has('email3') ? ' is-invalid' : ''), 'placeholder' => 'Email #3']) }}
                     {!! $errors->first('email3', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

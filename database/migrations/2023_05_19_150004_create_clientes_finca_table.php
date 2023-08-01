@@ -24,11 +24,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('finca');
 
-            $table->unsignedBigInteger('zona_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('zona_id')
-                ->references('id')
-                ->on('zonas');
-
             $table->timestamps();
             $table->softDeletes();
         });
@@ -39,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clientes_finca_zonas');
+        Schema::dropIfExists('clientes_finca');
     }
 };

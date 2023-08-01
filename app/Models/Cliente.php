@@ -61,7 +61,6 @@ class Cliente extends Model
         'email1',
         'email2',
         'email3',
-        'id_finca',
         'observaciones',
     ];
 

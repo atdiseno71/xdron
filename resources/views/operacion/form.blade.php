@@ -39,6 +39,13 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
+                    {{ Form::label('zona_id', 'Zona:') }}
+                    {{ Form::select('zona_id', $suertes, $operacion->zona_id, ['class' => 'form-control select2' . ($errors->has('zona_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una zona']) }}
+                    {!! $errors->first('zona_id', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
                     {{ Form::label('fecha_ejecucion', 'Fecha operación:') }}
                     {{ Form::date('fecha_ejecucion', $operacion->fecha_ejecucion, ['class' => 'form-control' . ($errors->has('fecha_ejecucion') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Ejecucion']) }}
                     {!! $errors->first('fecha_ejecucion', '<div class="invalid-feedback">:message</div>') !!}

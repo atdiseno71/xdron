@@ -11,6 +11,7 @@ use App\Models\Servicio;
 use App\Traits\Template;
 use App\Models\Cliente;
 use App\Models\Finca;
+use App\Models\Suerte;
 use App\Models\User;
 use App\Models\Zona;
 use Exception;
@@ -63,9 +64,11 @@ class OperacionController extends Controller
 
         $zonas = Zona::pluck('name as label', 'id as value');
 
+        $suertes = Suerte::pluck('name as label', 'id as value');
+
         $pilotos = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        return view('operacion.create', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos'));
+        return view('operacion.create', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos', 'suertes'));
     }
 
     /**
@@ -156,7 +159,9 @@ class OperacionController extends Controller
 
         $pilotos = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        return view('operacion.edit', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos'));
+        $suertes = Suerte::pluck('name as label', 'id as value');
+
+        return view('operacion.edit', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos', 'suertes'));
     }
 
     /**

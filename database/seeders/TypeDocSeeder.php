@@ -13,13 +13,6 @@ class TypeDocSeeder extends Seeder
      */
     public function run(): void
     {
-        TypeDocument::create([
-            'name' => 'REGISTRO CIVIL',
-        ]);
-
-        TypeDocument::create([
-            'name' => 'TARJETA DE IDENTIDAD',
-        ]);
 
         TypeDocument::create([
             'name' => 'CEDULA DE CIUDADANIA',
