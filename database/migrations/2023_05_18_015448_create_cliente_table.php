@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('cliente', function (Blueprint $table) {
             $table->id();
-            // $table->string('nit');
-            // $table->string('nombre');
-            // $table->string('email');
 
             $table->unsignedBigInteger('id_user')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('id_user')
@@ -30,11 +27,6 @@ return new class extends Migration
             $table->string('email1')->nullable();
             $table->string('email2')->nullable();
             $table->string('email3')->nullable();
-
-            $table->unsignedBigInteger('id_finca')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('id_finca')
-                ->references('id')
-                ->on('finca');
 
             $table->text('observaciones')->nullable();
 

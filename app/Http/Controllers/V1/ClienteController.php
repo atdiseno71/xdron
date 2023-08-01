@@ -7,6 +7,8 @@ use App\Models\Finca;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ClientesFinca;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class ClienteController
@@ -113,7 +115,24 @@ class ClienteController extends Controller
 
         $data['id_user'] = $cliente->id;
 
-        $new_client = Cliente::create($data);
+        $client_exist = Cliente::where('id_user', $cliente->id)->get();
+
+        if (empty($client_exist)) {
+            $new_client = Cliente::create($data);
+        } else {
+            $client_exist->update($data);
+        }
+
+
+        /* REGISTRAR FINCAS */
+        $fincas = $data['id_finca'];
+
+        foreach ($fincas as $key => $value) {
+            ClientesFinca::create([
+                'id_finca' => $value,
+                'id_cliente' => $new_client->id
+            ]);
+        }
 
         return redirect()->route('clientes.index')
             ->with('success', 'Cliente actualizado con éxito.');

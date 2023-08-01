@@ -56,6 +56,7 @@ class Operacion extends Model
         'fecha_ejecucion',
         'id_cliente',
         'id_finca',
+        'id_suerte',
         'zona_id',
         'id_piloto',
         'evidencia_record',
@@ -103,5 +104,13 @@ class Operacion extends Model
     public function zona()
     {
         return $this->hasOne('App\Models\Zona', 'id', 'zona_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function suerte()
+    {
+        return $this->hasOne('App\Models\Suerte', 'id', 'id_suerte');
     }
 }

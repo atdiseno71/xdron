@@ -31,6 +31,7 @@
                                     <th>Apellido</th>
                                     <th>Email</th>
                                     <th>Activo</th>
+                                    <th>Cliente</th>
 
                                     <th>Acciones</th>
                                 </tr>
@@ -52,6 +53,14 @@
                                                 @csrf
                                             </form>
                                         </td>
+
+                                        @if ($user->roles[0]?->name == "cliente")
+                                            <td>
+                                                <a class="btn btn-sm btn-success" href="{{ route('clientes.edit', $user->id) }}"><i class="fa fa-plus"></i></a>
+                                            </td>
+                                        @else
+                                            <td></td>
+                                        @endif
 
                                         <td>
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="form-delete">
