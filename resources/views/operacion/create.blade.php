@@ -35,9 +35,3 @@
         </div>
     </section>
 @endsection
-
-@section('js')
-
-    <script src="{{ asset('js/views/image-preview.js') }}"></script>
-
-@endsection

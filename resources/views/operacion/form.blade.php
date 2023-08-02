@@ -110,6 +110,6 @@
     </div>
     @include('layouts.btn-submit')
 
-    <script src="{{ asset('js/views/image-preview.js') }}"></script>
+    <script src="{{ asset('js/plugins/image-preview.js') }}"></script>
 
 </div>
