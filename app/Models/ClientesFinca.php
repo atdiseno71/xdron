@@ -52,7 +52,7 @@ class ClientesFinca extends Model
      */
     public function finca()
     {
-        return $this->hasOne('App\Models\Finca', 'id', 'id_finca');
+        return $this->belongsTo('App\Models\Finca', 'id_finca', 'id');
     }
 
 

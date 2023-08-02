@@ -17,7 +17,7 @@
             {!! $errors->first('quantity', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('cuote') }}
+            {{ Form::label('cuote', 'Cuota') }}
             {{ Form::text('cuote', $product->cuote, ['class' => 'form-control' . ($errors->has('cuote') ? ' is-invalid' : ''), 'placeholder' => 'Cuote']) }}
             {!! $errors->first('cuote', '<div class="invalid-feedback">:message</div>') !!}
         </div>

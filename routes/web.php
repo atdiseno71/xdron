@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getNotifications', [UserController::class, 'getNotification']);
     /* PRODUCTOS */
     Route::resource('products', ProductController::class)->names('products');
+    /* LLENAR SELECTS */
+    Route::get('/get-fincas-by-cliente', [OperacionController::class, 'getFincasByCliente'])->name('get-fincas-by-cliente');
 });
 
 // Auth::routes();
