@@ -39,9 +39,9 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('zona_id', 'Zona:') }}
-                    {{ Form::select('zona_id', $suertes, $operacion->zona_id, ['class' => 'form-control select2' . ($errors->has('zona_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una zona']) }}
-                    {!! $errors->first('zona_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('id_suerte', 'Suertes:') }}
+                    {{ Form::select('id_suerte', $suertes, $operacion->id_suerte, ['class' => 'form-control select2' . ($errors->has('id_suerte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una suerte']) }}
+                    {!! $errors->first('id_suerte', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -51,7 +51,7 @@
                     {!! $errors->first('fecha_ejecucion', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12 col-md-12">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('descarga') }}
                     {{ Form::text('descarga', $operacion->descarga, ['class' => 'form-control' . ($errors->has('descarga') ? ' is-invalid' : ''), 'placeholder' => 'Descarga']) }}

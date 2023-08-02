@@ -33,7 +33,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = User::where('id_role', config('roles.cliente'))->paginate();
+        $clientes = User::where('id_role', config('roles.cliente'))->with('cliente')->paginate();
 
         return view('cliente.index', compact('clientes'))
             ->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
@@ -115,10 +115,10 @@ class ClienteController extends Controller
 
         $data['id_user'] = $cliente->id;
 
-        $client_exist = Cliente::where('id_user', $cliente->id)->get();
+        $client_exist = Cliente::where('id_user', $cliente->id)->first();
 
         if (empty($client_exist)) {
-            $new_client = Cliente::create($data);
+            $client_exist = Cliente::create($data);
         } else {
             $client_exist->update($data);
         }
@@ -127,10 +127,12 @@ class ClienteController extends Controller
         /* REGISTRAR FINCAS */
         $fincas = $data['id_finca'];
 
+        $user = ClientesFinca::where('id_cliente', $client_exist->id)->delete();
+
         foreach ($fincas as $key => $value) {
             ClientesFinca::create([
                 'id_finca' => $value,
-                'id_cliente' => $new_client->id
+                'id_cliente' => $client_exist->id
             ]);
         }
 

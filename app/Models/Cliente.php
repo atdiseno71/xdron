@@ -76,14 +76,6 @@ class Cliente extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function finca()
-    {
-        return $this->hasOne('App\Models\Finca', 'id', 'id_finca');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function user()
     {
         return $this->hasOne('App\Models\User', 'id', 'id_user');
