@@ -37,7 +37,6 @@ class User extends Authenticatable
 		'name' => 'required',
 		'email' => 'required',
 		'username' => 'required',
-		'lastname' => 'required',
 		'id_role' => 'required',
 		'id_type_document' => 'required',
 		'document_number' => 'required',
@@ -73,6 +72,14 @@ class User extends Authenticatable
     public function count_notificacion() {
         $user = User::find(Auth::id());
         return count($user->notifications);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cliente()
+    {
+        return $this->hasOne('App\Models\Cliente', 'id_user', 'id');
     }
 
 }

@@ -51,9 +51,16 @@
 
 											<td>{{ $cliente->document_number }}</td>
 											<td>{{ $cliente->name }}</td>
-											<td>{{ $cliente->contacto }}</td>
+											<td>{{ $cliente->cliente?->contacto ?? '' }}</td>
 											<td>{{ $cliente->email }}</td>
-											<td>{{ $cliente->finca?->name }}</td>
+											<td>
+                                                @foreach($cliente->cliente->clientesFincas as $clienteFinca)
+                                                    {{ $clienteFinca->finca->name }}
+                                                    @if (!$loop->last)
+                                                        , <!-- Agrega una coma si no es el último elemento -->
+                                                    @endif
+                                                @endforeach
+                                            </td>
 											<td>{{ $cliente->created_at }}</td>
 
                                             <td>
