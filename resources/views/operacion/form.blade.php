@@ -111,5 +111,6 @@
     @include('layouts.btn-submit')
 
     <script src="{{ asset('js/plugins/image.preview.js') }}"></script>
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
 
 </div>
