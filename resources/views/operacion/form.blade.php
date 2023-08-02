@@ -9,10 +9,11 @@
                     {!! $errors->first('id_servicio', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
+            <!-- Agrega un atributo 'data-url' con la ruta del controlador a tu select de clientes -->
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('id_cliente', 'Cliente:') }}
-                    {{ Form::select('id_cliente', $clientes, $operacion->id_cliente, ['class' => 'form-control select2' . ($errors->has('id_cliente') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un cliente']) }}
+                    {{ Form::select('id_cliente', $clientes, $operacion->id_cliente, ['class' => 'form-control select2' . ($errors->has('id_cliente') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un cliente', 'onchange' => 'loadFincas()']) }}
                     {!! $errors->first('id_cliente', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -23,10 +24,11 @@
                     {!! $errors->first('id_piloto', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
+            <!-- Añade un nuevo select para las fincas -->
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('id_finca', 'Finca:') }}
-                    {{ Form::select('id_finca', $fincas, $operacion->id_finca, ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una finca']) }}
+                    {{ Form::select('id_finca', [], null, ['class' => 'form-control select2' . ($errors->has('id_finca') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una finca']) }}
                     {!! $errors->first('id_finca', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -121,6 +123,32 @@
                 img.src = dataURL;
             };
             reader.readAsDataURL(input.files[0]);
+        }
+        function loadFincas() {
+            const clienteSelect = document.querySelector('#id_cliente');
+            const fincaSelect = document.querySelector('#id_finca');
+
+            const clienteId = clienteSelect.value;
+            const url = "{{ route('get-fincas-by-cliente') }}?cliente_id=" + clienteId;
+
+            fetch(url).then(response => response.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        fincaSelect.innerHTML = '<option value="">Seleccione una finca</option>'; // Limpiar el select actual
+
+                        data.forEach(finca => {
+                            const option = document.createElement('option');
+                            option.value = finca.id;
+                            option.textContent = finca.name; // Ajusta el nombre del campo de acuerdo a tu modelo de finca
+                            fincaSelect.appendChild(option);
+                        });
+                    } else {
+                        console.error('El resultado del servidor no es un array:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener las fincas: ', error);
+                });
         }
     </script>
 

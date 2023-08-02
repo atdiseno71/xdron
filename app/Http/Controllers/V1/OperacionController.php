@@ -246,4 +246,15 @@ class OperacionController extends Controller
         }
     }
 
+    /* BUSCAR FINCAS POR ID DEL CLIENTE */
+    public function getFincasByCliente(Request $request)
+    {
+        $clienteId = $request->input('cliente_id');
+        $fincas = Finca::whereHas('clientesFincas', function ($query) use ($clienteId) {
+            $query->where('id_cliente', $clienteId);
+        })->get();
+
+        return response()->json($fincas);
+    }
+
 }
