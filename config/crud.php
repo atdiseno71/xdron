@@ -58,7 +58,7 @@ return [
     ],
 
     'controller' => [
-        'namespace' => 'App\Http\Controllers',
+        'namespace' => 'App\Http\Controllers\V1',
     ],
 
 ];
