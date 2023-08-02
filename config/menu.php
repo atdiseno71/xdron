@@ -37,4 +37,10 @@ return [
         'icon' => 'fa fa-map',
         'can' => 'suertes.index'
     ],
+    [
+        'text' => 'Producto',
+        'url' => 'products',
+        'icon' => 'fas fa-box',
+        'can' => 'products.index'
+    ],
 ];

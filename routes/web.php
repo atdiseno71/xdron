@@ -5,6 +5,7 @@ use App\Http\Controllers\V1\OperacionController;
 use App\Http\Controllers\V1\ClienteController;
 use App\Http\Controllers\V1\SuerteController;
 use App\Http\Controllers\V1\FincaController;
+use App\Http\Controllers\V1\ProductController;
 use App\Http\Controllers\V1\ServicioController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('servicios', ServicioController::class)->names('servicios');
     /* NOTIFICACIONES */
     Route::get('getNotifications', [UserController::class, 'getNotification']);
+    /* PRODUCTOS */
+    Route::resource('products', ProductController::class)->names('products');
 });
 
 // Auth::routes();
