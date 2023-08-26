@@ -17,7 +17,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('type_documents');
 
-            $table->string('document_number')->nullable();
+            $table->string('document_number', 80)->nullable();
         });
     }
 

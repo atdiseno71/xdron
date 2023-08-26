@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('operacion', function (Blueprint $table) {
+        Schema::create('operation_pilot', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('id_servicio')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('id_servicio')
-                ->references('id')
-                ->on('servicio');
 
             $table->string('descarga')->nullable();
             $table->date('fecha_ejecucion');
 
-            $table->unsignedBigInteger('id_cliente')->nullable()->constrained()->onDelete('cascade');
+            /* $table->unsignedBigInteger('id_cliente')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('id_cliente')
                 ->references('id')
                 ->on('cliente');
@@ -45,7 +40,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_piloto')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('id_piloto')
                 ->references('id')
-                ->on('users');
+                ->on('users'); */
 
             $table->string('evidencia_record')->nullable();
             $table->string('evidencia_track')->nullable();
@@ -62,6 +57,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('operacion');
+        Schema::dropIfExists('operation_pilot');
     }
 };

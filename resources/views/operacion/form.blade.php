@@ -2,13 +2,13 @@
     <div class="box-body">
 
         <div class="row">
-            <div class="col-12 col-md-6">
+            {{-- <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('id_servicio', 'Servicio:') }}
                     {{ Form::select('id_servicio', $servicios, $operacion->id_servicio, ['class' => 'form-control select2' . ($errors->has('id_servicio') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un servicio']) }}
                     {!! $errors->first('id_servicio', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-            </div>
+            </div> --}}
             <!-- Agrega un atributo 'data-url' con la ruta del controlador a tu select de clientes -->
             <div class="col-12 col-md-6">
                 <div class="form-group">

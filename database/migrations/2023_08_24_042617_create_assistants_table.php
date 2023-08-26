@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('assistants', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 30);
-            $table->string('type', 80);
-            $table->string('quantity', 30);
-            // $table->double('cuote', 15, 2)->nullable();
+            $table->string('name', 50);
+            $table->string('lastname', 50);
+            $table->string('type_document', 50);
+            $table->string('document_number', 50);
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')
                 ->on('users');
-
-            $table->text('observaciones')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('assistants');
     }
 };

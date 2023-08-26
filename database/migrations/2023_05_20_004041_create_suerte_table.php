@@ -16,10 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->text('observaciones')->nullable();
 
-            $table->unsignedBigInteger('id_zona')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('id_zona')
+            $table->unsignedBigInteger('finca_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('finca_id')
                 ->references('id')
-                ->on('zonas');
+                ->on('finca');
+
+            $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
 
             $table->timestamps();
             $table->softDeletes();

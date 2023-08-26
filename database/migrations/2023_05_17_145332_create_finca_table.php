@@ -14,6 +14,17 @@ return new class extends Migration
         Schema::create('finca', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
+            $table->unsignedBigInteger('cliente_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes');
+
+            $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
+
             $table->text('observaciones')->nullable();
 
             $table->timestamps();

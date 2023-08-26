@@ -56,7 +56,7 @@ class OperacionController extends Controller
     {
         $operacion = new Operacion();
 
-        $servicios = Servicio::pluck('name as label', 'id as value');
+        // $servicios = Servicio::pluck('name as label', 'id as value');
 
         $clientes = Cliente::with('user')->get()->pluck('user.name', 'id');
 
@@ -68,7 +68,7 @@ class OperacionController extends Controller
 
         $pilotos = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        return view('operacion.create', compact('operacion', 'servicios', 'clientes', 'fincas', 'zonas', 'pilotos', 'suertes'));
+        return view('operacion.create', compact('operacion', 'clientes', 'fincas', 'zonas', 'pilotos', 'suertes'));
     }
 
     /**

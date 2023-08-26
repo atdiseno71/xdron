@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cliente', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('id_user')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('id_user')
+            $table->string('nit', 30);
+            $table->string('razon_social', 120);
+            $table->string('direccion', 60);
+            $table->string('telefono', 30);
+            $table->string('email_enterprise', 191);
+            $table->string('email_enterprise2', 191);
+            $table->string('email_user', 191);
+            $table->string('full_name_user', 120);
+
+            $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('created_by')
                 ->references('id')
                 ->on('users');
-
-            $table->string('contacto');
-            $table->string('direccion');
-            $table->char('campos_nuevos')->nullable();
-            $table->string('telefono')->nullable();
-            $table->string('email_encargado')->nullable();
-            $table->string('email1')->nullable();
-            $table->string('email2')->nullable();
-            $table->string('email3')->nullable();
 
             $table->text('observaciones')->nullable();
 

@@ -35,13 +35,11 @@ class Cliente extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'cliente';
+    protected $table = 'clientes';
 
     static $rules = [
-		'contacto' => 'required',
-		'direccion' => 'required',
-        'id_finca' => 'required',
-        'contacto' => 'required',
+		'nit' => 'required',
+		'telefono' => 'required',
     ];
 
     protected $perPage = 20;
@@ -52,15 +50,15 @@ class Cliente extends Model
      * @var array
      */
     protected $fillable = [
-        'id_user',
-        'contacto',
-        'campos_nuevos',
+        'nit',
+        'razon_social',
         'direccion',
         'telefono',
-        'email_encargado',
-        'email1',
-        'email2',
-        'email3',
+        'email_enterprise',
+        'email_enterprise2',
+        'email_user',
+        'full_name_user',
+        'created_by',
         'observaciones',
     ];
 
@@ -78,7 +76,7 @@ class Cliente extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'id_user');
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
 
     /**
