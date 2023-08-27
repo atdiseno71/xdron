@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('operation_admin', function (Blueprint $table) {
+        Schema::create('operation', function (Blueprint $table) {
 
             $table->id();
 
@@ -65,6 +65,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('operation_admin');
+        Schema::dropIfExists('operation');
     }
 };

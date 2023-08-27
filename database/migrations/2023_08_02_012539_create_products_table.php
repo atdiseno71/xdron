@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('name', 30);
             $table->string('type', 80);
-            $table->string('quantity', 30);
+            // $table->string('quantity', 30);
             // $table->double('cuote', 15, 2)->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
