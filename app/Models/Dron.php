@@ -6,29 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Product
+ * Class Dron
  *
  * @property $id
- * @property $name
- * @property $type
+ * @property $enrollment
+ * @property $brand
+ * @property $model
+ * @property $year
  * @property $created_by
- * @property $observations
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
  *
- * @property Operation[] $operations
  * @property User $user
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Product extends Model
+class Dron extends Model
 {
     use SoftDeletes;
 
     static $rules = [
-		'name' => 'required',
-		'type' => 'required',
+		'enrollment' => 'required',
+		'brand' => 'required',
+		'model' => 'required',
+		'year' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,17 +40,9 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','type','created_by','observations'];
+    protected $fillable = ['enrollment','brand','model','year','created_by'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function operations()
-    {
-        return $this->hasMany('App\Models\Operation', 'type_product_id', 'id');
-    }
-    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

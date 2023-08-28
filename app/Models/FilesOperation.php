@@ -6,24 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Department
+ * Class FilesOperation
  *
  * @property $id
- * @property $name
+ * @property $record
+ * @property $track
+ * @property $map
+ * @property $detail_operation_id
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
  *
- * @property Municipality[] $municipalities
+ * @property DetailOperation $detailOperation
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Department extends Model
+class FilesOperation extends Model
 {
     use SoftDeletes;
 
     static $rules = [
-		'name' => 'required',
     ];
 
     protected $perPage = 20;
@@ -33,15 +35,15 @@ class Department extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['record','track','map','detail_operation_id'];
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function municipalities()
+    public function detailOperation()
     {
-        return $this->hasMany('App\Models\Municipality', 'department_id', 'id');
+        return $this->hasOne('App\Models\DetailOperation', 'id', 'detail_operation_id');
     }
     
 

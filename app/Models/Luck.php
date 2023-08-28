@@ -6,29 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Product
+ * Class Luck
  *
  * @property $id
  * @property $name
- * @property $type
- * @property $created_by
  * @property $observations
+ * @property $estate_id
+ * @property $created_by
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
  *
- * @property Operation[] $operations
+ * @property DetailOperation[] $detailOperations
+ * @property Estate $estate
  * @property User $user
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Product extends Model
+class Luck extends Model
 {
     use SoftDeletes;
 
     static $rules = [
 		'name' => 'required',
-		'type' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,15 +38,23 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','type','created_by','observations'];
+    protected $fillable = ['name','observations','estate_id','created_by'];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function operations()
+    public function detailOperations()
     {
-        return $this->hasMany('App\Models\Operation', 'type_product_id', 'id');
+        return $this->hasMany('App\Models\DetailOperation', 'luck_id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function estate()
+    {
+        return $this->hasOne('App\Models\Estate', 'id', 'estate_id');
     }
     
     /**
