@@ -91,7 +91,7 @@ class OperacionController extends Controller
         $operacion->id_finca = $request['id_finca'];
         $operacion->zona_id = $request['zona_id'];
         $operacion->id_piloto = $request['id_piloto'];
-        $operacion->observaciones = $request['observaciones'];
+        $operacion->observations = $request['observations'];
 
         $save = $operacion->save();
 
@@ -183,7 +183,7 @@ class OperacionController extends Controller
             $operacion->id_finca = $request['id_finca'];
             $operacion->zona_id = $request['zona_id'];
             $operacion->id_piloto = $request['id_piloto'];
-            $operacion->observaciones = $request['observaciones'];
+            $operacion->observations = $request['observations'];
 
             $save = $operacion->save();
 

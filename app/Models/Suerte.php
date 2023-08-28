@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property $id
  * @property $name
- * @property $observaciones
+ * @property $observations
  * @property $id_zona
  * @property $created_at
  * @property $updated_at
@@ -37,7 +37,7 @@ class Suerte extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','observaciones','id_zona'];
+    protected $fillable = ['name','observations','id_zona'];
 
 
     /**

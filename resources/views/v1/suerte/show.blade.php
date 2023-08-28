@@ -25,8 +25,8 @@
                             {{ $suerte->name }}
                         </div>
                         <div class="form-group">
-                            <strong>Observaciones:</strong>
-                            {{ $suerte->observaciones }}
+                            <strong>observations:</strong>
+                            {{ $suerte->observations }}
                         </div>
                         <div class="form-group">
                             <strong>Id Zona:</strong>

@@ -61,8 +61,8 @@
                             {{ $operacion->evidencia_gps }}
                         </div>
                         <div class="form-group">
-                            <strong>Observaciones:</strong>
-                            {{ $operacion->observaciones }}
+                            <strong>observations:</strong>
+                            {{ $operacion->observations }}
                         </div>
 
                     </div>

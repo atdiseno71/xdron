@@ -56,7 +56,7 @@ class OperationNotification extends Notification
             'descarga' => $this->operation?->descarga,
             'fecha_ejecucion' => $this->operation?->fecha_ejecucion,
             'id_piloto' => $this->operation?->user?->name,
-            'observaciones' => $this->operation?->observaciones,
+            'observations' => $this->operation?->observations,
             'created_at' => $this->operation?->created_at,
         ];
     }

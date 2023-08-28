@@ -11,24 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('lucks', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('observations')->nullable();
 
-            $table->string('nit', 30);
-            $table->string('razon_social', 120);
-            $table->string('direccion', 60);
-            $table->string('telefono', 30);
-            $table->string('email_enterprise', 191);
-            $table->string('email_enterprise2', 191);
-            $table->string('email_user', 191);
-            $table->string('full_name_user', 120);
+            $table->unsignedBigInteger('finca_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('finca_id')
+                ->references('id')
+                ->on('finca');
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')
                 ->on('users');
-
-            $table->text('observaciones')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -40,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cliente');
+        Schema::dropIfExists('suerte');
     }
 };

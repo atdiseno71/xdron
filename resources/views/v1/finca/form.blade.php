@@ -11,9 +11,9 @@
             </div>
             <div class="col-12 col-md-12">
                 <div class="form-group">
-                    {{ Form::label('observaciones', 'Observaciones:') }}
-                    {{ Form::textArea('observaciones', $finca->observaciones ?? '', ['class' => 'form-control' . ($errors->has('observaciones') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
-                    {!! $errors->first('observaciones', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('observations', 'observations:') }}
+                    {{ Form::textArea('observations', $finca->observations ?? '', ['class' => 'form-control' . ($errors->has('observations') ? ' is-invalid' : ''), 'placeholder' => 'observations']) }}
+                    {!! $errors->first('observations', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>

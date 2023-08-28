@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('zonas', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('observaciones')->nullable();
+            $table->text('observations')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

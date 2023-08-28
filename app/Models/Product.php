@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property $type
  * @property $quantity
  * @property $cuote
- * @property $observaciones
+ * @property $observations
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
@@ -38,7 +38,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','type','quantity','cuote','observaciones'];
+    protected $fillable = ['name','type','quantity','cuote','observations'];
 
 
 

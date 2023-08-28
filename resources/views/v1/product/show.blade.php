@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $product->name }}
@@ -37,8 +37,8 @@
                             {{ $product->cuote }}
                         </div>
                         <div class="form-group">
-                            <strong>Observaciones:</strong>
-                            {{ $product->observaciones }}
+                            <strong>observations:</strong>
+                            {{ $product->observations }}
                         </div>
 
                     </div>

@@ -59,7 +59,7 @@ class Cliente extends Model
         'email_user',
         'full_name_user',
         'created_by',
-        'observaciones',
+        'observations',
     ];
 
 

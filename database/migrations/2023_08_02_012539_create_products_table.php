@@ -24,7 +24,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users');
 
-            $table->text('observaciones')->nullable();
+            $table->text('observations')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

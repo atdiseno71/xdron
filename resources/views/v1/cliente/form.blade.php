@@ -92,9 +92,9 @@
         <div class="row">
             <div class="col-12 col-md-12">
                 <div class="form-group">
-                    {{ Form::label('observaciones') }}
-                    {{ Form::textArea('observaciones', $cliente->observaciones ?? '', ['class' => 'form-control' . ($errors->has('observaciones') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
-                    {!! $errors->first('observaciones', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('observations') }}
+                    {{ Form::textArea('observations', $cliente->observations ?? '', ['class' => 'form-control' . ($errors->has('observations') ? ' is-invalid' : ''), 'placeholder' => 'observations']) }}
+                    {!! $errors->first('observations', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>

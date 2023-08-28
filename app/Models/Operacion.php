@@ -20,7 +20,7 @@ use Illuminate\Notifications\Notifiable;
  * @property $evidencia_record
  * @property $evidencia_track
  * @property $evidencia_gps
- * @property $observaciones
+ * @property $observations
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
@@ -62,7 +62,7 @@ class Operacion extends Model
         'evidencia_record',
         'evidencia_track',
         'evidencia_gps',
-        'observaciones'
+        'observations'
     ];
 
 
