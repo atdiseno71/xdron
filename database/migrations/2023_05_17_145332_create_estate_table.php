@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cliente_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('cliente_id')
                 ->references('id')
-                ->on('clientes');
+                ->on('clients');
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('finca');
+        Schema::dropIfExists('estate');
     }
 };

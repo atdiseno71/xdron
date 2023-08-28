@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('observations')->nullable();
 
-            $table->unsignedBigInteger('finca_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('finca_id')
+            $table->unsignedBigInteger('estate_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('estate_id')
                 ->references('id')
-                ->on('finca');
+                ->on('estate');
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')

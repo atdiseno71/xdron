@@ -29,12 +29,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'users.edit'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'users.destroy'])->syncRoles([$role1, $role2]);
 
-        /* FINCAS */
-        Permission::create(['name' => 'fincas.index'])->syncRoles([$role1, $role2, $role3, $role4]);
-        Permission::create(['name' => 'fincas.create'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'fincas.show'])->syncRoles([$role1, $role2, $role3, $role4]);
-        Permission::create(['name' => 'fincas.edit'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'fincas.destroy'])->syncRoles([$role1, $role2]);
+        /* estateS */
+        Permission::create(['name' => 'estates.index'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'estates.create'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'estates.show'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'estates.edit'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'estates.destroy'])->syncRoles([$role1, $role2]);
 
         /* ZONAS */
         Permission::create(['name' => 'zonas.index'])->syncRoles([$role1, $role2, $role3, $role4]);
@@ -50,12 +50,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'suertes.edit'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'suertes.destroy'])->syncRoles([$role1, $role2]);
 
-        /* CLIENTES */
-        Permission::create(['name' => 'clientes.index'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'clientes.create'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'clientes.show'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'clientes.edit'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'clientes.destroy'])->syncRoles([$role1, $role2]);
+        /* clients */
+        Permission::create(['name' => 'clients.index'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'clients.create'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'clients.show'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'clients.edit'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'clients.destroy'])->syncRoles([$role1, $role2]);
 
         /* OPERACIONES */
         Permission::create(['name' => 'operaciones.index'])->syncRoles([$role1, $role2, $role3, $role4]);

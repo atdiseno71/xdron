@@ -46,7 +46,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_cliente')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('id_cliente')
                 ->references('id')
-                ->on('clientes');
+                ->on('clients');
 
             $table->unsignedBigInteger('admin_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('admin_by')
