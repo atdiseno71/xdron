@@ -10,7 +10,7 @@ return [
     [
         'text' => 'Asistentes',
         'url' => 'assistants',
-        'icon' => 'fas fa-fw fa-assistants',
+        'icon' => 'fas fa-fw fa-users',
         'can' => 'assistants.index'
     ],
     [

@@ -48,19 +48,19 @@ class Assistant extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function operations()
+    public function assistant_one()
     {
         return $this->hasMany('App\Models\Operation', 'assistant_id_one', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function operations()
+    public function assistant_two()
     {
         return $this->hasMany('App\Models\Operation', 'assistant_id_two', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -68,6 +68,6 @@ class Assistant extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    
+
 
 }
