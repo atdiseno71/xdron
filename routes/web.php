@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\V1\OperacionController;
-use App\Http\Controllers\V1\ClienteController;
-use App\Http\Controllers\V1\SuerteController;
-use App\Http\Controllers\V1\FincaController;
-use App\Http\Controllers\V1\ProductController;
-use App\Http\Controllers\V1\ServicioController;
 use App\Http\Controllers\V1\UserController;
+use App\Http\Controllers\V2\AssistantController;
+use App\Http\Controllers\V2\ClientController;
+use App\Http\Controllers\V2\DepartmentController;
+use App\Http\Controllers\V2\DronController;
+use App\Http\Controllers\V2\EstateController;
+use App\Http\Controllers\V2\LuckController;
+use App\Http\Controllers\V2\MunicipalityController;
+use App\Http\Controllers\V2\OperationController;
+use App\Http\Controllers\V2\ProductController;
+use App\Http\Controllers\V2\StatusController;
 use Illuminate\Support\Facades\Route;
 
 /* RUTA DE INICIO PARA LAS PWA */
@@ -29,22 +33,25 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{id}', [UserController::class, 'active'])->name('users.active');
     Route::get('users/{user}', [UserController::class, 'show'])->name('users.asignar');
     Route::put('users/{user}', [UserController::class, 'updateRol']);
-    /* CLIENTES */
-    Route::resource('clientes', ClienteController::class);
-    /* FINCAS */
-    Route::resource('fincas', FincaController::class);
-    /* SUERTES */
-    Route::resource('suertes', SuerteController::class);
-    /* OPERACIONES */
-    Route::resource('operacion', OperacionController::class)->names('operaciones');
-    /* SERVICIOS */
-    Route::resource('servicios', ServicioController::class)->names('servicios');
     /* NOTIFICACIONES */
     Route::get('getNotifications', [UserController::class, 'getNotification']);
-    /* PRODUCTOS */
-    Route::resource('products', ProductController::class)->names('products');
     /* LLENAR SELECTS */
     Route::get('/get-fincas-by-cliente', [OperacionController::class, 'getFincasByCliente'])->name('get-fincas-by-cliente');
+
+    /* ASISTENTES */
+    Route::resource('assistants', AssistantController::class)->names('assistants');
+
+    Route::resource('clients', ClientController::class)->names('clients');
+
+    Route::resource('departments', DepartmentController::class)->names('departments');
+    Route::resource('drons', DronController::class)->names('drons');
+    Route::resource('estates', EstateController::class)->names('estates');
+    Route::resource('lucks', LuckController::class)->names('lucks');
+    Route::resource('municipalities', MunicipalityController::class)->names('municipalities');
+    Route::resource('operations', operationsController::class)->names('operations');
+    Route::resource('products', ProductController::class)->names('products');
+    Route::resource('statuses', StatusController::class)->names('statuses');
+
 });
 
 // Auth::routes();
