@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V2;
 
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class ZoneController

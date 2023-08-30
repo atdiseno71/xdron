@@ -26,6 +26,8 @@ class Dron extends Model
 {
     use SoftDeletes;
 
+    protected $table = "dron";
+
     static $rules = [
 		'enrollment' => 'required',
 		'brand' => 'required',
@@ -50,6 +52,6 @@ class Dron extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    
+
 
 }
