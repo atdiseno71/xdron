@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Zona;
+use App\Models\Zone;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ZonasSeeder extends Seeder
+class ZonesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,7 +27,7 @@ class ZonasSeeder extends Seeder
         ];
 
         foreach ($zonas as $key => $value) {
-            Zona::create([
+            Zone::create([
                 'name' => $value
             ]);
         }

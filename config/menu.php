@@ -8,37 +8,43 @@ return [
         'can' => 'users.index'
     ],
     [
+        'text' => 'Asistentes',
+        'url' => 'assistants',
+        'icon' => 'fas fa-fw fa-assistants',
+        'can' => 'assistants.index'
+    ],
+    [
         'text' => 'Clientes',
-        'url' => 'clientes',
+        'url' => 'clients',
         'icon' => 'fas fa-fw fa-user',
-        'can' => 'clientes.index'
+        'can' => 'clients.index'
     ],
     [
-        'text' => 'Fincas',
-        'url' => 'fincas',
-        'icon' => 'fa fa-street-view',
-        'can' => 'fincas.index'
-    ],
-    [
-        'text' => 'Servicios',
-        'url' => 'servicios',
+        'text' => 'Drones',
+        'url' => 'drons',
         'icon' => 'fa fa-rocket',
-        'can' => 'servicios.index'
+        'can' => 'drons.index'
+    ],
+    [
+        'text' => 'Haciendas',
+        'url' => 'estates',
+        'icon' => 'fa fa-street-view',
+        'can' => 'estates.index'
+    ],
+    [
+        'text' => 'Suertes',
+        'url' => 'lucks',
+        'icon' => 'fa fa-map',
+        'can' => 'lucks.index'
     ],
     [
         'text' => 'Operaciones',
-        'url' => 'operacion',
+        'url' => 'operations',
         'icon' => 'fa fa-tasks',
-        'can' => 'zonas.index'
+        'can' => 'operations.index'
     ],
     [
-        'text' => 'Suerte',
-        'url' => 'suertes',
-        'icon' => 'fa fa-map',
-        'can' => 'suertes.index'
-    ],
-    [
-        'text' => 'Producto',
+        'text' => 'Productos',
         'url' => 'products',
         'icon' => 'fas fa-box',
         'can' => 'products.index'

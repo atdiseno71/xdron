@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             DepartmentsSeeder::class,
             MunicipalitySeeder::class,
             TypeDocSeeder::class,
-            ZonasSeeder::class,
+            ZonesSeeder::class,
         ]);
     }
 }
