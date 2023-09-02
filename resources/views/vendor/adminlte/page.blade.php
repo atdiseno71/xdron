@@ -3,28 +3,6 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
-    <style>
-        .form-check-input:focus {
-            border-color: #198754 !important;
-            outline: 0 !important;
-            box-shadow: 0 0 0 .25rem rgba(13, 253, 84, 0.09) !important;
-        }
-        .form-check-input:checked {
-            background-color: #198754 !important;
-            border-color: #198754 !important;
-        }
-        .form-switch .form-check-input:focus {
-            --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e") !important;
-        }
-        .brand-link {
-            color: #fff !important;
-            text-decoration: none !important;
-        }
-    </style>
-    <link rel="stylesheet" href="{{ asset('css/plugins/select2.min.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     @stack('css')
     @yield('css')
 @stop
@@ -74,19 +52,9 @@
 @stop
 
 @section('adminlte_js')
-    <!-- Sweetalert2 for alerts more nice -->
-    <script src="{{ asset('js/plugins/sweetalert2@11.js') }}"></script>
-    <!-- Load plugins -->
-    <script src="{{ asset('js/plugins/select2.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/patternomaly.js') }}"></script>
-    <script src="{{ asset('js/plugins/chart.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/parsley.min.js') }}"></script>
-    <script language="JavaScript">
-        $(document).ready(() => {
-            $('.select2').select2();
-        });
-        history.forward();
-    </script>
     @stack('js')
     @yield('js')
+    <script>
+        console.log('demo')
+    </script>
 @stop

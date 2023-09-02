@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    Assistant
+@section('title')
+    Asistentes
 @endsection
 
 @section('content')
@@ -13,21 +13,19 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Assistant') }}
+                                Asistentes
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('assistants.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  Nuevo asistente
                                 </a>
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -35,12 +33,12 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Name</th>
-										<th>Lastname</th>
-										<th>Type Document</th>
-										<th>Document Number</th>
-										<th>Created By</th>
+
+										<th>Nombre</th>
+										<th>Apellido</th>
+										<th>Tipo documento</th>
+										<th># Documento</th>
+										<th>Creado por</th>
 
                                         <th></th>
                                     </tr>
@@ -49,7 +47,7 @@
                                     @foreach ($assistants as $assistant)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $assistant->name }}</td>
 											<td>{{ $assistant->lastname }}</td>
 											<td>{{ $assistant->type_document }}</td>
@@ -58,11 +56,11 @@
 
                                             <td>
                                                 <form action="{{ route('assistants.destroy',$assistant->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('assistants.show',$assistant->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('assistants.edit',$assistant->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('assistants.show',$assistant->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('assistants.edit',$assistant->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -71,8 +69,10 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $assistants->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $assistants->links() !!}
             </div>
         </div>
     </div>
