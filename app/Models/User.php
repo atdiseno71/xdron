@@ -82,4 +82,12 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Cliente', 'id_user', 'id');
     }
 
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'user_id', 'id')
+            ->withPivot('value')
+            ->as('clients_users')
+            ->withTimestamps();;
+    }
+
 }

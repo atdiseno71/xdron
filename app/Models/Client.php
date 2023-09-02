@@ -61,7 +61,7 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Estate', 'cliente_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -69,7 +69,7 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Operation', 'id_cliente', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -77,6 +77,13 @@ class Client extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'client_id', 'id')
+            ->withPivot('value')
+            ->as('clients_users')
+            ->withTimestamps();;
+    }
 
 }
