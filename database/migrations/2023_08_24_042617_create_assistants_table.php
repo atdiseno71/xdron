@@ -16,8 +16,12 @@ return new class extends Migration
 
             $table->string('name', 50);
             $table->string('lastname', 50);
-            $table->string('type_document', 50);
             $table->string('document_number', 50);
+
+            $table->unsignedBigInteger('type_document')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('type_document')
+                ->references('id')
+                ->on('type_documents');
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')

@@ -29,10 +29,10 @@ class Assistant extends Model
     use SoftDeletes;
 
     static $rules = [
-		'name' => 'required',
-		'lastname' => 'required',
-		'type_document' => 'required',
-		'document_number' => 'required',
+        'name' => 'required',
+        'lastname' => 'required',
+        'type_document' => 'required',
+        'document_number' => 'required',
     ];
 
     protected $perPage = 20;
@@ -42,7 +42,7 @@ class Assistant extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','lastname','type_document','document_number','created_by'];
+    protected $fillable = ['name', 'lastname', 'type_document', 'document_number', 'created_by'];
 
 
     /**
@@ -69,5 +69,11 @@ class Assistant extends Model
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function type_document()
+    {
+        return $this->hasOne('App\Models\TypeDocument', 'id', 'type_document');
+    }
 }

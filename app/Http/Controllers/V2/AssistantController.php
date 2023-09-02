@@ -6,6 +6,7 @@ use App\Models\Assistant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TypeDocument;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class AssistantController
@@ -50,10 +51,12 @@ class AssistantController extends Controller
     {
         request()->validate(Assistant::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $assistant = Assistant::create($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Assistant creado con exito.');
+            ->with('success', 'Asistentecreado con exito.');
     }
 
     /**
@@ -88,7 +91,7 @@ class AssistantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Assistant $assistant
+     * @param  Asistente$assistant
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Assistant $assistant)
@@ -98,7 +101,7 @@ class AssistantController extends Controller
         $assistant->update($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Assistant actualizado con exito.');
+            ->with('success', 'Asistenteactualizado con exito.');
     }
 
     /**
@@ -111,6 +114,6 @@ class AssistantController extends Controller
         $assistant = Assistant::find($id)->delete();
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Assistant eliminado con exito.');
+            ->with('success', 'Asistenteeliminado con exito.');
     }
 }

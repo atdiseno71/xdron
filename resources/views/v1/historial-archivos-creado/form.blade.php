@@ -1,6 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
             {{ Form::label('directorio') }}
             {{ Form::text('directorio', $historialArchivosCreado->directorio, ['class' => 'form-control' . ($errors->has('directorio') ? ' is-invalid' : ''), 'placeholder' => 'Directorio']) }}
@@ -23,7 +23,5 @@
         </div>
 
     </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
+    @include('layouts.btn-submit')
 </div>

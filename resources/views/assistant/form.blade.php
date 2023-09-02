@@ -19,19 +19,14 @@
         </div>
 
         <div class="row">
-            <div class="col-6 col-md-12">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('type_document', 'Tipo de documento') }}
                     {{ Form::select('type_document', $type_documents, $assistant->type_document, ['class' => 'form-control select2' . ($errors->has('type_document') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un tipo de documento']) }}
                     {!! $errors->first('type_document', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <div class="form-group">
-                    {{ Form::label('type_document') }}
-                    {{ Form::text('type_document', $assistant->type_document, ['class' => 'form-control' . ($errors->has('type_document') ? ' is-invalid' : ''), 'placeholder' => 'Type Document']) }}
-                    {!! $errors->first('type_document', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
             </div>
-            <div class="col-6 col-md-12">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('document_number') }}
                     {{ Form::number('document_number', $assistant->document_number, ['class' => 'form-control' . ($errors->has('document_number') ? ' is-invalid' : ''), 'placeholder' => 'Document Number']) }}
@@ -41,7 +36,5 @@
         </div>
 
     </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
+    @include('layouts.btn-submit')
 </div>

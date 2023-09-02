@@ -40,7 +40,7 @@
 										<th># Documento</th>
 										<th>Creado por</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
