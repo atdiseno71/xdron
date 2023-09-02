@@ -49,7 +49,7 @@ class FilesOperationController extends Controller
         $filesOperation = FilesOperation::create($request->all());
 
         return redirect()->route('files-operations.index')
-            ->with('success', 'FilesOperation created successfully.');
+            ->with('success', 'FilesOperation creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class FilesOperationController extends Controller
         $filesOperation->update($request->all());
 
         return redirect()->route('files-operations.index')
-            ->with('success', 'FilesOperation updated successfully');
+            ->with('success', 'FilesOperation actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class FilesOperationController extends Controller
         $filesOperation = FilesOperation::find($id)->delete();
 
         return redirect()->route('files-operations.index')
-            ->with('success', 'FilesOperation deleted successfully');
+            ->with('success', 'FilesOperation eliminado con exito.');
     }
 }

@@ -49,7 +49,7 @@ class TypeDocumentController extends Controller
         $typeDocument = TypeDocument::create($request->all());
 
         return redirect()->route('type-documents.index')
-            ->with('success', 'TypeDocument created successfully.');
+            ->with('success', 'TypeDocument creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class TypeDocumentController extends Controller
         $typeDocument->update($request->all());
 
         return redirect()->route('type-documents.index')
-            ->with('success', 'TypeDocument updated successfully');
+            ->with('success', 'TypeDocument actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class TypeDocumentController extends Controller
         $typeDocument = TypeDocument::find($id)->delete();
 
         return redirect()->route('type-documents.index')
-            ->with('success', 'TypeDocument deleted successfully');
+            ->with('success', 'TypeDocument eliminado con exito.');
     }
 }

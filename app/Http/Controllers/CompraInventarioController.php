@@ -48,7 +48,7 @@ class CompraInventarioController extends Controller
         $compraInventario = CompraInventario::create($request->all());
 
         return redirect()->route('compra-inventarios.index')
-            ->with('success', 'CompraInventario created successfully.');
+            ->with('success', 'CompraInventario creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class CompraInventarioController extends Controller
         $compraInventario->update($request->all());
 
         return redirect()->route('compra-inventarios.index')
-            ->with('success', 'CompraInventario updated successfully');
+            ->with('success', 'CompraInventario actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class CompraInventarioController extends Controller
         $compraInventario = CompraInventario::find($id)->delete();
 
         return redirect()->route('compra-inventarios.index')
-            ->with('success', 'CompraInventario deleted successfully');
+            ->with('success', 'CompraInventario eliminado con exito.');
     }
 }

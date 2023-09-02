@@ -49,7 +49,7 @@ class DronController extends Controller
         $dron = Dron::create($request->all());
 
         return redirect()->route('drons.index')
-            ->with('success', 'Dron created successfully.');
+            ->with('success', 'Dron creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class DronController extends Controller
         $dron->update($request->all());
 
         return redirect()->route('drons.index')
-            ->with('success', 'Dron updated successfully');
+            ->with('success', 'Dron actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class DronController extends Controller
         $dron = Dron::find($id)->delete();
 
         return redirect()->route('drons.index')
-            ->with('success', 'Dron deleted successfully');
+            ->with('success', 'Dron eliminado con exito.');
     }
 }

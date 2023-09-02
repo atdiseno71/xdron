@@ -48,7 +48,7 @@ class DetalleServicioController extends Controller
         $detalleServicio = DetalleServicio::create($request->all());
 
         return redirect()->route('detalle-servicios.index')
-            ->with('success', 'DetalleServicio created successfully.');
+            ->with('success', 'DetalleServicio creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class DetalleServicioController extends Controller
         $detalleServicio->update($request->all());
 
         return redirect()->route('detalle-servicios.index')
-            ->with('success', 'DetalleServicio updated successfully');
+            ->with('success', 'DetalleServicio actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class DetalleServicioController extends Controller
         $detalleServicio = DetalleServicio::find($id)->delete();
 
         return redirect()->route('detalle-servicios.index')
-            ->with('success', 'DetalleServicio deleted successfully');
+            ->with('success', 'DetalleServicio eliminado con exito.');
     }
 }

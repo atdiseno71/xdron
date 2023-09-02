@@ -48,7 +48,7 @@ class MunicipalityController extends Controller
         $municipality = Municipality::create($request->all());
 
         return redirect()->route('municipalities.index')
-            ->with('success', 'Municipality created successfully.');
+            ->with('success', 'Municipality creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class MunicipalityController extends Controller
         $municipality->update($request->all());
 
         return redirect()->route('municipalities.index')
-            ->with('success', 'Municipality updated successfully');
+            ->with('success', 'Municipality actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class MunicipalityController extends Controller
         $municipality = Municipality::find($id)->delete();
 
         return redirect()->route('municipalities.index')
-            ->with('success', 'Municipality deleted successfully');
+            ->with('success', 'Municipality eliminado con exito.');
     }
 }

@@ -48,7 +48,7 @@ class CalibracionController extends Controller
         $calibracion = Calibracion::create($request->all());
 
         return redirect()->route('calibracions.index')
-            ->with('success', 'Calibracion created successfully.');
+            ->with('success', 'Calibracion creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class CalibracionController extends Controller
         $calibracion->update($request->all());
 
         return redirect()->route('calibracions.index')
-            ->with('success', 'Calibracion updated successfully');
+            ->with('success', 'Calibracion actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class CalibracionController extends Controller
         $calibracion = Calibracion::find($id)->delete();
 
         return redirect()->route('calibracions.index')
-            ->with('success', 'Calibracion deleted successfully');
+            ->with('success', 'Calibracion eliminado con exito.');
     }
 }

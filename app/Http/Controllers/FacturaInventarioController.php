@@ -48,7 +48,7 @@ class FacturaInventarioController extends Controller
         $facturaInventario = FacturaInventario::create($request->all());
 
         return redirect()->route('factura-inventarios.index')
-            ->with('success', 'FacturaInventario created successfully.');
+            ->with('success', 'FacturaInventario creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class FacturaInventarioController extends Controller
         $facturaInventario->update($request->all());
 
         return redirect()->route('factura-inventarios.index')
-            ->with('success', 'FacturaInventario updated successfully');
+            ->with('success', 'FacturaInventario actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class FacturaInventarioController extends Controller
         $facturaInventario = FacturaInventario::find($id)->delete();
 
         return redirect()->route('factura-inventarios.index')
-            ->with('success', 'FacturaInventario deleted successfully');
+            ->with('success', 'FacturaInventario eliminado con exito.');
     }
 }

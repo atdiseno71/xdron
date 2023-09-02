@@ -48,7 +48,7 @@ class CiudadController extends Controller
         $ciudad = Ciudad::create($request->all());
 
         return redirect()->route('ciudads.index')
-            ->with('success', 'Ciudad created successfully.');
+            ->with('success', 'Ciudad creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class CiudadController extends Controller
         $ciudad->update($request->all());
 
         return redirect()->route('ciudads.index')
-            ->with('success', 'Ciudad updated successfully');
+            ->with('success', 'Ciudad actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class CiudadController extends Controller
         $ciudad = Ciudad::find($id)->delete();
 
         return redirect()->route('ciudads.index')
-            ->with('success', 'Ciudad deleted successfully');
+            ->with('success', 'Ciudad eliminado con exito.');
     }
 }

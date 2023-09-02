@@ -48,7 +48,7 @@ class AplicacionController extends Controller
         $aplicacion = Aplicacion::create($request->all());
 
         return redirect()->route('aplicacions.index')
-            ->with('success', 'Aplicacion created successfully.');
+            ->with('success', 'Aplicacion creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class AplicacionController extends Controller
         $aplicacion->update($request->all());
 
         return redirect()->route('aplicacions.index')
-            ->with('success', 'Aplicacion updated successfully');
+            ->with('success', 'Aplicacion actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class AplicacionController extends Controller
         $aplicacion = Aplicacion::find($id)->delete();
 
         return redirect()->route('aplicacions.index')
-            ->with('success', 'Aplicacion deleted successfully');
+            ->with('success', 'Aplicacion eliminado con exito.');
     }
 }

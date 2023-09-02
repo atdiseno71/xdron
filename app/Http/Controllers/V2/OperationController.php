@@ -49,7 +49,7 @@ class OperationController extends Controller
         $operation = Operation::create($request->all());
 
         return redirect()->route('operations.index')
-            ->with('success', 'Operation created successfully.');
+            ->with('success', 'Operation creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class OperationController extends Controller
         $operation->update($request->all());
 
         return redirect()->route('operations.index')
-            ->with('success', 'Operation updated successfully');
+            ->with('success', 'Operation actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class OperationController extends Controller
         $operation = Operation::find($id)->delete();
 
         return redirect()->route('operations.index')
-            ->with('success', 'Operation deleted successfully');
+            ->with('success', 'Operation eliminado con exito.');
     }
 }

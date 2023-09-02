@@ -48,7 +48,7 @@ class EstacionServicioController extends Controller
         $estacionServicio = EstacionServicio::create($request->all());
 
         return redirect()->route('estacion-servicios.index')
-            ->with('success', 'EstacionServicio created successfully.');
+            ->with('success', 'EstacionServicio creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class EstacionServicioController extends Controller
         $estacionServicio->update($request->all());
 
         return redirect()->route('estacion-servicios.index')
-            ->with('success', 'EstacionServicio updated successfully');
+            ->with('success', 'EstacionServicio actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class EstacionServicioController extends Controller
         $estacionServicio = EstacionServicio::find($id)->delete();
 
         return redirect()->route('estacion-servicios.index')
-            ->with('success', 'EstacionServicio deleted successfully');
+            ->with('success', 'EstacionServicio eliminado con exito.');
     }
 }

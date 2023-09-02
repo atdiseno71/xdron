@@ -48,7 +48,7 @@ class GrupoController extends Controller
         $grupo = Grupo::create($request->all());
 
         return redirect()->route('grupos.index')
-            ->with('success', 'Grupo created successfully.');
+            ->with('success', 'Grupo creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class GrupoController extends Controller
         $grupo->update($request->all());
 
         return redirect()->route('grupos.index')
-            ->with('success', 'Grupo updated successfully');
+            ->with('success', 'Grupo actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class GrupoController extends Controller
         $grupo = Grupo::find($id)->delete();
 
         return redirect()->route('grupos.index')
-            ->with('success', 'Grupo deleted successfully');
+            ->with('success', 'Grupo eliminado con exito.');
     }
 }

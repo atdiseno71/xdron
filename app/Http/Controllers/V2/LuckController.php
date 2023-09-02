@@ -49,7 +49,7 @@ class LuckController extends Controller
         $luck = Luck::create($request->all());
 
         return redirect()->route('lucks.index')
-            ->with('success', 'Luck created successfully.');
+            ->with('success', 'Luck creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class LuckController extends Controller
         $luck->update($request->all());
 
         return redirect()->route('lucks.index')
-            ->with('success', 'Luck updated successfully');
+            ->with('success', 'Luck actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class LuckController extends Controller
         $luck = Luck::find($id)->delete();
 
         return redirect()->route('lucks.index')
-            ->with('success', 'Luck deleted successfully');
+            ->with('success', 'Luck eliminado con exito.');
     }
 }

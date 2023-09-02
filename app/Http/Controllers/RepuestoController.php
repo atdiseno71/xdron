@@ -48,7 +48,7 @@ class RepuestoController extends Controller
         $repuesto = Repuesto::create($request->all());
 
         return redirect()->route('repuestos.index')
-            ->with('success', 'Repuesto created successfully.');
+            ->with('success', 'Repuesto creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class RepuestoController extends Controller
         $repuesto->update($request->all());
 
         return redirect()->route('repuestos.index')
-            ->with('success', 'Repuesto updated successfully');
+            ->with('success', 'Repuesto actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class RepuestoController extends Controller
         $repuesto = Repuesto::find($id)->delete();
 
         return redirect()->route('repuestos.index')
-            ->with('success', 'Repuesto deleted successfully');
+            ->with('success', 'Repuesto eliminado con exito.');
     }
 }

@@ -48,7 +48,7 @@ class GrupoInventarioController extends Controller
         $grupoInventario = GrupoInventario::create($request->all());
 
         return redirect()->route('grupo-inventarios.index')
-            ->with('success', 'GrupoInventario created successfully.');
+            ->with('success', 'GrupoInventario creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class GrupoInventarioController extends Controller
         $grupoInventario->update($request->all());
 
         return redirect()->route('grupo-inventarios.index')
-            ->with('success', 'GrupoInventario updated successfully');
+            ->with('success', 'GrupoInventario actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class GrupoInventarioController extends Controller
         $grupoInventario = GrupoInventario::find($id)->delete();
 
         return redirect()->route('grupo-inventarios.index')
-            ->with('success', 'GrupoInventario deleted successfully');
+            ->with('success', 'GrupoInventario eliminado con exito.');
     }
 }

@@ -59,7 +59,7 @@ class ZonaController extends Controller
         $zona = Zona::create($request->all());
 
         return redirect()->route('zonas.index')
-            ->with('success', 'Zona created successfully.');
+            ->with('success', 'Zona creado con exito.');
     }
 
     /**
@@ -103,7 +103,7 @@ class ZonaController extends Controller
         $zona->update($request->all());
 
         return redirect()->route('zonas.index')
-            ->with('success', 'Zona updated successfully');
+            ->with('success', 'Zona actualizado con exito.');
     }
 
     /**
@@ -116,7 +116,7 @@ class ZonaController extends Controller
         $zona = Zona::find($id)->delete();
 
         return redirect()->route('zonas.index')
-            ->with('success', 'Zona deleted successfully');
+            ->with('success', 'Zona eliminado con exito.');
     }
 
     public function zonaFinca($id) {

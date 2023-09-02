@@ -48,7 +48,7 @@ class HistorialArchivosCreadoController extends Controller
         $historialArchivosCreado = HistorialArchivosCreado::create($request->all());
 
         return redirect()->route('historial-archivos-creados.index')
-            ->with('success', 'HistorialArchivosCreado created successfully.');
+            ->with('success', 'HistorialArchivosCreado creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class HistorialArchivosCreadoController extends Controller
         $historialArchivosCreado->update($request->all());
 
         return redirect()->route('historial-archivos-creados.index')
-            ->with('success', 'HistorialArchivosCreado updated successfully');
+            ->with('success', 'HistorialArchivosCreado actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class HistorialArchivosCreadoController extends Controller
         $historialArchivosCreado = HistorialArchivosCreado::find($id)->delete();
 
         return redirect()->route('historial-archivos-creados.index')
-            ->with('success', 'HistorialArchivosCreado deleted successfully');
+            ->with('success', 'HistorialArchivosCreado eliminado con exito.');
     }
 }

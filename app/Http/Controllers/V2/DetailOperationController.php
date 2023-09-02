@@ -49,7 +49,7 @@ class DetailOperationController extends Controller
         $detailOperation = DetailOperation::create($request->all());
 
         return redirect()->route('detail-operations.index')
-            ->with('success', 'DetailOperation created successfully.');
+            ->with('success', 'DetailOperation creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class DetailOperationController extends Controller
         $detailOperation->update($request->all());
 
         return redirect()->route('detail-operations.index')
-            ->with('success', 'DetailOperation updated successfully');
+            ->with('success', 'DetailOperation actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class DetailOperationController extends Controller
         $detailOperation = DetailOperation::find($id)->delete();
 
         return redirect()->route('detail-operations.index')
-            ->with('success', 'DetailOperation deleted successfully');
+            ->with('success', 'DetailOperation eliminado con exito.');
     }
 }

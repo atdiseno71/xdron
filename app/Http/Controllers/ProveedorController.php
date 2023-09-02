@@ -48,7 +48,7 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::create($request->all());
 
         return redirect()->route('proveedors.index')
-            ->with('success', 'Proveedor created successfully.');
+            ->with('success', 'Proveedor creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class ProveedorController extends Controller
         $proveedor->update($request->all());
 
         return redirect()->route('proveedors.index')
-            ->with('success', 'Proveedor updated successfully');
+            ->with('success', 'Proveedor actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::find($id)->delete();
 
         return redirect()->route('proveedors.index')
-            ->with('success', 'Proveedor deleted successfully');
+            ->with('success', 'Proveedor eliminado con exito.');
     }
 }

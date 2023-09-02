@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Models\Assistant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TypeDocument;
 
 /**
  * Class AssistantController
@@ -33,7 +34,10 @@ class AssistantController extends Controller
     public function create()
     {
         $assistant = new Assistant();
-        return view('assistant.create', compact('assistant'));
+
+        $type_documents = TypeDocument::pluck('name as label', 'id as value');
+
+        return view('assistant.create', compact('assistant', 'type_documents'));
     }
 
     /**
@@ -49,7 +53,7 @@ class AssistantController extends Controller
         $assistant = Assistant::create($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Assistant created successfully.');
+            ->with('success', 'Assistant creado con exito.');
     }
 
     /**
@@ -75,7 +79,9 @@ class AssistantController extends Controller
     {
         $assistant = Assistant::find($id);
 
-        return view('assistant.edit', compact('assistant'));
+        $type_documents = TypeDocument::pluck('name as label', 'id as value');
+
+        return view('assistant.edit', compact('assistant', 'type_documents'));
     }
 
     /**
@@ -92,7 +98,7 @@ class AssistantController extends Controller
         $assistant->update($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Assistant updated successfully');
+            ->with('success', 'Assistant actualizado con exito.');
     }
 
     /**
@@ -105,6 +111,6 @@ class AssistantController extends Controller
         $assistant = Assistant::find($id)->delete();
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Assistant deleted successfully');
+            ->with('success', 'Assistant eliminado con exito.');
     }
 }

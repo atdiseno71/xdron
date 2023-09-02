@@ -49,7 +49,7 @@ class EstateController extends Controller
         $estate = Estate::create($request->all());
 
         return redirect()->route('estates.index')
-            ->with('success', 'Estate created successfully.');
+            ->with('success', 'Estate creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class EstateController extends Controller
         $estate->update($request->all());
 
         return redirect()->route('estates.index')
-            ->with('success', 'Estate updated successfully');
+            ->with('success', 'Estate actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class EstateController extends Controller
         $estate = Estate::find($id)->delete();
 
         return redirect()->route('estates.index')
-            ->with('success', 'Estate deleted successfully');
+            ->with('success', 'Estate eliminado con exito.');
     }
 }

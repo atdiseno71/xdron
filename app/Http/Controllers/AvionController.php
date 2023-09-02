@@ -48,7 +48,7 @@ class AvionController extends Controller
         $avion = Avion::create($request->all());
 
         return redirect()->route('avions.index')
-            ->with('success', 'Avion created successfully.');
+            ->with('success', 'Avion creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class AvionController extends Controller
         $avion->update($request->all());
 
         return redirect()->route('avions.index')
-            ->with('success', 'Avion updated successfully');
+            ->with('success', 'Avion actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class AvionController extends Controller
         $avion = Avion::find($id)->delete();
 
         return redirect()->route('avions.index')
-            ->with('success', 'Avion deleted successfully');
+            ->with('success', 'Avion eliminado con exito.');
     }
 }

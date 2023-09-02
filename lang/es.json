@@ -116,8 +116,8 @@
     "Welcome, start by changing your password.": "Bienvenido, empieza por cambiar tu contraseña.",
     "Generate backup": "Generar copia de seguridad",
 
-    "Created successfully.": "Creado con éxito.",
-    "Updated successfully.": "Actualizado con éxito.",
-    "Deleted successfully.": "Eliminado con éxito."
+    "creado con exito.": "Creado con éxito.",
+    "actualizado con exito..": "Actualizado con éxito.",
+    "eliminado con exito..": "Eliminado con éxito."
 
 }

@@ -48,7 +48,7 @@ class MarcaController extends Controller
         $marca = Marca::create($request->all());
 
         return redirect()->route('marcas.index')
-            ->with('success', 'Marca created successfully.');
+            ->with('success', 'Marca creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class MarcaController extends Controller
         $marca->update($request->all());
 
         return redirect()->route('marcas.index')
-            ->with('success', 'Marca updated successfully');
+            ->with('success', 'Marca actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class MarcaController extends Controller
         $marca = Marca::find($id)->delete();
 
         return redirect()->route('marcas.index')
-            ->with('success', 'Marca deleted successfully');
+            ->with('success', 'Marca eliminado con exito.');
     }
 }

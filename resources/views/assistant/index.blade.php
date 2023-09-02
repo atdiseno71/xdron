@@ -52,7 +52,7 @@
 											<td>{{ $assistant->lastname }}</td>
 											<td>{{ $assistant->type_document }}</td>
 											<td>{{ $assistant->document_number }}</td>
-											<td>{{ $assistant->created_by }}</td>
+											<td>{{ $assistant->user?->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('assistants.destroy',$assistant->id) }}" method="POST">

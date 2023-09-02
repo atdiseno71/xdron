@@ -49,7 +49,7 @@ class StatusController extends Controller
         $status = Status::create($request->all());
 
         return redirect()->route('statuses.index')
-            ->with('success', 'Status created successfully.');
+            ->with('success', 'Status creado con exito.');
     }
 
     /**
@@ -92,7 +92,7 @@ class StatusController extends Controller
         $status->update($request->all());
 
         return redirect()->route('statuses.index')
-            ->with('success', 'Status updated successfully');
+            ->with('success', 'Status actualizado con exito.');
     }
 
     /**
@@ -105,6 +105,6 @@ class StatusController extends Controller
         $status = Status::find($id)->delete();
 
         return redirect()->route('statuses.index')
-            ->with('success', 'Status deleted successfully');
+            ->with('success', 'Status eliminado con exito.');
     }
 }

@@ -48,7 +48,7 @@ class AeronaveController extends Controller
         $aeronave = Aeronave::create($request->all());
 
         return redirect()->route('aeronaves.index')
-            ->with('success', 'Aeronave created successfully.');
+            ->with('success', 'Aeronave creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class AeronaveController extends Controller
         $aeronave->update($request->all());
 
         return redirect()->route('aeronaves.index')
-            ->with('success', 'Aeronave updated successfully');
+            ->with('success', 'Aeronave actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class AeronaveController extends Controller
         $aeronave = Aeronave::find($id)->delete();
 
         return redirect()->route('aeronaves.index')
-            ->with('success', 'Aeronave deleted successfully');
+            ->with('success', 'Aeronave eliminado con exito.');
     }
 }

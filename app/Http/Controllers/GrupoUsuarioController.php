@@ -48,7 +48,7 @@ class GrupoUsuarioController extends Controller
         $grupoUsuario = GrupoUsuario::create($request->all());
 
         return redirect()->route('grupo-usuarios.index')
-            ->with('success', 'GrupoUsuario created successfully.');
+            ->with('success', 'GrupoUsuario creado con exito.');
     }
 
     /**
@@ -91,7 +91,7 @@ class GrupoUsuarioController extends Controller
         $grupoUsuario->update($request->all());
 
         return redirect()->route('grupo-usuarios.index')
-            ->with('success', 'GrupoUsuario updated successfully');
+            ->with('success', 'GrupoUsuario actualizado con exito.');
     }
 
     /**
@@ -104,6 +104,6 @@ class GrupoUsuarioController extends Controller
         $grupoUsuario = GrupoUsuario::find($id)->delete();
 
         return redirect()->route('grupo-usuarios.index')
-            ->with('success', 'GrupoUsuario deleted successfully');
+            ->with('success', 'GrupoUsuario eliminado con exito.');
     }
 }
