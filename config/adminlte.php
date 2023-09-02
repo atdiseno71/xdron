@@ -290,7 +290,7 @@ return [
     |
     */
 
-    'menu' => include "menu.php",
+    'menu' => include 'menu.php',
 
     /*
     |--------------------------------------------------------------------------
@@ -444,5 +444,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
