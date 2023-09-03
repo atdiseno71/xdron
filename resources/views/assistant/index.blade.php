@@ -36,7 +36,6 @@
 
 										<th>Nombre</th>
 										<th>Apellido</th>
-										<th>Tipo documento</th>
 										<th># Documento</th>
 										<th>Creado por</th>
 
@@ -50,12 +49,11 @@
 
 											<td>{{ $assistant->name }}</td>
 											<td>{{ $assistant->lastname }}</td>
-											<td>{{ $assistant->typeDocument?->name }}</td>
 											<td>{{ $assistant->document_number }}</td>
 											<td>{{ $assistant->user?->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('assistants.destroy',$assistant->id) }}" method="POST">
+                                                <form action="{{ route('assistants.destroy',$assistant->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('assistants.show',$assistant->id) }}"><i class="fa fa-fw fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('assistants.edit',$assistant->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
@@ -76,4 +74,11 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

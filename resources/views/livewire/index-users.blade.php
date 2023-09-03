@@ -31,7 +31,7 @@
                                     <th>Apellido</th>
                                     <th>Email</th>
                                     <th>Activo</th>
-                                    <th>Cliente</th>
+                                    <th>Clientes</th>
 
                                     <th>Acciones</th>
                                 </tr>
@@ -54,13 +54,11 @@
                                             </form>
                                         </td>
 
-                                        @if ($user->roles[0]?->name == "cliente")
-                                            <td>
-                                                <a class="btn btn-sm btn-success" href="{{ route('clientes.edit', $user->id) }}"><i class="fa fa-plus"></i></a>
-                                            </td>
-                                        @else
-                                            <td></td>
-                                        @endif
+                                        <td>
+                                            @foreach ($user->clients as $key => $client)
+                                                {{ $client->full_name_user }}{{ $loop->last ? '' : ',' }}
+                                            @endforeach
+                                        </td>
 
                                         <td>
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="form-delete">

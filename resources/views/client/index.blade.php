@@ -23,11 +23,9 @@
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -59,7 +57,7 @@
 											<td>{{ $client->createBy?->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
+                                                <form action="{{ route('clients.destroy',$client->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('clients.show',$client->id) }}"><i class="fa fa-fw fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('clients.edit',$client->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
@@ -73,9 +71,18 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $clients->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $clients->links() !!}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

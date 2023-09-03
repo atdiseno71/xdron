@@ -30,5 +30,6 @@
                 </div>
             </div>
         </div>
+        @include('modals.client')
     </section>
 @endsection

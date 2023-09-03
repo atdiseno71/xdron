@@ -12,15 +12,18 @@
             <div class="col-12 col-md-5">
                 <div class="form-group">
                     {{ Form::label('id_cliente', 'Clientes') }}
-                    @php
+                    {{-- @php
                         // Convertir el JSON en un arreglo de PHP
                         $selectedClients = [];
                         if (!empty($user->clients)) {
-                            $selectedClients = json_decode($user->clients, true);
+                            foreach ($user->clients as $key => $value) {
+                                $selectedClients = array_push($selectedClients, [$value->id => $value->full_name_user]);
+                            }
+                            // $selectedClients = json_decode($user->clients, true);
                             // Obtener los valores de 'id_cliente' para el atributo 'value' del select
-                            $selectedClients = array_column($selectedClients, 'id_cliente');
+                            // $selectedClients = array_column($selectedClients, 'id_cliente');
                         }
-                    @endphp
+                    @endphp --}}
                     {{ Form::select('id_cliente[]', $clients, $selectedClients, ['class' => 'form-control select2' . ($errors->has('id_cliente') ? ' is-invalid' : ''), 'id' => 'id_cliente', 'placeholder' => 'Seleccione los clientes', 'multiple' => 'multiple']) }}
                     {!! $errors->first('id_cliente', '<div class="invalid-feedback">:message</div>') !!}
                 </div>

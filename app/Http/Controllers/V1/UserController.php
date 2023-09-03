@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\V1;
 
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-use App\Models\Client;
-use App\Models\TypeDocument;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
+use App\Models\TypeDocument;
+use App\Models\Client;
+use App\Models\User;
+use App\Models\Role;
 
 use Livewire\WithPagination;
 
@@ -63,7 +63,9 @@ class UserController extends Controller
 
         $user = new User();
 
-        return view('user.create', compact('user', 'clients', 'type_documents', 'roles'));
+        $selectedClients = $user->clients;
+
+        return view('user.create', compact('selectedClients', 'user', 'clients', 'type_documents', 'roles'));
     }
 
     /**
@@ -75,11 +77,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        request()->validate(User::$rules);
+        request()->validate([
+            'name' => 'required',
+            'email' => ['required', Rule::unique('users', 'email')],
+            'username' => 'required',
+            'id_role' => 'required',
+            'id_type_document' => 'required',
+            'document_number' => 'required',
+        ]);
 
         $request['password'] = Hash::make($request['document_number']);
 
         $new_user = $this->model->create($request->all());
+
+        $clients = $request['id_cliente'];
+
+        foreach ($clients as $id_client) {
+            DB::table('clients_users')->insert([
+                'client_id' => $id_client,
+                'user_id' => $new_user->id,
+            ]);
+        }
 
         $new_user->assignRole($request->id_role);
 
@@ -113,9 +131,11 @@ class UserController extends Controller
         $roles = Role::pluck('name as label', 'id as value');
         $clients = Client::pluck('full_name_user as label', 'id as name');
 
-        $user = $this->model->find($user->id)->with('clients');
+        $user = $this->model->find($user->id);
 
-        return view('user.edit', compact('user', 'clients', 'type_documents', 'roles'));
+        $selectedClients = $user->clients;
+
+        return view('user.edit', compact('user', 'clients', 'type_documents', 'roles', 'selectedClients'));
     }
 
     /**
@@ -127,9 +147,25 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        request()->validate(User::$rules);
+        request()->validate([
+            'name' => 'required',
+            'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
+            'username' => 'required',
+            'id_role' => 'required',
+            'id_type_document' => 'required',
+            'document_number' => 'required',
+        ]);
+
+        $clients = $request['id_cliente'];
 
         $user->update($request->all());
+
+        foreach ($clients as $id_client) {
+            DB::table('clients_users')->insert([
+                'client_id' => $id_client,
+                'user_id' => $user->id,
+            ]);
+        }
 
         $user->assignRole($request->id_role);
 

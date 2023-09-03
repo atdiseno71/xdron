@@ -78,10 +78,7 @@ class Client extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'client_id', 'id')
-            ->withPivot('value')
-            ->as('clients_users')
-            ->withTimestamps();;
+        return $this->belongsToMany(User::class, 'clients_users', 'client_id', 'user_id');
     }
 
 }

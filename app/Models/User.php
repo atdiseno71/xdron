@@ -6,8 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -33,14 +33,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasRoles, SoftDeletes, Notifiable;
 
-    static $rules = [
+    /* static $rules = [
 		'name' => 'required',
-		'email' => 'required',
+		'email' => ['required', Rule::unique('users', 'email')->ignore($this->id)],
 		'username' => 'required',
 		'id_role' => 'required',
 		'id_type_document' => 'required',
 		'document_number' => 'required',
-    ];
+    ]; */
 
     protected $perPage = 20;
 
@@ -74,20 +74,9 @@ class User extends Authenticatable
         return count($user->notifications);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function cliente()
-    {
-        return $this->hasOne('App\Models\Cliente', 'id_user', 'id');
-    }
-
     public function clients()
     {
-        return $this->belongsToMany(Client::class, 'user_id', 'id')
-            ->withPivot('value')
-            ->as('clients_users')
-            ->withTimestamps();;
+        return $this->belongsToMany(Client::class, 'clients_users', 'user_id', 'client_id');
     }
 
 }

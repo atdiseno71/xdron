@@ -55,19 +55,19 @@ class Operation extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function assistant()
+    public function assistant_one()
     {
         return $this->hasOne('App\Models\Assistant', 'id', 'assistant_id_one');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function assistant()
+    public function assistant_two()
     {
         return $this->hasOne('App\Models\Assistant', 'id', 'assistant_id_two');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -75,7 +75,7 @@ class Operation extends Model
     {
         return $this->hasOne('App\Models\Client', 'id', 'id_cliente');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -83,7 +83,7 @@ class Operation extends Model
     {
         return $this->hasOne('App\Models\Product', 'id', 'type_product_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -91,22 +91,22 @@ class Operation extends Model
     {
         return $this->hasOne('App\Models\Status', 'id', 'status_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function userAdmin()
     {
         return $this->hasOne('App\Models\User', 'id', 'admin_by');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function userPilot()
     {
         return $this->hasOne('App\Models\User', 'id', 'pilot_id');
     }
-    
+
 
 }
