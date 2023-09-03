@@ -28,7 +28,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('phone', 'Telefono') }}
-                    {{ Form::text('phone', $client->phone, ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'placeholder' => 'Phone']) }}
+                    {{ Form::number('phone', $client->phone, ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'placeholder' => 'Phone']) }}
                     {!! $errors->first('phone', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

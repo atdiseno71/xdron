@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Actualizar Asistante
 @endsection
 
@@ -13,7 +13,12 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Asistante</span>
+                        <div class="float-left">
+                            <span class="card-title">Actualizar Asistante</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('assistants.index') }}"> Volver</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('assistants.update', $assistant->id) }}"  role="form" enctype="multipart/form-data">

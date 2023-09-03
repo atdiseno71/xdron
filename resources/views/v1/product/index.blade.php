@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Product
 @endsection
 
@@ -57,7 +57,7 @@
                                             <td>
                                                 <form action="{{ route('products.destroy',$product->id) }}" method="POST" class="form-delete">
                                                     @can('products.edit')
-                                                        <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                        <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @endcan
                                                     @csrf
                                                     @method('DELETE')

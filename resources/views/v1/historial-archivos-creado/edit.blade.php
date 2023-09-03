@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     {{ __('Update') }} Historial Archivos Creado
 @endsection
 

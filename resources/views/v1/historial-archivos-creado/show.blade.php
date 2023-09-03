@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $historialArchivosCreado->name ?? "{{ __('Show') Historial Archivos Creado" }}
+@section('title')
+    {{ $historialArchivosCreado->name ?? "{{ Ver Historial Archivos Creado" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Historial Archivos Creado</span>
+                            <span class="card-title">Ver Historial Archivos Creado</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('historial-archivos-creados.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('historial-archivos-creados.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Directorio:</strong>
                             {{ $historialArchivosCreado->directorio }}

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Grupo Usuario
 @endsection
 
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Id User</th>
 										<th>Id Grupo</th>
 										<th>Cliente</th>
@@ -47,18 +47,18 @@
                                     @foreach ($grupoUsuarios as $grupoUsuario)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $grupoUsuario->id_user }}</td>
 											<td>{{ $grupoUsuario->id_grupo }}</td>
 											<td>{{ $grupoUsuario->cliente }}</td>
 
                                             <td>
                                                 <form action="{{ route('grupo-usuarios.destroy',$grupoUsuario->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('grupo-usuarios.show',$grupoUsuario->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('grupo-usuarios.edit',$grupoUsuario->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('grupo-usuarios.show',$grupoUsuario->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('grupo-usuarios.edit',$grupoUsuario->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $calibracion->name ?? "{{ __('Show') Calibracion" }}
+@section('title')
+    {{ $calibracion->name ?? "{{ Ver Calibracion" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Calibracion</span>
+                            <span class="card-title">Ver Calibracion</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('calibracions.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('calibracions.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Id Cliente:</strong>
                             {{ $calibracion->id_cliente }}

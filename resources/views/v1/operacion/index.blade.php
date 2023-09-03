@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Operacion
 @endsection
 
@@ -71,12 +71,12 @@
                                                         </a>
                                                     @endcan
                                                     @can('operaciones.edit')
-                                                        <a class="btn btn-sm btn-success" href="{{ route('operaciones.edit',$operacion->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
+                                                        <a class="btn btn-sm btn-success" href="{{ route('operaciones.edit',$operacion->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  --}}</a>
                                                     @endcan
                                                     @csrf
                                                     @method('DELETE')
                                                     @can('operaciones.destroy')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  {{ __('Delete') }} --}}</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  --}}</button>
                                                     @endcan
                                                 </form>
                                             </td>

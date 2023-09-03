@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $servicio->name ?? "{{ __('Show') Servicio" }}
+@section('title')
+    {{ $servicio->name ?? "{{ Ver Servicio" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Servicio</span>
+                            <span class="card-title">Ver Servicio</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('servicios.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('servicios.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $servicio->name }}

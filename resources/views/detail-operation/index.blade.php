@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Detail Operation
 @endsection
 
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Number Flights</th>
 										<th>Hour Flights</th>
 										<th>Acres</th>
@@ -53,7 +53,7 @@
                                     @foreach ($detailOperations as $detailOperation)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $detailOperation->number_flights }}</td>
 											<td>{{ $detailOperation->hour_flights }}</td>
 											<td>{{ $detailOperation->acres }}</td>
@@ -66,11 +66,11 @@
 
                                             <td>
                                                 <form action="{{ route('detail-operations.destroy',$detailOperation->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('detail-operations.show',$detailOperation->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('detail-operations.edit',$detailOperation->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('detail-operations.show',$detailOperation->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('detail-operations.edit',$detailOperation->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

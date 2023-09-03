@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Detalle Servicio
 @endsection
 
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Cantidad</th>
 										<th>Id Inventario</th>
 										<th>Num Servicio</th>
@@ -48,7 +48,7 @@
                                     @foreach ($detalleServicios as $detalleServicio)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $detalleServicio->cantidad }}</td>
 											<td>{{ $detalleServicio->id_inventario }}</td>
 											<td>{{ $detalleServicio->num_servicio }}</td>
@@ -56,11 +56,11 @@
 
                                             <td>
                                                 <form action="{{ route('detalle-servicios.destroy',$detalleServicio->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-servicios.show',$detalleServicio->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('detalle-servicios.edit',$detalleServicio->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-servicios.show',$detalleServicio->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('detalle-servicios.edit',$detalleServicio->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

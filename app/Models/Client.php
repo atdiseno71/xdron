@@ -71,7 +71,7 @@ class Client extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function createBy()
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }

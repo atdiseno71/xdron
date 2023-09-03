@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Finca
 @endsection
 
@@ -53,17 +53,17 @@
 
 											<td>{{ $finca->name }}</td>
 											<td>
-                                                <a class="btn btn-sm btn-primary " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                <a class="btn btn-sm btn-primary " href="{{ route('suertes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  --}}</a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-success " href="{{ route('clientes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                <a class="btn btn-sm btn-success " href="{{ route('clientes.index') }}"><i class="fa fa-fw fa-eye"></i>{{--  --}}</a>
                                             </td>
 											<td>{{ $finca->created_at }}</td>
 
                                             <td>
                                                 <form action="{{ route('fincas.destroy',$finca->id) }}" method="POST" class="form-delete">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('fincas.show',$finca->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('fincas.edit',$finca->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('fincas.show',$finca->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  --}}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('fincas.edit',$finca->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  --}}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     @can('fincas.show')
@@ -75,7 +75,7 @@
                                                     @can('fincas.destroy')
 
                                                     @endcan
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  {{ __('Delete') }} --}}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>{{--  --}}</button>
                                                 </form>
                                             </td>
                                         </tr>

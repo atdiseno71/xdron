@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Suerte
 @endsection
 
@@ -55,13 +55,13 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     @can('suertes.show')
-                                                        <a class="btn btn-sm btn-primary " href="{{ route('suertes.show',$suerte->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  {{ __('Show') }} --}}</a>
+                                                        <a class="btn btn-sm btn-primary " href="{{ route('suertes.show',$suerte->id) }}"><i class="fa fa-fw fa-eye"></i>{{--  --}}</a>
                                                     @endcan
                                                     @can('suertes.edit')
-                                                        <a class="btn btn-sm btn-success" href="{{ route('suertes.edit',$suerte->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  {{ __('Edit') }} --}}</a>
+                                                        <a class="btn btn-sm btn-success" href="{{ route('suertes.edit',$suerte->id) }}"><i class="fa fa-fw fa-edit"></i>{{--  --}}</a>
                                                     @endcan
                                                     @can('suertes.destroy')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                     @endcan
                                                 </form>
                                             </td>

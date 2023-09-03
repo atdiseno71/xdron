@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $compraInventario->name ?? "{{ __('Show') Compra Inventario" }}
+@section('title')
+    {{ $compraInventario->name ?? "{{ Ver Compra Inventario" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Compra Inventario</span>
+                            <span class="card-title">Ver Compra Inventario</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('compra-inventarios.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('compra-inventarios.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Id Factura:</strong>
                             {{ $compraInventario->id_factura }}

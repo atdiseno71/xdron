@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $typeDocument->name ?? "{{ __('Show') Type Document" }}
+@section('title')
+    {{ $typeDocument->name ?? "{{ Ver Type Document" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Type Document</span>
+                            <span class="card-title">Ver Type Document</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('type-documents.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('type-documents.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $typeDocument->name }}

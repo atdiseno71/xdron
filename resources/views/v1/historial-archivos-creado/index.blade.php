@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Historial Archivos Creado
 @endsection
 
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Directorio</th>
 										<th>Nombre Archivo</th>
 										<th>Id User</th>
@@ -48,7 +48,7 @@
                                     @foreach ($historialArchivosCreados as $historialArchivosCreado)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $historialArchivosCreado->directorio }}</td>
 											<td>{{ $historialArchivosCreado->nombre_archivo }}</td>
 											<td>{{ $historialArchivosCreado->id_user }}</td>
@@ -56,11 +56,11 @@
 
                                             <td>
                                                 <form action="{{ route('historial-archivos-creados.destroy',$historialArchivosCreado->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('historial-archivos-creados.show',$historialArchivosCreado->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('historial-archivos-creados.edit',$historialArchivosCreado->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('historial-archivos-creados.show',$historialArchivosCreado->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('historial-archivos-creados.edit',$historialArchivosCreado->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('template_title')
+@section('title')
     {{ $user->name ?? 'Asignar rol a usuarios' }}
 @endsection
 

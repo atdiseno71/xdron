@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $filesOperation->name ?? "{{ __('Show') Files Operation" }}
+@section('title')
+    {{ $filesOperation->name ?? "{{ Ver Files Operation" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Files Operation</span>
+                            <span class="card-title">Ver Files Operation</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('files-operations.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('files-operations.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Record:</strong>
                             {{ $filesOperation->record }}

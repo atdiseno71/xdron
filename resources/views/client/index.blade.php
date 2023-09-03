@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    Client
+@section('title')
+    Clientes
 @endsection
 
 @section('content')
@@ -35,44 +35,36 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Nit</th>
-										<th>Social Reason</th>
-										<th>Address</th>
-										<th>Phone</th>
-										<th>Email Enterprise</th>
-										<th>Email Enterprise2</th>
-										<th>Email User</th>
-										<th>Full Name User</th>
-										<th>Created By</th>
-										<th>Observations</th>
 
-                                        <th></th>
+										<th>Nit</th>
+										<th>Razon social</th>
+										<th>Direccion</th>
+										<th>Telefono</th>
+										<th>Nombre completo</th>
+										<th>Creado por</th>
+
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($clients as $client)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $client->nit }}</td>
 											<td>{{ $client->social_reason }}</td>
 											<td>{{ $client->address }}</td>
 											<td>{{ $client->phone }}</td>
-											<td>{{ $client->email_enterprise }}</td>
-											<td>{{ $client->email_enterprise2 }}</td>
-											<td>{{ $client->email_user }}</td>
 											<td>{{ $client->full_name_user }}</td>
-											<td>{{ $client->created_by }}</td>
-											<td>{{ $client->observations }}</td>
+											<td>{{ $client->createBy?->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('clients.show',$client->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('clients.edit',$client->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('clients.show',$client->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('clients.edit',$client->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

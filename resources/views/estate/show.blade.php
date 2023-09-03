@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $estate->name ?? "{{ __('Show') Estate" }}
+@section('title')
+    {{ $estate->name ?? "{{ Ver Estate" }}
 @endsection
 
 @section('content')
@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Estate</span>
+                            <span class="card-title">Ver Estate</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('estates.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('estates.index') }}"> Volver</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $estate->name }}

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
+@section('title')
     Aeronave
 @endsection
 
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Id Cliente</th>
 										<th>Matricula</th>
 										<th>Poliza Inicio</th>
@@ -65,7 +65,7 @@
                                     @foreach ($aeronaves as $aeronave)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $aeronave->id_cliente }}</td>
 											<td>{{ $aeronave->matricula }}</td>
 											<td>{{ $aeronave->poliza_inicio }}</td>
@@ -90,11 +90,11 @@
 
                                             <td>
                                                 <form action="{{ route('aeronaves.destroy',$aeronave->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('aeronaves.show',$aeronave->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('aeronaves.edit',$aeronave->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('aeronaves.show',$aeronave->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('aeronaves.edit',$aeronave->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
