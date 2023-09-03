@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('avions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  Crear nuevo
                                 </a>
                               </div>
                         </div>

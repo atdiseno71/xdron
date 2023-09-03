@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Estate
+    Hacienda
 @endsection
 
 @section('content')
@@ -13,21 +13,19 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Estate') }}
+                                Hacienda
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('estates.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  Crear nuevo
                                 </a>
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,12 +34,11 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Name</th>
-										<th>Cliente Id</th>
-										<th>Created By</th>
-										<th>Observations</th>
+										<th>Nombre</th>
+										<th>Cliente</th>
+										<th>Creado por</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,10 +49,9 @@
 											<td>{{ $estate->name }}</td>
 											<td>{{ $estate->cliente_id }}</td>
 											<td>{{ $estate->created_by }}</td>
-											<td>{{ $estate->observations }}</td>
 
                                             <td>
-                                                <form action="{{ route('estates.destroy',$estate->id) }}" method="POST">
+                                                <form action="{{ route('estates.destroy',$estate->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('estates.show',$estate->id) }}"><i class="fa fa-fw fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('estates.edit',$estate->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
@@ -69,9 +65,18 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $drons->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $estates->links() !!}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

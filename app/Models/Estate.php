@@ -28,8 +28,11 @@ class Estate extends Model
 {
     use SoftDeletes;
 
+    protected $table = "estate";
+
     static $rules = [
 		'name' => 'required',
+		'type_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -39,8 +42,16 @@ class Estate extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','cliente_id','created_by','observations'];
+    protected $fillable = ['name','type_id','cliente_id','created_by','observations'];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function typeProduct()
+    {
+        return $this->hasOne('App\Models\TypeProduct', 'id', 'type_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -49,7 +60,7 @@ class Estate extends Model
     {
         return $this->hasOne('App\Models\Client', 'id', 'cliente_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -57,7 +68,7 @@ class Estate extends Model
     {
         return $this->hasMany('App\Models\DetailOperation', 'estate_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -65,7 +76,7 @@ class Estate extends Model
     {
         return $this->hasMany('App\Models\Luck', 'estate_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -73,6 +84,6 @@ class Estate extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    
+
 
 }
