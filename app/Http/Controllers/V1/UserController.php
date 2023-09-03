@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\TypeDocument;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -58,10 +59,11 @@ class UserController extends Controller
 
         $type_documents = TypeDocument::pluck('name', 'id');
         $roles = Role::pluck('name', 'id');
+        $clients = Client::pluck('full_name_user as label', 'id as name');
 
         $user = new User();
 
-        return view('user.create', compact('user', 'type_documents', 'roles'));
+        return view('user.create', compact('user', 'clients', 'type_documents', 'roles'));
     }
 
     /**
@@ -109,10 +111,11 @@ class UserController extends Controller
 
         $type_documents = TypeDocument::pluck('name as label', 'id as value');
         $roles = Role::pluck('name as label', 'id as value');
+        $clients = Client::pluck('full_name_user as label', 'id as name');
 
-        $user = $this->model->find($user->id);
+        $user = $this->model->find($user->id)->with('clients');
 
-        return view('user.edit', compact('user', 'type_documents', 'roles'));
+        return view('user.edit', compact('user', 'clients', 'type_documents', 'roles'));
     }
 
     /**

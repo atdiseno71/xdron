@@ -52,6 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
 
+    Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');
+    Route::get('getClients', [ClientController::class, 'getSelects']);
+
 });
 
 // Auth::routes();

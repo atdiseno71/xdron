@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ClientController
@@ -53,6 +54,35 @@ class ClientController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeFromUser(Request $request)
+    {
+        request()->validate(Client::$rules);
+
+        $client = Client::create($request->all());
+
+        return redirect()->route('users.create')
+            ->with('success', 'Client creado con exito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $clients = Client::pluck('full_name_user as label', 'id as value');
+
+        return response()->json($clients);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int $id
@@ -88,6 +118,8 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         request()->validate(Client::$rules);
+
+        $request['created_by'] = Auth::id();
 
         $client->update($request->all());
 

@@ -39,8 +39,6 @@ class Client extends Model
 		'address' => 'required',
 		'phone' => 'required',
 		'email_enterprise' => 'required',
-		'email_enterprise2' => 'required',
-		'email_user' => 'required',
 		'full_name_user' => 'required',
     ];
 

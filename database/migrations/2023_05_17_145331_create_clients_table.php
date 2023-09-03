@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('social_reason', 120);
             $table->string('address', 60);
             $table->string('phone', 30);
-            $table->string('email_enterprise', 191);
-            $table->string('email_enterprise2', 191);
-            $table->string('email_user', 191);
+            $table->string('email_enterprise', 191)->nullable();
+            $table->string('email_enterprise2', 191)->nullable();
+            $table->string('email_user', 191)->nullable();
             $table->string('full_name_user', 120);
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
