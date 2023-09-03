@@ -13,7 +13,12 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar cliente</span>
+                        <div class="float-left">
+                            <span class="card-title">Actualizar cliente</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('clients.index') }}"> Volver</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('clients.update', $client->id) }}"  role="form" enctype="multipart/form-data">
