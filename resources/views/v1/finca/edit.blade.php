@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Finca
+    Actualizar Finca
 @endsection
 
 @section('content')

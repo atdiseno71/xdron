@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Grupo
+    Actualizar Grupo
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Grupo</span>
+                        <span class="card-title">Actualizar Grupo</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('grupos.update', $grupo->id) }}"  role="form" enctype="multipart/form-data">

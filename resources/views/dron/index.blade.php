@@ -36,13 +36,13 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Enrollment</th>
-										<th>Brand</th>
-										<th>Model</th>
-										<th>Year</th>
-										<th>Created By</th>
+										<th>Matricula</th>
+										<th>Marca</th>
+										<th>Modelo</th>
+										<th>Año</th>
+										<th>Creado por</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,10 +54,10 @@
 											<td>{{ $dron->brand }}</td>
 											<td>{{ $dron->model }}</td>
 											<td>{{ $dron->year }}</td>
-											<td>{{ $dron->created_by }}</td>
+											<td>{{ $dron->creator?->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('drons.destroy',$dron->id) }}" method="POST">
+                                                <form action="{{ route('drons.destroy',$dron->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('drons.show',$dron->id) }}"><i class="fa fa-fw fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('drons.edit',$dron->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
@@ -71,9 +71,18 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $drons->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $drons->links() !!}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

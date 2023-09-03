@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Files Operation
+    Crear Files Operation
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Files Operation</span>
+                        <span class="card-title">Crear Files Operation</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('files-operations.store') }}"  role="form" enctype="multipart/form-data">

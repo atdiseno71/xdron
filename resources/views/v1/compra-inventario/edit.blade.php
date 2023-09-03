@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Compra Inventario
+    Actualizar Compra Inventario
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Compra Inventario</span>
+                        <span class="card-title">Actualizar Compra Inventario</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('compra-inventarios.update', $compraInventario->id) }}"  role="form" enctype="multipart/form-data">

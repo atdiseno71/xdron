@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Ciudad
+    Crear Ciudad
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Ciudad</span>
+                        <span class="card-title">Crear Ciudad</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('ciudads.store') }}"  role="form" enctype="multipart/form-data">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Zone
+    Actualizar Zone
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Zone</span>
+                        <span class="card-title">Actualizar Zone</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('zones.update', $zone->id) }}"  role="form" enctype="multipart/form-data">

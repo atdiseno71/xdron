@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Calibracion
+    Crear Calibracion
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Calibracion</span>
+                        <span class="card-title">Crear Calibracion</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('calibracions.store') }}"  role="form" enctype="multipart/form-data">

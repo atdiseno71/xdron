@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Zona
+    Crear Zona
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Zona</span>
+                        <span class="card-title">Crear Zona</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('zonas.store') }}"  role="form" enctype="multipart/form-data">

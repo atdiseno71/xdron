@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Luck
+    Crear Luck
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Luck</span>
+                        <span class="card-title">Crear Luck</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('lucks.store') }}"  role="form" enctype="multipart/form-data">

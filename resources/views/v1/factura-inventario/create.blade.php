@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Factura Inventario
+    Crear Factura Inventario
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Factura Inventario</span>
+                        <span class="card-title">Crear Factura Inventario</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('factura-inventarios.store') }}"  role="form" enctype="multipart/form-data">

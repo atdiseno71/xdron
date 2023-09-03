@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Type Document
+    Crear Type Document
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Type Document</span>
+                        <span class="card-title">Crear Type Document</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('type-documents.store') }}"  role="form" enctype="multipart/form-data">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Operacion
+    Actualizar Operacion
 @endsection
 
 @section('css')

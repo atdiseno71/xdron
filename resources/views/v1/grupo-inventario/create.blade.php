@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Grupo Inventario
+    Crear Grupo Inventario
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Grupo Inventario</span>
+                        <span class="card-title">Crear Grupo Inventario</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('grupo-inventarios.store') }}"  role="form" enctype="multipart/form-data">

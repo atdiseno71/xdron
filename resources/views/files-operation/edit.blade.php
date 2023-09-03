@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Files Operation
+    Actualizar Files Operation
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Files Operation</span>
+                        <span class="card-title">Actualizar Files Operation</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('files-operations.update', $filesOperation->id) }}"  role="form" enctype="multipart/form-data">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Models\Dron;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class DronController
@@ -45,6 +46,8 @@ class DronController extends Controller
     public function store(Request $request)
     {
         request()->validate(Dron::$rules);
+
+        $request['created_by'] = Auth::id();
 
         $dron = Dron::create($request->all());
 

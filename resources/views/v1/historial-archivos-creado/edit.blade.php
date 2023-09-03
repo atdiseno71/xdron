@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Update') }} Historial Archivos Creado
+    Actualizar Historial Archivos Creado
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Historial Archivos Creado</span>
+                        <span class="card-title">Actualizar Historial Archivos Creado</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('historial-archivos-creados.update', $historialArchivosCreado->id) }}"  role="form" enctype="multipart/form-data">

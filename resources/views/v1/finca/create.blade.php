@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} Finca
+    Crear Finca
 @endsection
 
 @section('content')
