@@ -72,7 +72,7 @@ class Assistant extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function type_document()
+    public function typeDocument()
     {
         return $this->hasOne('App\Models\TypeDocument', 'id', 'type_document');
     }

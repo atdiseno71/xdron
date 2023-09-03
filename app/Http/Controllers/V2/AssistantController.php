@@ -56,7 +56,7 @@ class AssistantController extends Controller
         $assistant = Assistant::create($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Asistentecreado con exito.');
+            ->with('success', 'Asistente creado con exito.');
     }
 
     /**
@@ -96,12 +96,12 @@ class AssistantController extends Controller
      */
     public function update(Request $request, Assistant $assistant)
     {
-        request()->validate(Assistant::$rules);
+        // request()->validate(Assistant::$rules);
 
         $assistant->update($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Asistenteactualizado con exito.');
+            ->with('success', 'Asistente actualizado con exito.');
     }
 
     /**
@@ -114,6 +114,6 @@ class AssistantController extends Controller
         $assistant = Assistant::find($id)->delete();
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Asistenteeliminado con exito.');
+            ->with('success', 'Asistente eliminado con exito.');
     }
 }

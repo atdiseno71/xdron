@@ -50,7 +50,7 @@
 
 											<td>{{ $assistant->name }}</td>
 											<td>{{ $assistant->lastname }}</td>
-											<td>{{ $assistant->type_document }}</td>
+											<td>{{ $assistant->typeDocument?->name }}</td>
 											<td>{{ $assistant->document_number }}</td>
 											<td>{{ $assistant->user?->name }}</td>
 
