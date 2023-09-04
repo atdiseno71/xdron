@@ -47,8 +47,8 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $estate->name }}</td>
-											<td>{{ $estate->cliente_id }}</td>
-											<td>{{ $estate->created_by }}</td>
+											<td>{{ $estate->client?->full_name_user }}</td>
+											<td>{{ $estate->creator?->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('estates.destroy',$estate->id) }}" method="POST" class="form-delete">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        {{ $drons->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                        {{ $estates->appends(request()->except('page'))->links('vendor.pagination.custom') }}
                     </div>
                 </div>
             </div>

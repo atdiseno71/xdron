@@ -5,6 +5,8 @@ namespace App\Http\Controllers\V2;
 use App\Models\Estate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class EstateController
@@ -33,7 +35,10 @@ class EstateController extends Controller
     public function create()
     {
         $estate = new Estate();
-        return view('estate.create', compact('estate'));
+
+        $clients = Client::pluck('full_name_user as label', 'id as value');
+
+        return view('estate.create', compact('estate', 'clients'));
     }
 
     /**
@@ -46,10 +51,12 @@ class EstateController extends Controller
     {
         request()->validate(Estate::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $estate = Estate::create($request->all());
 
         return redirect()->route('estates.index')
-            ->with('success', 'Estate creado con exito.');
+            ->with('success', 'Hacienda creada con exito.');
     }
 
     /**
@@ -75,7 +82,9 @@ class EstateController extends Controller
     {
         $estate = Estate::find($id);
 
-        return view('estate.edit', compact('estate'));
+        $clients = Client::pluck('full_name_user as label', 'id as value');
+
+        return view('estate.edit', compact('estate', 'clients'));
     }
 
     /**
@@ -92,7 +101,7 @@ class EstateController extends Controller
         $estate->update($request->all());
 
         return redirect()->route('estates.index')
-            ->with('success', 'Estate actualizado con exito.');
+            ->with('success', 'Hacienda actualizado con exito.');
     }
 
     /**
@@ -105,6 +114,6 @@ class EstateController extends Controller
         $estate = Estate::find($id)->delete();
 
         return redirect()->route('estates.index')
-            ->with('success', 'Estate eliminado con exito.');
+            ->with('success', 'Hacienda eliminado con exito.');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $estate->name ?? "{{ Ver Estate" }}
+    {{ $estate->name ?? "Ver hacienda" }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Ver Estate</span>
+                            <span class="card-title">Ver hacienda</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('estates.index') }}"> Volver</a>

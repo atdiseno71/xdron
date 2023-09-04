@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 30);
-            $table->string('type', 80);
-            // $table->string('quantity', 30);
-            // $table->double('cuote', 15, 2)->nullable();
+
+            $table->unsignedBigInteger('type_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('type_products');
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')

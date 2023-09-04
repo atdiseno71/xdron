@@ -32,7 +32,6 @@ class Estate extends Model
 
     static $rules = [
 		'name' => 'required',
-		'type_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -42,7 +41,7 @@ class Estate extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','type_id','cliente_id','created_by','observations'];
+    protected $fillable = ['name','cliente_id','created_by','observations'];
 
 
     /**
@@ -80,7 +79,7 @@ class Estate extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function creator()
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }

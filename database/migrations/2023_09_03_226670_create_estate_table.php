@@ -15,11 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
 
-            $table->unsignedBigInteger('type_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('type_products');
-
             $table->unsignedBigInteger('cliente_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('cliente_id')
                 ->references('id')
