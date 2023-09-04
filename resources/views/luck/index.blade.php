@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Luck
+    Suerte
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Luck') }}
+                                Suerte
                             </span>
 
                              <div class="float-right">
@@ -23,11 +23,9 @@
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,12 +34,11 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Name</th>
-										<th>Observations</th>
-										<th>Estate Id</th>
-										<th>Created By</th>
+										<th>Nombre</th>
+										<th>Hacienda</th>
+										<th>Creado por</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,12 +47,11 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $luck->name }}</td>
-											<td>{{ $luck->observations }}</td>
-											<td>{{ $luck->estate_id }}</td>
-											<td>{{ $luck->created_by }}</td>
+											<td>{{ $luck->estate?->name }}</td>
+											<td>{{ $luck->creator?->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('lucks.destroy',$luck->id) }}" method="POST">
+                                                <form action="{{ route('lucks.destroy',$luck->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('lucks.show',$luck->id) }}"><i class="fa fa-fw fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('lucks.edit',$luck->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
@@ -69,9 +65,18 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $lucks->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $lucks->links() !!}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

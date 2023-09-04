@@ -5,6 +5,8 @@ namespace App\Http\Controllers\V2;
 use App\Models\Luck;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Estate;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class LuckController
@@ -33,7 +35,10 @@ class LuckController extends Controller
     public function create()
     {
         $luck = new Luck();
-        return view('luck.create', compact('luck'));
+
+        $estates = Estate::pluck('name as label', 'id as value');
+
+        return view('luck.create', compact('luck', 'estates'));
     }
 
     /**
@@ -46,10 +51,12 @@ class LuckController extends Controller
     {
         request()->validate(Luck::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $luck = Luck::create($request->all());
 
         return redirect()->route('lucks.index')
-            ->with('success', 'Luck creado con exito.');
+            ->with('success', 'Suerte creado con exito.');
     }
 
     /**
@@ -75,7 +82,9 @@ class LuckController extends Controller
     {
         $luck = Luck::find($id);
 
-        return view('luck.edit', compact('luck'));
+        $estates = Estate::pluck('name as label', 'id as value');
+
+        return view('luck.edit', compact('luck', 'estates'));
     }
 
     /**
@@ -92,7 +101,7 @@ class LuckController extends Controller
         $luck->update($request->all());
 
         return redirect()->route('lucks.index')
-            ->with('success', 'Luck actualizado con exito.');
+            ->with('success', 'Suerte actualizado con exito.');
     }
 
     /**
@@ -105,6 +114,6 @@ class LuckController extends Controller
         $luck = Luck::find($id)->delete();
 
         return redirect()->route('lucks.index')
-            ->with('success', 'Luck eliminado con exito.');
+            ->with('success', 'Suerte eliminado con exito.');
     }
 }

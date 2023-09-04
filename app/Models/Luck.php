@@ -48,7 +48,7 @@ class Luck extends Model
     {
         return $this->hasMany('App\Models\DetailOperation', 'luck_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -56,14 +56,14 @@ class Luck extends Model
     {
         return $this->hasOne('App\Models\Estate', 'id', 'estate_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function creator()
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    
+
 
 }
