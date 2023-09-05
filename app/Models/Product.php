@@ -26,9 +26,11 @@ class Product extends Model
 {
     use SoftDeletes;
 
+    protected $table = "products";
+
     static $rules = [
 		'name' => 'required',
-		'type' => 'required',
+		'type_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +40,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','type','created_by','observations'];
+    protected $fillable = ['name','type_id','created_by','observations'];
 
 
     /**
@@ -48,14 +50,21 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Operation', 'type_product_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function creator()
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function typeProduct()
+    {
+        return $this->hasOne('App\Models\TypeProduct', 'id', 'type_id');
+    }
 
 }

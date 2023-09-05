@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V2;
 
 use App\Models\TypeProduct;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class TypeProductController
@@ -22,6 +23,18 @@ class TypeProductController extends Controller
 
         return view('type-product.index', compact('typeProducts'))
             ->with('i', (request()->input('page', 1) - 1) * $typeProducts->perPage());
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $typeProducts = TypeProduct::pluck('name as label', 'id as value');
+
+        return response()->json($typeProducts);
     }
 
     /**
@@ -47,8 +60,8 @@ class TypeProductController extends Controller
 
         $typeProduct = TypeProduct::create($request->all());
 
-        return redirect()->route('type-products.index')
-            ->with('success', 'TypeProduct created successfully.');
+        return redirect()->back()
+            ->with('success', 'Tipo de producto creado con éxito.');
     }
 
     /**

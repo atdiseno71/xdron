@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Product
+    Producto
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Product') }}
+                                Producto
                             </span>
 
                              <div class="float-right">
@@ -23,11 +23,9 @@
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
+                    {{-- Plantilla mensajes--}}
+                    @include('layouts.message')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,12 +34,11 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Name</th>
-										<th>Type</th>
-										<th>Created By</th>
-										<th>Observations</th>
+										<th>Nombre</th>
+										<th>Tipo</th>
+										<th>Creado por</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,12 +47,11 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $product->name }}</td>
-											<td>{{ $product->type }}</td>
-											<td>{{ $product->created_by }}</td>
-											<td>{{ $product->observations }}</td>
+											<td>{{ $product->typeProduct?->name }}</td>
+											<td>{{ $product->creator?->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                                                <form action="{{ route('products.destroy',$product->id) }}" method="POST" class="form-delete">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('products.show',$product->id) }}"><i class="fa fa-fw fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i></a>
                                                     @csrf
@@ -69,9 +65,18 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{ $products->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
-                {!! $products->links() !!}
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+
 @endsection

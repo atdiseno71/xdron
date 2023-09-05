@@ -12,6 +12,7 @@ use App\Http\Controllers\V2\MunicipalityController;
 use App\Http\Controllers\V2\OperationController;
 use App\Http\Controllers\V2\ProductController;
 use App\Http\Controllers\V2\StatusController;
+use App\Http\Controllers\V2\TypeProductController;
 use Illuminate\Support\Facades\Route;
 
 /* RUTA DE INICIO PARA LAS PWA */
@@ -54,6 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');
     Route::get('getClients', [ClientController::class, 'getSelects']);
+    Route::post('uploadTypeProduct', [TypeProductController::class, 'store'])->name('typeProduct.uploadTypeProduct');
+    Route::get('getTypeProducts', [TypeProductController::class, 'getSelects']);
 
 });
 

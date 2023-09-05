@@ -5,6 +5,8 @@ namespace App\Http\Controllers\V2;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TypeProduct;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProductController
@@ -33,7 +35,10 @@ class ProductController extends Controller
     public function create()
     {
         $product = new Product();
-        return view('product.create', compact('product'));
+
+        $type_products = TypeProduct::pluck('name as label', 'id as value');
+
+        return view('product.create', compact('product', 'type_products'));
     }
 
     /**
@@ -46,10 +51,12 @@ class ProductController extends Controller
     {
         request()->validate(Product::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $product = Product::create($request->all());
 
         return redirect()->route('products.index')
-            ->with('success', 'Product creado con exito.');
+            ->with('success', 'Producto creado con exito.');
     }
 
     /**
@@ -75,7 +82,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        return view('product.edit', compact('product'));
+        $type_products = TypeProduct::pluck('name as label', 'id as value');
+
+        return view('product.edit', compact('product', 'type_products'));
     }
 
     /**
@@ -92,7 +101,7 @@ class ProductController extends Controller
         $product->update($request->all());
 
         return redirect()->route('products.index')
-            ->with('success', 'Product actualizado con exito.');
+            ->with('success', 'Producto actualizado con exito.');
     }
 
     /**
@@ -105,6 +114,6 @@ class ProductController extends Controller
         $product = Product::find($id)->delete();
 
         return redirect()->route('products.index')
-            ->with('success', 'Product eliminado con exito.');
+            ->with('success', 'Producto eliminado con exito.');
     }
 }
