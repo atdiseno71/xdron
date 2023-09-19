@@ -141,25 +141,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('hour_flights', 'Horas vuelos') }}
                     {{ Form::number('hour_flights', $detail_operation->hour_flights, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. horas vuelos']) }}
                     {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('acres', 'Hectareas') }}
                     {{ Form::number('acres', $detail_operation->acres, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. hectareas']) }}
                     {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="form-group">
-                    {{ Form::label('observation', 'Hectareas') }}
-                    {{ Form::number('observation', $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. hectareas']) }}
-                    {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-4">
@@ -202,6 +195,13 @@
                         </div>
                     </div>
                     {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="form-group">
+                    {{ Form::label('observation', 'Observaciones') }}
+                    {{ Form::textArea('observation', $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese observaciones de la operacion']) }}
+                    {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
