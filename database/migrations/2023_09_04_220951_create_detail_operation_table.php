@@ -23,6 +23,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('observation')->nullable();
 
+            $table->unsignedBigInteger('dron_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('dron_id')
+                ->references('id')
+                ->on('dron');
+
             $table->unsignedBigInteger('estate_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('estate_id')
                 ->references('id')

@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('estates', EstateController::class)->names('estates');
     Route::resource('lucks', LuckController::class)->names('lucks');
     Route::resource('municipalities', MunicipalityController::class)->names('municipalities');
-    Route::resource('operations', operationsController::class)->names('operations');
+    Route::resource('operations', OperationController::class)->names('operations');
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
 

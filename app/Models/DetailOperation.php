@@ -43,17 +43,35 @@ class DetailOperation extends Model
      *
      * @var array
      */
-    protected $fillable = ['number_flights','hour_flights','acres','download','description','observation','estate_id','luck_id','zone_id'];
+    protected $fillable = [
+        'number_flights',
+        'hour_flights',
+        'acres',
+        'download',
+        'description',
+        'observation',
+        'estate_id',
+        'luck_id',
+        'zone_id',
+        'dron_id',
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function drone()
+    {
+        return $this->hasOne('App\Models\Estate', 'id', 'dron_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function estate()
     {
-        return $this->hasOne('App\Models\Estate', 'id', 'estate_id');
+        return $this->hasOne('App\Models\Dron', 'id', 'estate_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,7 +79,7 @@ class DetailOperation extends Model
     {
         return $this->hasMany('App\Models\FilesOperation', 'detail_operation_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -69,7 +87,7 @@ class DetailOperation extends Model
     {
         return $this->hasOne('App\Models\Luck', 'id', 'luck_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -77,6 +95,6 @@ class DetailOperation extends Model
     {
         return $this->hasOne('App\Models\Zone', 'id', 'zone_id');
     }
-    
+
 
 }

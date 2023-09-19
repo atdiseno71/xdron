@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-    Actualizar Operation
+    Actualizar operacion
+@endsection
+
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 @endsection
 
 @section('content')
@@ -13,7 +17,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Operation</span>
+                        <span class="card-title">Actualizar operacion</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('operations.update', $operation->id) }}"  role="form" enctype="multipart/form-data">

@@ -39,6 +39,8 @@ class Operation extends Model
 {
     use SoftDeletes;
 
+    protected $table = "operation";
+
     static $rules = [
     ];
 
@@ -49,8 +51,17 @@ class Operation extends Model
      *
      * @var array
      */
-    protected $fillable = ['download','observation_admin','observation_pilot','observation_assistant_one','observation_assistant_two','type_product_id','assistant_id_one','assistant_id_two','pilot_id','id_cliente','admin_by','status_id'];
-
+    protected $fillable = [
+        'download',
+        'observation',
+        'type_product_id',
+        'assistant_id_one',
+        'assistant_id_two',
+        'pilot_id',
+        'id_cliente',
+        'admin_by',
+        'status_id',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

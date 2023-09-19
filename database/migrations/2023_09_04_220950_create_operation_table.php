@@ -16,12 +16,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('download')->nullable();
-            // $table->date('date_ejecution');
 
             $table->text('observation_admin')->nullable();
-            $table->text('observation_pilot')->nullable();
-            $table->text('observation_assistant_one')->nullable();
-            $table->text('observation_assistant_two')->nullable();
 
             $table->unsignedBigInteger('type_product_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('type_product_id')

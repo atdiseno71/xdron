@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             MunicipalitySeeder::class,
             TypeDocSeeder::class,
             ZonesSeeder::class,
+            StatusesSeeder::class,
         ]);
     }
 }

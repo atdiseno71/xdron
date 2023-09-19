@@ -5,4 +5,5 @@ return [
     'root' => 2,
     'piloto' => 3,
     'cliente' => 4,
+    'ayudante' => 5,
 ];

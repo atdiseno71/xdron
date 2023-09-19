@@ -23,6 +23,8 @@ class Status extends Model
 {
     use SoftDeletes;
 
+    protected $table = "statuses";
+
     static $rules = [
 		'name' => 'required',
 		'slug' => 'required',
@@ -45,6 +47,6 @@ class Status extends Model
     {
         return $this->hasMany('App\Models\Operation', 'status_id', 'id');
     }
-    
+
 
 }

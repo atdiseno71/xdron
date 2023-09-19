@@ -2,9 +2,20 @@
 
 namespace App\Http\Controllers\V2;
 
-use App\Models\Operation;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Assistant;
+use App\Models\Client;
+use App\Models\DetailOperation;
+use App\Models\Dron;
+use App\Models\Estate;
+use App\Models\FilesOperation;
+use App\Models\Luck;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Operation;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Zone;
 
 /**
  * Class OperationController
@@ -33,7 +44,46 @@ class OperationController extends Controller
     public function create()
     {
         $operation = new Operation();
-        return view('operation.create', compact('operation'));
+
+        $detail_operation = new DetailOperation();
+
+        $files_operation = new FilesOperation();
+
+        $user = User::where('id', Auth::id())->with('roles')->first();
+
+        $role_user = $user->roles[0]->name;
+
+        $products = Product::pluck('name as label', 'id as value');
+
+        $assistents = Assistant::pluck('name as label', 'id as value');
+
+        $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
+
+        $clients = Client::pluck('full_name_user as label', 'id as value');
+
+        $estates = Estate::pluck('name as label', 'id as value');
+
+        $lucks = Luck::pluck('name as label', 'id as value');
+
+        $zones = Zone::pluck('name as label', 'id as value');
+
+        $drones = Dron::pluck('enrollment as label', 'id as value');
+
+        return view('operation.create',
+            compact(
+                'operation',
+                'detail_operation',
+                'role_user',
+                'products',
+                'assistents',
+                'pilots',
+                'clients',
+                'estates',
+                'drones',
+                'lucks',
+                'zones',
+                'files_operation',
+            ));
     }
 
     /**
@@ -45,6 +95,9 @@ class OperationController extends Controller
     public function store(Request $request)
     {
         request()->validate(Operation::$rules);
+
+        $request['admin_by'] = Auth::id();
+        $request['status_id'] = config('status.CRE');
 
         $operation = Operation::create($request->all());
 
@@ -62,7 +115,7 @@ class OperationController extends Controller
     {
         $operation = Operation::find($id);
 
-        return view('operation.show', compact('operation'));
+        return view('operation.show', compact('operation', 'role_user'));
     }
 
     /**
@@ -75,7 +128,45 @@ class OperationController extends Controller
     {
         $operation = Operation::find($id);
 
-        return view('operation.edit', compact('operation'));
+        $detail_operation = new DetailOperation();
+
+        $files_operation = new FilesOperation();
+
+        $user = User::where('id', Auth::id())->with('roles')->first();
+
+        $role_user = $user->roles[0]->name;
+
+        $products = Product::pluck('name as label', 'id as value');
+
+        $assistents = Assistant::pluck('name as label', 'id as value');
+
+        $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
+
+        $clients = Client::pluck('full_name_user as label', 'id as value');
+
+        $estates = Estate::pluck('name as label', 'id as value');
+
+        $lucks = Luck::pluck('name as label', 'id as value');
+
+        $zones = Zone::pluck('name as label', 'id as value');
+
+        $drones = Dron::pluck('enrollment as label', 'id as value');
+
+        return view('operation.edit',
+            compact(
+                'operation',
+                'detail_operation',
+                'role_user',
+                'products',
+                'assistents',
+                'pilots',
+                'clients',
+                'estates',
+                'drones',
+                'lucks',
+                'zones',
+                'files_operation',
+            ));
     }
 
     /**
