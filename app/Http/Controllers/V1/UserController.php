@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with('roles')->paginate();
+        $users = User::whereNotIn('id_role', [1])->with('roles')->paginate();
 
         return view('user.index', compact('users'));
     }
@@ -58,7 +58,7 @@ class UserController extends Controller
     {
 
         $type_documents = TypeDocument::pluck('name', 'id');
-        $roles = Role::pluck('name', 'id');
+        $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
         $clients = Client::pluck('full_name_user as label', 'id as name');
 
         $user = new User();
@@ -128,7 +128,7 @@ class UserController extends Controller
     {
 
         $type_documents = TypeDocument::pluck('name as label', 'id as value');
-        $roles = Role::pluck('name as label', 'id as value');
+        $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
         $clients = Client::pluck('full_name_user as label', 'id as name');
 
         $user = $this->model->find($user->id);
