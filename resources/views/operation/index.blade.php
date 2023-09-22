@@ -17,15 +17,17 @@
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('operations.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    Crear nuevo
-                                </a>
+                                @can('operations.create')
+                                    <a href="{{ route('operations.create') }}" class="btn btn-primary btn-sm float-right"
+                                        data-placement="left">
+                                        Crear nuevo
+                                    </a>
+                                @endcan
                             </div>
                         </div>
                     </div>
 
-                    {{-- Plantilla mensajes--}}
+                    {{-- Plantilla mensajes --}}
                     @include('layouts.message')
 
                     <div class="card-body">
@@ -51,7 +53,8 @@
                                             <td>{{ ++$i }}</td>
 
                                             <td>{{ $operation->product?->name }}</td>
-                                            <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
+                                            <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}
+                                            </td>
                                             <td>{{ $operation->userPilot?->name }}</td>
                                             <td>{{ $operation->client?->full_name_user }}</td>
                                             <td>{{ $operation->userAdmin?->name }}</td>
@@ -59,17 +62,23 @@
 
                                             <td>
                                                 <form action="{{ route('operations.destroy', $operation->id) }}"
-                                                    method="POST"  class="form-delete">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('operations.show', $operation->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('operations.edit', $operation->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i></a>
+                                                    method="POST" class="form-delete">
+                                                    @can('operations.show')
+                                                        <a class="btn btn-sm btn-primary "
+                                                            href="{{ route('operations.show', $operation->id) }}"><i
+                                                                class="fa fa-fw fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('operations.destroy')
+                                                        <a class="btn btn-sm btn-success"
+                                                            href="{{ route('operations.edit', $operation->id) }}"><i
+                                                                class="fa fa-fw fa-edit"></i></a>
+                                                    @endcan
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i></button>
+                                                    @can('operations.destroy')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-fw fa-trash"></i></button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>
@@ -88,8 +97,6 @@
 @endsection
 
 @section('js')
-
     <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
     <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
-
 @endsection

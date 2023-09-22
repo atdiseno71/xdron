@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class LuckController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:lucks.index')->only('index');
+        $this->middleware('can:lucks.create')->only('create', 'store');
+        $this->middleware('can:lucks.show')->only('show');
+        $this->middleware('can:lucks.edit')->only('edit', 'update');
+        $this->middleware('can:lucks.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

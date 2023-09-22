@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class EstateController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:estates.index')->only('index');
+        $this->middleware('can:estates.create')->only('create', 'store');
+        $this->middleware('can:estates.show')->only('show');
+        $this->middleware('can:estates.edit')->only('edit', 'update');
+        $this->middleware('can:estates.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

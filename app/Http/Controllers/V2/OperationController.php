@@ -24,6 +24,15 @@ use App\Models\Zone;
  */
 class OperationController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('can:operations.index')->only('index');
+        $this->middleware('can:operations.create')->only('create', 'store');
+        $this->middleware('can:operations.show')->only('show');
+        $this->middleware('can:operations.edit')->only('edit', 'update');
+        $this->middleware('can:operations.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -130,7 +139,7 @@ class OperationController extends Controller
         dd($detailOperationData);
 
         return redirect()->route('operations.index')
-            ->with('success', 'Operation creado con exito.');
+            ->with('success', 'Operacion creada con exito.');
     }
 
     /**
@@ -214,7 +223,7 @@ class OperationController extends Controller
         $operation->update($request->all());
 
         return redirect()->route('operations.index')
-            ->with('success', 'Operation actualizado con exito.');
+            ->with('success', 'Operacion actualizada con exito.');
     }
 
     /**
@@ -227,6 +236,6 @@ class OperationController extends Controller
         $operation = Operation::find($id)->delete();
 
         return redirect()->route('operations.index')
-            ->with('success', 'Operation eliminado con exito.');
+            ->with('success', 'Operacion eliminada con exito.');
     }
 }

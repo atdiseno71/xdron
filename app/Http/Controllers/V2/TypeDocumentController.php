@@ -12,6 +12,16 @@ use App\Http\Controllers\Controller;
  */
 class TypeDocumentController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:type-documents.index')->only('index');
+        $this->middleware('can:type-documents.create')->only('create', 'store');
+        $this->middleware('can:type-documents.show')->only('show');
+        $this->middleware('can:type-documents.edit')->only('edit', 'update');
+        $this->middleware('can:type-documents.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

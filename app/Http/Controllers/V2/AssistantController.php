@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class AssistantController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:assistants.index')->only('index', 'getSelects');
+        $this->middleware('can:assistants.create')->only('create', 'store', 'storeFromModal');
+        $this->middleware('can:assistants.show')->only('show');
+        $this->middleware('can:assistants.edit')->only('edit', 'update');
+        $this->middleware('can:assistants.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

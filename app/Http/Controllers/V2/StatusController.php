@@ -12,6 +12,16 @@ use App\Http\Controllers\Controller;
  */
 class StatusController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:statuses.index')->only('index');
+        $this->middleware('can:statuses.create')->only('create', 'store');
+        $this->middleware('can:statuses.show')->only('show');
+        $this->middleware('can:statuses.edit')->only('edit', 'update');
+        $this->middleware('can:statuses.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

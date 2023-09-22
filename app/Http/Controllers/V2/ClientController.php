@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class ClientController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:clients.index')->only('index', 'getSelects');
+        $this->middleware('can:clients.create')->only('create', 'store', 'storeFromUser');
+        $this->middleware('can:clients.show')->only('show');
+        $this->middleware('can:clients.edit')->only('edit', 'update');
+        $this->middleware('can:clients.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

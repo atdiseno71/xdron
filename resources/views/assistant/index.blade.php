@@ -16,15 +16,18 @@
                                 Asistentes
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('assistants.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  Nuevo asistente
-                                </a>
-                              </div>
+                            <div class="float-right">
+                                @can('assistants.create')
+                                    <a href="{{ route('assistants.create') }}" class="btn btn-primary btn-sm float-right"
+                                        data-placement="left">
+                                        Nuevo asistente
+                                    </a>
+                                @endcan
+                            </div>
                         </div>
                     </div>
 
-                    {{-- Plantilla mensajes--}}
+                    {{-- Plantilla mensajes --}}
                     @include('layouts.message')
 
                     <div class="card-body">
@@ -34,10 +37,10 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Nombre</th>
-										<th>Apellido</th>
-										<th># Documento</th>
-										<th>Creado por</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th># Documento</th>
+                                        <th>Creado por</th>
 
                                         <th>Acciones</th>
                                     </tr>
@@ -47,18 +50,30 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $assistant->name }}</td>
-											<td>{{ $assistant->lastname }}</td>
-											<td>{{ $assistant->document_number }}</td>
-											<td>{{ $assistant->user?->name }}</td>
+                                            <td>{{ $assistant->name }}</td>
+                                            <td>{{ $assistant->lastname }}</td>
+                                            <td>{{ $assistant->document_number }}</td>
+                                            <td>{{ $assistant->user?->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('assistants.destroy',$assistant->id) }}" method="POST" class="form-delete">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('assistants.show',$assistant->id) }}"><i class="fa fa-fw fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('assistants.edit',$assistant->id) }}"><i class="fa fa-fw fa-edit"></i></a>
+                                                <form action="{{ route('assistants.destroy', $assistant->id) }}"
+                                                    method="POST" class="form-delete">
+                                                    @can('assistants.show')
+                                                        <a class="btn btn-sm btn-primary "
+                                                            href="{{ route('assistants.show', $assistant->id) }}"><i
+                                                                class="fa fa-fw fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('assistants.edit')
+                                                        <a class="btn btn-sm btn-success"
+                                                            href="{{ route('assistants.edit', $assistant->id) }}"><i
+                                                                class="fa fa-fw fa-edit"></i></a>
+                                                    @endcan
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
+                                                    @can('assistants.destroy')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-fw fa-trash"></i></button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>
@@ -77,8 +92,6 @@
 @endsection
 
 @section('js')
-
     <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
     <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
-
 @endsection
