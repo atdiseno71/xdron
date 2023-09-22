@@ -35,7 +35,12 @@ class FilesOperation extends Model
      *
      * @var array
      */
-    protected $fillable = ['record','track','map','detail_operation_id'];
+    protected $fillable = [
+        'record',
+        'track',
+        'map',
+        'detail_operation_id'
+    ];
 
 
     /**
@@ -45,6 +50,6 @@ class FilesOperation extends Model
     {
         return $this->hasOne('App\Models\DetailOperation', 'id', 'detail_operation_id');
     }
-    
+
 
 }

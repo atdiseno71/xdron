@@ -53,9 +53,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
 
+    // Subir registros desde los modals
     Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');
-    Route::get('getClients', [ClientController::class, 'getSelects']);
     Route::post('uploadTypeProduct', [TypeProductController::class, 'store'])->name('typeProduct.uploadTypeProduct');
+    Route::post('uploadAsistent', [AssistantController::class, 'storeFromModal'])->name('assistants.uploadAsistent');
+
+    // SELECTS
+    Route::get('getAsistents', [AssistantController::class, 'getSelects']);
+    Route::get('getClients', [ClientController::class, 'getSelects']);
     Route::get('getTypeProducts', [TypeProductController::class, 'getSelects']);
 
 });

@@ -23,6 +23,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('observation')->nullable();
 
+            $table->unsignedBigInteger('operation_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('operation_id')
+                ->references('id')
+                ->on('operation');
+
             $table->unsignedBigInteger('dron_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('dron_id')
                 ->references('id')
@@ -42,6 +47,10 @@ return new class extends Migration
             $table->foreign('zone_id')
                 ->references('id')
                 ->on('zones');
+
+            $table->text('evidencia_record')->nullable();
+            $table->text('evidencia_track')->nullable();
+            $table->text('evidencia_gps')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

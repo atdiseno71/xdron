@@ -13,25 +13,21 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-5">
                 <div class="form-group">
-                    {{ Form::label('type_product_id', 'Producto') }}
-                    {{ Form::select('type_product_id', $products, $operation->type_product_id, ['class' => 'form-control select2' . ($errors->has('type_product_id') ? ' is-invalid' : ''), 'id' => 'type_product_id', 'placeholder' => 'Seleccione el tipo de producto']) }}
-                    {!! $errors->first('type_product_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('id_cliente', 'Cliente') }}
+                    {{ Form::select('id_cliente', $clients, $operation->id_cliente, ['class' => 'form-control select2' . ($errors->has('id_cliente') ? ' is-invalid' : ''), 'id' => 'id_cliente', 'placeholder' => 'Seleccione cliente']) }}
+                    {!! $errors->first('id_cliente', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    {{ Form::label('assistant_id_one', 'Asistente uno') }}
-                    {{ Form::select('assistant_id_one', $assistents, $operation->assistant_id_one, ['class' => 'form-control select2' . ($errors->has('assistant_id_one') ? ' is-invalid' : ''), 'id' => 'assistant_id_one', 'placeholder' => 'Seleccione asistente uno']) }}
-                    {!! $errors->first('assistant_id_one', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    {{ Form::label('assistant_id_two', 'Asistente dos') }}
-                    {{ Form::select('assistant_id_two', $assistents, $operation->assistant_id_two, ['class' => 'form-control select2' . ($errors->has('assistant_id_two') ? ' is-invalid' : ''), 'id' => 'assistant_id_two', 'placeholder' => 'Seleccione asistente dos']) }}
-                    {!! $errors->first('assistant_id_two', '<div class="invalid-feedback">:message</div>') !!}
+            <div class="col-12 col-md-1">
+                <div class="form-group btn-modal">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formCliente">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -41,11 +37,45 @@
                     {!! $errors->first('pilot_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12">
                 <div class="form-group">
-                    {{ Form::label('id_cliente', 'Cliente') }}
-                    {{ Form::select('id_cliente', $clients, $operation->id_cliente, ['class' => 'form-control select2' . ($errors->has('id_cliente') ? ' is-invalid' : ''), 'id' => 'id_cliente', 'placeholder' => 'Seleccione cliente']) }}
-                    {!! $errors->first('id_cliente', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('type_product_id', 'Tipo producto') }}
+                    {{ Form::select('type_product_id', $type_products, $operation->type_product_id, ['class' => 'form-control select2' . ($errors->has('type_product_id') ? ' is-invalid' : ''), 'id' => 'type_product_id', 'placeholder' => 'Seleccione el tipo de producto']) }}
+                    {!! $errors->first('type_product_id', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-5">
+                <div class="form-group">
+                    {{ Form::label('assistant_id_one', 'Asistente uno') }}
+                    {{ Form::select('assistant_id_one', $assistents, $operation->assistant_id_one, ['class' => 'form-control select2' . ($errors->has('assistant_id_one') ? ' is-invalid' : ''), 'id' => 'assistant_id_one', 'placeholder' => 'Seleccione asistente uno']) }}
+                    {!! $errors->first('assistant_id_one', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-1">
+                <div class="form-group btn-modal">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formAsistent">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 col-md-5">
+                <div class="form-group">
+                    {{ Form::label('assistant_id_two', 'Asistente dos') }}
+                    {{ Form::select('assistant_id_two', $assistents, $operation->assistant_id_two, ['class' => 'form-control select2' . ($errors->has('assistant_id_two') ? ' is-invalid' : ''), 'id' => 'assistant_id_two', 'placeholder' => 'Seleccione asistente dos']) }}
+                    {!! $errors->first('assistant_id_two', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-1">
+                <div class="form-group btn-modal">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formAsistent">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -60,37 +90,10 @@
                     </div>
                 </div>
             @endif
-            {{--
-            @if ($role_user == "piloto")
-                <div class="col-12 col-md-12">
-                    <div class="form-group">
-                        {{ Form::label('observation_pilot') }}
-                        {{ Form::textArea('observation_pilot', $operation->observation_pilot, ['class' => 'form-control' . ($errors->has('observation_pilot') ? ' is-invalid' : ''), 'placeholder' => 'Observation Pilot']) }}
-                        {!! $errors->first('observation_pilot', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-            @endif
-
-            @if ($role_user == "ayudante")
-                <div class="col-12 col-md-12">
-                    <div class="form-group">
-                        {{ Form::label('observation_assistant_one') }}
-                        {{ Form::textArea('observation_assistant_one', $operation->observation_assistant_one, ['class' => 'form-control' . ($errors->has('observation_assistant_one') ? ' is-invalid' : ''), 'placeholder' => 'Observation Assistant One']) }}
-                        {!! $errors->first('observation_assistant_one', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                <div class="col-12 col-md-12">
-                    <div class="form-group">
-                        {{ Form::label('observation_assistant_two') }}
-                        {{ Form::textArea('observation_assistant_two', $operation->observation_assistant_two, ['class' => 'form-control' . ($errors->has('observation_assistant_two') ? ' is-invalid' : ''), 'placeholder' => 'Observation Assistant Two']) }}
-                        {!! $errors->first('observation_assistant_two', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-            @endif --}}
         </div>
-        <div class="row">
+        <input type="text" name="detail_operation_input" id="detail_operation_input" hidden>
+        <div class="row detail-operation">
             <div class="col-12">
-                <hr class="lader-divider">
                 <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO</h3>
                 <hr class="lader-divider">
             </div>
@@ -122,9 +125,6 @@
                     {!! $errors->first('zone_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12">
-                <hr class="lader-divider">
-            </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('dron_id', 'Drones') }}
@@ -139,8 +139,6 @@
                     {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('hour_flights', 'Horas vuelos') }}
@@ -163,7 +161,7 @@
                         <input type="file" name="evidencia_record" class="input-img-logo" id="input-record" value="{{$files_operation->evidencia_record ?? 'images/img/default.png'}}"  data-preview-id="preview-record" onchange="previewFile(event)" onchange="previewFile(event)"/>
                         <img id="preview-record" src="{{ asset($files_operation->evidencia_record ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
-                            <i class="fa fa-upload fa-5x"></i>
+                            <i class="fa fa-upload fa-3x"></i>
                         </div>
                     </div>
                     {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
@@ -177,7 +175,7 @@
                         <input type="file" name="evidencia_track" class="input-img-logo" id="input-track" value="{{$files_operation->evidencia_track ?? 'images/img/default.png'}}" data-preview-id="preview-track" onchange="previewFile(event)"/>
                         <img id="preview-track" src="{{ asset($files_operation->evidencia_track ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
-                            <i class="fa fa-upload fa-5x"></i>
+                            <i class="fa fa-upload fa-3x"></i>
                         </div>
                     </div>
                     {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
@@ -191,7 +189,7 @@
                         <input type="file" name="evidencia_gps" class="input-img-logo" id="input-gps" value="{{$files_operation->evidencia_gps ?? 'images/img/default.png'}}" data-preview-id="preview-gps" onchange="previewFile(event)"/>
                         <img id="preview-gps" src="{{ asset($files_operation->evidencia_gps ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
-                            <i class="fa fa-upload fa-5x"></i>
+                            <i class="fa fa-upload fa-3x"></i>
                         </div>
                     </div>
                     {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
@@ -205,21 +203,17 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-12">
-                <div class="form-group btn-modal">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formCliente">
-                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <button type="button" class="btn btn-success btn-block duplicarDetalleOperacion" data-target=".detail-operation">
+            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+            </svg>
+        </button>
     </div>
+    <br>
     @include('layouts.btn-submit')
     <script>
+        // Preview de los files
         function previewFile(event) {
             var input = event.target;
             var reader = new FileReader();
@@ -231,6 +225,7 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
+
         function loadFincas() {
             const clienteSelect = document.querySelector('#id_cliente');
             const fincaSelect = document.querySelector('#id_finca');
@@ -257,5 +252,71 @@
                     console.error('Error al obtener las fincas: ', error);
                 });
         }
+
+        // Define un arreglo para almacenar los datos de detalle de operación
+        let detailOperationDataArray = [];
+        // Función para duplicar y guardar información
+        function duplicarYGuardarInformacion() {
+            // Obtener el contenedor detail-operation
+            const detailOperationContainer = document.querySelector('.detail-operation');
+
+            // Obtener todos los campos de entrada, selects y file dentro del contenedor
+            const detailOperationInputs = detailOperationContainer.querySelectorAll('input, select, [type="file"]');
+
+            // Crear un objeto para almacenar los datos del detalle de operación
+            const detailOperationData = {};
+
+            // Recorrer los campos de entrada y almacenar sus valores en el objeto
+            detailOperationInputs.forEach(input => {
+                const inputName = input.name;
+                const inputValue = input.type === 'checkbox' ? input.checked : input.value;
+                detailOperationData[inputName] = inputValue;
+            });
+
+            // Agregar el objeto de datos a la matriz
+            detailOperationDataArray.push(detailOperationData);
+
+            // Convertir la matriz en formato JSON
+            const jsonData = JSON.stringify(detailOperationDataArray);
+
+            // Establecer el JSON como valor del campo de entrada detail_operation_input
+            document.getElementById('detail_operation_input').value = jsonData;
+
+            // Limpiar o eliminar los campos de entrada si es necesario
+            detailOperationInputs.forEach(input => {
+                if (input.type !== 'hidden') {
+                    // Puedes limpiar el valor de los campos de entrada aquí
+                    input.value = '';
+
+                    // Si es un campo select, también puedes restablecerlo a su opción predeterminada
+                    if (input.tagName === 'SELECT') {
+                        input.selectedIndex = 0;
+                    }
+
+                    // Si es un campo de tipo file, puedes borrarlo
+                    if (input.type === 'file') {
+                        // Para campos de tipo file, no puedes borrar el archivo seleccionado directamente debido a restricciones de seguridad del navegador.
+                        // Lo que puedes hacer es crear un nuevo campo de tipo file y reemplazar el campo existente con él.
+                        const newInput = document.createElement('input');
+                        newInput.type = 'file';
+                        newInput.name = input.name;
+                        newInput.className = input.className;
+                        newInput.id = input.id;
+                        input.parentNode.replaceChild(newInput, input);
+                    }
+                }
+            });
+
+            Swal.fire({
+                title: '¡Se agregó el vuelo correctamente!',
+                text: "Continué agregando vuelos o terminé la operación",
+                icon: 'success',
+                showConfirmButton: true,
+            })
+
+        }
+
+        // Agregar un controlador de eventos al botón de duplicar para llamar a la función
+        document.querySelector('.duplicarDetalleOperacion').addEventListener('click', duplicarYGuardarInformacion);
     </script>
 </div>

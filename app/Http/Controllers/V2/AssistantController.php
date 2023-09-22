@@ -47,6 +47,36 @@ class AssistantController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    public function storeFromModal(Request $request)
+    {
+        request()->validate(Assistant::$rules);
+
+        $assistant = Assistant::create($request->all());
+
+        return response()->json(['success' => 'Asistente creado con exito.']);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Assistant::pluck('name', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         request()->validate(Assistant::$rules);

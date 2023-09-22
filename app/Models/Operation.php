@@ -53,7 +53,7 @@ class Operation extends Model
      */
     protected $fillable = [
         'download',
-        'observation',
+        'observation_admin',
         'type_product_id',
         'assistant_id_one',
         'assistant_id_two',

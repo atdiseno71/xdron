@@ -33,6 +33,8 @@ class DetailOperation extends Model
 {
     use SoftDeletes;
 
+    protected $table = "detail_operation";
+
     static $rules = [
     ];
 
@@ -44,6 +46,7 @@ class DetailOperation extends Model
      * @var array
      */
     protected $fillable = [
+        'operation_id',
         'number_flights',
         'hour_flights',
         'acres',
@@ -54,6 +57,9 @@ class DetailOperation extends Model
         'luck_id',
         'zone_id',
         'dron_id',
+        'evidencia_record',
+        'evidencia_track',
+        'evidencia_gps',
     ];
 
     /**
@@ -75,9 +81,9 @@ class DetailOperation extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function filesOperations()
+    public function operations()
     {
-        return $this->hasMany('App\Models\FilesOperation', 'detail_operation_id', 'id');
+        return $this->hasMany('App\Models\Operation', 'operation_id', 'id');
     }
 
     /**
