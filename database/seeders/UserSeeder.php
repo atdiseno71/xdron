@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'remember_token' => Str::random(10),
             'active' => 1,
-            'id_role' => 1,
-            'id_type_document' => 1,
+            'id_role' => "1",
+            'id_type_document' => "1",
             'document_number' => "12345678",
         ])->assignRole('super.root');
         // Usuarios falsos para pruebas
