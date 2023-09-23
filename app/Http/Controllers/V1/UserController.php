@@ -46,8 +46,6 @@ class UserController extends Controller
     {
         $users = User::whereNotIn('id_role', [config('roles.super_root')])->with('roles')->paginate();
 
-        dd($users);
-
         return view('user.index', compact('users'));
     }
 
