@@ -68,7 +68,7 @@
                                                             href="{{ route('operations.show', $operation->id) }}"><i
                                                                 class="fa fa-fw fa-eye"></i></a>
                                                     @endcan
-                                                    @can('operations.destroy')
+                                                    @can('operations.edit')
                                                         <a class="btn btn-sm btn-success"
                                                             href="{{ route('operations.edit', $operation->id) }}"><i
                                                                 class="fa fa-fw fa-edit"></i></a>

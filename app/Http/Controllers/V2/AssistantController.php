@@ -63,7 +63,8 @@ class AssistantController extends Controller
 
         $assistant = Assistant::create($request->all());
 
-        return response()->json(['success' => 'Asistente creado con exito.']);
+        return redirect()->back()
+            ->with('success', 'Asistente creado con éxito.');
     }
 
     /**

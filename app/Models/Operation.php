@@ -92,7 +92,7 @@ class Operation extends Model
      */
     public function product()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'type_product_id');
+        return $this->hasOne('App\Models\TypeProduct', 'id', 'type_product_id');
     }
 
     /**

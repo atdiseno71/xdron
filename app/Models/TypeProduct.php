@@ -17,7 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TypeProduct extends Model
 {
-    
+
+    protected $table = "type_products";
+
     static $rules = [
 		'name' => 'required',
     ];

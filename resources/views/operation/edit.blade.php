@@ -23,9 +23,11 @@
                         <form method="POST" action="{{ route('operations.update', $operation->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
-
-                            @include('operation.form')
-
+                            @if ($role_user == 'super.root')
+                                @include('operation.form-admin')
+                            @elseif ($role_user == 'piloto')
+                                @include('operation.form-pilot')
+                            @endif
                         </form>
                     </div>
                 </div>

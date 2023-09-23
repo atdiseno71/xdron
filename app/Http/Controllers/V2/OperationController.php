@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\V2;
 
 use App\Http\Controllers\Controller;
-use App\Models\Assistant;
-use App\Models\Client;
-use App\Models\DetailOperation;
-use App\Models\Dron;
-use App\Models\Estate;
-use App\Models\FilesOperation;
-use App\Models\Luck;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\Operation;
-use App\Models\Product;
+use App\Models\DetailOperation;
+use App\Models\FilesOperation;
 use App\Models\TypeDocument;
+use Illuminate\Http\Request;
+use App\Models\TypeProduct;
+use App\Models\Assistant;
+use App\Models\Operation;
+use App\Traits\Template;
+use App\Models\Client;
+use App\Models\Estate;
+use App\Models\Dron;
+use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
 
@@ -24,6 +25,9 @@ use App\Models\Zone;
  */
 class OperationController extends Controller
 {
+
+    use Template;
+
     function __construct()
     {
         $this->middleware('can:operations.index')->only('index');
@@ -40,7 +44,22 @@ class OperationController extends Controller
      */
     public function index()
     {
-        $operations = Operation::paginate();
+        // Capturamos el usuario logeado
+        $user_log = User::with('roles')->find(Auth::id());
+        // Capturamos el rol
+        $rol = $user_log->roles[0]?->id;
+
+        switch ($rol) {
+            case config('roles.piloto'):
+                $operations = Operation::where('pilot_id', $user_log->id)->paginate();
+                break;
+            case config('roles.cliente'):
+                $operations = Operation::where('id_cliente', $user_log->id)->paginate();
+                break;
+            default:
+                $operations = Operation::paginate();
+                break;
+        }
 
         return view('operation.index', compact('operations'))
             ->with('i', (request()->input('page', 1) - 1) * $operations->perPage());
@@ -63,7 +82,7 @@ class OperationController extends Controller
 
         $role_user = $user->roles[0]->name;
 
-        $type_products = Product::pluck('name as label', 'id as value');
+        $type_products = TypeProduct::pluck('name as label', 'id as value');
 
         $assistents = Assistant::pluck('name as label', 'id as value');
 
@@ -108,35 +127,20 @@ class OperationController extends Controller
     public function store(Request $request)
     {
 
-        // Decodificar la cadena JSON en un array
-        $detailOperationData = json_decode($request['detail_operation_input'], true);
-
         request()->validate(Operation::$rules);
 
-        $request['admin_by'] = Auth::id();
-        $request['status_id'] = config('status.CRE');
+        $operation = new Operation();
 
-        $operation = Operation::create($request->all());
+        $operation->observation_admin = $request['observation_admin'];
+        $operation->type_product_id = $request['type_product_id'];
+        $operation->assistant_id_one = $request['assistant_id_one'];
+        $operation->assistant_id_two = $request['assistant_id_two'];
+        $operation->pilot_id = $request['pilot_id'];
+        $operation->id_cliente = $request['id_cliente'];
+        $operation->admin_by = Auth::id();
+        $operation->status_id = config('status.CRE');
 
-        foreach ($detailOperationData as $detail_operation) {
-            /* Guardamos el detalle de la operacion */
-            DetailOperation::create([
-                'operation_id' => $operation->id,
-                'estate_id' => $detail_operation['estate_id'],
-                'luck_id' => $detail_operation['luck_id'],
-                'download' => $detail_operation['download'],
-                'zone_id' => $detail_operation['zone_id'],
-                'dron_id' => $detail_operation['dron_id'],
-                'number_flights' => $detail_operation['number_flights'],
-                'hour_flights' => $detail_operation['hour_flights'],
-                'acres' => $detail_operation['acres'],
-                'evidencia_record' => $detail_operation['evidencia_record'],
-                'evidencia_track' => $detail_operation['evidencia_track'],
-                'evidencia_gps' => $detail_operation['evidencia_gps'],
-            ]);
-        }
-
-        dd($detailOperationData);
+        $operation->save();
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
@@ -173,7 +177,7 @@ class OperationController extends Controller
 
         $role_user = $user->roles[0]->name;
 
-        $products = Product::pluck('name as label', 'id as value');
+        $type_products = TypeProduct::pluck('name as label', 'id as value');
 
         $assistents = Assistant::pluck('name as label', 'id as value');
 
@@ -189,12 +193,14 @@ class OperationController extends Controller
 
         $drones = Dron::pluck('enrollment as label', 'id as value');
 
+        $types_documents = TypeDocument::pluck('name as label', 'id as value');
+
         return view('operation.edit',
             compact(
                 'operation',
                 'detail_operation',
                 'role_user',
-                'products',
+                'type_products',
                 'assistents',
                 'pilots',
                 'clients',
@@ -203,6 +209,7 @@ class OperationController extends Controller
                 'lucks',
                 'zones',
                 'files_operation',
+                'types_documents',
             ));
     }
 

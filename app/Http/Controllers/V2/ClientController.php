@@ -77,7 +77,8 @@ class ClientController extends Controller
 
         $client = Client::create($request->all());
 
-        return response()->json(['success' => 'Cliente creado con exito.']);
+        return redirect()->back()
+            ->with('success', 'Cliente creado con éxito.');
     }
 
     /**

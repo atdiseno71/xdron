@@ -2,14 +2,8 @@
     <div class="box-body">
 
         <div class="row">
-            {{-- <div class="col-12 col-md-6">
-                <div class="form-group">
-                    {{ Form::label('download', 'Descarga') }}
-                    {{ Form::number('download', $operation->download, ['class' => 'form-control' . ($errors->has('download') ? ' is-invalid' : ''), 'step' => '0.5', 'placeholder' => 'Descarga']) }}
-                    {!! $errors->first('download', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div> --}}
-
+            {{-- Plantilla mensajes --}}
+            @include('layouts.message')
         </div>
 
         <div class="row">
@@ -22,10 +16,16 @@
             </div>
             <div class="col-12 col-md-1">
                 <div class="form-group btn-modal">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formCliente">
-                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#formCliente">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
+                                fill="#FCFCFC" />
+                            <path
+                                d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z"
+                                fill="#FCFCFC" />
                         </svg>
                     </button>
                 </div>
@@ -37,11 +37,27 @@
                     {!! $errors->first('pilot_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12 col-md-12">
+            <div class="col-12 col-md-11">
                 <div class="form-group">
                     {{ Form::label('type_product_id', 'Tipo producto') }}
                     {{ Form::select('type_product_id', $type_products, $operation->type_product_id, ['class' => 'form-control select2' . ($errors->has('type_product_id') ? ' is-invalid' : ''), 'id' => 'type_product_id', 'placeholder' => 'Seleccione el tipo de producto']) }}
                     {!! $errors->first('type_product_id', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-1">
+                <div class="form-group btn-modal">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#formTypeProduct">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
+                                fill="#FCFCFC" />
+                            <path
+                                d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z"
+                                fill="#FCFCFC" />
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div class="col-12 col-md-5">
@@ -53,10 +69,16 @@
             </div>
             <div class="col-12 col-md-1">
                 <div class="form-group btn-modal">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formAsistent">
-                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#formAsistent">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
+                                fill="#FCFCFC" />
+                            <path
+                                d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z"
+                                fill="#FCFCFC" />
                         </svg>
                     </button>
                 </div>
@@ -70,10 +92,16 @@
             </div>
             <div class="col-12 col-md-1">
                 <div class="form-group btn-modal">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formAsistent">
-                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                            <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#formAsistent">
+                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
+                                fill="#FCFCFC" />
+                            <path
+                                d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z"
+                                fill="#FCFCFC" />
                         </svg>
                     </button>
                 </div>
@@ -81,7 +109,7 @@
         </div>
 
         <div class="row">
-            @if ($role_user == "root" || $role_user == "super.root")
+            @if ($role_user == 'root' || $role_user == 'super.root')
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('observation_admin', 'Observaciones administrador') }}
@@ -91,7 +119,7 @@
                 </div>
             @endif
         </div>
-        <input type="text" name="detail_operation_input" id="detail_operation_input" hidden>
+        {{-- <input type="text" name="detail_operation_input" id="detail_operation_input" hidden>
         <div class="row detail-operation">
             <div class="col-12">
                 <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO</h3>
@@ -114,7 +142,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('download', 'Descarga') }}
-                    {{ Form::select('download', [5,10,15,20], $detail_operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una descarga']) }}
+                    {{ Form::select('download', [5, 10, 15, 20], $detail_operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una descarga']) }}
                     {!! $errors->first('download', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -158,8 +186,12 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia de registro:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_record" class="input-img-logo" id="input-record" value="{{$files_operation->evidencia_record ?? 'images/img/default.png'}}"  data-preview-id="preview-record" onchange="previewFile(event)" onchange="previewFile(event)"/>
-                        <img id="preview-record" src="{{ asset($files_operation->evidencia_record ?? 'images/img/default.png') }}" />
+                        <input type="file" name="evidencia_record" class="input-img-logo" id="input-record"
+                            value="{{ $files_operation->evidencia_record ?? 'images/img/default.png' }}"
+                            data-preview-id="preview-record" onchange="previewFile(event)"
+                            onchange="previewFile(event)" />
+                        <img id="preview-record"
+                            src="{{ asset($files_operation->evidencia_record ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-3x"></i>
                         </div>
@@ -172,8 +204,11 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia track:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_track" class="input-img-logo" id="input-track" value="{{$files_operation->evidencia_track ?? 'images/img/default.png'}}" data-preview-id="preview-track" onchange="previewFile(event)"/>
-                        <img id="preview-track" src="{{ asset($files_operation->evidencia_track ?? 'images/img/default.png') }}" />
+                        <input type="file" name="evidencia_track" class="input-img-logo" id="input-track"
+                            value="{{ $files_operation->evidencia_track ?? 'images/img/default.png' }}"
+                            data-preview-id="preview-track" onchange="previewFile(event)" />
+                        <img id="preview-track"
+                            src="{{ asset($files_operation->evidencia_track ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-3x"></i>
                         </div>
@@ -186,8 +221,11 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia de gps:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_gps" class="input-img-logo" id="input-gps" value="{{$files_operation->evidencia_gps ?? 'images/img/default.png'}}" data-preview-id="preview-gps" onchange="previewFile(event)"/>
-                        <img id="preview-gps" src="{{ asset($files_operation->evidencia_gps ?? 'images/img/default.png') }}" />
+                        <input type="file" name="evidencia_gps" class="input-img-logo" id="input-gps"
+                            value="{{ $files_operation->evidencia_gps ?? 'images/img/default.png' }}"
+                            data-preview-id="preview-gps" onchange="previewFile(event)" />
+                        <img id="preview-gps"
+                            src="{{ asset($files_operation->evidencia_gps ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-3x"></i>
                         </div>
@@ -202,13 +240,19 @@
                     {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-        </div>
-        <button type="button" class="btn btn-success btn-block duplicarDetalleOperacion" data-target=".detail-operation">
-            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+        </div> --}}
+        {{-- <button type="button" class="btn btn-success btn-block duplicarDetalleOperacion"
+            data-target=".detail-operation">
+            <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
+                    fill="#FCFCFC" />
+                <path
+                    d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z"
+                    fill="#FCFCFC" />
             </svg>
-        </button>
+        </button> --}}
     </div>
     <br>
     @include('layouts.btn-submit')
@@ -217,7 +261,7 @@
         function previewFile(event) {
             var input = event.target;
             var reader = new FileReader();
-            reader.onload = function(){
+            reader.onload = function() {
                 var dataURL = reader.result;
                 var previewId = $(input).data('preview-id');
                 var img = document.getElementById(previewId);
@@ -236,12 +280,14 @@
             fetch(url).then(response => response.json())
                 .then(data => {
                     if (Array.isArray(data)) {
-                        fincaSelect.innerHTML = '<option value="">Seleccione una finca</option>'; // Limpiar el select actual
+                        fincaSelect.innerHTML =
+                            '<option value="">Seleccione una finca</option>'; // Limpiar el select actual
 
                         data.forEach(finca => {
                             const option = document.createElement('option');
                             option.value = finca.id;
-                            option.textContent = finca.name; // Ajusta el nombre del campo de acuerdo a tu modelo de finca
+                            option.textContent = finca
+                                .name; // Ajusta el nombre del campo de acuerdo a tu modelo de finca
                             fincaSelect.appendChild(option);
                         });
                     } else {
@@ -256,7 +302,7 @@
         // Define un arreglo para almacenar los datos de detalle de operación
         let detailOperationDataArray = [];
         // Función para duplicar y guardar información
-        function duplicarYGuardarInformacion() {
+        /* function duplicarYGuardarInformacion() {
             // Obtener el contenedor detail-operation
             const detailOperationContainer = document.querySelector('.detail-operation');
 
@@ -314,7 +360,58 @@
                 showConfirmButton: true,
             })
 
+        } */
+        function duplicarYGuardarInformacion() {
+            const detailOperationContainer = document.querySelector('.detail-operation');
+            const detailOperationInputs = detailOperationContainer.querySelectorAll('input, select, [type="file"]');
+            const detailOperationData = {};
+
+            detailOperationInputs.forEach(input => {
+                const inputName = input.name;
+                if (input.type === 'file') {
+                    // Para campos de tipo file, verifica si se seleccionó un archivo
+                    if (input.files.length > 0) {
+                        // Guarda el archivo o la información relevante (como el nombre del archivo)
+                        detailOperationData[inputName] = input.files[0].name;
+                    }
+                } else {
+                    const inputValue = input.type === 'checkbox' ? input.checked : input.value;
+                    detailOperationData[inputName] = inputValue;
+                }
+            });
+
+            detailOperationDataArray.push(detailOperationData);
+            const jsonData = JSON.stringify(detailOperationDataArray);
+
+            document.getElementById('detail_operation_input').value = jsonData;
+
+            detailOperationInputs.forEach(input => {
+                if (input.type !== 'hidden') {
+                    input.value = '';
+                    if (input.tagName === 'SELECT') {
+                        input.selectedIndex = 0;
+                    }
+                    if (input.type === 'file') {
+                        // Recreate the file input
+                        const newInput = document.createElement('input');
+                        newInput.type = 'file';
+                        newInput.name = input.name;
+                        newInput.className = input.className;
+                        newInput.id = input.id;
+                        input.parentNode.replaceChild(newInput, input);
+                    }
+                }
+            });
+
+            Swal.fire({
+                title: '¡Se agregó el vuelo correctamente!',
+                text: "Continúe agregando vuelos o termine la operación",
+                icon: 'success',
+                showConfirmButton: true,
+            });
         }
+
+
 
         // Agregar un controlador de eventos al botón de duplicar para llamar a la función
         document.querySelector('.duplicarDetalleOperacion').addEventListener('click', duplicarYGuardarInformacion);
