@@ -31,6 +31,7 @@ class AssistantController extends Controller
      */
     public function index()
     {
+
         $assistants = Assistant::paginate();
 
         return view('assistant.index', compact('assistants'))
@@ -60,6 +61,8 @@ class AssistantController extends Controller
     public function storeFromModal(Request $request)
     {
         request()->validate(Assistant::$rules);
+
+        $request['created_by'] = Auth::id();
 
         $assistant = Assistant::create($request->all());
 

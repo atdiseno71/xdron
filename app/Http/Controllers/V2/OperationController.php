@@ -100,7 +100,8 @@ class OperationController extends Controller
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
-        return view('operation.create',
+        return view(
+            'operation.create',
             compact(
                 'operation',
                 'detail_operation',
@@ -115,7 +116,8 @@ class OperationController extends Controller
                 'zones',
                 'files_operation',
                 'types_documents',
-            ));
+            )
+        );
     }
 
     /**
@@ -195,7 +197,8 @@ class OperationController extends Controller
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
-        return view('operation.edit',
+        return view(
+            'operation.edit',
             compact(
                 'operation',
                 'detail_operation',
@@ -210,7 +213,8 @@ class OperationController extends Controller
                 'zones',
                 'files_operation',
                 'types_documents',
-            ));
+            )
+        );
     }
 
     /**
@@ -223,7 +227,58 @@ class OperationController extends Controller
     public function update(Request $request, Operation $operation)
     {
 
-        dd($request->all());
+        $maxFields = config('global.max_operation');
+
+        $name_inputs = [
+            'number_flights',
+            'hour_flights',
+            'acres',
+            'download',
+            'description',
+            'observation',
+            'estate_id',
+            'luck_id',
+            'zone_id',
+            'dron_id',
+            'evidencia_record',
+            'evidencia_track',
+            'evidencia_gps',
+            // 'operation_id',
+        ];
+
+        // Folder donde se guardan las evidencias
+        $folder = 'evidencias/' . $operation->id . '/';
+
+        for ($i = 1; $i <= $maxFields; $i++) {
+            // Creo variable temporal para la informacion del detalle
+            $detail_temp = [];
+            // Guardo el id de la operacion
+            $detail_temp['operation_id'] = $operation->id;
+            foreach ($name_inputs as $input) {
+                $fieldName = $input . "_" . $i;
+                // Acceder al valor del campo en la solicitud
+                $value = $request->input($fieldName);
+                // Guardamos campos de archivos
+                $file_name = [
+                    "evidencia_record_" . $i,
+                    "evidencia_track_" . $i,
+                    "evidencia_gps_" . $i,
+                ];
+                // Preguntamos si es un archivo, sino sobelo y guarde el dato
+                if (in_array($fieldName, $file_name)) {
+                    $handle_1 = $this->moveImage($request, $fieldName, $fieldName, $folder);
+                    $detail_temp[$input] = $handle_1;
+                }
+                // Agregar el valor al arreglo de datos
+                else if ($request->has($fieldName)) {
+                    $detail_temp[$input] = $value;
+                }
+            }
+            // Creamos el detalle de la operacion
+            $detail_operation = DetailOperation::create($detail_temp);
+        }
+
+        dd("revisate");
 
         request()->validate(Operation::$rules);
 

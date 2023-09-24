@@ -75,6 +75,8 @@ class ClientController extends Controller
     {
         request()->validate(Client::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $client = Client::create($request->all());
 
         return redirect()->back()

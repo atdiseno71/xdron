@@ -34,7 +34,11 @@ class Proveedor extends Model
 		'identificacion' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -51,6 +55,6 @@ class Proveedor extends Model
     {
         return $this->hasMany('App\Models\Repuesto', 'id_proveedor', 'id');
     }
-    
+
 
 }

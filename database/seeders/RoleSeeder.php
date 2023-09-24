@@ -33,6 +33,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'users.active'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'users.asignar'])->syncRoles([$role1, $role2]);
 
+        /* PERMISOS EXCLUSIVOS PARA PILOTOS - MODULO OPERACION */
+        Permission::create(['name' => 'operations.index'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create(['name' => 'operations.create'])->syncRoles([$role1, $role2, $role3]);
+        Permission::create(['name' => 'operations.show'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create(['name' => 'operations.edit'])->syncRoles([$role1, $role2, $role3]);
+        Permission::create(['name' => 'operations.destroy'])->syncRoles([$role1, $role2]);
 
         $views = [
             'assistants',
@@ -42,7 +48,7 @@ class RoleSeeder extends Seeder
             'estates',
             'lucks',
             'municipalities',
-            'operations',
+            // 'operations',
             'products',
             'statuses',
             'type-products',

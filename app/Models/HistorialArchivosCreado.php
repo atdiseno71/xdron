@@ -31,7 +31,11 @@ class HistorialArchivosCreado extends Model
 		'fecha_registro' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -48,6 +52,6 @@ class HistorialArchivosCreado extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_user');
     }
-    
+
 
 }

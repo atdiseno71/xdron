@@ -59,7 +59,11 @@ class Aplicacion extends Model
 		'tipo_app' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -76,7 +80,7 @@ class Aplicacion extends Model
     {
         return $this->hasOne('App\Models\Cliente', 'id', 'id_cliente');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -84,7 +88,7 @@ class Aplicacion extends Model
     {
         return $this->hasOne('App\Models\Producto', 'id', 'id_producto');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -92,6 +96,6 @@ class Aplicacion extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_user');
     }
-    
+
 
 }

@@ -29,7 +29,11 @@ class Repuesto extends Model
 		'nombre' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -46,6 +50,6 @@ class Repuesto extends Model
     {
         return $this->hasOne('App\Models\Proveedor', 'id', 'id_proveedor');
     }
-    
+
 
 }

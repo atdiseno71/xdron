@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-
+        <div class="row copy-detail-operation"></div>
         <div class="row detail-operation">
             <div class="col-12">
                 <hr class="lader-divider">
@@ -60,58 +60,58 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('estate_id', 'Hacienda') }}
-                    {{ Form::select('estate_id', $estates, $detail_operation->estate_id, ['class' => 'form-control select2' . ($errors->has('estate_id') ? ' is-invalid' : ''), 'id' => 'estate_id', 'placeholder' => 'Seleccione una hacienda']) }}
-                    {!! $errors->first('estate_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('estate_id_1', 'Hacienda') }}
+                    {{ Form::select('estate_id_1', $estates, $detail_operation->estate_id_1, ['class' => 'form-control select2' . ($errors->has('estate_id_1') ? ' is-invalid' : ''), 'id' => 'estate_id_1', 'placeholder' => 'Seleccione una hacienda']) }}
+                    {!! $errors->first('estate_id_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('luck_id', 'Suerte') }}
-                    {{ Form::select('luck_id', $lucks, $detail_operation->luck_id, ['class' => 'form-control select2' . ($errors->has('luck_id') ? ' is-invalid' : ''), 'id' => 'luck_id', 'placeholder' => 'Seleccione una suerte']) }}
-                    {!! $errors->first('luck_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('luck_id_1', 'Suerte') }}
+                    {{ Form::select('luck_id_1', $lucks, $detail_operation->luck_id_1, ['class' => 'form-control select2' . ($errors->has('luck_id_1') ? ' is-invalid' : ''), 'id' => 'luck_id_1', 'placeholder' => 'Seleccione una suerte']) }}
+                    {!! $errors->first('luck_id_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('download', 'Descarga') }}
-                    {{ Form::select('download', [5, 10, 15, 20], $detail_operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una descarga']) }}
-                    {!! $errors->first('download', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('download_1', 'Descarga') }}
+                    {{ Form::select('download_1', [5, 10, 15, 20], $detail_operation->download_1, ['class' => 'form-control select2' . ($errors->has('download_1') ? ' is-invalid' : ''), 'id' => 'download_1', 'placeholder' => 'Seleccione una descarga']) }}
+                    {!! $errors->first('download_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('zone_id', 'Zona') }}
-                    {{ Form::select('zone_id', $zones, $detail_operation->zone_id, ['class' => 'form-control select2' . ($errors->has('zone_id') ? ' is-invalid' : ''), 'id' => 'zone_id', 'placeholder' => 'Seleccione una zona']) }}
-                    {!! $errors->first('zone_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('zone_id_1', 'Zona') }}
+                    {{ Form::select('zone_id_1', $zones, $detail_operation->zone_id_1, ['class' => 'form-control select2' . ($errors->has('zone_id_1') ? ' is-invalid' : ''), 'id' => 'zone_id_1', 'placeholder' => 'Seleccione una zona']) }}
+                    {!! $errors->first('zone_id_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('dron_id', 'Drones') }}
-                    {{ Form::select('dron_id', $drones, $detail_operation->dron_id, ['class' => 'form-control select2' . ($errors->has('dron_id') ? ' is-invalid' : ''), 'id' => 'dron_id', 'placeholder' => 'Seleccione una drones']) }}
-                    {!! $errors->first('dron_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('dron_id_1', 'Drones') }}
+                    {{ Form::select('dron_id_1', $drones, $detail_operation->dron_id_1, ['class' => 'form-control select2' . ($errors->has('dron_id_1') ? ' is-invalid' : ''), 'id' => 'dron_id_1', 'placeholder' => 'Seleccione una drones']) }}
+                    {!! $errors->first('dron_id_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('number_flights', 'Bacterias') }}
-                    {{ Form::number('number_flights', $detail_operation->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. bacterias']) }}
-                    {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('number_flights_1', 'Bacterias') }}
+                    {{ Form::number('number_flights_1', $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights_1') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. bacterias']) }}
+                    {!! $errors->first('number_flights_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('hour_flights', 'Horas vuelos') }}
-                    {{ Form::number('hour_flights', $detail_operation->hour_flights, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. horas vuelos']) }}
-                    {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('hour_flights_1', 'Horas vuelos') }}
+                    {{ Form::number('hour_flights_1', $detail_operation->hour_flights_1, ['class' => 'form-control' . ($errors->has('hour_flights_1') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. horas vuelos']) }}
+                    {!! $errors->first('hour_flights_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('acres', 'Hectareas') }}
-                    {{ Form::number('acres', $detail_operation->acres, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. hectareas']) }}
-                    {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('acres_1', 'Hectareas') }}
+                    {{ Form::number('acres_1', $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres_1') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. hectareas']) }}
+                    {!! $errors->first('acres_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-4">
@@ -119,12 +119,12 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia de registro:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_record" class="input-img-logo" id="input-record"
-                            value="{{ $files_operation->evidencia_record ?? 'images/img/default.png' }}"
+                        <input type="file" name="evidencia_record_1" class="input-img-logo" id="evidencia_record_1"
+                            value="{{ $files_operation->evidencia_record_1 ?? 'images/img/default.png' }}"
                             data-preview-id="preview-record" onchange="previewFile(event)"
                             onchange="previewFile(event)" />
                         <img id="preview-record"
-                            src="{{ asset($files_operation->evidencia_record ?? 'images/img/default.png') }}" />
+                            src="{{ asset($files_operation->evidencia_record_1 ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-3x"></i>
                         </div>
@@ -137,11 +137,11 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia track:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_track" class="input-img-logo" id="input-track"
-                            value="{{ $files_operation->evidencia_track ?? 'images/img/default.png' }}"
+                        <input type="file" name="evidencia_track_1" class="input-img-logo" id="evidencia_track_1"
+                            value="{{ $files_operation->evidencia_track_1 ?? 'images/img/default.png' }}"
                             data-preview-id="preview-track" onchange="previewFile(event)" />
                         <img id="preview-track"
-                            src="{{ asset($files_operation->evidencia_track ?? 'images/img/default.png') }}" />
+                            src="{{ asset($files_operation->evidencia_track_1 ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-3x"></i>
                         </div>
@@ -154,11 +154,11 @@
                 <div class="form-group">
                     <label for="input-logo">Evidencia de gps:</label>
                     <div class="card img-logo">
-                        <input type="file" name="evidencia_gps" class="input-img-logo" id="input-gps"
-                            value="{{ $files_operation->evidencia_gps ?? 'images/img/default.png' }}"
+                        <input type="file" name="evidencia_gps_1" class="input-img-logo" id="evidencia_gps_1"
+                            value="{{ $files_operation->evidencia_gps_1 ?? 'images/img/default.png' }}"
                             data-preview-id="preview-gps" onchange="previewFile(event)" />
                         <img id="preview-gps"
-                            src="{{ asset($files_operation->evidencia_gps ?? 'images/img/default.png') }}" />
+                            src="{{ asset($files_operation->evidencia_gps_1 ?? 'images/img/default.png') }}" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-3x"></i>
                         </div>
@@ -168,16 +168,15 @@
             </div>
             <div class="col-12 col-md-12">
                 <div class="form-group">
-                    {{ Form::label('observation', 'Observaciones') }}
-                    {{ Form::textArea('observation', $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese observaciones de la operacion']) }}
-                    {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('observation_1', 'Observaciones') }}
+                    {{ Form::textArea('observation_1', $detail_operation->observation_1, ['class' => 'form-control' . ($errors->has('observation_1') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese observaciones de la operacion']) }}
+                    {!! $errors->first('observation_1', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
         <button type="button" class="btn btn-success btn-block duplicarDetalleOperacion"
             data-target=".detail-operation">
-            <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
                     fill="#FCFCFC" />
@@ -202,5 +201,97 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
+        // Copiar formulario despues de tocar el boton
+        /* $(document).ready(function() {
+            // Manejador del botón para duplicar
+            $(".duplicarDetalleOperacion").click(function() {
+                // Clona el contenido de detail-operation
+                var $clone = $(".detail-operation").clone();
+
+                // Encuentra el último número en los nombres de los campos clonados
+                var lastNumber = 1; // Valor predeterminado si no se encuentra ninguno
+
+                $clone.find(":input").each(function() {
+                    var oldName = $(this).attr("name");
+                    if (oldName) {
+                        var matches = oldName.match(
+                        /_(\d+)$/); // Busca el número al final del nombre
+                        if (matches && matches.length > 1) {
+                            var number = parseInt(matches[1]);
+                            if (!isNaN(number) && number > lastNumber) {
+                                lastNumber = number;
+                            }
+                        }
+                    }
+                });
+
+                // Incrementa el último número para obtener el nuevo sufijo
+                var newNumber = lastNumber + 1;
+
+                // Actualiza los sufijos en los atributos 'name' y 'id' para cada campo clonado
+                $clone.find(":input").each(function() {
+                    var oldName = $(this).attr("name");
+                    var oldId = $(this).attr("id");
+                    if (oldName) {
+                        // Reemplaza el sufijo con el nuevo número
+                        var newName = oldName.replace(/_\d+$/, "_" + newNumber);
+                        var newId = oldId.replace(/_\d+$/, "_" + newNumber);
+                        $(this).attr("name", newName);
+                        $(this).attr("id", newId);
+                        // Limpia el valor de los campos clonados
+                        $(this).val("");
+                    }
+                });
+
+                // Agrega la copia al div copy-detail-operation
+                $(".copy-detail-operation").append($clone);
+            });
+        }); */
+        $(document).ready(function() {
+            // Manejador del botón para duplicar
+            $(".duplicarDetalleOperacion").click(function() {
+                // Clona el contenido de detail-operation
+                var $clone = $(".detail-operation").clone();
+
+                // Limpia los valores de los campos clonados
+                $clone.find(":input").val(""); // Esto borra los valores
+
+                // Encuentra el último número en los nombres de los campos clonados
+                var lastNumber = 1; // Valor predeterminado si no se encuentra ninguno
+
+                $clone.find(":input").each(function() {
+                    var oldName = $(this).attr("name");
+                    if (oldName) {
+                        var matches = oldName.match(
+                        /_(\d+)$/); // Busca el número al final del nombre
+                        if (matches && matches.length > 1) {
+                            var number = parseInt(matches[1]);
+                            if (!isNaN(number) && number > lastNumber) {
+                                lastNumber = number;
+                            }
+                        }
+                    }
+                });
+
+                // Incrementa el último número para obtener el nuevo sufijo
+                var newNumber = lastNumber + 1;
+
+                // Actualiza los sufijos en los atributos 'name' y 'id' para cada campo clonado
+                $clone.find(":input").each(function() {
+                    var oldName = $(this).attr("name");
+                    var oldId = $(this).attr("id");
+                    if (oldName) {
+                        // Reemplaza el sufijo con el nuevo número
+                        var newName = oldName.replace(/_\d+$/, "_" + newNumber);
+                        var newId = oldId.replace(/_\d+$/, "_" + newNumber);
+                        $(this).attr("name", newName);
+                        $(this).attr("id", newId);
+                    }
+                });
+
+                // Agrega la copia al div copy-detail-operation
+                $(".copy-detail-operation").append($clone);
+            });
+        });
     </script>
 </div>

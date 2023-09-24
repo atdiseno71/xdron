@@ -37,14 +37,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Operation extends Model
 {
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
+
     use SoftDeletes;
 
     protected $table = "operation";
 
     static $rules = [
     ];
-
-    protected $perPage = 20;
 
     /**
      * Attributes that should be mass-assignable.
