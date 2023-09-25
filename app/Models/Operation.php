@@ -124,5 +124,12 @@ class Operation extends Model
         return $this->hasOne('App\Models\User', 'id', 'pilot_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function details()
+    {
+        return $this->hasMany('App\Models\DetailOperation', 'operation_id', 'id');
+    }
 
 }

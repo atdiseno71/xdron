@@ -169,7 +169,7 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::find($id);
+        $operation = Operation::with('details')->find($id);
 
         $detail_operation = new DetailOperation();
 
@@ -227,7 +227,13 @@ class OperationController extends Controller
     public function update(Request $request, Operation $operation)
     {
 
-        $maxFields = config('global.max_operation');
+        $num_operation = (int)$request['detalleCounter'];
+
+        $user = User::where('id', Auth::id())->with('roles')->first();
+
+        $role_user = $user->roles[0]?->id;
+
+        // $maxFields = config('global.max_operation'); // De momento no se usa, se tiene un contador en el front
 
         $name_inputs = [
             'number_flights',
@@ -249,7 +255,7 @@ class OperationController extends Controller
         // Folder donde se guardan las evidencias
         $folder = 'evidencias/' . $operation->id . '/';
 
-        for ($i = 1; $i <= $maxFields; $i++) {
+        for ($i = 1; $i <= $num_operation; $i++) {
             // Creo variable temporal para la informacion del detalle
             $detail_temp = [];
             // Guardo el id de la operacion
@@ -278,11 +284,11 @@ class OperationController extends Controller
             $detail_operation = DetailOperation::create($detail_temp);
         }
 
-        dd("revisate");
+        if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
+            request()->validate(Operation::$rules);
 
-        request()->validate(Operation::$rules);
-
-        $operation->update($request->all());
+            $operation->update($request->all());
+        }
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion actualizada con exito.');
