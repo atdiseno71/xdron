@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\V2;
 
+use App\Notifications\OperationNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DetailOperation;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\FilesOperation;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
@@ -144,6 +146,9 @@ class OperationController extends Controller
 
         $operation->save();
 
+        /* CREAMOS LA NOTIFICACION */
+        $this->make_operation_notification($operation);
+
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
     }
@@ -156,9 +161,14 @@ class OperationController extends Controller
      */
     public function show($id)
     {
-        $operation = Operation::find($id);
+        $operation = Operation::with('details')->find($id);
 
-        return view('operation.show', compact('operation', 'role_user'));
+        //Generamos el pdf
+        set_time_limit(30000);
+        $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
+
+        $pdf->set_paper('letter', 'landscape');
+        return $pdf->stream('reporte.pdf');
     }
 
     /**
@@ -306,4 +316,18 @@ class OperationController extends Controller
         return redirect()->route('operations.index')
             ->with('success', 'Operacion eliminada con exito.');
     }
+
+    /* MANEJAR NOTIFICACIONES */
+    public function make_operation_notification($operation) {
+        try {
+            /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
+            $user = User::find($operation->id_piloto);
+            if ($user) {
+                $user->notify(new OperationNotification($operation));
+            }
+        } catch (\Exception $ex) {
+            return response()->json('Error al generar la notificacion', 422);
+        }
+    }
+
 }
