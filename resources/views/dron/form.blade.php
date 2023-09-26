@@ -29,7 +29,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     {{ Form::label('year', 'Año') }}
-                    {{ Form::text('year', $dron->year, ['class' => 'form-control' . ($errors->has('year') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese el año']) }}
+                    {{-- {{ Form::text('year', $dron->year, ['class' => 'form-control' . ($errors->has('year') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese el año']) }} --}}
+                    {{ Form::select('year', range(date('Y') - 30, date('Y') + 10), $dron->year, ['class' => 'form-control select2' . ($errors->has('year') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el año']) }}
                     {!! $errors->first('year', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
