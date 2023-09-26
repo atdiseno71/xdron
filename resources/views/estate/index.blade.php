@@ -50,7 +50,7 @@
                                             <td>{{ ++$i }}</td>
 
                                             <td>{{ $estate->name }}</td>
-                                            <td>{{ $estate->client?->full_name_user }}</td>
+                                            <td>{{ $estate->client?->social_reason }}</td>
                                             <td>{{ $estate->creator?->name }}</td>
 
                                             <td>
