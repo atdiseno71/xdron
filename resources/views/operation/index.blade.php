@@ -56,7 +56,7 @@
                                             <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}
                                             </td>
                                             <td>{{ $operation->userPilot?->name }}</td>
-                                            <td>{{ $operation->client?->full_name_user }}</td>
+                                            <td>{{ $operation->client?->social_reason }}</td>
                                             <td>{{ $operation->userAdmin?->name }}</td>
                                             <td>{{ $operation->status?->name }}</td>
 
