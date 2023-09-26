@@ -90,7 +90,7 @@ class ClientController extends Controller
      */
     public function getSelects()
     {
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         return response()->json($clients);
     }

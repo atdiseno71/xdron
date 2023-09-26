@@ -90,7 +90,7 @@ class OperationController extends Controller
 
         $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         $estates = Estate::pluck('name as label', 'id as value');
 
@@ -195,7 +195,7 @@ class OperationController extends Controller
 
         $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         $estates = Estate::pluck('name as label', 'id as value');
 

@@ -46,7 +46,7 @@ class EstateController extends Controller
     {
         $estate = new Estate();
 
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         return view('estate.create', compact('estate', 'clients'));
     }
@@ -92,7 +92,7 @@ class EstateController extends Controller
     {
         $estate = Estate::find($id);
 
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         return view('estate.edit', compact('estate', 'clients'));
     }
