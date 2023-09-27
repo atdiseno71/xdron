@@ -65,8 +65,23 @@ class LuckController extends Controller
 
         $luck = Luck::create($request->all());
 
-        return redirect()->route('lucks.index')
+        return redirect()->back()
             ->with('success', 'Suerte creado con exito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Luck::pluck('name', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

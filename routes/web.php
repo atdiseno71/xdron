@@ -57,11 +57,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');
     Route::post('uploadTypeProduct', [TypeProductController::class, 'store'])->name('typeProduct.uploadTypeProduct');
     Route::post('uploadAsistent', [AssistantController::class, 'storeFromModal'])->name('assistants.uploadAsistent');
+    Route::post('uploadEstate', [EstateController::class, 'store'])->name('estates.uploadEstate');
+    Route::post('uploadLuck', [LuckController::class, 'store'])->name('lucks.uploadLuck');
+    Route::post('uploadDron', [DronController::class, 'store'])->name('drons.uploadDron');
 
     // SELECTS
     Route::get('getAsistents', [AssistantController::class, 'getSelects']);
     Route::get('getClients', [ClientController::class, 'getSelects']);
     Route::get('getTypeProducts', [TypeProductController::class, 'getSelects']);
+    Route::get('getEstates', [EstateController::class, 'getSelects']);
+    Route::get('getLucks', [LuckController::class, 'getSelects']);
+    Route::get('getDrons', [DronController::class, 'getSelects']);
 
 });
 

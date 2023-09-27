@@ -83,7 +83,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-5">
                     <div class="form-group">
                         <label for="estate_id_{{ $key }}">Hacienda</label>
                         <select name="estate_id_{{ $key }}" id="estate_id_{{ $key }}"
@@ -101,7 +101,17 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-1">
+                    <div class="form-group btn-modal">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formEstate">
+                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
                     <div class="form-group">
                         <label for="luck_id_{{ $key }}">Suerte</label>
                         <select name="luck_id_{{ $key }}" id="luck_id_{{ $key }}"
@@ -117,6 +127,44 @@
                         @if ($errors->has('luck_id'))
                             <div class="invalid-feedback">{{ $errors->first('luck_id') }}</div>
                         @endif
+                    </div>
+                </div>
+                <div class="col-12 col-md-1">
+                    <div class="form-group btn-modal">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formLuck">
+                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="form-group">
+                        <label for="dron_id_{{ $key }}">Drones</label>
+                        <select name="dron_id_{{ $key }}" id="dron_id_{{ $key }}"
+                            class="form-control select2{{ $errors->has('dron_id') ? ' is-invalid' : '' }}"
+                            placeholder="Seleccione una drone">
+                            @foreach ($drones as $dronKey => $dronValue)
+                                <option value="{{ $dronKey }}"
+                                    {{ $detail->dron_id == $dronKey ? 'selected' : '' }}>
+                                    {{ $dronValue }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('dron_id'))
+                            <div class="invalid-feedback">{{ $errors->first('dron_id') }}</div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-12 col-md-1">
+                    <div class="form-group btn-modal">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formDron">
+                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -157,26 +205,8 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="dron_id_{{ $key }}">Drones</label>
-                        <select name="dron_id_{{ $key }}" id="dron_id_{{ $key }}"
-                            class="form-control select2{{ $errors->has('dron_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una drone">
-                            @foreach ($drones as $dronKey => $dronValue)
-                                <option value="{{ $dronKey }}"
-                                    {{ $detail->dron_id == $dronKey ? 'selected' : '' }}>
-                                    {{ $dronValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('dron_id'))
-                            <div class="invalid-feedback">{{ $errors->first('dron_id') }}</div>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('number_flights__' . $key, 'Bacterias') }}
-                        {{ Form::number('number_flights__' . $key, $detail->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. bacterias']) }}
+                        {{ Form::label('number_flights__' . $key, 'Baterias') }}
+                        {{ Form::number('number_flights__' . $key, $detail->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. Baterias']) }}
                         {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -194,6 +224,7 @@
                         {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
+                <div class="col-12 col-md-6"></div>
                 <div class="col-12 col-md-4">
                     <!-- File para el logo del proyecto -->
                     <div class="form-group">
@@ -266,9 +297,9 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <div class="form-group">
-                        <label for="estate_id_1">Tipo producto</label>
-                        <select name="estate_id_1" id="estate_id_1"
-                            class="form-control select2{{ $errors->has('type_product_id') ? ' is-invalid' : '' }}"
+                        <label for="type_product_id_1">Tipo producto</label>
+                        <select name="type_product_id_1" id="type_product_id_1"
+                            class="form-control select2{{ $errors->has('type_product_id_1') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione el tipo de producto">
                             @foreach ($type_products as $typeProductKey => $typeProductValue)
                                 <option value="{{ $typeProductKey }}"
@@ -277,8 +308,8 @@
                                 </option>
                             @endforeach
                         </select>
-                        @if ($errors->has('type_product_id'))
-                            <div class="invalid-feedback">{{ $errors->first('type_product_id') }}</div>
+                        @if ($errors->has('type_product_id_1'))
+                            <div class="invalid-feedback">{{ $errors->first('type_product_id_1') }}</div>
                         @endif
                     </div>
                 </div>
@@ -310,7 +341,17 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-1">
+                    <div class="form-group btn-modal">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formEstate">
+                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
                     <div class="form-group">
                         <label for="luck_id_1">Suerte</label>
                         <select name="luck_id_1" id="luck_id_1"
@@ -326,6 +367,44 @@
                         @if ($errors->has('luck_id_1'))
                             <div class="invalid-feedback">{{ $errors->first('luck_id_1') }}</div>
                         @endif
+                    </div>
+                </div>
+                <div class="col-12 col-md-1">
+                    <div class="form-group btn-modal">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formLuck">
+                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="form-group">
+                        <label for="dron_id_1">Drones</label>
+                        <select name="dron_id_1" id="dron_id_1"
+                            class="form-control select2{{ $errors->has('dron_id_1') ? ' is-invalid' : '' }}"
+                            placeholder="Seleccione una drone">
+                            @foreach ($drones as $dronKey => $dronValue)
+                                <option value="{{ $dronKey }}"
+                                    {{ $detail_operation->dron_id_1 == $dronKey ? 'selected' : '' }}>
+                                    {{ $dronValue }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('dron_id_1'))
+                            <div class="invalid-feedback">{{ $errors->first('dron_id_1') }}</div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-12 col-md-1">
+                    <div class="form-group btn-modal">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formDron">
+                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
+                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -366,26 +445,8 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="dron_id_1">Drones</label>
-                        <select name="dron_id_1" id="dron_id_1"
-                            class="form-control select2{{ $errors->has('dron_id_1') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una drone">
-                            @foreach ($drones as $dronKey => $dronValue)
-                                <option value="{{ $dronKey }}"
-                                    {{ $detail_operation->dron_id_1 == $dronKey ? 'selected' : '' }}>
-                                    {{ $dronValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('dron_id_1'))
-                            <div class="invalid-feedback">{{ $errors->first('dron_id_1') }}</div>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('number_flights_1', 'Bacterias') }}
-                        {{ Form::number('number_flights_1', $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights_1') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. bacterias']) }}
+                        {{ Form::label('number_flights_1', 'Baterias') }}
+                        {{ Form::number('number_flights_1', $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights_1') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese cant. Baterias']) }}
                         {!! $errors->first('number_flights_1', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>

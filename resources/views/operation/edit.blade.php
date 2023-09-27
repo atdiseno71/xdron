@@ -36,6 +36,9 @@
         @include('modals.typeProduct')
         @include('modals.client')
         @include('modals.asistent')
+        @include('modals.estate')
+        @include('modals.luck')
+        @include('modals.dron')
     </section>
 @endsection
 
@@ -193,6 +196,159 @@
                     }
                 });
             });
+            // Formulario para las haciendas
+            $('#formEstate').on('submit', function(e) {
+                e.preventDefault(); // Evita el envío normal del formulario
+                // Obtener la URL completa
+                var urlCompleta = window.location.href;
+
+                // Crear un objeto URL a partir de la URL completa
+                var urlObjeto = new URL(urlCompleta);
+
+                // Obtener la URL base
+                var urlBase = urlObjeto.origin;
+
+                // Envía el formulario a través de AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('estates.uploadEstate') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}", // Agrega el token CSRF aquí
+                        $(this).serialize()
+                    }, // Serializa el formulario
+                    success: function(response) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Registro completado',
+                            showConfirmButton: true,
+                            // timer: 1500
+                        })
+                        // Seleccionar el botón de cierre por su ID
+                        const botonCerrarModal = document.getElementById('closeModal');
+                        // Simular un clic en el botón para cerrar el modal
+                        botonCerrarModal.click();
+                        // Recargar el select
+                        onloadEstates();
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Revise que los campos esten llenos',
+                                showConfirmButton: true,
+                                // timer: 1500
+                            })
+                        } else {
+                            // Otros códigos de error
+                            console.error('Error:', xhr.status, xhr.statusText);
+                        }
+                    }
+                });
+            });
+            // Formulario para las suertes
+            $('#formLuck').on('submit', function(e) {
+                e.preventDefault(); // Evita el envío normal del formulario
+                // Obtener la URL completa
+                var urlCompleta = window.location.href;
+
+                // Crear un objeto URL a partir de la URL completa
+                var urlObjeto = new URL(urlCompleta);
+
+                // Obtener la URL base
+                var urlBase = urlObjeto.origin;
+
+                // Envía el formulario a través de AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('lucks.uploadLuck') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}", // Agrega el token CSRF aquí
+                        $(this).serialize()
+                    }, // Serializa el formulario
+                    success: function(response) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Registro completado',
+                            showConfirmButton: true,
+                            // timer: 1500
+                        })
+                        // Seleccionar el botón de cierre por su ID
+                        const botonCerrarModal = document.getElementById('closeModal');
+                        // Simular un clic en el botón para cerrar el modal
+                        botonCerrarModal.click();
+                        // Recargar el select
+                        onloadLucks();
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Revise que los campos esten llenos',
+                                showConfirmButton: true,
+                                // timer: 1500
+                            })
+                        } else {
+                            // Otros códigos de error
+                            console.error('Error:', xhr.status, xhr.statusText);
+                        }
+                    }
+                });
+            });
+            // Formulario para las suertes
+            $('#formDron').on('submit', function(e) {
+                e.preventDefault(); // Evita el envío normal del formulario
+                // Obtener la URL completa
+                var urlCompleta = window.location.href;
+
+                // Crear un objeto URL a partir de la URL completa
+                var urlObjeto = new URL(urlCompleta);
+
+                // Obtener la URL base
+                var urlBase = urlObjeto.origin;
+
+                // Envía el formulario a través de AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('drons.uploadDron') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}", // Agrega el token CSRF aquí
+                        $(this).serialize()
+                    }, // Serializa el formulario
+                    success: function(response) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Registro completado',
+                            showConfirmButton: true,
+                            // timer: 1500
+                        })
+                        // Seleccionar el botón de cierre por su ID
+                        const botonCerrarModal = document.getElementById('closeModal');
+                        // Simular un clic en el botón para cerrar el modal
+                        botonCerrarModal.click();
+                        // Recargar el select
+                        onloadDrons();
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Revise que los campos esten llenos',
+                                showConfirmButton: true,
+                                // timer: 1500
+                            })
+                        } else {
+                            // Otros códigos de error
+                            console.error('Error:', xhr.status, xhr.statusText);
+                        }
+                    }
+                });
+            });
         });
         // CARGAR CLIENTES
         function onloadClients() {
@@ -307,7 +463,7 @@
                 url: urlBase + '/getTypeProducts',
                 success: function(response) {
                     if (response && typeof response === 'object') {
-                        var selectElement = document.getElementById('type_id');
+                        var selectElement = document.getElementById('type_product_id_1');
                         selectElement.innerHTML = ''; // Limpiar el contenido actual
                         // Iterar sobre las claves del objeto JSON
                         for (var key in response) {
@@ -331,12 +487,136 @@
                 }
             });
         }
+        // CARGAR HACIENDAS
+        function onloadEstates() {
+            // Obtener la URL completa
+            var urlCompleta = window.location.href;
 
+            // Crear un objeto URL a partir de la URL completa
+            var urlObjeto = new URL(urlCompleta);
+
+            // Obtener la URL base
+            var urlBase = urlObjeto.origin;
+
+            // Recargar la lista de clientes desde el servidor
+            $.ajax({
+                type: 'GET',
+                url: urlBase + '/getEstates',
+                success: function(response) {
+                    if (response && typeof response === 'object') {
+                        var selectElement = document.getElementById('estate_id_1');
+                        selectElement.innerHTML = ''; // Limpiar el contenido actual
+                        // Iterar sobre las claves del objeto JSON
+                        for (var key in response) {
+                            if (response.hasOwnProperty(key)) {
+                                var option = document.createElement('option');
+                                option.value = key; // Utilizar la clave como valor
+                                option.text = response[key]; // Utilizar el valor como texto
+                                selectElement.appendChild(option);
+                            }
+                        }
+
+                        // Volver a inicializar el plugin select2 (si lo estás utilizando)
+                        $(selectElement).select2();
+                    } else {
+                        console.error('La respuesta del API no es un objeto JSON válido.');
+                    }
+                },
+                error: function(xhr) {
+                    // Manejar errores si es necesario
+                    console.error('Error al obtener la lista de clientes:', xhr.status, xhr.statusText);
+                }
+            });
+        }
+        // CARGAR SUERTES
+        function onloadLucks() {
+            // Obtener la URL completa
+            var urlCompleta = window.location.href;
+
+            // Crear un objeto URL a partir de la URL completa
+            var urlObjeto = new URL(urlCompleta);
+
+            // Obtener la URL base
+            var urlBase = urlObjeto.origin;
+
+            // Recargar la lista de clientes desde el servidor
+            $.ajax({
+                type: 'GET',
+                url: urlBase + '/getLucks',
+                success: function(response) {
+                    if (response && typeof response === 'object') {
+                        var selectElement = document.getElementById('estate_id_1');
+                        selectElement.innerHTML = ''; // Limpiar el contenido actual
+                        // Iterar sobre las claves del objeto JSON
+                        for (var key in response) {
+                            if (response.hasOwnProperty(key)) {
+                                var option = document.createElement('option');
+                                option.value = key; // Utilizar la clave como valor
+                                option.text = response[key]; // Utilizar el valor como texto
+                                selectElement.appendChild(option);
+                            }
+                        }
+
+                        // Volver a inicializar el plugin select2 (si lo estás utilizando)
+                        $(selectElement).select2();
+                    } else {
+                        console.error('La respuesta del API no es un objeto JSON válido.');
+                    }
+                },
+                error: function(xhr) {
+                    // Manejar errores si es necesario
+                    console.error('Error al obtener la lista de clientes:', xhr.status, xhr.statusText);
+                }
+            });
+        }
+        // CARGAR DRONES
+        function onloadDrons() {
+            // Obtener la URL completa
+            var urlCompleta = window.location.href;
+
+            // Crear un objeto URL a partir de la URL completa
+            var urlObjeto = new URL(urlCompleta);
+
+            // Obtener la URL base
+            var urlBase = urlObjeto.origin;
+
+            // Recargar la lista de clientes desde el servidor
+            $.ajax({
+                type: 'GET',
+                url: urlBase + '/getDrons',
+                success: function(response) {
+                    if (response && typeof response === 'object') {
+                        var selectElement = document.getElementById('estate_id_1');
+                        selectElement.innerHTML = ''; // Limpiar el contenido actual
+                        // Iterar sobre las claves del objeto JSON
+                        for (var key in response) {
+                            if (response.hasOwnProperty(key)) {
+                                var option = document.createElement('option');
+                                option.value = key; // Utilizar la clave como valor
+                                option.text = response[key]; // Utilizar el valor como texto
+                                selectElement.appendChild(option);
+                            }
+                        }
+
+                        // Volver a inicializar el plugin select2 (si lo estás utilizando)
+                        $(selectElement).select2();
+                    } else {
+                        console.error('La respuesta del API no es un objeto JSON válido.');
+                    }
+                },
+                error: function(xhr) {
+                    // Manejar errores si es necesario
+                    console.error('Error al obtener la lista de clientes:', xhr.status, xhr.statusText);
+                }
+            });
+        }
         document.addEventListener('DOMContentLoaded', function() {
             // Tu código aquí se ejecutará después de que todo el HTML se haya cargado
             onloadClients();
             onloadAsistents();
-            onloadTypeProducts();
+            // onloadTypeProducts();
+            // onloadEstates();
+            // onloadLucks();
         });
     </script>
 @endsection

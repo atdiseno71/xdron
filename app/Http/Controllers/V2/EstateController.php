@@ -65,8 +65,23 @@ class EstateController extends Controller
 
         $estate = Estate::create($request->all());
 
-        return redirect()->route('estates.index')
+        return redirect()->back()
             ->with('success', 'Hacienda creada con exito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Estate::pluck('name', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

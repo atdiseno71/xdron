@@ -16,11 +16,11 @@ class DronController extends Controller
 
     function __construct()
     {
-        $this->middleware('can:departments.index')->only('index');
-        $this->middleware('can:departments.create')->only('create', 'store');
-        $this->middleware('can:departments.show')->only('show');
-        $this->middleware('can:departments.edit')->only('edit', 'update');
-        $this->middleware('can:departments.destroy')->only('destroy');
+        $this->middleware('can:drons.index')->only('index');
+        $this->middleware('can:drons.create')->only('create', 'store');
+        $this->middleware('can:drons.show')->only('show');
+        $this->middleware('can:drons.edit')->only('edit', 'update');
+        $this->middleware('can:drons.destroy')->only('destroy');
     }
 
     /**
@@ -61,8 +61,23 @@ class DronController extends Controller
 
         $dron = Dron::create($request->all());
 
-        return redirect()->route('drons.index')
+        return redirect()->back()
             ->with('success', 'Dron creado con exito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Dron::pluck('enrollment', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
