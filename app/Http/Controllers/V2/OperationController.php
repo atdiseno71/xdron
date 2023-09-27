@@ -136,7 +136,7 @@ class OperationController extends Controller
         $operation = new Operation();
 
         $operation->observation_admin = $request['observation_admin'];
-        $operation->type_product_id = $request['type_product_id'];
+        // $operation->type_product_id = $request['type_product_id'];
         $operation->assistant_id_one = $request['assistant_id_one'];
         $operation->assistant_id_two = $request['assistant_id_two'];
         $operation->pilot_id = $request['pilot_id'];
@@ -259,6 +259,7 @@ class OperationController extends Controller
             'evidencia_record',
             'evidencia_track',
             'evidencia_gps',
+            'type_product_id'
             // 'operation_id',
         ];
 

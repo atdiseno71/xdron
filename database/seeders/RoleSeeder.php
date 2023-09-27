@@ -35,7 +35,7 @@ class RoleSeeder extends Seeder
 
         /* PERMISOS EXCLUSIVOS PARA PILOTOS - MODULO OPERACION */
         Permission::create(['name' => 'operations.index'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
-        Permission::create(['name' => 'operations.create'])->syncRoles([$role1, $role2, $role3]);
+        Permission::create(['name' => 'operations.create'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'operations.show'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create(['name' => 'operations.edit'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'operations.destroy'])->syncRoles([$role1, $role2]);
@@ -48,7 +48,6 @@ class RoleSeeder extends Seeder
             'estates',
             'lucks',
             'municipalities',
-            // 'operations',
             'products',
             'statuses',
             'type-products',
@@ -56,18 +55,31 @@ class RoleSeeder extends Seeder
             'zones',
         ];
 
+        $viewsPilotCreate = [
+            'clients',
+            'drons',
+            'estates',
+            'lucks',
+            'products',
+            'type-products',
+        ];
+
+        // firstOrNew es para buscar o crear uno nuevo
         /* PERMISOS DE VISTAS TIENEN ACCESO TODOS LOS ROLES */
         foreach ($views as $view) {
             Permission::create(['name' => "$view.index"])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
-            Permission::create(['name' => "$view.create"])->syncRoles([$role1, $role2, $role4, $role5]);
+            $createPermission = Permission::create(['name' => "$view.create"]);
+            if (in_array($view, $viewsPilotCreate)) {
+                $createPermission->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+            } else {
+                $createPermission->syncRoles([$role1, $role2, $role4, $role5]);
+            }
             Permission::create(['name' => "$view.edit"])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
             Permission::create(['name' => "$view.show"])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         }
 
         /* PERMISOS USUARIOS NORMALES */
         foreach ($views as $view) {
-            // Permission::create(['name' => "$view.create"])->syncRoles([$role1, $role2]);
-            // Permission::create(['name' => "$view.edit"])->syncRoles([$role1, $role2]);
             Permission::create(['name' => "$view.destroy"])->syncRoles([$role1, $role2]);
         }
 

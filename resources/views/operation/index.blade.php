@@ -37,7 +37,7 @@
                                     <tr>
                                         <th>No</th>
 
-                                        <th>Tipo producto</th>
+                                        {{-- <th>Tipo producto</th> --}}
                                         <th>Asistentes</th>
                                         <th>Piloto</th>
                                         <th>Cliente</th>
@@ -52,7 +52,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-                                            <td>{{ $operation->product?->name }}</td>
+                                            {{-- <td>{{ $operation->product?->name }}</td> --}}
                                             <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}
                                             </td>
                                             <td>{{ $operation->userPilot?->name }}</td>
@@ -64,7 +64,7 @@
                                                 <form action="{{ route('operations.destroy', $operation->id) }}"
                                                     method="POST" class="form-delete">
                                                     @can('operations.show')
-                                                        <a class="btn btn-sm btn-primary "
+                                                        <a class="btn btn-sm btn-primary " target="_blank"
                                                             href="{{ route('operations.show', $operation->id) }}">
                                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M18.125 8.125H13.75V3.125C13.7495 2.62789 13.5517 2.15129 13.2002 1.79978C12.8487 1.44827 12.3721 1.25055 11.875 1.25H3.125C2.62789 1.25055 2.15129 1.44827 1.79978 1.79978C1.44827 2.15129 1.25055 2.62789 1.25 3.125V16.875C1.25055 17.3721 1.44827 17.8487 1.79978 18.2002C2.15129 18.5517 2.62789 18.7495 3.125 18.75H15.625C16.4535 18.749 17.2478 18.4195 17.8336 17.8336C18.4195 17.2478 18.749 16.4535 18.75 15.625V8.75C18.75 8.58424 18.6842 8.42527 18.5669 8.30806C18.4497 8.19085 18.2908 8.125 18.125 8.125ZM2.5 16.875V3.125C2.50015 2.95929 2.56604 2.8004 2.68322 2.68322C2.8004 2.56604 2.95929 2.50015 3.125 2.5H11.875C12.0407 2.50015 12.1996 2.56604 12.3168 2.68322C12.434 2.8004 12.4999 2.95929 12.5 3.125V17.5H3.125C2.95929 17.4999 2.8004 17.434 2.68322 17.3168C2.56604 17.1996 2.50015 17.0407 2.5 16.875V16.875ZM17.5 15.625C17.4995 16.1221 17.3017 16.5987 16.9502 16.9502C16.5987 17.3017 16.1221 17.4995 15.625 17.5H13.75V9.375H17.5V15.625Z" fill="white"/>

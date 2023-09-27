@@ -19,11 +19,6 @@ return new class extends Migration
 
             $table->text('observation_admin')->nullable();
 
-            $table->unsignedBigInteger('type_product_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('type_product_id')
-                ->references('id')
-                ->on('type_products');
-
             $table->unsignedBigInteger('assistant_id_one')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('assistant_id_one')
                 ->references('id')

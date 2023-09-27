@@ -48,6 +48,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('zones');
 
+            $table->unsignedBigInteger('type_product_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('type_product_id')
+                ->references('id')
+                ->on('type_products');
+
             $table->text('evidencia_record')->nullable();
             $table->text('evidencia_track')->nullable();
             $table->text('evidencia_gps')->nullable();

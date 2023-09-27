@@ -64,6 +64,7 @@ class DetailOperation extends Model
         'evidencia_record',
         'evidencia_track',
         'evidencia_gps',
+        'type_product_id',
     ];
 
     /**
