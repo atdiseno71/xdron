@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class ProductController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:products.index')->only('index');
+        $this->middleware('can:products.create')->only('create', 'store');
+        $this->middleware('can:products.show')->only('show');
+        $this->middleware('can:products.edit')->only('edit', 'update');
+        $this->middleware('can:products.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

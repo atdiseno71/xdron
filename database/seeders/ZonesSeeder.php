@@ -17,13 +17,13 @@ class ZonesSeeder extends Seeder
 
         $zonas = [
             'NORTE',
-            'NORESTE',
+            // 'NORESTE',
             'ESTE',
-            'SURESTE',
+            // 'SURESTE',
             'SUR',
-            'SUROESTE',
+            // 'SUROESTE',
             'OESTE',
-            'NOROESTE',
+            // 'NOROESTE',
         ];
 
         foreach ($zonas as $key => $value) {

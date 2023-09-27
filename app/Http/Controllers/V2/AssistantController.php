@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class AssistantController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:assistants.index')->only('index', 'getSelects');
+        $this->middleware('can:assistants.create')->only('create', 'store', 'storeFromModal');
+        $this->middleware('can:assistants.show')->only('show');
+        $this->middleware('can:assistants.edit')->only('edit', 'update');
+        $this->middleware('can:assistants.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +31,7 @@ class AssistantController extends Controller
      */
     public function index()
     {
+
         $assistants = Assistant::paginate();
 
         return view('assistant.index', compact('assistants'))
@@ -39,6 +50,39 @@ class AssistantController extends Controller
         $type_documents = TypeDocument::pluck('name as label', 'id as value');
 
         return view('assistant.create', compact('assistant', 'type_documents'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeFromModal(Request $request)
+    {
+        request()->validate(Assistant::$rules);
+
+        $request['created_by'] = Auth::id();
+
+        $assistant = Assistant::create($request->all());
+
+        return redirect()->back()
+            ->with('success', 'Asistente creado con éxito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Assistant::pluck('name', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

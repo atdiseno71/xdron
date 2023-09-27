@@ -12,6 +12,16 @@ use App\Http\Controllers\Controller;
  */
 class DepartmentController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:departments.index')->only('index');
+        $this->middleware('can:departments.create')->only('create', 'store');
+        $this->middleware('can:departments.show')->only('show');
+        $this->middleware('can:departments.edit')->only('edit', 'update');
+        $this->middleware('can:departments.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

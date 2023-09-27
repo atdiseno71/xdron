@@ -12,6 +12,16 @@ use App\Http\Controllers\Controller;
  */
 class MunicipalityController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:municipalities.index')->only('index');
+        $this->middleware('can:municipalities.create')->only('create', 'store');
+        $this->middleware('can:municipalities.show')->only('show');
+        $this->middleware('can:municipalities.edit')->only('edit', 'update');
+        $this->middleware('can:municipalities.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

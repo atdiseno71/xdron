@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class LuckController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:lucks.index')->only('index');
+        $this->middleware('can:lucks.create')->only('create', 'store');
+        $this->middleware('can:lucks.show')->only('show');
+        $this->middleware('can:lucks.edit')->only('edit', 'update');
+        $this->middleware('can:lucks.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,8 +65,23 @@ class LuckController extends Controller
 
         $luck = Luck::create($request->all());
 
-        return redirect()->route('lucks.index')
+        return redirect()->back()
             ->with('success', 'Suerte creado con exito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Luck::pluck('name', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

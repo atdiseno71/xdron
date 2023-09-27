@@ -28,14 +28,23 @@ class FilesOperation extends Model
     static $rules = [
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['record','track','map','detail_operation_id'];
+    protected $fillable = [
+        'record',
+        'track',
+        'map',
+        'detail_operation_id'
+    ];
 
 
     /**
@@ -45,6 +54,6 @@ class FilesOperation extends Model
     {
         return $this->hasOne('App\Models\DetailOperation', 'id', 'detail_operation_id');
     }
-    
+
 
 }

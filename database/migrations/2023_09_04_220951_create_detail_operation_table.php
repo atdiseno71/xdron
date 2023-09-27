@@ -23,6 +23,16 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('observation')->nullable();
 
+            $table->unsignedBigInteger('operation_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('operation_id')
+                ->references('id')
+                ->on('operation');
+
+            $table->unsignedBigInteger('dron_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('dron_id')
+                ->references('id')
+                ->on('dron');
+
             $table->unsignedBigInteger('estate_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('estate_id')
                 ->references('id')
@@ -37,6 +47,15 @@ return new class extends Migration
             $table->foreign('zone_id')
                 ->references('id')
                 ->on('zones');
+
+            $table->unsignedBigInteger('type_product_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('type_product_id')
+                ->references('id')
+                ->on('type_products');
+
+            $table->text('evidencia_record')->nullable();
+            $table->text('evidencia_track')->nullable();
+            $table->text('evidencia_gps')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

@@ -36,7 +36,11 @@ class Calibracion extends Model
 		'archivo3' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -53,7 +57,7 @@ class Calibracion extends Model
     {
         return $this->hasOne('App\Models\Cliente', 'id', 'id_cliente');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -61,6 +65,6 @@ class Calibracion extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_user');
     }
-    
+
 
 }

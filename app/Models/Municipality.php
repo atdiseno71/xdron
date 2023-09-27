@@ -28,7 +28,11 @@ class Municipality extends Model
 		'department_id' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -45,6 +49,6 @@ class Municipality extends Model
     {
         return $this->hasOne('App\Models\Department', 'id', 'department_id');
     }
-    
+
 
 }

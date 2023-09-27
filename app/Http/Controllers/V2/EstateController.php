@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class EstateController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:estates.index')->only('index');
+        $this->middleware('can:estates.create')->only('create', 'store');
+        $this->middleware('can:estates.show')->only('show');
+        $this->middleware('can:estates.edit')->only('edit', 'update');
+        $this->middleware('can:estates.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +46,7 @@ class EstateController extends Controller
     {
         $estate = new Estate();
 
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         return view('estate.create', compact('estate', 'clients'));
     }
@@ -55,8 +65,23 @@ class EstateController extends Controller
 
         $estate = Estate::create($request->all());
 
-        return redirect()->route('estates.index')
+        return redirect()->back()
             ->with('success', 'Hacienda creada con exito.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSelects()
+    {
+        $assistants = Estate::pluck('name', 'id');
+
+        // Agregar la opción "Seleccione una opción" con clave 0
+        $assistants[0] = 'Seleccione una opción';
+
+        return response()->json($assistants, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -82,7 +107,7 @@ class EstateController extends Controller
     {
         $estate = Estate::find($id);
 
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         return view('estate.edit', compact('estate', 'clients'));
     }

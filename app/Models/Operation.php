@@ -37,20 +37,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Operation extends Model
 {
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
+
     use SoftDeletes;
+
+    protected $table = "operation";
 
     static $rules = [
     ];
-
-    protected $perPage = 20;
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['download','observation_admin','observation_pilot','observation_assistant_one','observation_assistant_two','type_product_id','assistant_id_one','assistant_id_two','pilot_id','id_cliente','admin_by','status_id'];
-
+    protected $fillable = [
+        'download',
+        'observation_admin',
+        'assistant_id_one',
+        'assistant_id_two',
+        'pilot_id',
+        'id_cliente',
+        'admin_by',
+        'status_id',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -81,7 +96,7 @@ class Operation extends Model
      */
     public function product()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'type_product_id');
+        return $this->hasOne('App\Models\TypeProduct', 'id', 'type_product_id');
     }
 
     /**
@@ -108,5 +123,12 @@ class Operation extends Model
         return $this->hasOne('App\Models\User', 'id', 'pilot_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function details()
+    {
+        return $this->hasMany('App\Models\DetailOperation', 'operation_id', 'id');
+    }
 
 }

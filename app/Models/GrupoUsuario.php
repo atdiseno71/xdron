@@ -28,7 +28,11 @@ class GrupoUsuario extends Model
     static $rules = [
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -45,7 +49,7 @@ class GrupoUsuario extends Model
     {
         return $this->hasOne('App\Models\Grupo', 'id', 'id_grupo');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -53,6 +57,6 @@ class GrupoUsuario extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_user');
     }
-    
+
 
 }

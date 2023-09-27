@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class ClientController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:clients.index')->only('index', 'getSelects');
+        $this->middleware('can:clients.create')->only('create', 'store', 'storeFromUser');
+        $this->middleware('can:clients.show')->only('show');
+        $this->middleware('can:clients.edit')->only('edit', 'update');
+        $this->middleware('can:clients.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -65,9 +75,12 @@ class ClientController extends Controller
     {
         request()->validate(Client::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $client = Client::create($request->all());
 
-        return response()->json(['success' => 'Cliente creado con exito.']);
+        return redirect()->back()
+            ->with('success', 'Cliente creado con éxito.');
     }
 
     /**
@@ -77,7 +90,7 @@ class ClientController extends Controller
      */
     public function getSelects()
     {
-        $clients = Client::pluck('full_name_user as label', 'id as value');
+        $clients = Client::pluck('social_reason as label', 'id as value');
 
         return response()->json($clients);
     }

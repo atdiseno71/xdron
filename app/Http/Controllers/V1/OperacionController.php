@@ -132,7 +132,7 @@ class OperacionController extends Controller
         $evidencia_gps = $operacion->evidencia_gps;
 
         //Generamos el pdf
-        set_time_limit(300);
+        set_time_limit(30000);
         $pdf = PDF::loadview('pdf.report.operation', compact('evidencia_record', 'evidencia_track', 'evidencia_gps'), ['dpi' => '200']);
 
         $pdf->set_paper('letter', 'landscape');

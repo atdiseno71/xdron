@@ -20,13 +20,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Role extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
 		'guard_name' => 'required',
     ];
 
-    protected $perPage = 20;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
 
     /**
      * Attributes that should be mass-assignable.
@@ -43,7 +47,7 @@ class Role extends Model
     {
         return $this->hasOne('App\Models\ModelHasRole', 'role_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -51,6 +55,6 @@ class Role extends Model
     {
         return $this->hasMany('App\Models\RoleHasPermission', 'role_id', 'id');
     }
-    
+
 
 }

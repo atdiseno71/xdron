@@ -12,6 +12,16 @@ use App\Http\Controllers\Controller;
  */
 class TypeProductController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('can:type-products.index')->only('index', 'getSelects');
+        $this->middleware('can:type-products.create')->only('create', 'store');
+        $this->middleware('can:type-products.show')->only('show');
+        $this->middleware('can:type-products.edit')->only('edit', 'update');
+        $this->middleware('can:type-products.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

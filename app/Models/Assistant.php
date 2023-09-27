@@ -26,6 +26,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Assistant extends Model
 {
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = config('global.num_pagination');
+    }
+
     use SoftDeletes;
 
     static $rules = [
@@ -34,8 +41,6 @@ class Assistant extends Model
         'type_document' => 'required',
         'document_number' => 'required',
     ];
-
-    protected $perPage = 20;
 
     /**
      * Attributes that should be mass-assignable.
