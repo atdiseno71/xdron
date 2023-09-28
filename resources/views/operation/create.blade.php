@@ -17,7 +17,12 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Crear operacion</span>
+                        <div class="float-left">
+                            <span class="card-title">Crear operacion</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('operations.index') }}"> Volver</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('operations.store') }}" role="form"
