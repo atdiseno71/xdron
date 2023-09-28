@@ -11,6 +11,7 @@ use App\Models\FilesOperation;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
 use App\Models\TypeProduct;
+use App\Traits\ImageTrait;
 use App\Models\Assistant;
 use App\Models\Operation;
 use App\Traits\Template;
@@ -28,7 +29,7 @@ use App\Models\Zone;
 class OperationController extends Controller
 {
 
-    use Template;
+    use Template, ImageTrait;
 
     function __construct()
     {
@@ -266,7 +267,7 @@ class OperationController extends Controller
         ];
 
         // Folder donde se guardan las evidencias
-        $folder = 'evidencias/' . $operation->id . '/';
+        $folder = 'evidences/_' . $operation->id . '/';
 
         for ($i = 1; $i <= $num_operation; $i++) {
             // Creo variable temporal para la informacion del detalle
@@ -285,7 +286,7 @@ class OperationController extends Controller
                 ];
                 // Preguntamos si es un archivo, sino sobelo y guarde el dato
                 if (in_array($fieldName, $file_name) && $request->has($fieldName)) {
-                    $handle_1 = $this->moveImage($request, $fieldName, $fieldName, $folder);
+                    $handle_1 = $this->webpImage($request, $fieldName, $folder, $fieldName);
                     $detail_temp[$input] = $handle_1;
                 }
                 // Agregar el valor al arreglo de datos

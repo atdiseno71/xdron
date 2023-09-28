@@ -19,9 +19,9 @@ trait ImageTrait
      * cambiandole el formado webp
      *
      */
-    public function webpImage(Request $request, $input_name, $model, $id)
+    public function webpImage(Request $request, $input_name, $model, $name_file)
     {
-        $path = storage_path('app/public') . "/$model/$id/";
+        $path = storage_path('app/public') . "/" . $model ."/";
         if ($request->hasFile($input_name)) {
             try {
                 $file = $request->file($input_name);
@@ -30,8 +30,8 @@ trait ImageTrait
                 $image->encode('webp', 90);
 
                 // Create folder directory and save
-                Storage::disk('public')->makeDirectory($model . '/' . $id);
-                $image->save($path . $rand . '.webp');
+                Storage::disk('public')->makeDirectory($model);
+                $image->save($path . $name_file . '.webp');
                 return [
                     'response' => ['status' => true, 'name' => $rand, 'message' => 'Se ha guardado con éxito']
                 ];
