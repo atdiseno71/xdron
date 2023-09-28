@@ -339,9 +339,9 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             // Tu código aquí se ejecutará después de que todo el HTML se haya cargado
-            onloadClients();
-            onloadAsistents();
-            onloadTypeProducts();
+            // onloadClients();
+            // onloadAsistents();
+            // onloadTypeProducts();
         });
     </script>
 @endsection
