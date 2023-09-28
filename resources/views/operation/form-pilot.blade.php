@@ -336,6 +336,7 @@
                         <select name="estate_id_1" id="estate_id_1"
                             class="form-control {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una hacienda">
+                            <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($estates as $estateKey => $estateValue)
                                 <option value="{{ $estateKey }}">
                                     {{ $estateValue }}
@@ -363,6 +364,7 @@
                         <select name="luck_id_1" id="luck_id_1"
                             class="form-control {{ $errors->has('luck_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una suerte">
+                            <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($lucks as $luckKey => $luckValue)
                                 <option value="{{ $luckKey }}">
                                     {{ $luckValue }}
@@ -390,6 +392,7 @@
                         <select name="dron_id_1" id="dron_id_1"
                             class="form-control {{ $errors->has('dron_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una drone">
+                            <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($drones as $dronKey => $dronValue)
                                 <option value="{{ $dronKey }}">
                                     {{ $dronValue }}
@@ -434,6 +437,7 @@
                         <select name="zone_id_1" id="zone_id_1"
                             class="form-control {{ $errors->has('zone_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una zona">
+                            <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($zones as $zoneKey => $zoneValue)
                                 <option value="{{ $zoneKey }}">
                                     {{ $zoneValue }}
