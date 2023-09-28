@@ -107,5 +107,4 @@ class DetailOperation extends Model
         return $this->hasOne('App\Models\Zone', 'id', 'zone_id');
     }
 
-
 }
