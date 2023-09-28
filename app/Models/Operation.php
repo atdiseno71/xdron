@@ -65,6 +65,7 @@ class Operation extends Model
         'id_cliente',
         'admin_by',
         'status_id',
+        'observation_admin',
     ];
 
     /**
