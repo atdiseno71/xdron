@@ -21,7 +21,7 @@ trait ImageTrait
      */
     public function webpImage(Request $request, $input_name, $model, $name_file)
     {
-        $path = storage_path('app/public') . "/" . $model;
+        $path = public_path("images/$model");
         if ($request->hasFile($input_name)) {
             try {
                 $file = $request->file($input_name);
@@ -33,10 +33,15 @@ trait ImageTrait
                 $path_image = $path . $name_file . '.webp';
 
                 // Create folder directory and save
-                Storage::disk('public')->makeDirectory($model);
+                // Storage::disk('public')->makeDirectory("images/$model");
+                // Verificar si el directorio ya existe
+                if (!file_exists($path)) {
+                    // Si no existe, crear el directorio
+                    mkdir($path, 0777, true);
+                }
                 $image->save($path_image);
                 return [
-                    'response' => ['status' => true, 'name' => $model . $name_file . '.webp', 'message' => 'Se ha guardado con éxito']
+                    'response' => ['status' => true, 'name' => "images/$model" . $name_file . '.webp', 'message' => 'Se ha guardado con éxito']
                 ];
             } catch (\Exception $ex) {
                 return [
