@@ -287,8 +287,7 @@ class OperationController extends Controller
                 // Preguntamos si es un archivo, sino sobelo y guarde el dato
                 if (in_array($fieldName, $file_name) && $request->has($fieldName)) {
                     $handle_1 = $this->webpImage($request, $fieldName, $folder, $fieldName);
-                    $detail_temp[$input] = $handle_1;
-                    dd($handle_1['response']['name']);
+                    $detail_temp[$input] = $handle_1['response']['name'];
                 }
                 // Agregar el valor al arreglo de datos
                 else if ($request->has($fieldName)) {
