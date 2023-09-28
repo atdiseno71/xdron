@@ -288,7 +288,7 @@ class OperationController extends Controller
                 if (in_array($fieldName, $file_name) && $request->has($fieldName)) {
                     $handle_1 = $this->webpImage($request, $fieldName, $folder, $fieldName);
                     $detail_temp[$input] = $handle_1;
-                    dd($handle_1['name']);
+                    dd($handle_1['response']);
                 }
                 // Agregar el valor al arreglo de datos
                 else if ($request->has($fieldName)) {
