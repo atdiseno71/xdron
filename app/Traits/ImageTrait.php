@@ -36,7 +36,7 @@ trait ImageTrait
                 Storage::disk('public')->makeDirectory($model);
                 $image->save($path_image);
                 return [
-                    'response' => ['status' => true, 'name' => $model . $name_file . '.webp', 'message' => 'Se ha guardado con éxito']
+                    'response' => ['status' => true, 'name' => $path_image/* $model . $name_file . '.webp' */, 'message' => 'Se ha guardado con éxito']
                 ];
             } catch (\Exception $ex) {
                 return [
