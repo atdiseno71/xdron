@@ -17,7 +17,12 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar operacion</span>
+                        <div class="float-left">
+                            <span class="card-title">Actualizar operacion</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('operations.index') }}"> Volver</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('operations.update', $operation->id) }}"  role="form" enctype="multipart/form-data">
@@ -612,8 +617,8 @@
         }
         document.addEventListener('DOMContentLoaded', function() {
             // Tu código aquí se ejecutará después de que todo el HTML se haya cargado
-            onloadClients();
-            onloadAsistents();
+            // onloadClients();
+            // onloadAsistents();
             // onloadTypeProducts();
             // onloadEstates();
             // onloadLucks();

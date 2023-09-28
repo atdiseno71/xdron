@@ -11,6 +11,7 @@ use App\Models\FilesOperation;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
 use App\Models\TypeProduct;
+use App\Traits\ImageTrait;
 use App\Models\Assistant;
 use App\Models\Operation;
 use App\Traits\Template;
@@ -28,7 +29,7 @@ use App\Models\Zone;
 class OperationController extends Controller
 {
 
-    use Template;
+    use Template, ImageTrait;
 
     function __construct()
     {
@@ -207,6 +208,8 @@ class OperationController extends Controller
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
+        // dd($operation->details);
+
         return view(
             'operation.edit',
             compact(
@@ -246,6 +249,7 @@ class OperationController extends Controller
         // $maxFields = config('global.max_operation'); // De momento no se usa, se tiene un contador en el front
 
         $name_inputs = [
+            'id_detail_operation',
             'number_flights',
             'hour_flights',
             'acres',
@@ -259,12 +263,11 @@ class OperationController extends Controller
             'evidencia_record',
             'evidencia_track',
             'evidencia_gps',
-            'type_product_id'
-            // 'operation_id',
+            'type_product_id',
         ];
 
         // Folder donde se guardan las evidencias
-        $folder = 'evidencias/' . $operation->id . '/';
+        $folder = 'evidences/_' . $operation->id . '/';
 
         for ($i = 1; $i <= $num_operation; $i++) {
             // Creo variable temporal para la informacion del detalle
@@ -282,9 +285,9 @@ class OperationController extends Controller
                     "evidencia_gps_" . $i,
                 ];
                 // Preguntamos si es un archivo, sino sobelo y guarde el dato
-                if (in_array($fieldName, $file_name)) {
-                    $handle_1 = $this->moveImage($request, $fieldName, $fieldName, $folder);
-                    $detail_temp[$input] = $handle_1;
+                if (in_array($fieldName, $file_name) && $request->has($fieldName)) {
+                    $handle_1 = $this->webpImage($request, $fieldName, $folder, $fieldName);
+                    $detail_temp[$input] = $handle_1['response']['name'];
                 }
                 // Agregar el valor al arreglo de datos
                 else if ($request->has($fieldName)) {
@@ -292,7 +295,15 @@ class OperationController extends Controller
                 }
             }
             // Creamos el detalle de la operacion
-            $detail_operation = DetailOperation::create($detail_temp);
+            if ($detail_temp['id_detail_operation'] == 0 || $detail_temp['id_detail_operation'] == "0") {
+                // El campo clave es nulo, así que creamos un nuevo registro
+                DetailOperation::create($detail_temp);
+            } else {
+                // El campo clave no es nulo, intentamos actualizar un registro existente
+                $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
+                $detail_operation_new->update($detail_temp);
+            }
+
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {

@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nit', 30);
+            $table->string('nit', 30)->nullable();
             $table->string('social_reason', 120);
-            $table->string('address', 60);
-            $table->string('phone', 30);
+            $table->string('address', 60)->nullable();
+            $table->string('phone', 30)->nullable();
             $table->string('email_enterprise', 191)->nullable();
             $table->string('email_enterprise2', 191)->nullable();
             $table->string('email_user', 191)->nullable();
-            $table->string('full_name_user', 120);
+            $table->string('full_name_user', 120)->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('created_by')

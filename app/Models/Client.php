@@ -34,12 +34,12 @@ class Client extends Model
     use SoftDeletes;
 
     static $rules = [
-		'nit' => 'required',
+		// 'nit' => 'required',
 		'social_reason' => 'required',
-		'address' => 'required',
-		'phone' => 'required',
-		'email_enterprise' => 'required',
-		'full_name_user' => 'required',
+		// 'address' => 'required',
+		// 'phone' => 'required',
+		// 'email_enterprise' => 'required',
+		// 'full_name_user' => 'required',
     ];
 
     public function __construct(array $attributes = [])

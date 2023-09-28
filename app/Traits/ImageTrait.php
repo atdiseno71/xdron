@@ -19,9 +19,9 @@ trait ImageTrait
      * cambiandole el formado webp
      *
      */
-    public function webpImage(Request $request, $input_name, $model, $id)
+    public function webpImage(Request $request, $input_name, $model, $name_file)
     {
-        $path = storage_path('app/public') . "/$model/$id/";
+        $path = storage_path('app/public') . "/" . $model;
         if ($request->hasFile($input_name)) {
             try {
                 $file = $request->file($input_name);
@@ -29,11 +29,14 @@ trait ImageTrait
                 $image = Image::make($file);
                 $image->encode('webp', 90);
 
+                // RUTA DE LA IMAGEN
+                $path_image = $path . $name_file . '.webp';
+
                 // Create folder directory and save
-                Storage::disk('public')->makeDirectory($model . '/' . $id);
-                $image->save($path . $rand . '.webp');
+                Storage::disk('public')->makeDirectory($model);
+                $image->save($path_image);
                 return [
-                    'response' => ['status' => true, 'name' => $rand, 'message' => 'Se ha guardado con éxito']
+                    'response' => ['status' => true, 'name' => $model . $name_file . '.webp', 'message' => 'Se ha guardado con éxito']
                 ];
             } catch (\Exception $ex) {
                 return [
@@ -67,7 +70,7 @@ trait ImageTrait
                 $file = $request->file($input_name);
                 $ext = $file->getClientOriginalExtension();
                 $filename_parsed = "$uid.$ext";
-                
+
                 $file->move(storage_path('app/public') . "/$model/$id/", $filename_parsed);
                 $url = "$model/$id/$filename_parsed";
             }

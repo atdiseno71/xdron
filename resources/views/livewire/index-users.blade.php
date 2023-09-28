@@ -32,6 +32,7 @@
                                     <th>Email</th>
                                     <th>Activo</th>
                                     <th>Clientes</th>
+                                    <th>Tipo usuario</th>
 
                                     <th>Acciones</th>
                                 </tr>
@@ -59,6 +60,8 @@
                                                 {{ $client->full_name_user }}{{ $loop->last ? '' : ',' }}
                                             @endforeach
                                         </td>
+
+                                        <td>{{ $user->roles[0]?->name }}</td>
 
                                         <td>
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="form-delete">

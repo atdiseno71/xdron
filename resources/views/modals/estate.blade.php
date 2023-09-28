@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group">
-                                        {{ Form::label('observations') }}
+                                        {{ Form::label('observations', 'Observaciones') }}
                                         {{ Form::textArea('observations', '', ['class' => 'form-control' . ($errors->has('observations') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
                                         {!! $errors->first('observations', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
