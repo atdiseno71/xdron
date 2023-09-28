@@ -242,7 +242,7 @@
                                 data-preview-id="preview-record" onchange="previewFile(event)"
                                 onchange="previewFile(event)" />
                             <img id="preview-record"
-                                src="{{ asset($detail->evidencia_record ?? 'images/img/default.png') }}" />
+                                src="{{ asset('storage/' . $detail->evidencia_record ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
                                 <i class="fa fa-upload fa-3x"></i>
                             </div>
@@ -260,7 +260,7 @@
                                 value="{{ $detail->evidencia_track ?? 'images/img/default.png' }}"
                                 data-preview-id="preview-track" onchange="previewFile(event)" />
                             <img id="preview-track"
-                                src="{{ asset($detail->evidencia_track ?? 'images/img/default.png') }}" />
+                                src="{{ asset('storage/' . $detail->evidencia_track ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
                                 <i class="fa fa-upload fa-3x"></i>
                             </div>
@@ -277,7 +277,7 @@
                                 value="{{ $detail->evidencia_gps ?? 'images/img/default.png' }}"
                                 data-preview-id="preview-gps" onchange="previewFile(event)" />
                             <img id="preview-gps"
-                                src="{{ asset($detail->evidencia_gps ?? 'images/img/default.png') }}" />
+                                src="{{ asset('storage/' . $detail->evidencia_gps ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
                                 <i class="fa fa-upload fa-3x"></i>
                             </div>
@@ -482,7 +482,7 @@
                                 data-preview-id="preview-record" onchange="previewFile(event)"
                                 onchange="previewFile(event)" />
                             <img id="preview-record"
-                                src="{{ asset($detail_operation->evidencia_record_1 ?? 'images/img/default.png') }}" />
+                                src="{{ asset('storage/' . $detail_operation->evidencia_record_1 ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
                                 <i class="fa fa-upload fa-3x"></i>
                             </div>
@@ -500,7 +500,7 @@
                                 value="{{ $detail_operation->evidencia_track_1 ?? 'images/img/default.png' }}"
                                 data-preview-id="preview-track" onchange="previewFile(event)" />
                             <img id="preview-track"
-                                src="{{ asset($detail_operation->evidencia_track_1 ?? 'images/img/default.png') }}" />
+                                src="{{ asset('storage/' . $detail_operation->evidencia_track_1 ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
                                 <i class="fa fa-upload fa-3x"></i>
                             </div>
@@ -517,7 +517,7 @@
                                 value="{{ $detail_operation->evidencia_gps_1 ?? 'images/img/default.png' }}"
                                 data-preview-id="preview-gps" onchange="previewFile(event)" />
                             <img id="preview-gps"
-                                src="{{ asset($detail_operation->evidencia_gps_1 ?? 'images/img/default.png') }}" />
+                                src="{{ asset('storage/' . $detail_operation->evidencia_gps_1 ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
                                 <i class="fa fa-upload fa-3x"></i>
                             </div>
