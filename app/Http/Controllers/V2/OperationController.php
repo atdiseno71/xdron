@@ -198,13 +198,13 @@ class OperationController extends Controller
 
         $clients = Client::pluck('social_reason as label', 'id as value');
 
-        $estates = Estate::pluck('name as label', 'id as value');
+        $estates = Estate::where('cliente_id', $operation->id_cliente)->pluck('name as label', 'id as value');
 
         $lucks = Luck::pluck('name as label', 'id as value');
 
         $zones = Zone::pluck('name as label', 'id as value');
 
-        $drones = Dron::pluck('enrollment as label', 'id as value');
+        $drones = Dron::where('created_by', $operation->pilot_id)->pluck('enrollment as label', 'id as value');
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
