@@ -42,7 +42,7 @@
             </div>
         </div>
         <!-- Agrega un input hidden para rastrear el contador -->
-        <input type="hidden" name="detalleCounter" id="detalleCounter" value="1">
+        <input type="hidden" name="detalleCounter" id="detalleCounter" value="{{ count($operation->details) != 0 ? count($operation->details) : 1 }}">
         <!-- Contenedor donde todo se va a copiar -->
         <div class="row copy-detail-operation"></div>
 
