@@ -53,7 +53,7 @@
                 <div class="col-12">
                     <hr class="lader-divider">
                     <br>
-                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO #{{ $detail->id }}</h3>
+                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO #{{ $key + 1 }}</h3>
                 </div>
                 <input name="id_detail_operation_{{ $key + 1 }}" id="id_detail_operation_{{ $key + 1 }}" type="text" value="{{ $detail->id }}" hidden>
                 <div class="col-12 col-md-11">
