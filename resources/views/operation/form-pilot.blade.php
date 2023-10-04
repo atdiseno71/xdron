@@ -53,7 +53,7 @@
                 <div class="col-12">
                     <hr class="lader-divider">
                     <br>
-                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO #{{ $key + 1 }}</h3>
+                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_{{ $key + 1 }}">#{{ $key + 1 }}</strong></h3>
                 </div>
                 <input name="id_detail_operation_{{ $key + 1 }}" id="id_detail_operation_{{ $key + 1 }}" type="text" value="{{ $detail->id }}" hidden>
                 <div class="col-12 col-md-11">
@@ -299,7 +299,7 @@
                 <div class="col-12">
                     <hr class="lader-divider">
                     <br>
-                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO</h3>
+                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong class="number_1">#1</strong></h3>
                 </div>
                 <input name="id_detail_operation_1" id="id_detail_operation_1" type="text" value="0" hidden>
                 <div class="col-12 col-md-5">
@@ -592,8 +592,25 @@
                     }
                 });
 
+                $clone.find("strong").each(function() {
+                    var oldId = $(this).attr("id");
+
+                    if (oldId) {
+                        var newId = oldId.replace(/_\d+$/, "_" + detalleCounter);
+                        $(this).attr("id", newId);
+                        $(this).html("#" + detalleCounter);
+                    }
+                });
+
                 // Agrega la copia al div copy-detail-operation
                 $(".copy-detail-operation").append($clone);
+
+                // Obtén el contador de vuelos
+                // var strongElement = document.getElementById("number_"+detalleCounter);
+                // console.log('detalleCounter', detalleCounter);
+                // console.log('strongElement', strongElement);
+                // // Cambiamos su contenido
+                // strongElement.innerHTML = "#" + detalleCounter;
 
                 // Reinicializa Select2 en los selects clonados
                 // $clone.find('select.select2').select2();
