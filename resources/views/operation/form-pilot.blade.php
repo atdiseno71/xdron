@@ -89,8 +89,8 @@
                     <div class="form-group">
                         <label for="estate_id_{{ $key + 1 }}">Hacienda</label>
                         <select name="estate_id_{{ $key + 1 }}" id="estate_id_{{ $key + 1 }}"
-                            class="form-control {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una hacienda">
+                            class="form-control estate-selector {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
+                            placeholder="Seleccione una hacienda" data-key="{{ $key + 1 }}">
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($estates as $estateKey => $estateValue)
                                 <option value="{{ $estateKey }}"
@@ -118,8 +118,8 @@
                     <div class="form-group">
                         <label for="luck_id_{{ $key + 1 }}">Suerte</label>
                         <select name="luck_id_{{ $key + 1 }}" id="luck_id_{{ $key + 1 }}"
-                            class="form-control {{ $errors->has('luck_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una suerte">
+                            class="form-control luck-selector {{ $errors->has('luck_id') ? ' is-invalid' : '' }}"
+                            placeholder="Seleccione una suerte" data-key="{{ $key + 1 }}">
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($lucks as $luckKey => $luckValue)
                                 <option value="{{ $luckKey }}"
@@ -299,7 +299,7 @@
                 <div class="col-12">
                     <hr class="lader-divider">
                     <br>
-                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong class="number_1">#1</strong></h3>
+                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_1">#1</strong></h3>
                 </div>
                 <input name="id_detail_operation_1" id="id_detail_operation_1" type="text" value="0" hidden>
                 <div class="col-12 col-md-5">
@@ -334,8 +334,8 @@
                     <div class="form-group">
                         <label for="estate_id_1">Hacienda</label>
                         <select name="estate_id_1" id="estate_id_1"
-                            class="form-control {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una hacienda">
+                            class="form-control estate-selector {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
+                            placeholder="Seleccione una hacienda" data-key="1">
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($estates as $estateKey => $estateValue)
                                 <option value="{{ $estateKey }}">
@@ -362,8 +362,8 @@
                     <div class="form-group">
                         <label for="luck_id_1">Suerte</label>
                         <select name="luck_id_1" id="luck_id_1"
-                            class="form-control {{ $errors->has('luck_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una suerte">
+                            class="form-control luck-selector {{ $errors->has('luck_id') ? ' is-invalid' : '' }}"
+                            placeholder="Seleccione una suerte" data-key="1">
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($lucks as $luckKey => $luckValue)
                                 <option value="{{ $luckKey }}">
@@ -563,7 +563,7 @@
             reader.readAsDataURL(input.files[0]);
         }
         // Copiar formulario despues de tocar el boton
-        document.addEventListener('DOMContentLoaded', function() {
+        /* document.addEventListener('DOMContentLoaded', function() {
             // Manejador del botón para duplicar
             $(".duplicarDetalleOperacion").click(function() {
                 // Clona el contenido de detail-operation
@@ -604,17 +604,87 @@
 
                 // Agrega la copia al div copy-detail-operation
                 $(".copy-detail-operation").append($clone);
+            });
+        }); */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializa el contador de data-key
+            var keyCounter = 1;
 
-                // Obtén el contador de vuelos
-                // var strongElement = document.getElementById("number_"+detalleCounter);
-                // console.log('detalleCounter', detalleCounter);
-                // console.log('strongElement', strongElement);
-                // // Cambiamos su contenido
-                // strongElement.innerHTML = "#" + detalleCounter;
+            // Manejador del botón para duplicar
+            $(".duplicarDetalleOperacion").click(function() {
+                // Clona el contenido de detail-operation
+                var $clone = $(".detail-operation").clone();
 
-                // Reinicializa Select2 en los selects clonados
-                // $clone.find('select.select2').select2();
+                // Limpia los valores de los campos clonados y las imágenes
+                $clone.find(":input").val("");
+                $clone.find("img").attr('src', "{{ asset('images/img/default.png') }}");
+
+                // Incrementa el contador y establece el nuevo sufijo en data-key
+                keyCounter++;
+
+                // Actualiza los sufijos en los atributos 'name' y 'id' para cada campo clonado
+                $clone.find(":input").each(function() {
+                    var oldName = $(this).attr("name");
+                    var oldId = $(this).attr("id");
+
+                    if (oldName) {
+                        // Reemplaza el sufijo con el nuevo número
+                        var newName = oldName.replace(/_\d+$/, "_" + keyCounter);
+                        var newId = oldId.replace(/_\d+$/, "_" + keyCounter);
+
+                        $(this).attr("data-key", keyCounter);
+                        $(this).attr("name", newName);
+                        $(this).attr("id", newId);
+                    }
+                });
+
+                $clone.find("strong").each(function() {
+                    var oldId = $(this).attr("id");
+
+                    if (oldId) {
+                        var newId = oldId.replace(/_\d+$/, "_" + keyCounter);
+                        $(this).attr("id", newId);
+                        $(this).html("#" + keyCounter);
+                    }
+                });
+
+                // Agrega la copia al div copy-detail-operation
+                $(".copy-detail-operation").append($clone);
             });
         });
+
+        // Llenar las suertes
+        $(document).ready(function () {
+            // Delega el evento "change" desde el documento para las clases .estate-selector
+            $(document).on("change", ".estate-selector", function () {
+                var selectedEstateValue = $(this).val();
+                var key = $(this).data("key");
+                var luckSelect = document.getElementById("luck_id_" + key); // Obtener el elemento DOM
+
+                const url = "{{ route('lucks.getLucks') }}?id=" + selectedEstateValue;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            luckSelect.innerHTML =
+                                '<option value="">Seleccione una suerte</option>'; // Limpiar el select actual
+
+                            data.forEach(luck => {
+                                const option = document.createElement('option');
+                                option.value = luck.id;
+                                option.textContent = luck.name; // Ajusta el nombre del campo de acuerdo a tu modelo de finca
+                                luckSelect.appendChild(option);
+                            });
+                        } else {
+                            console.error('El resultado del servidor no es un array:', data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener las fincas: ', error);
+                    });
+            });
+        });
+
     </script>
 </div>

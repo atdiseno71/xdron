@@ -21,6 +21,7 @@ use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperationController
@@ -200,7 +201,7 @@ class OperationController extends Controller
 
         $estates = Estate::where('cliente_id', $operation->id_cliente)->pluck('name as label', 'id as value');
 
-        $lucks = Luck::pluck('name as label', 'id as value');
+        $lucks = [];
 
         $zones = Zone::pluck('name as label', 'id as value');
 
@@ -338,6 +339,27 @@ class OperationController extends Controller
         } catch (\Exception $ex) {
             return response()->json('Error al generar la notificacion', 422);
         }
+    }
+
+    /* BUSCAR FINCAS POR ID DEL CLIENTE */
+    public function getFincasByCliente(Request $request)
+    {
+        $clienteId = $request->input('cliente_id');
+        $fincas = Estate::whereHas('clientesFincas', function ($query) use ($clienteId) {
+            $query->where('id_cliente', $clienteId);
+        })->get();
+
+        return response()->json($fincas);
+    }
+
+    /* BUSCAR FINCAS POR ID DEL CLIENTE */
+    public function getLucksByClient(Request $request)
+    {
+
+        $estate_id = $request->input('id');
+        $fincas = Luck::where('estate_id', $estate_id)->get();
+
+        return response()->json($fincas);
     }
 
 }
