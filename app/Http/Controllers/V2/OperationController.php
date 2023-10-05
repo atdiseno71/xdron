@@ -204,11 +204,9 @@ class OperationController extends Controller
 
         $zones = Zone::pluck('name as label', 'id as value');
 
-        $drones = Dron::where('created_by', $operation->pilot_id)->pluck('enrollment as label', 'id as value');
+        $drones = Dron::pluck('enrollment as label', 'id as value');
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
-
-        // dd($operation->details);
 
         return view(
             'operation.edit',
