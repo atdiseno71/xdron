@@ -201,7 +201,7 @@ class OperationController extends Controller
 
         $estates = Estate::where('cliente_id', $operation->id_cliente)->pluck('name as label', 'id as value');
 
-        $lucks = [];
+        $lucks = Luck::pluck('name as label', 'id as value');
 
         $zones = Zone::pluck('name as label', 'id as value');
 
