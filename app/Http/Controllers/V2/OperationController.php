@@ -305,6 +305,10 @@ class OperationController extends Controller
 
         }
 
+        $detalle = DetailOperation::where('operation_id', $operation->id)->get();
+
+        dd($detalle);
+
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
             request()->validate(Operation::$rules);
 
