@@ -267,6 +267,7 @@ class OperationController extends Controller
 
         // Folder donde se guardan las evidencias
         $folder = 'evidences/_' . $operation->id . '/';
+        dd($num_operation);
 
         for ($i = 1; $i <= $num_operation; $i++) {
             // Creo variable temporal para la informacion del detalle
