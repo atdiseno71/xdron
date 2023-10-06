@@ -57,9 +57,9 @@
             </svg>
         </button>
         <!-- Recorremos los detalles guardados -->
+        <!-- Contenerdor con campos del vuelo -->
+        <div class="row detail-operation">
         @forelse ($operation->details as $key => $detail)
-            <!-- Contenerdor con campos del vuelo -->
-            <div class="row detail-operation">
                 <div class="col-12">
                     <br>
                     <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_{{ $key + 1 }}">#{{ $key + 1 }}</strong></h3>
@@ -126,7 +126,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('luck_' . $key + 1, 'Suerte') }}
-                        {{ Form::text('luck_' . $key + 1, $detail->hour_flights, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $key + 1, 'placeholder' => 'Ingrese la suerte']) }}
+                        {{ Form::text('luck_' . $key + 1, $detail->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $key + 1, 'placeholder' => 'Ingrese la suerte']) }}
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -497,8 +497,8 @@
                         {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
-            </div>
         @endforelse
+        </div>
         <!-- Contenedor donde todo se va a copiar -->
         <div class="row copy-detail-operation"></div>
     </div>

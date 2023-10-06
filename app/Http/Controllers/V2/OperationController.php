@@ -304,12 +304,10 @@ class OperationController extends Controller
                 $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
                 $detail_operation_new->update($detail_temp);
             }
-
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
             request()->validate(Operation::$rules);
-
             $operation->update($request->all());
         }
 
