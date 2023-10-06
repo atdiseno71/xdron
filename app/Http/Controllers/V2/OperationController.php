@@ -181,7 +181,9 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::with('details')->find($id);
+        $operation = Operation::with(['details' => function ($query) {
+                            $query->orderBy('id', 'DESC'); // Reemplaza 'column_name' con el nombre de la columna por la cual deseas ordenar
+                        }])->find($id);
 
         $detail_operation = new DetailOperation();
 

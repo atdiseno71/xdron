@@ -58,7 +58,7 @@ class DetailOperation extends Model
         'description',
         'observation',
         'estate_id',
-        'luck_id',
+        'luck',
         'zone_id',
         'dron_id',
         'evidencia_record',
@@ -89,14 +89,6 @@ class DetailOperation extends Model
     public function operations()
     {
         return $this->hasMany('App\Models\Operation', 'operation_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function luck()
-    {
-        return $this->hasOne('App\Models\Luck', 'id', 'luck_id');
     }
 
     /**

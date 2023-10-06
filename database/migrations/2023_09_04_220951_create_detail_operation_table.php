@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('hour_flights')->nullable();
             $table->string('acres')->nullable();
             $table->string('download')->nullable();
+            $table->string('luck')->nullable();
 
             $table->text('description')->nullable();
             $table->text('observation')->nullable();
@@ -37,11 +38,6 @@ return new class extends Migration
             $table->foreign('estate_id')
                 ->references('id')
                 ->on('estate');
-
-            $table->unsignedBigInteger('luck_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('luck_id')
-                ->references('id')
-                ->on('lucks');
 
             $table->unsignedBigInteger('zone_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('zone_id')

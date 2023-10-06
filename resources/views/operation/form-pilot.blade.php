@@ -53,7 +53,7 @@
                 <div class="col-12">
                     <hr class="lader-divider">
                     <br>
-                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_{{ $key + 1 }}">#{{ $key + 1 }}</strong></h3>
+                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_{{ $key + 1 }}">#{{ $key + 1 }}</strong>({{ $detail->id }})</h3>
                 </div>
                 <input name="id_detail_operation_{{ $key + 1 }}" id="id_detail_operation_{{ $key + 1 }}" type="text" value="{{ $detail->id }}" hidden>
                 <div class="col-12 col-md-11">
@@ -114,7 +114,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-12 col-md-5">
+                {{-- <div class="col-12 col-md-5">
                     <div class="form-group">
                         <label for="luck_id_{{ $key + 1 }}">Suerte</label>
                         <select name="luck_id_{{ $key + 1 }}" id="luck_id_{{ $key + 1 }}"
@@ -131,6 +131,13 @@
                         @if ($errors->has('luck_id'))
                             <div class="invalid-feedback">{{ $errors->first('luck_id') }}</div>
                         @endif
+                    </div>
+                </div> --}}
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        {{ Form::label('luck_' . $key + 1, 'Suerte') }}
+                        {{ Form::number('luck_' . $key + 1, $detail->hour_flights, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $key + 1, 'placeholder' => 'Ingrese la suerte']) }}
+                        {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-1">
@@ -240,7 +247,7 @@
                                 id="evidencia_record_{{ $key + 1 }}"
                                 value="{{ $detail->evidencia_record ?? 'images/img/default.png' }}"
                                 data-preview-id="preview-record" onchange="previewFile(event)"
-                                onchange="previewFile(event)" />
+                                onchange="previewFile(event)" data-key="{{ $key + 1 }}"/>
                             <img id="preview-record"
                                 src="{{ asset($detail->evidencia_record ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
@@ -258,7 +265,7 @@
                             <input type="file" name="evidencia_track_{{ $key + 1 }}" class="input-img-logo"
                                 id="evidencia_track_{{ $key + 1 }}"
                                 value="{{ $detail->evidencia_track ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-track" onchange="previewFile(event)" />
+                                data-preview-id="preview-track" onchange="previewFile(event)" data-key="{{ $key + 1 }}"/>
                             <img id="preview-track"
                                 src="{{ asset($detail->evidencia_track ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
@@ -275,7 +282,7 @@
                         <div class="card img-logo">
                             <input type="file" name="evidencia_gps_{{ $key + 1 }}" class="input-img-logo" id="evidencia_gps_{{ $key + 1 }}"
                                 value="{{ $detail->evidencia_gps ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-gps" onchange="previewFile(event)" />
+                                data-preview-id="preview-gps" onchange="previewFile(event)" data-key="{{ $key + 1 }}"/>
                             <img id="preview-gps"
                                 src="{{ asset($detail->evidencia_gps ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
@@ -358,22 +365,11 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="luck_id_1">Suerte</label>
-                        <select name="luck_id_1" id="luck_id_1"
-                            class="form-control luck-selector {{ $errors->has('luck_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una suerte" data-key="1">
-                            <option value="0" selected>Selecciona una opcion</option>
-                            @foreach ($lucks as $luckKey => $luckValue)
-                                <option value="{{ $luckKey }}">
-                                    {{ $luckValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('luck_id'))
-                            <div class="invalid-feedback">{{ $errors->first('luck_id') }}</div>
-                        @endif
+                        {{ Form::label('luck_' . $key + 1, 'Suerte') }}
+                        {{ Form::number('luck_' . $key + 1, $detail->hour_flights, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $key + 1, 'placeholder' => 'Ingrese la suerte']) }}
+                        {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-1">
@@ -480,7 +476,7 @@
                                 id="evidencia_record_1"
                                 value="{{ $detail_operation->evidencia_record_1 ?? 'images/img/default.png' }}"
                                 data-preview-id="preview-record" onchange="previewFile(event)"
-                                onchange="previewFile(event)" />
+                                onchange="previewFile(event)" data-key="1"/>
                             <img id="preview-record"
                                 src="{{ asset($detail_operation->evidencia_record_1 ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
@@ -498,7 +494,7 @@
                             <input type="file" name="evidencia_track_1" class="input-img-logo"
                                 id="evidencia_track_1"
                                 value="{{ $detail_operation->evidencia_track_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-track" onchange="previewFile(event)" />
+                                data-preview-id="preview-track" onchange="previewFile(event)" data-key="1"/>
                             <img id="preview-track"
                                 src="{{ asset($detail_operation->evidencia_track_1 ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
@@ -515,7 +511,7 @@
                         <div class="card img-logo">
                             <input type="file" name="evidencia_gps_1" class="input-img-logo" id="evidencia_gps_1"
                                 value="{{ $detail_operation->evidencia_gps_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-gps" onchange="previewFile(event)" />
+                                data-preview-id="preview-gps" onchange="previewFile(event)" data-key="1"/>
                             <img id="preview-gps"
                                 src="{{ asset($detail_operation->evidencia_gps_1 ?? 'images/img/default.png') }}" />
                             <div class="icon-wrapper">
@@ -562,50 +558,6 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
-        // Copiar formulario despues de tocar el boton
-        /* document.addEventListener('DOMContentLoaded', function() {
-            // Manejador del botón para duplicar
-            $(".duplicarDetalleOperacion").click(function() {
-                // Clona el contenido de detail-operation
-                var $clone = $(".detail-operation").clone();
-
-                // Limpia los valores de los campos clonados y las imágenes
-                $clone.find(":input").val("");
-                $clone.find("img").attr('src', "{{ asset('images/img/default.png') }}");
-
-                // Incrementa el contador y establece el nuevo sufijo
-                var detalleCounter = parseInt($("#detalleCounter").val()) + 1;
-                $("#detalleCounter").val(detalleCounter);
-
-                // Actualiza los sufijos en los atributos 'name' y 'id' para cada campo clonado
-                $clone.find(":input").each(function() {
-                    var oldName = $(this).attr("name");
-                    var oldId = $(this).attr("id");
-
-                    if (oldName) {
-                        // Reemplaza el sufijo con el nuevo número
-                        var newName = oldName.replace(/_\d+$/, "_" + detalleCounter);
-                        var newId = oldId.replace(/_\d+$/, "_" + detalleCounter);
-
-                        $(this).attr("name", newName);
-                        $(this).attr("id", newId);
-                    }
-                });
-
-                $clone.find("strong").each(function() {
-                    var oldId = $(this).attr("id");
-
-                    if (oldId) {
-                        var newId = oldId.replace(/_\d+$/, "_" + detalleCounter);
-                        $(this).attr("id", newId);
-                        $(this).html("#" + detalleCounter);
-                    }
-                });
-
-                // Agrega la copia al div copy-detail-operation
-                $(".copy-detail-operation").append($clone);
-            });
-        }); */
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializa el contador de data-key
             var keyCounter = 1;
@@ -654,39 +606,6 @@
 
                 // Agrega la copia al div copy-detail-operation
                 $(".copy-detail-operation").append($clone);
-            });
-        });
-
-        // Llenar las suertes
-        $(document).ready(function () {
-            // Delega el evento "change" desde el documento para las clases .estate-selector
-            $(document).on("change", ".estate-selector", function () {
-                var selectedEstateValue = $(this).val();
-                var key = $(this).data("key");
-                var luckSelect = document.getElementById("luck_id_" + key); // Obtener el elemento DOM
-
-                const url = "{{ route('lucks.getLucks') }}?id=" + selectedEstateValue;
-
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (Array.isArray(data)) {
-                            luckSelect.innerHTML =
-                                '<option value="">Seleccione una suerte</option>'; // Limpiar el select actual
-
-                            data.forEach(luck => {
-                                const option = document.createElement('option');
-                                option.value = luck.id;
-                                option.textContent = luck.name; // Ajusta el nombre del campo de acuerdo a tu modelo de finca
-                                luckSelect.appendChild(option);
-                            });
-                        } else {
-                            console.error('El resultado del servidor no es un array:', data);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error al obtener las fincas: ', error);
-                    });
             });
         });
 
