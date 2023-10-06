@@ -339,7 +339,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('luck_1', 'Suerte') }}
-                        {{ Form::number('luck_1', $detail_operation->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_1', 'placeholder' => 'Ingrese la suerte']) }}
+                        {{ Form::text('luck_1', $detail_operation->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_1', 'placeholder' => 'Ingrese la suerte']) }}
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
