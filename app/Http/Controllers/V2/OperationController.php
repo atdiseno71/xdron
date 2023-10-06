@@ -267,7 +267,6 @@ class OperationController extends Controller
 
         // Folder donde se guardan las evidencias
         $folder = 'evidences/_' . $operation->id . '/';
-        dd($num_operation);
 
         for ($i = 1; $i <= $num_operation; $i++) {
             // Creo variable temporal para la informacion del detalle
@@ -305,10 +304,6 @@ class OperationController extends Controller
             }
 
         }
-
-        $detalle = DetailOperation::where('operation_id', $operation->id)->get();
-
-        dd($detalle);
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
             request()->validate(Operation::$rules);
