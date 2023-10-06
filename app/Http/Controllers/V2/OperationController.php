@@ -258,7 +258,7 @@ class OperationController extends Controller
             'description',
             'observation',
             'estate_id',
-            'luck_id',
+            'luck',
             'zone_id',
             'dron_id',
             'evidencia_record',
