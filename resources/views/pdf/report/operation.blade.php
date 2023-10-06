@@ -6,6 +6,7 @@
     @include('template.cabezote')
 
     @forelse ($operation->details as $key => $detail)
+        <h3>{{ $detail->estate->name }}</h3>
         <div class="img-evidencia_record">
             <img src="{{ $detail->evidencia_record }}">
         </div>
