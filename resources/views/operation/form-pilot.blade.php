@@ -619,6 +619,10 @@
                 $clone.find(":input").val("");
                 $clone.find("img").attr('src', "{{ asset('images/img/default.png') }}");
 
+                // Incrementa el contador y establece el nuevo sufijo
+                var detalleCounter = parseInt($("#detalleCounter").val()) + 1;
+                $("#detalleCounter").val(detalleCounter);
+
                 // Incrementa el contador y establece el nuevo sufijo en data-key
                 keyCounter++;
 
