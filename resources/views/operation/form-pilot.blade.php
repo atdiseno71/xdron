@@ -213,60 +213,12 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6"></div>
-                <div class="col-12 col-md-4">
-                    <!-- File para el logo del proyecto -->
-                    <div class="form-group">
-                        <label for="input-logo">Evidencia de registro:</label>
-                        <div class="card img-logo">
-                            <input type="file" name="evidencia_record_1" class="input-img-logo"
-                                id="evidencia_record_1"
-                                value="{{ $detail_operation->evidencia_record_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-record" onchange="previewFile(event)"
-                                onchange="previewFile(event)" data-key="1"/>
-                            <img id="preview-record"
-                                src="{{ asset($detail_operation->evidencia_record_1 ?? 'images/img/default.png') }}" />
-                            <div class="icon-wrapper">
-                                <i class="fa fa-upload fa-3x"></i>
-                            </div>
-                        </div>
-                        {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <!-- File para el logo del proyecto -->
-                    <div class="form-group">
-                        <label for="input-logo">Evidencia track:</label>
-                        <div class="card img-logo">
-                            <input type="file" name="evidencia_track_1" class="input-img-logo"
-                                id="evidencia_track_1"
-                                value="{{ $detail_operation->evidencia_track_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-track" onchange="previewFile(event)" data-key="1"/>
-                            <img id="preview-track"
-                                src="{{ asset($detail_operation->evidencia_track_1 ?? 'images/img/default.png') }}" />
-                            <div class="icon-wrapper">
-                                <i class="fa fa-upload fa-3x"></i>
-                            </div>
-                        </div>
-                        {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <!-- File para el logo del proyecto -->
-                    <div class="form-group">
-                        <label for="input-logo">Evidencia de gps:</label>
-                        <div class="card img-logo">
-                            <input type="file" name="evidencia_gps_1" class="input-img-logo" id="evidencia_gps_1"
-                                value="{{ $detail_operation->evidencia_gps_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-gps" onchange="previewFile(event)" data-key="1"/>
-                            <img id="preview-gps"
-                                src="{{ asset($detail_operation->evidencia_gps_1 ?? 'images/img/default.png') }}" />
-                            <div class="icon-wrapper">
-                                <i class="fa fa-upload fa-3x"></i>
-                            </div>
-                        </div>
-                        {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
+                {{--  --}}
+                {{--  --}}
+                {{--  --}}
+                {{--  --}}
+                {{--  --}}
+                {{--  --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('observation_1', 'Observaciones') }}
@@ -657,60 +609,19 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6"></div>
-                <div class="col-12 col-md-4">
-                    <!-- File para el logo del proyecto -->
+                {{-- INICIO DE ESPACIO PARA IMAGEN --}}
+                <div class="col-12 col-md-2"></div>
+                <div class="col-12 col-md-8 section-evidence">
                     <div class="form-group">
-                        <label for="input-logo">Evidencia de registro:</label>
-                        <div class="card img-logo">
-                            <input type="file" name="evidencia_record_1" class="input-img-logo"
-                                id="evidencia_record_1"
-                                value="{{ $detail_operation->evidencia_record_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-record" onchange="previewFile(event)"
-                                onchange="previewFile(event)" data-key="1"/>
-                            <img id="preview-record"
-                                src="{{ asset($detail_operation->evidencia_record_1 ?? 'images/img/default.png') }}" />
-                            <div class="icon-wrapper">
-                                <i class="fa fa-upload fa-3x"></i>
-                            </div>
-                        </div>
-                        {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                        {{ Form::label('files', 'Subir Evidencias (Máximo 7)') }}
+                        <section id="multi-selector-uniq">
+                            <input class="form-control" id="files" name="files[]" type="file" multiple>
+                            <ul id="preview-files"></ul>
+                        </section>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <!-- File para el logo del proyecto -->
-                    <div class="form-group">
-                        <label for="input-logo">Evidencia track:</label>
-                        <div class="card img-logo">
-                            <input type="file" name="evidencia_track_1" class="input-img-logo"
-                                id="evidencia_track_1"
-                                value="{{ $detail_operation->evidencia_track_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-track" onchange="previewFile(event)" data-key="1"/>
-                            <img id="preview-track"
-                                src="{{ asset($detail_operation->evidencia_track_1 ?? 'images/img/default.png') }}" />
-                            <div class="icon-wrapper">
-                                <i class="fa fa-upload fa-3x"></i>
-                            </div>
-                        </div>
-                        {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <!-- File para el logo del proyecto -->
-                    <div class="form-group">
-                        <label for="input-logo">Evidencia de gps:</label>
-                        <div class="card img-logo">
-                            <input type="file" name="evidencia_gps_1" class="input-img-logo" id="evidencia_gps_1"
-                                value="{{ $detail_operation->evidencia_gps_1 ?? 'images/img/default.png' }}"
-                                data-preview-id="preview-gps" onchange="previewFile(event)" data-key="1"/>
-                            <img id="preview-gps"
-                                src="{{ asset($detail_operation->evidencia_gps_1 ?? 'images/img/default.png') }}" />
-                            <div class="icon-wrapper">
-                                <i class="fa fa-upload fa-3x"></i>
-                            </div>
-                        </div>
-                        {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
+                <div class="col-12 col-md-2"></div>
+                {{-- FIN DE ESPACIO PARA IMAGEN --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('observation_1', 'Observaciones') }}
@@ -727,70 +638,7 @@
     <br>
     @include('layouts.btn-submit')
     <script>
-        // Preview de los files
-        function previewFile(event) {
-            var input = event.target;
-            var reader = new FileReader();
-            reader.onload = function() {
-                var dataURL = reader.result;
-                var previewId = $(input).data('preview-id');
-                var img = document.getElementById(previewId);
-                img.src = dataURL;
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-        /* document.addEventListener('DOMContentLoaded', function() {
-            // Inicializa el contador de data-key
-            var keyCounter = parseInt($("#detalleCounter").val());
-
-            // Manejador del botón para duplicar
-            $(".duplicarDetalleOperacion").click(function() {
-                // Clona el contenido de detail-operation
-                var $clone = $(".detail-operation").clone();
-
-                // Limpia los valores de los campos clonados y las imágenes
-                $clone.find(":input").val("");
-                $clone.find("img").attr('src', "{{ asset('images/img/default.png') }}");
-
-                // Incrementa el contador y establece el nuevo sufijo
-                var detalleCounter = parseInt($("#detalleCounter").val()) + 1;
-                $("#detalleCounter").val(detalleCounter);
-
-                // Incrementa el contador y establece el nuevo sufijo en data-key
-                keyCounter++;
-
-                // Actualiza los sufijos en los atributos 'name' y 'id' para cada campo clonado
-                $clone.find(":input").each(function() {
-                    var oldName = $(this).attr("name");
-                    var oldId = $(this).attr("id");
-
-                    if (oldName) {
-                        // Reemplaza el sufijo con el nuevo número
-                        var newName = oldName.replace(/_\d+$/, "_" + keyCounter);
-                        var newId = oldId.replace(/_\d+$/, "_" + keyCounter);
-
-                        $(this).attr("data-key", keyCounter);
-                        $(this).attr("name", newName);
-                        $(this).attr("id", newId);
-                    }
-                });
-
-                $clone.find("strong").each(function() {
-                    var oldId = $(this).attr("id");
-
-                    if (oldId) {
-                        var newId = oldId.replace(/_\d+$/, "_" + keyCounter);
-                        $(this).attr("id", newId);
-                        $(this).html("#" + keyCounter);
-                    }
-                });
-
-                // Agrega la copia al div copy-detail-operation
-                $(".copy-detail-operation").append($clone);
-                console.log('$clone',$clone);
-            });
-        }); */
-        // V2
+        // V2 para duplicar el form de vuelos
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializa el contador de data-key
             var keyCounter = parseInt($("#detalleCounter").val());
@@ -842,6 +690,6 @@
             });
         });
 
-
     </script>
+    <script src="{{ asset('js/views/multiple.image.js') }}"></script>
 </div>
