@@ -305,7 +305,7 @@ class OperationController extends Controller
             // subir archivo
             if ($request->has('file_evidence')) {
                 $handle_1 = $this->update_file($request, 'file_evidence', $folder, $operation->id, $operation->file_evidence);
-                $operation->update(['file_evidence' => $handle_1['payload']]);
+                $operation->update(['file_evidence' => $handle_1['response']['payload']]);
             }
         }
 

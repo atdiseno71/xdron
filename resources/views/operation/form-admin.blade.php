@@ -90,8 +90,14 @@
             <div class="form-group">
                 {{ Form::label('file_evidence', 'Subir Evidencia (zip)') }}
                 <section id="multi-selector-uniq">
-                    <input class="form-control" id="file_evidence" name="file_evidence" type="file" >
-                    {{-- accept=".zip,.rar,.7zip" --}}
+                    <input class="form-control" id="file_evidence" name="file_evidence" type="file" accept=".zip,.rar,.7zip">
+                    @if (!empty($operation->file_evidence) || !is_null($operation->file_evidence))
+                        <ul id="preview-files">
+                            <li draggable="true" class="section-evidence-preview-zip">
+                                <p>Ya ha subido un archivo zip.</p>
+                            </li>
+                        </ul>
+                    @endif                    
                 </section>
             </div>
         </div>

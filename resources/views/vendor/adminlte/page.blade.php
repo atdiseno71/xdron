@@ -58,6 +58,14 @@
             margin-top: 25px;
             align-items: center;
             /* padding: 10px!important; */
+        }´
+        .section-evidence-preview-zip {
+            margin-bottom: 10px;
+        }
+        #preview-files {
+            /* display: flex; */
+            list-style: none;
+            text-align: center !important;
         }
         #preview-files_1 {
             /* display: flex; */
