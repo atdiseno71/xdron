@@ -302,6 +302,13 @@ class OperationController extends Controller
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
             request()->validate(Operation::$rules);
             $operation->update($request->all());
+            // subir archivo
+            if ($request->has('file_evidence')) {
+                // dd($request->file('file_evidence'));
+                $handle_1 = $this->update_file($request, 'file_evidence', $folder, $operation->id, $operation->file_evidence);
+                $operation->update(['file_evidence' => $handle_1]);
+                dd($handle_1);
+            }
         }
 
         return redirect()->route('operations.index')

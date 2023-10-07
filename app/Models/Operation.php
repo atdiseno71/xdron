@@ -66,6 +66,7 @@ class Operation extends Model
         'admin_by',
         'status_id',
         'observation_admin',
+        'file_evidence',
     ];
 
     /**

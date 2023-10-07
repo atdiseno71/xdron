@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Utilities\Resources;
 use Illuminate\Support\Str;
 use Exception;
+
 trait ImageTrait
 {
 
@@ -54,7 +55,7 @@ trait ImageTrait
 
     public function send_file(Request $request, string $input_name, string $model, int $id): array
     {
-        $path = storage_path('app/public') . "/$model/$id/";
+        $path = public_path("images/$model");
         $doc_path = "$model/$id/";
 
         try {
@@ -77,8 +78,8 @@ trait ImageTrait
                 $ext = $file->getClientOriginalExtension();
                 $filename_parsed = "$uid.$ext";
 
-                $file->move(storage_path('app/public') . "/$model/$id/", $filename_parsed);
-                $url = "$model/$id/$filename_parsed";
+                $file->move(public_path("images/$model"), $filename_parsed);
+                $url = "images/$model/$filename_parsed";
             }
 
             return [
@@ -91,12 +92,46 @@ trait ImageTrait
         }
     }
 
+    public function sendZipFile(Request $request, string $input_name, string $model): array
+    {
+        // Validar que el archivo existe y es un archivo válido
+        /* $request->validate([
+            $input_name => 'required|file|max:15000', // 15 megabytes (15,000 kilobytes)
+        ]); */
+
+        if ($request->hasFile($input_name)) {
+            $file = $request->file($input_name);
+            $originalFileName = $file->getClientOriginalName();
+
+            // Generar un nombre único para el archivo
+            $uniqueFileName = Str::random(10) . '_' . time() . '.' . $file->getClientOriginalExtension();
+
+            // Mover el archivo a la carpeta 'public'
+            $path = $file->move(public_path("images/$model"), $uniqueFileName);
+
+            return [
+                'response' => [
+                    'success' => true,
+                    'message' => 'Archivo .zip subido con éxito.',
+                    'original_filename' => $originalFileName,
+                    'stored_path' => $path,
+                ],
+            ];
+        }
+
+        return [
+            'response' => ['success' => false, 'message' => 'No se pudo subir el archivo.'],
+        ];
+    }
+
     public function update_file(Request $request, string $input_name, string $model, int  $id, string $url): array
     {
         try {
-            // $url_file = DialogueTable::query()->whereId($id)->value($input_name);
-            Storage::disk('public')->delete($url);
-            $response = $this->send_file($request, $input_name, $model, $id);
+            if (File::exists($url)) {
+                // Elimina el archivo
+                File::delete($url);
+            }
+            $response = $this->sendZipFile($request, $input_name, $model);
             return $response;
         } catch (Exception $ex) {
             return [

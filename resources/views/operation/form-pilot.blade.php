@@ -220,7 +220,7 @@
                         <div class="form-group">
                             {{ Form::label('files_1', 'Subir Evidencias (Máximo 7)') }}
                             <section id="multi-selector-uniq">
-                                <input class="form-control" id="files_1" name="files_1[]" type="file" multiple>
+                                <input class="form-control" id="files_1" name="files_1[]" type="file" multiple accept="image/*">
                                 <ul id="preview-files_1"></ul>
                             </section>
                         </div>
@@ -407,7 +407,7 @@
                     <div class="form-group">
                         {{ Form::label('files_' . $key + 1, 'Subir Evidencias (Máximo 7)') }}
                         <section id="multi-selector-uniq">
-                            <input class="form-control" id="files_{{ $key + 1 }}" name="files_{{ $key + 1 }}[]" type="file" multiple>
+                            <input class="form-control" id="files_{{ $key + 1 }}" name="files_{{ $key + 1 }}[]" type="file" multiple accept="image/*">
                             <ul id="preview-files_{{ $key + 1 }}">
                                 @forelse ($detail->files_details as $files_evidence)
                                     <li draggable="true" data-key="5229470.png" class="section-evidence-preview">
