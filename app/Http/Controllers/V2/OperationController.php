@@ -291,16 +291,12 @@ class OperationController extends Controller
                 $detail_operation_new->update($detail_temp);
             }
             // Guardamos las imagenes despues de todo
-            if ($request->has('files')) {
+            $file_name = "files_" . $i;
+            if ($request->has($file_name)) {
                 // Guardamos lo que viene del request
-                $files = $request['files'];
-                foreach ($files as $key => $file) {
-                    $handle_1 = $this->updateAllFiles($request, $detail_operation_new->id, $folder);
-                    dd($handle_1);
-                }
-                $detail_temp[$input] = $handle_1['response']['name'];
+                $files = $request[$file_name];
+                $handle_1 = $this->updateAllFiles($request, $detail_operation_new->id, $folder, $file_name);
             }
-            dd($request->all());
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {

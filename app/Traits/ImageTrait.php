@@ -2,14 +2,14 @@
 
 namespace App\Traits;
 
-use App\Models\FilesOperation;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+use App\Models\FilesOperation;
+use Illuminate\Http\Request;
 use App\Utilities\Resources;
+use Illuminate\Support\Str;
 use Exception;
-
 trait ImageTrait
 {
 
@@ -106,19 +106,19 @@ trait ImageTrait
     }
 
     /* SUBIR DOCUMENTOS A TRAVES DEL DROPZONE */
-    public function uploadAll($request, $id, $model) {
+    public function uploadAll($request, $id, $model, $name_file) {
 
-        $files = $request->file('files');
+        $files = $request->file($name_file);
         // If the variable '$files' is not empty, we update the registry with the new images
         if (!empty($files)) {
             try {
                 // Validate that the name and image format are present.
                 $request->validate([
-                    'files.*' => 'bail|required|mimes:jpeg,png,gif,pdf|max:10048',
+                    "$name_file.*" => 'bail|required|mimes:jpeg,png,gif,pdf|max:10048',
                 ]);
                 // We receive one or more images and update them.
                 $path = public_path("images/$model");
-                foreach ($request->file('files') as $file) {
+                foreach ($request->file($name_file) as $file) {
                     $rand = strtolower(Str::random(10));
                     $image = Image::make($file);
                     $image->encode('webp', 90);
@@ -139,7 +139,7 @@ trait ImageTrait
                     ]);
                 }
                 return [
-                    'response' => ['status' => true, 'name' => $model, 'message' => 'Se ha guardado con éxito']
+                    'response' => ['status' => true, 'name' => "images/$model" . $rand . '.webp', 'message' => 'Se ha guardado con éxito']
                 ];
             } catch (\Exception $ex) {
                 return [
@@ -150,17 +150,21 @@ trait ImageTrait
     }
 
     /* ACTUALIZAR DOCUMENTOS QUE VIENEN A TRAVES DEL DROPZONE */
-    public function updateAllFiles($request, $id, $model) {
+    public function updateAllFiles($request, $id, $model, $name_file) {
 
         try {
-            $files = $request->file('files');
+            $files = $request->file($name_file);
             $evidences = FilesOperation::where('detail_operation_id', $id)->get();
             if (!empty($files)) {
                 foreach ($evidences as $evidence) {
-                    Storage::disk('public')->delete($evidence->path);
-                    $evidence->delete();
+                    // Storage::disk('public')->delete($evidence->path);
+                    if (File::exists($evidence->path)) {
+                        // Elimina el archivo
+                        File::delete($evidence->path);
+                        $evidence->delete();
+                    }
                 }
-                $response = $this->uploadAll($request, $id, $model);
+                $response = $this->uploadAll($request, $id, $model, $name_file);
                 return $response;
             }
         } catch (Exception $ex) {

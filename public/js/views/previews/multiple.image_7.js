@@ -2,11 +2,11 @@
         * Variables
         */
 
-let filesList = [];
-const classDragOver = "drag-over";
-const fileInputMulti = document.querySelector("#multi-selector-uniq #files");
+let filesList_7 = [];
+// const classDragOver = "drag-over";
+const fileInputMulti_7 = document.querySelector("#multi-selector-uniq #files_7");
 // DEMO Preview
-const multiSelectorUniqPreview = document.querySelector("#multi-selector-uniq #preview-files");
+const multiSelectorUniqPreview_7 = document.querySelector("#multi-selector-uniq #preview-files_7");
 
 /*
 * Functions
@@ -90,9 +90,9 @@ function renderPreviews(currentFileList, target, inputFile) {
         myButtonRemove.classList.add("btn-danger"); // Agregar una clase al btn
         myButtonRemove.classList.add("btn-preview-image"); // Agregar una clase al btn
         myButtonRemove.addEventListener("click", () => {
-            filesList = deleteArrayElementByIndex(currentFileList, index);
-            inputFile.files = arrayFilesToFileList(filesList);
-            return renderPreviews(filesList, multiSelectorUniqPreview, inputFile);
+            filesList_7 = deleteArrayElementByIndex(currentFileList, index);
+            inputFile.files = arrayFilesToFileList(filesList_7);
+            return renderPreviews(filesList_7, multiSelectorUniqPreview_7, inputFile);
         });
         myLi.appendChild(myButtonRemove);
         target.appendChild(myLi);
@@ -110,11 +110,11 @@ function deleteArrayElementByIndex(list, index) {
 
 /**
  * Returns a FileLists from an array containing Files.
- * @param {Array<File>} filesList
+ * @param {Array<File>} filesList_7
  * @return {FileList}
  */
-function arrayFilesToFileList(filesList) {
-    return filesList.reduce(function (dataTransfer, file) {
+function arrayFilesToFileList(filesList_7) {
+    return filesList_7.reduce(function (dataTransfer, file) {
         dataTransfer.items.add(file);
         return dataTransfer;
     }, new DataTransfer()).files;
@@ -140,31 +140,31 @@ function arraySwapIndex(firstIndex, secondIndex, list) {
 */
 
 // Input file
-fileInputMulti.addEventListener("input", async () => {
+fileInputMulti_7.addEventListener("input", async () => {
     // Get files list from <input>
-    const newFilesList = Array.from(fileInputMulti.files);
+    const newFilesList = Array.from(fileInputMulti_7.files);
     // Update list files
-    filesList = await getUniqFiles(newFilesList, filesList);
+    filesList_7 = await getUniqFiles(newFilesList, filesList_7);
     // Only DEMO. Redraw
-    renderPreviews(filesList, multiSelectorUniqPreview, fileInputMulti);
+    renderPreviews(filesList_7, multiSelectorUniqPreview_7, fileInputMulti_7);
     // Set data to input
-    fileInputMulti.files = arrayFilesToFileList(filesList);
+    fileInputMulti_7.files = arrayFilesToFileList(filesList_7);
 });
 
 // Drag and drop
 
 // Drag Start - Moving element.
-let myDragElement = undefined;
+let myDragElement_7 = undefined;
 document.addEventListener("dragstart", (event) => {
     // Saves which element is moving.
-    myDragElement = event.target;
+    myDragElement_7 = event.target;
 });
 
 // Drag over - Element that is below the element that is moving.
 function eventDragOver(event) {
     // Remove from all elements the class that will show that it is a drop zone.
     event.preventDefault();
-    multiSelectorUniqPreview
+    multiSelectorUniqPreview_7
         .querySelectorAll("li")
         .forEach((item) => item.classList.remove(classDragOver));
 
@@ -177,13 +177,13 @@ function eventDrop(event) {
     // The element that is underneath the element that is moving when it is released is captured.
     const myDropElement = event.target;
     // The positions of the elements in the array are swapped. The dataset key is used as an index.
-    filesList = arraySwapIndex(
-        getIndexOfFileList(myDragElement.dataset.key, filesList),
-        getIndexOfFileList(myDropElement.dataset.key, filesList),
-        filesList
+    filesList_7 = arraySwapIndex(
+        getIndexOfFileList(myDragElement_7.dataset.key, filesList_7),
+        getIndexOfFileList(myDropElement.dataset.key, filesList_7),
+        filesList_7
     );
     // The content of the input file is updated.
-    fileInputMulti.files = arrayFilesToFileList(filesList);
+    fileInputMulti_7.files = arrayFilesToFileList(filesList_7);
     // Only DEMO. Changes are redrawn.
-    renderPreviews(filesList, multiSelectorUniqPreview, fileInputMulti);
+    renderPreviews(filesList_7, multiSelectorUniqPreview_7, fileInputMulti_7);
 }
