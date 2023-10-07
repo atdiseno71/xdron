@@ -261,9 +261,6 @@ class OperationController extends Controller
             'luck',
             'zone_id',
             'dron_id',
-            'evidencia_record',
-            'evidencia_track',
-            'evidencia_gps',
             'type_product_id',
         ];
 
@@ -279,31 +276,31 @@ class OperationController extends Controller
                 $fieldName = $input . "_" . $i;
                 // Acceder al valor del campo en la solicitud
                 $value = $request->input($fieldName);
-                // Guardamos campos de archivos
-                $file_name = [
-                    "evidencia_record_" . $i,
-                    "evidencia_track_" . $i,
-                    "evidencia_gps_" . $i,
-                ];
-                // Preguntamos si es un archivo, sino sobelo y guarde el dato
-                if (in_array($fieldName, $file_name) && $request->has($fieldName)) {
-                    $handle_1 = $this->webpImage($request, $fieldName, $folder, $fieldName);
-                    $detail_temp[$input] = $handle_1['response']['name'];
-                }
                 // Agregar el valor al arreglo de datos
-                else if ($request->has($fieldName)) {
+                if ($request->has($fieldName)) {
                     $detail_temp[$input] = $value;
                 }
             }
             // Creamos el detalle de la operacion
             if ($detail_temp['id_detail_operation'] == 0 || $detail_temp['id_detail_operation'] == "0") {
                 // El campo clave es nulo, así que creamos un nuevo registro
-                DetailOperation::create($detail_temp);
+                $detail_operation_new = DetailOperation::create($detail_temp);
             } else {
                 // El campo clave no es nulo, intentamos actualizar un registro existente
                 $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
                 $detail_operation_new->update($detail_temp);
             }
+            // Guardamos las imagenes despues de todo
+            if ($request->has('files')) {
+                // Guardamos lo que viene del request
+                $files = $request['files'];
+                foreach ($files as $key => $file) {
+                    $handle_1 = $this->updateAllFiles($request, $detail_operation_new->id, $folder);
+                    dd($handle_1);
+                }
+                $detail_temp[$input] = $handle_1['response']['name'];
+            }
+            dd($request->all());
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {

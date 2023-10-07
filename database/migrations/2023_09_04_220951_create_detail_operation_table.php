@@ -49,10 +49,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('type_products');
 
-            $table->text('evidencia_record')->nullable();
-            $table->text('evidencia_track')->nullable();
-            $table->text('evidencia_gps')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
 

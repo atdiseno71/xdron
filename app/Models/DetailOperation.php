@@ -92,6 +92,14 @@ class DetailOperation extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function files_details()
+    {
+        return $this->hasMany('App\Models\FilesOperation', 'detail_operation_id', 'id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function zone()

@@ -25,6 +25,8 @@ class FilesOperation extends Model
 {
     use SoftDeletes;
 
+    protected $table = "files_operation";
+
     static $rules = [
     ];
 
@@ -40,9 +42,7 @@ class FilesOperation extends Model
      * @var array
      */
     protected $fillable = [
-        'record',
-        'track',
-        'map',
+        'src_file',
         'detail_operation_id'
     ];
 
@@ -54,6 +54,5 @@ class FilesOperation extends Model
     {
         return $this->hasOne('App\Models\DetailOperation', 'id', 'detail_operation_id');
     }
-
 
 }

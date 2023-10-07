@@ -665,13 +665,13 @@
                     var oldId = $(this).attr("id");
 
                     if (oldName) {
-                        // Reemplaza el sufijo con el nuevo número
-                        var newName = oldName.replace(/_\d+$/, "_" + keyCounter);
+                        if (oldName.startsWith("files_")) var newName = "files_" + keyCounter + "[]";
+                        else var newName = oldName.replace(/_\d+$/, "_" + keyCounter);
                         var newId = oldId.replace(/_\d+$/, "_" + keyCounter);
 
-                        $(this).attr("data-key", keyCounter);
-                        $(this).attr("name", newName);
-                        $(this).attr("id", newId);
+                            $(this).attr("data-key", keyCounter);
+                            $(this).attr("name", newName);
+                            $(this).attr("id", newId);
                     }
                 });
 

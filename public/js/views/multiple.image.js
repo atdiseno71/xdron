@@ -69,39 +69,15 @@ async function getUniqFiles(newFiles, currentListFiles) {
  * @Only .EMO> param target.
  * @
  */
-/* function renderPreviews(currentFileList, target, inputFile) {
-    //
-    target.textContent = "";
-    currentFileList.forEach((file, index) => {
-        console.log("file",file);
-        const myLi = document.createElement("li");
-        myLi.textContent = file.name;
-        myLi.setAttribute("draggable", 'true');
-        myLi.dataset.key = file.name;
-        myLi.addEventListener("drop", eventDrop);
-        myLi.addEventListener("dragover", eventDragOver);
-        const myButtonRemove = document.createElement("button");
-        myButtonRemove.textContent = "X";
-        myButtonRemove.addEventListener("click", () => {
-            filesList = deleteArrayElementByIndex(currentFileList, index);
-            inputFile.files = arrayFilesToFileList(filesList);
-            return renderPreviews(filesList, multiSelectorUniqPreview, inputFile);
-        });
-        myLi.appendChild(myButtonRemove);
-        target.appendChild(myLi);
-    });
-} */
 function renderPreviews(currentFileList, target, inputFile) {
     target.textContent = "";
     currentFileList.forEach((file, index) => {
-        console.log("file",file);
         const myLi = document.createElement("li");
         const img = document.createElement("img"); // Crear un elemento <img>
         img.src = URL.createObjectURL(file); // Asignar la URL de la imagen
         img.setAttribute("width", "80%"); // Establece el ancho máximo
         img.setAttribute("height", "100px"); // Establece el alto máximo
         myLi.appendChild(img); // Agregar la imagen al <li>
-        console.log("img",img);
         myLi.setAttribute("draggable", 'true');
         myLi.dataset.key = file.name;
         myLi.addEventListener("drop", eventDrop);

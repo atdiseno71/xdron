@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\FilesOperation;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -103,4 +104,71 @@ trait ImageTrait
             ];
         }
     }
+
+    /* SUBIR DOCUMENTOS A TRAVES DEL DROPZONE */
+    public function uploadAll($request, $id, $model) {
+
+        $files = $request->file('files');
+        // If the variable '$files' is not empty, we update the registry with the new images
+        if (!empty($files)) {
+            try {
+                // Validate that the name and image format are present.
+                $request->validate([
+                    'files.*' => 'bail|required|mimes:jpeg,png,gif,pdf|max:10048',
+                ]);
+                // We receive one or more images and update them.
+                $path = public_path("images/$model");
+                foreach ($request->file('files') as $file) {
+                    $rand = strtolower(Str::random(10));
+                    $image = Image::make($file);
+                    $image->encode('webp', 90);
+
+                    // RUTA DE LA IMAGEN
+                    $path_image = $path . $rand . '.webp';
+
+                    // Verificar si el directorio ya existe
+                    if (!file_exists($path)) {
+                        // Si no existe, crear el directorio
+                        mkdir($path, 0777, true);
+                    }
+                    $image->save($path_image);
+                    // Save in database with relation
+                    FilesOperation::create([
+                        'src_file' => "images/$model" . $rand . '.webp',
+                        'detail_operation_id' => $id,
+                    ]);
+                }
+                return [
+                    'response' => ['status' => true, 'name' => $model, 'message' => 'Se ha guardado con éxito']
+                ];
+            } catch (\Exception $ex) {
+                return [
+                    'response' => ['status' => false, 'name' => $ex->getMessage(), 'message' => $ex->getMessage()]
+                ];
+            }
+        }
+    }
+
+    /* ACTUALIZAR DOCUMENTOS QUE VIENEN A TRAVES DEL DROPZONE */
+    public function updateAllFiles($request, $id, $model) {
+
+        try {
+            $files = $request->file('files');
+            $evidences = FilesOperation::where('detail_operation_id', $id)->get();
+            if (!empty($files)) {
+                foreach ($evidences as $evidence) {
+                    Storage::disk('public')->delete($evidence->path);
+                    $evidence->delete();
+                }
+                $response = $this->uploadAll($request, $id, $model);
+                return $response;
+            }
+        } catch (Exception $ex) {
+            return [
+                'response' => ['success' => false, 'payload' => $ex->getMessage()]
+            ];
+        }
+
+    }
+
 }
