@@ -90,7 +90,8 @@
             <div class="form-group">
                 {{ Form::label('file_evidence', 'Subir Evidencia (zip)') }}
                 <section id="multi-selector-uniq">
-                    <input class="form-control" id="file_evidence" name="file_evidence" type="file" accept=".zip,.rar,.7zip">
+                    <input class="form-control" id="file_evidence" name="file_evidence" type="file" >
+                    {{-- accept=".zip,.rar,.7zip" --}}
                 </section>
             </div>
         </div>

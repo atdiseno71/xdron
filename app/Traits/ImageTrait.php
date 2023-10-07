@@ -92,38 +92,6 @@ trait ImageTrait
         }
     }
 
-    public function sendZipFile(Request $request, string $input_name, string $model): array
-    {
-        // Validar que el archivo existe y es un archivo válido
-        /* $request->validate([
-            $input_name => 'required|file|max:15000', // 15 megabytes (15,000 kilobytes)
-        ]); */
-
-        if ($request->hasFile($input_name)) {
-            $file = $request->file($input_name);
-            $originalFileName = $file->getClientOriginalName();
-
-            // Generar un nombre único para el archivo
-            $uniqueFileName = Str::random(10) . '_' . time() . '.' . $file->getClientOriginalExtension();
-
-            // Mover el archivo a la carpeta 'public'
-            $path = $file->move(public_path("images/$model"), $uniqueFileName);
-
-            return [
-                'response' => [
-                    'success' => true,
-                    'message' => 'Archivo .zip subido con éxito.',
-                    'original_filename' => $originalFileName,
-                    'stored_path' => $path,
-                ],
-            ];
-        }
-
-        return [
-            'response' => ['success' => false, 'message' => 'No se pudo subir el archivo.'],
-        ];
-    }
-
     public function update_file(Request $request, string $input_name, string $model, int  $id, string $url): array
     {
         try {
@@ -131,7 +99,7 @@ trait ImageTrait
                 // Elimina el archivo
                 File::delete($url);
             }
-            $response = $this->sendZipFile($request, $input_name, $model);
+            $response = $this->send_file($request, $input_name, $model, $id);
             return $response;
         } catch (Exception $ex) {
             return [
