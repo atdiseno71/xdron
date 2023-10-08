@@ -3,19 +3,36 @@
 @section('title', 'Reporte de productos')
 
 @section('content')
-    @include('template.cabezote')
+    {{-- @include('template.cabezote') --}}
+
+    <header id="main-header">
+
+        <a id="logo-header" href="#">
+            <span class="site-name">XDRON</span>
+            <span class="site-desc">{{ $operation->client?->social_reason ?? '' }} / {{ $operation->details[0]?->typeProduct?->name ?? '' }}</span>
+        </a> <!-- / #logo-header -->
+
+        {{-- <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Acerca de</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav><!-- / nav --> --}}
+
+    </header>
 
     @forelse ($operation->details as $key => $detail)
-        <h3>{{ $detail->estate->name }}</h3>
-        <div class="img-evidencia_record">
-            <img src="{{ $detail->evidencia_record }}">
+        <div class="detail">
+            <ul>
+                <li>
+                    <p>(Hacienda) {{ $detail->estate?->name }} / (Suerte) {{ $detail->luck }} / (Zona) {{ $detail->zone?->name }} / (Drone) {{ $detail->drone?->enrollment }}</p>
+                </li>
+            </ul>
         </div>
-        <div class="img-evidencia_track">
-            <img src="{{ $detail->evidencia_track }}">
-        </div>
-        <div class="img-evidencia_gps">
-            <img src="{{ $detail->evidencia_gps }}">
-        </div>
+        @foreach ($detail->files_details as $file)
+            <img class="img-evidencia" src="{{ $file->src_file }}">
+        @endforeach
     @empty
         <p>No hay imagenes registratadas en la operación</p>
     @endforelse

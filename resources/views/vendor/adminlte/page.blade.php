@@ -37,9 +37,9 @@
             opacity: .5;
         }
 
-        /* #detail-copy {
+        .detail-copy-form {
             display: none; Oculta todo el contenido dentro del div
-        } */
+        }
         .section-evidence {
             text-align: center;
             border: 2px dashed #1a20d1;

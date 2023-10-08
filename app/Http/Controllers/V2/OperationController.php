@@ -167,6 +167,7 @@ class OperationController extends Controller
 
         //Generamos el pdf
         set_time_limit(30000);
+        // return view('pdf.report.operation', compact('operation'));
         $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
 
         $pdf->set_paper('letter', 'landscape');
@@ -307,6 +308,8 @@ class OperationController extends Controller
                 $handle_1 = $this->update_file($request, 'file_evidence', $folder, $operation->id, $operation->file_evidence);
                 $operation->update(['file_evidence' => $handle_1['response']['payload']]);
             }
+        } else if ($role_user == config('roles.piloto')) {
+            $operation->update(['status_id' => config('status.ENR')]);
         }
 
         return redirect()->route('operations.index')
