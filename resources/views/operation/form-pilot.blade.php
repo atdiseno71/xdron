@@ -57,6 +57,9 @@
             </svg>
         </button>
         {{-- ESPACIO BASE PARA COPIAR --}}
+        @if (count($operation->details) == 0)
+            <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
+        @endif
         <div id="detail-copy" class="{{ count($operation->details) == 0 ? '' : 'detail-copy-form' }}">
             <!-- Contenerdor con campos del vuelo -->
             <div class="row">
@@ -410,7 +413,7 @@
                                 @forelse ($detail->files_details as $files_evidence)
                                     <li draggable="true" data-key="5229470.png" class="section-evidence-preview">
                                         <img src="{{ asset($files_evidence->src_file) }}" width="80%" height="100px">
-                                        <button class="btn btn-danger btn-preview-image">X</button>
+                                        {{-- <button class="btn btn-danger btn-preview-image" type="button">X</button> --}}
                                     </li>
                                 @empty
                                     <p>No hay imagenes registradas.</p>
@@ -429,6 +432,7 @@
                     </div>
                 </div>
             </div>
+            <script src="{{ asset('js/views/previews/multiple.image_' . $key + 1 . '.js') }}"></script>
         @endforeach
         </div>
         <!-- Contenedor donde todo se va a copiar -->
@@ -504,7 +508,5 @@
                 document.body.appendChild(scriptElement);
             });
         });
-
     </script>
-    <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
 </div>

@@ -89,6 +89,7 @@ function renderPreviews(currentFileList, target, inputFile) {
         myButtonRemove.classList.add("btn"); // Agregar una clase al btn
         myButtonRemove.classList.add("btn-danger"); // Agregar una clase al btn
         myButtonRemove.classList.add("btn-preview-image"); // Agregar una clase al btn
+        myButtonRemove.setAttribute("type", 'button');
         myButtonRemove.addEventListener("click", () => {
             filesList_7 = deleteArrayElementByIndex(currentFileList, index);
             inputFile.files = arrayFilesToFileList(filesList_7);
