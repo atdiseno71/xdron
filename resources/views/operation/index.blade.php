@@ -42,6 +42,8 @@
                                         <th>Piloto</th>
                                         <th>Cliente</th>
                                         <th>Administrador</th>
+                                        <th>Hacienda</th>
+                                        <th>Tipo Producto</th>
                                         <th>Estado</th>
 
                                         <th>Acciones</th>
@@ -58,6 +60,8 @@
                                             <td>{{ $operation->userPilot?->name }}</td>
                                             <td>{{ $operation->client?->social_reason }}</td>
                                             <td>{{ $operation->userAdmin?->name }}</td>
+                                            <td>{{ $operation->details[0]?->estate->name }}</td>
+                                            <td>{{ $operation->details[0]?->typeProduct->name }}</td>
                                             <td>{{ $operation->status?->name }}</td>
 
                                             <td>
