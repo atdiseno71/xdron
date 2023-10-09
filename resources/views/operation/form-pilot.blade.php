@@ -57,9 +57,6 @@
             </svg>
         </button>
         {{-- ESPACIO BASE PARA COPIAR --}}
-        @if (count($operation->details) == 0)
-            <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
-        @endif
         <div id="detail-copy" class="{{ count($operation->details) == 0 ? '' : 'detail-copy-form' }}">
             <!-- Contenerdor con campos del vuelo -->
             <div class="row">
@@ -432,7 +429,6 @@
                     </div>
                 </div>
             </div>
-            <script src="{{ asset('js/views/previews/multiple.image_' . $key + 1 . '.js') }}"></script>
         @endforeach
         </div>
         <!-- Contenedor donde todo se va a copiar -->
@@ -509,4 +505,11 @@
             });
         });
     </script>
+    <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
+    <script src="{{ asset('js/views/previews/multiple.image_2.js') }}"></script>
+    <script src="{{ asset('js/views/previews/multiple.image_3.js') }}"></script>
+    <script src="{{ asset('js/views/previews/multiple.image_4.js') }}"></script>
+    <script src="{{ asset('js/views/previews/multiple.image_5.js') }}"></script>
+    <script src="{{ asset('js/views/previews/multiple.image_6.js') }}"></script>
+    <script src="{{ asset('js/views/previews/multiple.image_7.js') }}"></script>
 </div>

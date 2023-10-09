@@ -18,12 +18,12 @@
     <body>
         <!-- Document body -->
         @yield('content')
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0
             </div>
             <strong>Copyright©2023.</strong> All rights reserved. <strong>Arte & Diseño</strong>
-        </footer>
+        </footer> --}}
         {{-- Custom Scripts --}}
         @yield('js')
     </body>
