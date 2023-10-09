@@ -36,6 +36,72 @@
             border-top: 3px solid var(--bs-dropdown-divider-bg);
             opacity: .5;
         }
+
+        .detail-copy-form {
+            display: none; Oculta todo el contenido dentro del div
+        }
+        .section-evidence {
+            text-align: center;
+            border: 2px dashed #1a20d1;
+            background: rgba(130,26,89,0.09);
+        }
+        .section-evidence input {
+            margin-bottom: 10px;
+        }
+        .section-evidence-preview {
+            margin-bottom: 10px;
+            border: 2px dashed #616276;
+        }
+        .btn-preview-image {
+            position: absolute;
+            right: 30px;
+            margin-top: 25px;
+            align-items: center;
+            /* padding: 10px!important; */
+        }´
+        .section-evidence-preview-zip {
+            margin-bottom: 10px;
+        }
+        #preview-files {
+            /* display: flex; */
+            list-style: none;
+            text-align: center !important;
+        }
+        #preview-files_1 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
+        #preview-files_2 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
+        #preview-files_3 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
+        #preview-files_4 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
+        #preview-files_5 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
+        #preview-files_6 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
+        #preview-files_7 {
+            /* display: flex; */
+            list-style: none;
+            text-align: left !important;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/plugins/select2.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">

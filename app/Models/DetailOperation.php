@@ -58,7 +58,7 @@ class DetailOperation extends Model
         'description',
         'observation',
         'estate_id',
-        'luck_id',
+        'luck',
         'zone_id',
         'dron_id',
         'evidencia_record',
@@ -72,7 +72,7 @@ class DetailOperation extends Model
      */
     public function drone()
     {
-        return $this->hasOne('App\Models\Estate', 'id', 'dron_id');
+        return $this->hasOne('App\Models\Dron', 'id', 'dron_id');
     }
 
     /**
@@ -80,7 +80,7 @@ class DetailOperation extends Model
      */
     public function estate()
     {
-        return $this->hasOne('App\Models\Dron', 'id', 'estate_id');
+        return $this->hasOne('App\Models\Estate', 'id', 'estate_id');
     }
 
     /**
@@ -92,11 +92,11 @@ class DetailOperation extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function luck()
+    public function files_details()
     {
-        return $this->hasOne('App\Models\Luck', 'id', 'luck_id');
+        return $this->hasMany('App\Models\FilesOperation', 'detail_operation_id', 'id');
     }
 
     /**
@@ -105,6 +105,14 @@ class DetailOperation extends Model
     public function zone()
     {
         return $this->hasOne('App\Models\Zone', 'id', 'zone_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function typeProduct()
+    {
+        return $this->hasOne('App\Models\TypeProduct', 'id', 'type_product_id');
     }
 
 }

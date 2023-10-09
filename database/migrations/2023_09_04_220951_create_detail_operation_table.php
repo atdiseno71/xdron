@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('hour_flights')->nullable();
             $table->string('acres')->nullable();
             $table->string('download')->nullable();
+            $table->string('luck')->nullable();
 
             $table->text('description')->nullable();
             $table->text('observation')->nullable();
@@ -38,11 +39,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('estate');
 
-            $table->unsignedBigInteger('luck_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreign('luck_id')
-                ->references('id')
-                ->on('lucks');
-
             $table->unsignedBigInteger('zone_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('zone_id')
                 ->references('id')
@@ -52,10 +48,6 @@ return new class extends Migration
             $table->foreign('type_product_id')
                 ->references('id')
                 ->on('type_products');
-
-            $table->text('evidencia_record')->nullable();
-            $table->text('evidencia_track')->nullable();
-            $table->text('evidencia_gps')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

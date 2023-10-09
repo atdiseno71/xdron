@@ -31,12 +31,12 @@ return [
         'icon' => 'fa fa-street-view',
         'can' => 'estates.index'
     ],
-    [
+    /* [
         'text' => 'Suertes',
         'url' => 'lucks',
         'icon' => 'fa fa-map',
         'can' => 'lucks.index'
-    ],
+    ], */
     [
         'text' => 'Operaciones',
         'url' => 'operations',

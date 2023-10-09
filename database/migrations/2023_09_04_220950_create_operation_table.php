@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('download')->nullable();
 
             $table->text('observation_admin')->nullable();
+            $table->text('file_evidence')->nullable();
 
             $table->unsignedBigInteger('assistant_id_one')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('assistant_id_one')

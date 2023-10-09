@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getEstates', [EstateController::class, 'getSelects']);
     Route::get('getLucks', [LuckController::class, 'getSelects']);
     Route::get('getDrons', [DronController::class, 'getSelects']);
+    Route::get('getLucks', [OperationController::class, 'getLucksByClient'])->name('lucks.getLucks');
 
 });
 

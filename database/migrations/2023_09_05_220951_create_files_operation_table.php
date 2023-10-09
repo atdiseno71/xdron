@@ -15,9 +15,7 @@ return new class extends Migration
 
             $table->id();
 
-            $table->text('record')->nullable();
-            $table->text('track')->nullable();
-            $table->text('map')->nullable();
+            $table->text('src_file')->nullable();
 
             $table->unsignedBigInteger('detail_operation_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreign('detail_operation_id')

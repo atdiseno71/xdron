@@ -21,6 +21,7 @@ use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperationController
@@ -166,6 +167,7 @@ class OperationController extends Controller
 
         //Generamos el pdf
         set_time_limit(30000);
+        // return view('pdf.report.operation', compact('operation'));
         $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
 
         $pdf->set_paper('letter', 'landscape');
@@ -180,7 +182,9 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::with('details')->find($id);
+        $operation = Operation::with(['details' => function ($query) {
+                            $query->orderBy('id', 'DESC'); // Reemplaza 'column_name' con el nombre de la columna por la cual deseas ordenar
+                        }])->find($id);
 
         $detail_operation = new DetailOperation();
 
@@ -198,7 +202,7 @@ class OperationController extends Controller
 
         $clients = Client::pluck('social_reason as label', 'id as value');
 
-        $estates = Estate::pluck('name as label', 'id as value');
+        $estates = Estate::where('cliente_id', $operation->id_cliente)->pluck('name as label', 'id as value');
 
         $lucks = Luck::pluck('name as label', 'id as value');
 
@@ -207,8 +211,6 @@ class OperationController extends Controller
         $drones = Dron::pluck('enrollment as label', 'id as value');
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
-
-        // dd($operation->details);
 
         return view(
             'operation.edit',
@@ -257,12 +259,9 @@ class OperationController extends Controller
             'description',
             'observation',
             'estate_id',
-            'luck_id',
+            'luck',
             'zone_id',
             'dron_id',
-            'evidencia_record',
-            'evidencia_track',
-            'evidencia_gps',
             'type_product_id',
         ];
 
@@ -278,38 +277,39 @@ class OperationController extends Controller
                 $fieldName = $input . "_" . $i;
                 // Acceder al valor del campo en la solicitud
                 $value = $request->input($fieldName);
-                // Guardamos campos de archivos
-                $file_name = [
-                    "evidencia_record_" . $i,
-                    "evidencia_track_" . $i,
-                    "evidencia_gps_" . $i,
-                ];
-                // Preguntamos si es un archivo, sino sobelo y guarde el dato
-                if (in_array($fieldName, $file_name) && $request->has($fieldName)) {
-                    $handle_1 = $this->webpImage($request, $fieldName, $folder, $fieldName);
-                    $detail_temp[$input] = $handle_1['response']['name'];
-                }
                 // Agregar el valor al arreglo de datos
-                else if ($request->has($fieldName)) {
+                if ($request->has($fieldName)) {
                     $detail_temp[$input] = $value;
                 }
             }
             // Creamos el detalle de la operacion
             if ($detail_temp['id_detail_operation'] == 0 || $detail_temp['id_detail_operation'] == "0") {
                 // El campo clave es nulo, así que creamos un nuevo registro
-                DetailOperation::create($detail_temp);
+                $detail_operation_new = DetailOperation::create($detail_temp);
             } else {
                 // El campo clave no es nulo, intentamos actualizar un registro existente
                 $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
                 $detail_operation_new->update($detail_temp);
             }
-
+            // Guardamos las imagenes despues de todo
+            $file_name = "files_" . $i;
+            if ($request->has($file_name)) {
+                // Guardamos lo que viene del request
+                $files = $request[$file_name];
+                $handle_1 = $this->updateAllFiles($request, $detail_operation_new->id, $folder, $file_name);
+            }
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
             request()->validate(Operation::$rules);
-
             $operation->update($request->all());
+            // subir archivo
+            if ($request->has('file_evidence')) {
+                $handle_1 = $this->update_file($request, 'file_evidence', $folder, $operation->id, $operation->file_evidence);
+                $operation->update(['file_evidence' => $handle_1['response']['payload']]);
+            }
+        } else if ($role_user == config('roles.piloto')) {
+            $operation->update(['status_id' => config('status.ENR')]);
         }
 
         return redirect()->route('operations.index')
@@ -340,6 +340,27 @@ class OperationController extends Controller
         } catch (\Exception $ex) {
             return response()->json('Error al generar la notificacion', 422);
         }
+    }
+
+    /* BUSCAR FINCAS POR ID DEL CLIENTE */
+    public function getFincasByCliente(Request $request)
+    {
+        $clienteId = $request->input('cliente_id');
+        $fincas = Estate::whereHas('clientesFincas', function ($query) use ($clienteId) {
+            $query->where('id_cliente', $clienteId);
+        })->get();
+
+        return response()->json($fincas);
+    }
+
+    /* BUSCAR FINCAS POR ID DEL CLIENTE */
+    public function getLucksByClient(Request $request)
+    {
+
+        $estate_id = $request->input('id');
+        $fincas = Luck::where('estate_id', $estate_id)->get();
+
+        return response()->json($fincas);
     }
 
 }
