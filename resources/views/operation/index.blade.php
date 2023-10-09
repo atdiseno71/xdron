@@ -38,12 +38,15 @@
                                         <th>No</th>
 
                                         {{-- <th>Tipo producto</th> --}}
+                                        <th>Hacienda</th>
+                                        <th>Suerte</th>
+                                        <th>Tipo Producto</th>
+                                        <th>Dron</th>
+                                        <th>Cant. vuelos</th>
                                         <th>Asistentes</th>
                                         <th>Piloto</th>
                                         <th>Cliente</th>
                                         <th>Administrador</th>
-                                        <th>Hacienda</th>
-                                        <th>Tipo Producto</th>
                                         <th>Estado</th>
 
                                         <th>Acciones</th>
@@ -54,14 +57,24 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-                                            {{-- <td>{{ $operation->product?->name }}</td> --}}
-                                            <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}
+                                            <td>{{ $operation->details[0]?->estate->name }}</td>
+                                            <td>
+                                                @forelse ($operation->details as $index => $detail)
+                                                    {{ $detail->luck }}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @empty
+                                                    No hay vuelos.
+                                                @endforelse
                                             </td>
+                                            <td>{{ $operation->details[0]?->typeProduct->name }}</td>
+                                            <td>{{ $operation->details[0]?->drone->enrollment }}</td>
+                                            <td>{{ count($operation->details) }}</td>
+                                            <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
                                             <td>{{ $operation->userPilot?->name }}</td>
                                             <td>{{ $operation->client?->social_reason }}</td>
                                             <td>{{ $operation->userAdmin?->name }}</td>
-                                            <td>{{ $operation->details[0]?->estate->name }}</td>
-                                            <td>{{ $operation->details[0]?->typeProduct->name }}</td>
                                             <td>{{ $operation->status?->name }}</td>
 
                                             <td>
