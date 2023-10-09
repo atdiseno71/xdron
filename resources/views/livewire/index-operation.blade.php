@@ -4,17 +4,18 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <input wire:model="type" id="type" class="form-control" placeholder="Ingrese lo que desee buscar" hidden>
                         <div class="col-12 col-md-6">
-                            <select name="typeSelect" id="typeSelect"
-                                class="form-control" placeholder="Seleccione una zona">
-                                <option value="0" selected>Selecciona una opcion</option>
-                                @foreach ($types as $key => $type)
-                                    <option value="{{ $key }}"
-                                        {{ $type_option == $key ? 'selected' : '' }}>
-                                        {{ $type }}
-                                    </option>
-                                @endforeach
+                            <select wire:model="type" class="form-control" placeholder="Seleccione una opcion">
+                                <option value="0" disabled>Seleccione una opcion</option>
+                                <option value="1">Hacienda</option>
+                                <option value="2">Suerte</option>
+                                <option value="3">Tipo Producto</option>
+                                <option value="4">Dron</option>
+                                <option value="5">Asistentes</option>
+                                <option value="6">Piloto</option>
+                                <option value="7">Cliente</option>
+                                <option value="8">Administrador</option>
+                                <option value="9">Estado</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-4">

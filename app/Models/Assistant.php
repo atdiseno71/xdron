@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Assistant extends Model
 {
 
+    protected $table = 'assistants';
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
