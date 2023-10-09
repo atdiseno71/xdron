@@ -2,10 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
-use Livewire\WithPagination;
 
 class IndexUsers extends Component
 {
