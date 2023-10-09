@@ -26,7 +26,7 @@
         <div class="detail">
             <ul>
                 <li>
-                    <p>(Hacienda) {{ $detail->estate?->name }} / (Suerte) {{ $detail->luck }} / (Zona) {{ $detail->zone?->name }} / (Drone) {{ $detail->drone?->enrollment }}</p>
+                    <p><strong>Hacienda:</strong> {{ $detail->estate?->name }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<strong>Suerte:</strong> {{ $detail->luck }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<strong>Zona:</strong> {{ $detail->zone?->name }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<strong>Drone:</strong> {{ $detail->drone?->enrollment }}</p>
                 </li>
             </ul>
         </div>
