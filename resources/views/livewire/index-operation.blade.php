@@ -61,7 +61,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
 
-                                        <td>{{ $operation->details[0]?->estate->name }}</td>
+                                        <td>{{ $operation->details[0]?->estate->name ?? 'No hay vuelos.' }}</td>
                                         <td>
                                             @forelse ($operation->details as $index => $detail)
                                                 {{ $detail->luck }}
@@ -72,8 +72,8 @@
                                                 No hay vuelos.
                                             @endforelse
                                         </td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name }}</td>
-                                        <td>{{ $operation->details[0]?->drone->enrollment }}</td>
+                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
                                         <td>{{ count($operation->details) }}</td>
                                         <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
                                         <td>{{ $operation->userPilot?->name }}</td>
