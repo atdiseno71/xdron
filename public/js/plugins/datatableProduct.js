@@ -303,7 +303,6 @@ $(document).ready(function () {
         }
     });
 
-    var info = table.page.info();
-    console.log('info', info);
+    table.rows( {page:'all'} ).data();
 
 });
