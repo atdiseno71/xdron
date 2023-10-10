@@ -3,10 +3,10 @@ $(document).ready( function () {
         responsive: true,
         "searching": false,
         "paginate": false,
-        "lengthMenu": false,
+        "lengthMenu": true,
         "info": false,
         dom: 'Bfrtip',
-        buttons:[
+        buttons: [
             {
 				extend:    'csvHtml5',
 				text:      'CSV <i class="fas fa-file-excel"></i> ',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Operation
@@ -44,7 +45,7 @@ class Operation extends Model
         $this->perPage = config('global.num_pagination');
     }
 
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
     protected $table = "operation";
 

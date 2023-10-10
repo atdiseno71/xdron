@@ -61,7 +61,7 @@
                                             @endforeach
                                         </td>
 
-                                        <td>{{ $user->roles[0]?->name }}</td>
+                                        <td>{{ $user->roles[0]?->name ?? 'No hay roles.' }}</td>
 
                                         <td>
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="form-delete">

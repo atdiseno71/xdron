@@ -43,6 +43,6 @@ class UserSeeder extends Seeder
             'document_number' => "1006465338",
         ])->assignRole('piloto');
         // Usuarios falsos para pruebas
-        // User::factory()->count(5000)->create();
+        User::factory()->count(5000)->create();
     }
 }
