@@ -102,11 +102,21 @@
             list-style: none;
             text-align: left !important;
         }
+        /* Estilo de btn datatable */
+        /*para alinear los botones y cuadro de busqueda*/
+        .btn-group, .btn-group-vertical {
+            position: absolute !important;
+            margin-bottom: 15px !important;
+        }
+        .dt-buttons {
+            margin-bottom: 15px !important;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/plugins/select2.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('plugins/datatable/Buttons-2.4.2/css/buttons.bootstrap4.min.css') }}">
     @stack('css')
     @yield('css')
 @stop
@@ -158,6 +168,15 @@
 @section('adminlte_js')
     <!-- Sweetalert2 for alerts more nice -->
     <script src="{{ asset('js/plugins/sweetalert2@11.js') }}"></script>
+    {{-- Cargar scripts datatable --}}
+    <script src="{{ asset('plugins/datatable/DataTables-1.13.6/js/jquery.dataTables.min.js') }}"></script>
+    {{-- Buttons datatable --}}
+    <script src="{{ asset('plugins/datatable/Buttons-2.4.2/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatable/JSZip-3.10.1/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatable/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatable/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatable/Buttons-2.4.2/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatable/Buttons-2.4.2/js/buttons.print.min.js') }}"></script>
     <!-- Load plugins -->
     <script src="{{ asset('js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('js/plugins/patternomaly.js') }}"></script>

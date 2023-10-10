@@ -1,9 +1,40 @@
 $(document).ready( function () {
     $('.table').DataTable({
+        responsive: true,
         "searching": false,
         "paginate": false,
         "lengthMenu": false,
         "info": false,
+        dom: 'Bfrtip',
+        buttons:[
+            {
+				extend:    'csvHtml5',
+				text:      'CSV <i class="fas fa-file-excel"></i> ',
+				titleAttr: 'Exportar a CSV',
+				className: 'btn btn-primary'
+			},
+			{
+				extend:    'excelHtml5',
+				text:      'Excel <i class="fas fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+				className: 'btn btn-success'
+			},
+			{
+				extend:    'pdfHtml5',
+				text:      'PDF <i class="fas fa-file-pdf"></i> ',
+				titleAttr: 'Exportar a PDF',
+				className: 'btn btn-danger'
+			},
+			{
+				extend:    'print',
+				text:      '<i class="fa fa-print"></i> ',
+				titleAttr: 'Imprimir',
+				className: 'btn btn-secondary'
+			},
+		],
+        /* buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ], */
         language: {
             "processing": "Procesando...",
             "lengthMenu": "Mostrar _MENU_ registros",
