@@ -22,6 +22,36 @@
 
     </header>
 
+    <h5 style="text-align: center"><strong>REPORTE GENERAL</strong></h5>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th class="alineacion-center">Baterias</th>
+                <th class="alineacion-center">Horas vuelos</th>
+                <th class="alineacion-center">Hectareas</th>
+                <th class="alineacion-center">Vuelos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="alineacion-center">
+                @php
+                    $number_flights = 0;
+                    $hour_flights = 0;
+                    $acres = 0;
+                    foreach ($operation->details as $key => $detail) {
+                        $number_flights += $detail->number_flights;
+                        $hour_flights += $detail->hour_flights;
+                        $acres += $detail->acres;
+                    }
+                @endphp
+                <td>{{ $number_flights }}</td>
+                <td>{{ $hour_flights }}</td>
+                <td>{{ $acres }}</td>
+                <td>{{ count($operation->details) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
     @forelse ($operation->details as $key => $detail)
         <div class="detail">
             <ul>
@@ -34,7 +64,7 @@
             <img class="img-evidencia" src="{{ $file->src_file }}">
         @endforeach
     @empty
-        <p>No hay imagenes registratadas en la operación</p>
+        <p class="alineacion-center">No hay imagenes registratadas en la operación</p>
     @endforelse
 
 @endsection

@@ -172,6 +172,10 @@ th {
     text-align: left;
 }
 
+.alineacion-center {
+    text-align: center;
+}
+
 hr {
     color: #212529;
 }
@@ -183,11 +187,11 @@ ul {
 }
 
 .even {
-    background: #fbf8f0;
+    background: #198754;
 }
 
 .odd {
-    background: #fefcf9;
+    background: #198754;
 }
 
 .page {
@@ -202,7 +206,7 @@ ul {
 table,
 td,
 th {
-    border: 0px solid #595959;
+    border: 0px solid #198754;
     border-collapse: collapse;
 }
 
@@ -214,15 +218,15 @@ th {
 }
 
 th {
-    background: #f0e6cc;
+    background: #198754;
 }
 
 .even {
-    background: #fbf8f0;
+    background: #198754;
 }
 
 .odd {
-    background: #fefcf9;
+    background: #198754;
 }
 
 p {
