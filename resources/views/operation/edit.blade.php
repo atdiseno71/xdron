@@ -82,7 +82,7 @@
                         // Recargar el select
                         onloadClients();
                         /* Recargar pagina */
-                        location.reload();
+                        //location.reload();
                     },
                     error: function(xhr) {
                         if (xhr.status === 422) {
@@ -130,9 +130,9 @@
                         // Simular un clic en el botón para cerrar el modal
                         botonCerrarModal.click();
                         // Recargar el select
-                        onloadAsistent();
+                        onloadAsistents();
                         /* Recargar pagina */
-                        location.reload();
+                        //location.reload();
                     },
                     error: function(xhr) {
                         if (xhr.status === 422) {
@@ -153,49 +153,33 @@
             // Formulario para tipos productos
             $('#formTypeProduct').on('submit', function(e) {
                 e.preventDefault(); // Evita el envío normal del formulario
-                // Obtener la URL completa
-                var urlCompleta = window.location.href;
+                var formData = $(this).serialize(); // Serializa el formulario
 
-                // Crear un objeto URL a partir de la URL completa
-                var urlObjeto = new URL(urlCompleta);
-
-                // Obtener la URL base
-                var urlBase = urlObjeto.origin;
-
-                // Envía el formulario a través de AJAX
                 $.ajax({
                     type: 'POST',
-                    url: "{{ route('typeProduct.uploadTypeProduct') }}",
-                    data: {
-                        _token: "{{ csrf_token() }}", // Agrega el token CSRF aquí
-                        $(this).serialize()
-                    }, // Serializa el formulario
+                    url: $(this).attr('action'), // Obtiene la URL del formulario
+                    data: formData,
                     success: function(response) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
                             title: 'Registro completado',
                             showConfirmButton: true,
-                            // timer: 1500
                         })
-                        // Seleccionar el botón de cierre por su ID
                         const botonCerrarModal = document.getElementById('closeModal');
-                        // Simular un clic en el botón para cerrar el modal
                         botonCerrarModal.click();
-                        // Recargar el select
-                        onloadClients();
+                        // No es necesario recargar la vista, ya que no hay redirección
+                        // Puedes actualizar la vista según tus necesidades con los datos devueltos (typeProduct)
                     },
                     error: function(xhr) {
                         if (xhr.status === 422) {
                             Swal.fire({
                                 position: 'center',
                                 icon: 'error',
-                                title: 'Revise que los campos esten llenos',
+                                title: 'Revise que los campos estén llenos',
                                 showConfirmButton: true,
-                                // timer: 1500
                             })
                         } else {
-                            // Otros códigos de error
                             console.error('Error:', xhr.status, xhr.statusText);
                         }
                     }
