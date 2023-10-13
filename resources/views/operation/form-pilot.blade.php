@@ -57,21 +57,22 @@
             </svg>
         </button>
         {{-- ESPACIO BASE PARA COPIAR --}}
-        @if (count($operation->details) == 0)
-            <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
-        @endif
-        <div id="detail-copy" class="{{ count($operation->details) == 0 ? '' : 'detail-copy-form' }}">
+        @php
+            $areThere = count($operation->details) == 0 ? false : true;
+            $numberAreThere = $areThere ? 11 : 1;
+        @endphp
+        <div id="detail-copy" class="{{ $areThere ? 'detail-copy-form' : '' }}"> <!-- Oculta el contenido en caso de haber registros -->
             <!-- Contenerdor con campos del vuelo -->
             <div class="row">
                 <div class="col-12">
                     <br>
-                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_1">#1</strong></h3>
+                    <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_{{ $numberAreThere }}">#1</strong></h3>
                 </div>
-                <input name="id_detail_operation_1" id="id_detail_operation_1" type="text" value="0" hidden>
+                <input name="id_detail_operation_{{ $numberAreThere }}" id="id_detail_operation_{{ $numberAreThere }}" type="text" value="0" hidden>
                 <div class="col-12 col-md-5">
                     <div class="form-group">
-                        <label for="type_product_id_1">Tipo producto</label>
-                        <select name="type_product_id_1" id="type_product_id_1"
+                        <label for="type_product_id_{{ $numberAreThere }}">Tipo producto</label>
+                        <select name="type_product_id_{{ $numberAreThere }}" id="type_product_id_{{ $numberAreThere }}"
                             class="form-control {{ $errors->has('type_product_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione el tipo de producto">
                             <option value="0" selected>Selecciona una opcion</option>
@@ -98,10 +99,10 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <div class="form-group">
-                        <label for="estate_id_1">Hacienda</label>
-                        <select name="estate_id_1" id="estate_id_1"
+                        <label for="estate_id_{{ $numberAreThere }}">Hacienda</label>
+                        <select name="estate_id_{{ $numberAreThere }}" id="estate_id_{{ $numberAreThere }}"
                             class="form-control estate-selector {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una hacienda" data-key="1">
+                            placeholder="Seleccione una hacienda" data-key="{{ $numberAreThere }}">
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($estates as $estateKey => $estateValue)
                                 <option value="{{ $estateKey }}">
@@ -126,15 +127,15 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        {{ Form::label('luck_1', 'Suerte') }}
-                        {{ Form::text('luck_1', $detail_operation->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_1', 'placeholder' => 'Ingrese la suerte']) }}
+                        {{ Form::label('luck_' . $numberAreThere, 'Suerte') }}
+                        {{ Form::text('luck_' . $numberAreThere, $detail_operation->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $numberAreThere, 'placeholder' => 'Ingrese la suerte']) }}
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-5">
                     <div class="form-group">
-                        <label for="dron_id_1">Drones</label>
-                        <select name="dron_id_1" id="dron_id_1"
+                        <label for="dron_id_{{ $numberAreThere }}">Drones</label>
+                        <select name="dron_id_{{ $numberAreThere }}" id="dron_id_{{ $numberAreThere }}"
                             class="form-control {{ $errors->has('dron_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una drone">
                             <option value="0" selected>Selecciona una opcion</option>
@@ -161,8 +162,8 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="download_1">Descarga</label>
-                        <select name="download_1" id="download_1"
+                        <label for="download_{{ $numberAreThere }}">Descarga</label>
+                        <select name="download_{{ $numberAreThere }}" id="download_{{ $numberAreThere }}"
                             class="form-control {{ $errors->has('download') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una descarga">
                             @foreach (["Selecciona una opcion", 5, 10, 15, 20] as $value)
@@ -178,8 +179,8 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="zone_id_1">Zona</label>
-                        <select name="zone_id_1" id="zone_id_1"
+                        <label for="zone_id_{{ $numberAreThere }}">Zona</label>
+                        <select name="zone_id_{{ $numberAreThere }}" id="zone_id_{{ $numberAreThere }}"
                             class="form-control {{ $errors->has('zone_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una zona">
                             <option value="0" selected>Selecciona una opcion</option>
@@ -196,23 +197,23 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        {{ Form::label('number_flights_1', 'Baterias') }}
-                        {{ Form::number('number_flights_1', $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights_1', 'placeholder' => 'Ingrese cant. Baterias']) }}
+                        {{ Form::label('number_flights_' . $numberAreThere, 'Baterias') }}
+                        {{ Form::number('number_flights_' . $numberAreThere, $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights_' . $numberAreThere, 'placeholder' => 'Ingrese cant. Baterias']) }}
                         {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        {{ Form::label('hour_flights_1', 'Horas vuelos') }}
-                        {{ Form::number('hour_flights_1', $detail_operation->hour_flights_1, ['class' => 'form-control' . ($errors->has('hour_flights_1') ? ' is-invalid' : ''), 'id' => 'hour_flights_1', 'placeholder' => 'Ingrese cant. horas vuelos']) }}
-                        {!! $errors->first('hour_flights_1', '<div class="invalid-feedback">:message</div>') !!}
+                        {{ Form::label('hour_flights_' . $numberAreThere, 'Horas vuelos') }}
+                        {{ Form::number('hour_flights_' . $numberAreThere, $detail_operation->hour_flights_1, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights_' . $numberAreThere, 'placeholder' => 'Ingrese cant. horas vuelos']) }}
+                        {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        {{ Form::label('acres_1', 'Hectareas') }}
-                        {{ Form::number('acres_1', $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres_1') ? ' is-invalid' : ''), 'id' => 'acres_1', 'placeholder' => 'Ingrese cant. hectareas']) }}
-                        {!! $errors->first('acres_1', '<div class="invalid-feedback">:message</div>') !!}
+                        {{ Form::label('acres_'. $numberAreThere, 'Hectareas') }}
+                        {{ Form::number('acres_'. $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'placeholder' => 'Ingrese cant. hectareas']) }}
+                        {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-6"></div>
@@ -220,10 +221,10 @@
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-8 section-evidence">
                     <div class="form-group">
-                        {{ Form::label('files_1', 'Subir Evidencias (Máximo 7)') }}
+                        {{ Form::label('files_' . $numberAreThere, 'Subir Evidencias (Máximo 7)') }}
                         <section id="multi-selector-uniq">
-                            <input class="form-control" id="files_1" name="files_1[]" type="file" multiple accept="image/*">
-                            <ul id="preview-files_1"></ul>
+                            <input class="form-control" id="files_{{ $numberAreThere }}" name="files_{{ $numberAreThere }}[]" type="file" multiple accept="image/*">
+                            <ul id="preview-files_{{ $numberAreThere }}"></ul>
                         </section>
                     </div>
                 </div>
@@ -231,8 +232,8 @@
                 {{-- FIN DE ESPACIO PARA IMAGEN --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
-                        {{ Form::label('observation_1', 'Observaciones') }}
-                        {{ Form::textArea('observation_1', $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_1', 'placeholder' => 'Ingrese observaciones de la operacion']) }}
+                        {{ Form::label('observation_' . $numberAreThere, 'Observaciones') }}
+                        {{ Form::textArea('observation_' . $numberAreThere, $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $numberAreThere, 'placeholder' => 'Ingrese observaciones de la operacion']) }}
                         {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -409,11 +410,13 @@
                         {{ Form::label('files_' . $key + 1, 'Subir Evidencias (Máximo 7)') }}
                         <section id="multi-selector-uniq">
                             <input class="form-control" id="files_{{ $key + 1 }}" name="files_{{ $key + 1 }}[]" type="file" multiple accept="image/*">
-                            <ul id="preview-files_{{ $key + 1 }}">
+                            <ul id="preview-files_{{ $key + 1 }}"></ul>
+                        </section>
+                        <section id="multi-selector-uniq-load">
+                            <ul id="preview-files-load">
                                 @forelse ($detail->files_details as $files_evidence)
-                                    <li draggable="true" data-key="5229470.png" class="section-evidence-preview">
+                                    <li class="section-evidence-preview">
                                         <img src="{{ asset($files_evidence->src_file) }}" width="80%" height="100px">
-                                        {{-- <button class="btn btn-danger btn-preview-image" type="button">X</button> --}}
                                     </li>
                                 @empty
                                     <p>No hay imagenes registradas.</p>
@@ -432,7 +435,6 @@
                     </div>
                 </div>
             </div>
-            <script src="{{ asset('js/views/previews/multiple.image_' . $key + 1 . '.js') }}"></script>
         @endforeach
         </div>
         <!-- Contenedor donde todo se va a copiar -->
@@ -509,4 +511,5 @@
             });
         });
     </script>
+    <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
 </div>

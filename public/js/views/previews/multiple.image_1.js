@@ -188,3 +188,28 @@ function eventDrop(event) {
     // Only DEMO. Changes are redrawn.
     renderPreviews(filesList, multiSelectorUniqPreview, fileInputMulti);
 }
+
+// Modificar los botones ya cargados
+/* Buttons */
+const buttons = document.querySelectorAll(".btn-preview-image");
+
+buttons.forEach((button, index) => {
+
+    button.textContent = "X";
+    button.classList.add("btn");
+    button.classList.add("btn-danger");
+    button.classList.add("btn-preview-image");
+    button.setAttribute("type", 'button');
+
+    button.addEventListener("click", () => {
+        // lógica para eliminar el elemento y realizar otras acciones
+        // padre del botón donde se elimina
+        const parentElement = button.parentElement;
+        parentElement.remove();
+
+        // Donde se supone que deberia modificar la lista
+        filesList = deleteArrayElementByIndex(filesList, index);
+        inputFile.files = arrayFilesToFileList(filesList);
+        return renderPreviews(filesList, multiSelectorUniqPreview, inputFile);
+    });
+});

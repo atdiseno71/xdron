@@ -62,7 +62,7 @@
         .section-evidence-preview-zip {
             margin-bottom: 10px;
         }
-        #preview-files {
+        #preview-files-load {
             /* display: flex; */
             list-style: none;
             text-align: center !important;
