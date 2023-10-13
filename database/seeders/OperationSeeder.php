@@ -13,6 +13,6 @@ class OperationSeeder extends Seeder
     public function run(): void
     {
         // falsos para pruebas
-        Operation::factory()->count(5000)->create();
+        // Operation::factory()->count(5000)->create();
     }
 }

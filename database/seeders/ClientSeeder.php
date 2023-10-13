@@ -13,6 +13,6 @@ class ClientSeeder extends Seeder
     public function run(): void
     {
         // falsos para pruebas
-        Client::factory()->count(5000)->create();
+        // Client::factory()->count(5000)->create();
     }
 }
