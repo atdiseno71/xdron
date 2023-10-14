@@ -113,7 +113,7 @@
                                             </form>
                                         </td>
 
-                                        <td>{{ $operation->details[0]?->estate->name ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->estate->name ?? 'Sin vuelos.' }}</td>
                                         <td>
                                             @forelse ($operation->details as $index => $detail)
                                                 {{ $detail->luck }}
@@ -121,11 +121,11 @@
                                                     ,
                                                 @endif
                                             @empty
-                                                No hay vuelos.
+                                                Sin vuelos.
                                             @endforelse
                                         </td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
-                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'Sin vuelos.' }}</td>
                                         <td>{{ $divide1 }}</td>
                                         <td>{{ $divide2 }}</td>
                                         <td>{{ $number_flights }}</td>
@@ -138,7 +138,7 @@
                                         <td>{{ $operation->userAdmin?->name }}</td>
                                         <td>{{ $operation->created_at }}</td>
                                         <td>{{ $operation->details[0]?->created_at }}</td>
-                                        <td>{{ $operation->status?->name }}</td>
+                                        <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
 
                                     </tr>
                                 @endforeach
