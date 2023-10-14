@@ -46,16 +46,16 @@
                                     {{-- <th>Tipo producto</th> --}}
                                     <th>Hacienda</th>
                                     <th>Suerte</th>
-                                    <th>Tipo Producto</th>
+                                    <th>T. Producto</th>
                                     <th>Dron</th>
 
                                     <th>Hectareas/vuelos</th>
                                     <th>Hectareas/Baterias</th>
 
-                                    <th>Total Baterias</th>
-                                    <th>Total Horas vuelos</th>
-                                    <th>Total Hectareas</th>
-                                    <th>Total vuelos</th>
+                                    <th>T Baterias</th>
+                                    <th>TH vuelos</th>
+                                    <th>T Hectareas</th>
+                                    <th>T vuelos</th>
 
                                     <th>Asistentes</th>
                                     <th>Piloto</th>
