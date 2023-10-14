@@ -48,7 +48,12 @@
                                     <th>Suerte</th>
                                     <th>Tipo Producto</th>
                                     <th>Dron</th>
-                                    <th>Cant. vuelos</th>
+
+                                    <th>Total Baterias</th>
+                                    <th>Total Horas vuelos</th>
+                                    <th>Total Hectareas</th>
+                                    <th>Total vuelos</th>
+
                                     <th>Asistentes</th>
                                     <th>Piloto</th>
                                     <th>Cliente</th>
@@ -59,6 +64,16 @@
                             </thead>
                             <tbody>
                                 @foreach ($operations as $key => $operation)
+                                @php
+                                    $number_flights = 0;
+                                    $hour_flights = 0;
+                                    $acres = 0;
+                                    foreach ($operation->details as $key => $detail) {
+                                        $number_flights += $detail->number_flights;
+                                        $hour_flights += $detail->hour_flights;
+                                        $acres += $detail->acres;
+                                    }
+                                @endphp
                                     <tr>
 
                                         <td>{{ $key + 1 }}</td>
@@ -104,6 +119,9 @@
                                         </td>
                                         <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
                                         <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ $number_flights }}</td>
+                                        <td>{{ $hour_flights }}</td>
+                                        <td>{{ $acres }}</td>
                                         <td>{{ count($operation->details) }}</td>
                                         <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
                                         <td>{{ $operation->userPilot?->name }}</td>
