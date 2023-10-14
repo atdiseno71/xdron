@@ -49,6 +49,9 @@
                                     <th>Tipo Producto</th>
                                     <th>Dron</th>
 
+                                    <th>Hectareas/vuelos</th>
+                                    <th>Hectareas/Baterias</th>
+
                                     <th>Total Baterias</th>
                                     <th>Total Horas vuelos</th>
                                     <th>Total Hectareas</th>
@@ -73,6 +76,8 @@
                                         $hour_flights += $detail->hour_flights;
                                         $acres += $detail->acres;
                                     }
+                                    $divide1 = $acres / $hour_flights;
+                                    $divide2 = $acres / $number_flights;
                                 @endphp
                                     <tr>
 
@@ -119,6 +124,8 @@
                                         </td>
                                         <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
                                         <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ $divide1 }}</td>
+                                        <td>{{ $divide2 }}</td>
                                         <td>{{ $number_flights }}</td>
                                         <td>{{ $hour_flights }}</td>
                                         <td>{{ $acres }}</td>
