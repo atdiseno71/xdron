@@ -61,6 +61,8 @@
                                     <th>Piloto</th>
                                     <th>Cliente</th>
                                     <th>Administrador</th>
+                                    <th>Fecha creación</th>
+                                    <th>Fecha vuelo</th>
                                     <th>Estado</th>
 
                                 </tr>
@@ -134,6 +136,8 @@
                                         <td>{{ $operation->userPilot?->name }}</td>
                                         <td>{{ $operation->client?->social_reason }}</td>
                                         <td>{{ $operation->userAdmin?->name }}</td>
+                                        <td>{{ $operation->created_at }}</td>
+                                        <td>{{ $operation->details[0]?->created_at }}</td>
                                         <td>{{ $operation->status?->name }}</td>
 
                                     </tr>
