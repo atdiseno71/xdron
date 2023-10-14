@@ -42,6 +42,7 @@
                                 <tr>
                                     <th>No</th>
 
+                                    <th>Acciones</th>
                                     {{-- <th>Tipo producto</th> --}}
                                     <th>Hacienda</th>
                                     <th>Suerte</th>
@@ -54,33 +55,13 @@
                                     <th>Administrador</th>
                                     <th>Estado</th>
 
-                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($operations as $key => $operation)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
 
-                                        <td>{{ $operation->details[0]?->estate->name ?? 'No hay vuelos.' }}</td>
-                                        <td>
-                                            @forelse ($operation->details as $index => $detail)
-                                                {{ $detail->luck }}
-                                                @if (!$loop->last)
-                                                    ,
-                                                @endif
-                                            @empty
-                                                No hay vuelos.
-                                            @endforelse
-                                        </td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
-                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
-                                        <td>{{ count($operation->details) }}</td>
-                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
-                                        <td>{{ $operation->userPilot?->name }}</td>
-                                        <td>{{ $operation->client?->social_reason }}</td>
-                                        <td>{{ $operation->userAdmin?->name }}</td>
-                                        <td>{{ $operation->status?->name }}</td>
+                                        <td>{{ $key + 1 }}</td>
 
                                         <td>
                                             <form action="{{ route('operations.destroy', $operation->id) }}"
@@ -109,6 +90,27 @@
                                                 @endcan
                                             </form>
                                         </td>
+
+                                        <td>{{ $operation->details[0]?->estate->name ?? 'No hay vuelos.' }}</td>
+                                        <td>
+                                            @forelse ($operation->details as $index => $detail)
+                                                {{ $detail->luck }}
+                                                @if (!$loop->last)
+                                                    ,
+                                                @endif
+                                            @empty
+                                                No hay vuelos.
+                                            @endforelse
+                                        </td>
+                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
+                                        <td>{{ count($operation->details) }}</td>
+                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
+                                        <td>{{ $operation->userPilot?->name }}</td>
+                                        <td>{{ $operation->client?->social_reason }}</td>
+                                        <td>{{ $operation->userAdmin?->name }}</td>
+                                        <td>{{ $operation->status?->name }}</td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
