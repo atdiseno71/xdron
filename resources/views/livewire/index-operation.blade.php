@@ -147,7 +147,7 @@
                                         <td>{{ $operation->client?->social_reason }}</td>
                                         <td>{{ $operation->userAdmin?->name }}</td>
                                         <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
-                                        <td>{{ $operation->details[0]?->created_at?->format('d/m/Y') }}</td>
+                                        <td>{{ $operation->details[0]?->created_at?->format('d/m/Y') ?? 'Sin vuelos.' }}</td>
                                         <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
 
                                     </tr>
