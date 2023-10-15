@@ -78,8 +78,18 @@
                                         $hour_flights += $detail->hour_flights;
                                         $acres += $detail->acres;
                                     }
-                                    $divide1 = $acres / $hour_flights;
-                                    $divide2 = $acres / $number_flights;
+                                    /* Horas de vuelos */
+                                    if ($hour_flights != 0) {
+                                        $divide1 = $acres / $hour_flights;
+                                    } else {
+                                        $divide1 = 0;
+                                    }
+                                    /* Numero de vuelos */
+                                    if ($number_flights != 0) {
+                                        $divide2 = $acres / $number_flights;
+                                    } else {
+                                        $divide2 = 0;
+                                    }
                                 @endphp
                                     <tr>
 
