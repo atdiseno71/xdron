@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V2;
 
 use App\Notifications\OperationNotification;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DetailOperation;
@@ -21,7 +22,6 @@ use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperationController
@@ -290,6 +290,22 @@ class OperationController extends Controller
                 // El campo clave no es nulo, intentamos actualizar un registro existente
                 $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
                 $detail_operation_new->update($detail_temp);
+            }
+            // Preguntamos si hay imagenes por eliminar
+            $files_delete = json_decode($request->input('files_evidence_delete_' . $i), true);
+            if ($files_delete != null) {
+                foreach ($files_delete as $key => $file_delete) {
+                    $file_find = FilesOperation::where('src_file', $file_delete)
+                            ->whereHas('detailOperation', function ($query) use($detail_operation_new) {
+                                $query->where('detail_operation.id', $detail_operation_new->id);
+                            })->first();
+                    // Storage::disk('public')->delete($evidence->path);
+                    if (File::exists($file_find->src_file)) {
+                        // Elimina el archivo
+                        File::delete($file_find->src_file);
+                        $file_find->delete();
+                    }
+                }
             }
             // Guardamos las imagenes despues de todo
             $file_name = "files_" . $i;

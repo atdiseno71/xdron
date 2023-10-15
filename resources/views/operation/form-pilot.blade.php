@@ -407,6 +407,7 @@
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-8 section-evidence">
                     <div class="form-group">
+                        <input type="text" name="files_evidence_delete_{{ $key + 1 }}" id="files_evidence_delete_{{ $key + 1 }}" value="" hidden>
                         {{ Form::label('files_' . $key + 1, 'Subir Evidencias (Máximo 7)') }}
                         <section id="multi-selector-uniq">
                             <input class="form-control" id="files_{{ $key + 1 }}" name="files_{{ $key + 1 }}[]" type="file" multiple accept="image/*">
@@ -417,6 +418,7 @@
                                 @forelse ($detail->files_details as $files_evidence)
                                     <li class="section-evidence-preview">
                                         <img src="{{ asset($files_evidence->src_file) }}" width="80%" height="100px">
+                                        <button class="btn btn-danger btn-preview-image" type="button" data-key="{{ $key + 1 }}" data-src="{{ $files_evidence->src_file }}">X</button>
                                     </li>
                                 @empty
                                     <p>No hay imagenes registradas.</p>

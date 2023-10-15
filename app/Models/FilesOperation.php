@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class FilesOperation extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $table = "files_operation";
 
