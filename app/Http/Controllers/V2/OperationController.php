@@ -211,7 +211,7 @@ class OperationController extends Controller
         $drones = Dron::pluck('enrollment as label', 'id as value');
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
-
+        
         return view(
             'operation.edit',
             compact(
@@ -328,6 +328,9 @@ class OperationController extends Controller
             $operation->update(['status_id' => config('status.ENR')]);
         }
 
+        /* CREAMOS LA NOTIFICACION */
+        $this->make_detail_operation_notification($operation);
+
         return redirect()->route('operations.index')
             ->with('success', 'Operacion actualizada con exito.');
     }
@@ -346,12 +349,25 @@ class OperationController extends Controller
     }
 
     /* MANEJAR NOTIFICACIONES */
-    public function make_operation_notification($operation) {
+    public function make_operation_notification(Operation $operation) {
         try {
             /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
-            $user = User::find($operation->id_piloto);
+            $user = User::find($operation->pilot_id);
             if ($user) {
-                $user->notify(new OperationNotification($operation));
+                $user->notify(new OperationNotification($operation, 0)); // Notificacion de Operacion creada para el piloto
+            }
+        } catch (\Exception $ex) {
+            return response()->json('Error al generar la notificacion', 422);
+        }
+    }
+
+    /* MANEJAR NOTIFICACIONES */
+    public function make_detail_operation_notification($operation) {
+        try {
+            /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
+            $user = User::find($operation->admin_by);
+            if ($user) {
+                $user->notify(new OperationNotification($operation, 1)); // Notificacion de Operacion creada para el admin
             }
         } catch (\Exception $ex) {
             return response()->json('Error al generar la notificacion', 422);
