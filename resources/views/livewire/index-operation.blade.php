@@ -73,7 +73,7 @@
                                     $number_flights = 0;
                                     $hour_flights = 0;
                                     $acres = 0;
-                                    foreach ($operation->details as $key => $detail) {
+                                    foreach ($operation->details as $detail) {
                                         $number_flights += $detail->number_flights;
                                         $hour_flights += $detail->hour_flights;
                                         $acres += $detail->acres;
