@@ -92,7 +92,11 @@ class UserController extends Controller
 
         $clients = $request['id_cliente'];
 
-        if (!isset($clients) && !empty($clients)) {
+        if (isset($clients) && empty($clients)) {
+            // echo "La variable \$clients está definida pero está vacía.";
+        } elseif (!isset($clients)) {
+            // echo "La variable \$clients no está definida.";
+        } else {
             foreach ($clients as $id_client) {
                 DB::table('clients_users')->insert([
                     'client_id' => $id_client,
@@ -162,7 +166,11 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        if (!isset($clients) && !empty($clients)) {
+        if (isset($clients) && empty($clients)) {
+            // echo "La variable \$clients está definida pero está vacía.";
+        } elseif (!isset($clients)) {
+            // echo "La variable \$clients no está definida.";
+        } else {
             foreach ($clients as $id_client) {
                 DB::table('clients_users')->insert([
                     'client_id' => $id_client,
