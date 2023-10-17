@@ -188,7 +188,6 @@ function eventDrop(event) {
     // Only DEMO. Changes are redrawn.
     renderPreviews(filesList, multiSelectorUniqPreview, fileInputMulti);
 }
-
 // Modificar los botones ya cargados
 /* Buttons */
 const buttons = document.querySelectorAll(".btn-preview-image");
@@ -225,6 +224,5 @@ buttons.forEach((button, index) => {
         inputElement.value = JSON.stringify(filesList); // Guardar como JSON
         console.log('inputElement.value',inputElement.value)
 
-        return renderPreviews(filesList, multiSelectorUniqPreview, inputFile);
     });
 });
