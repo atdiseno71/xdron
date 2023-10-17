@@ -221,7 +221,9 @@ buttons.forEach((button, index) => {
         const nameKey = "files_evidence_delete_" + key;
         // Actualizar el valor del input con la lista actualizada
         const inputElement = document.getElementById(nameKey);
+        console.log('inputElement',inputElement)
         inputElement.value = JSON.stringify(filesList); // Guardar como JSON
+        console.log('inputElement.value',inputElement.value)
 
         return renderPreviews(filesList, multiSelectorUniqPreview, inputFile);
     });
