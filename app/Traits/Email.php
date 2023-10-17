@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Operation;
 use App\Mail\DemoMail;
+use App\Models\User;
 use Mail;
 
 trait Email
@@ -14,13 +15,15 @@ trait Email
         try {
             $operation = Operation::findOrFail($id);
 
+            $pilot = User::findOrFail($operation->pilot_id);
+
             $detail_message = "#$operation->id para el cliente " . $operation->client?->social_reason;
 
             $mailData = [
                 'data' => $operation,
             ];
 
-            Mail::to('jorgetecno38981@gmail.com')->send(new DemoMail($mailData, $detail_message));
+            Mail::to($pilot->email)->send(new DemoMail($mailData, $detail_message));
 
             return response()->json('Email send successfully', 200);
 
