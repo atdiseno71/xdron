@@ -57,7 +57,7 @@
 
                                         <td>
                                             @foreach ($user->clients as $key => $client)
-                                                {{ $client->full_name_user }}{{ $loop->last ? '' : ',' }}
+                                                {{ $client->social_reason }}{{ $loop->last ? '' : ',' }}
                                             @endforeach
                                         </td>
 
