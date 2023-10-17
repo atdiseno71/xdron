@@ -211,7 +211,7 @@ class OperationController extends Controller
         $drones = Dron::pluck('enrollment as label', 'id as value');
 
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
-        
+
         return view(
             'operation.edit',
             compact(
@@ -241,6 +241,9 @@ class OperationController extends Controller
      */
     public function update(Request $request, Operation $operation)
     {
+
+
+        dd($request->all());
 
         $num_operation = (int)$request['detalleCounter'];
 
@@ -329,7 +332,7 @@ class OperationController extends Controller
         }
 
         /* CREAMOS LA NOTIFICACION */
-        $this->make_detail_operation_notification($operation);
+        // $this->make_detail_operation_notification($operation);
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion actualizada con exito.');
