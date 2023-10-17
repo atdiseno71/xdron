@@ -52,6 +52,10 @@ class Operation extends Model
     static $rules = [
     ];
 
+    static $rulesAccept = [
+        'status_id' => 'required'
+    ];
+
     /**
      * Attributes that should be mass-assignable.
      *
@@ -60,6 +64,7 @@ class Operation extends Model
     protected $fillable = [
         'download',
         'observation_admin',
+        'observation',
         'assistant_id_one',
         'assistant_id_two',
         'pilot_id',

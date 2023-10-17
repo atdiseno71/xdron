@@ -16,7 +16,11 @@ use App\Http\Controllers\V2\LuckController;
 use App\Http\Controllers\V2\MailController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/sendemail', [MailController::class, 'index'])->name('mail.index');
+Route::get('/sendemail/{id}', [MailController::class, 'index'])->name('mail.index');
+
+// Aceptar operacion
+Route::get('/accept/{id}', [OperationController::class, 'acceptOperationIndex']);
+Route::post('/accept/{id}', [OperationController::class, 'acceptOperation'])->name('operation.accept');
 
 /* RUTA DE INICIO PARA LAS PWA */
 Route::get('/', function () {

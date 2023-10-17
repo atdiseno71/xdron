@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\V2;
+namespace App\Traits;
 
-use App\Http\Controllers\Controller;
 use App\Models\Operation;
 use App\Mail\DemoMail;
 use Mail;
 
-class MailController extends Controller
+trait Email
 {
-    public function index($id) {
+
+    public function send($id){
 
         try {
             $operation = Operation::findOrFail($id);
@@ -29,4 +29,5 @@ class MailController extends Controller
         }
 
     }
+
 }

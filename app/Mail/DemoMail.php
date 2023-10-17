@@ -14,13 +14,15 @@ class DemoMail extends Mailable
     use Queueable, SerializesModels;
 
     public $mailData;
+    public $detail;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($mailData, $detail)
     {
         $this->mailData = $mailData;
+        $this->detail = $detail;
     }
 
     /**
@@ -29,7 +31,7 @@ class DemoMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Demo Mail',
+            subject: 'Notificación operación ' . $this->detail,
         );
     }
 

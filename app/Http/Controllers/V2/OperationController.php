@@ -18,6 +18,8 @@ use App\Models\Operation;
 use App\Traits\Template;
 use App\Models\Client;
 use App\Models\Estate;
+use App\Models\Status;
+use App\Traits\Email;
 use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
@@ -30,7 +32,7 @@ use App\Models\Zone;
 class OperationController extends Controller
 {
 
-    use Template, ImageTrait;
+    use Template, ImageTrait, Email;
 
     function __construct()
     {
@@ -150,6 +152,9 @@ class OperationController extends Controller
 
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operation);
+
+        // Enviamos el correo
+        dd($this->send($operation->id));
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
@@ -393,6 +398,42 @@ class OperationController extends Controller
         $fincas = Luck::where('estate_id', $estate_id)->get();
 
         return response()->json($fincas);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function acceptOperationIndex($id)
+    {
+        $operation = Operation::find($id);
+
+        $clients = Client::where('id', $operation->id_cliente)->pluck('social_reason as label', 'id as value');
+
+        $assistents = Assistant::whereIn('id', [$operation->assistant_id_one, $operation->assistant_id_two])
+                    ->pluck('name as label', 'id as value');
+
+        $statuses = Status::whereIn('id', [config('status.RECI'), config('status.REC')])->pluck('name as label', 'id as value');
+
+        return view('operation.accept', compact('operation', 'clients', 'assistents', 'statuses'));
+
+    }
+
+    /* Aceptar operacion */
+    public function acceptOperation(Request $request, $id)
+    {
+        $operation = Operation::with('details')->find($id);
+
+        request()->validate(Operation::$rulesAccept);
+        $operation->update($request->all());
+
+        //Generamos el pdf
+        set_time_limit(30000);
+        return redirect()->route('home.welcome')
+            ->with('success', 'Puede continuar con su labor.');
+
     }
 
 }

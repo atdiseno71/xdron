@@ -9,11 +9,22 @@
 </head>
 
 <body>
-    <h1>{{ $mailData['title'] }}</h1>
-    <p>{{ $mailData['body'] }}</p>
+    <p>Hola, <strong>{{ $mailData['data']->userPilot?->name }}</strong>,<br><br> 
+        Ha recibido una notificación
+        para la operación #{{ $mailData['data']->id }}, para el cliente {{ $mailData['data']->client?->social_reason }}<br><br>
+        @if ($mailData['data']->assistant_two != null)
+            <strong>Asistentes:</strong><br>
+            {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }} -
+            {{ $mailData['data']->assistant_two?->name . ' ' . $mailData['data']->assistant_two?->lastname }}
+        @else
+            <strong>Asistente:</strong><br>
+            {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }}
+        @endif
+        <br><br>
+        <strong>Fecha:</strong> {{ $mailData['data']->created_at?->format('d/m/Y') }}<br><br>
+        Para confirmar haga click <a class="btn btn-sm btn-primary " href="{{ route('operation.accept', $mailData['data']->id) }}">aqui</a>
+    </p>
 
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum ullam facere necessitatibus odio praesentium hic
-        sed quos non quaerat neque. Non laborum animi exercitationem debitis beatae tenetur sit inventore vel!</p>
 </body>
 
 </html>
