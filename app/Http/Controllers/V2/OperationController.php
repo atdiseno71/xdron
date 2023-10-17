@@ -24,6 +24,7 @@ use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperationController
@@ -154,7 +155,9 @@ class OperationController extends Controller
         $this->make_operation_notification($operation);
 
         // Enviamos el correo
-        dd($this->send($operation->id));
+        $response_email = $this->send($operation->id);
+
+        Log::info("Response email: " . $response_email);
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
@@ -322,7 +325,7 @@ class OperationController extends Controller
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
-            request()->validate(Operation::$rules);
+            // request()->validate(Operation::$rules);
             $operation->update($request->all());
             // subir archivo
             if ($request->has('file_evidence')) {

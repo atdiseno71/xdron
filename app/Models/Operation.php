@@ -50,6 +50,9 @@ class Operation extends Model
     protected $table = "operation";
 
     static $rules = [
+        'id_cliente' => 'required',
+        'pilot_id' => 'required',
+        'assistant_id_one' => 'required',
     ];
 
     static $rulesAccept = [
