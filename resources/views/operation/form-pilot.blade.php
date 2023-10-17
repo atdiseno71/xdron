@@ -437,6 +437,7 @@
                     </div>
                 </div>
             </div>
+            <script src="{{ asset('js/views/previews/multiple.image_' . $key + 1 . '.js') }}"></script>
         @endforeach
         </div>
         <!-- Contenedor donde todo se va a copiar -->
