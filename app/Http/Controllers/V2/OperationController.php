@@ -242,9 +242,6 @@ class OperationController extends Controller
     public function update(Request $request, Operation $operation)
     {
 
-
-        dd($request->all());
-
         $num_operation = (int)$request['detalleCounter'];
 
         $user = User::where('id', Auth::id())->with('roles')->first();
