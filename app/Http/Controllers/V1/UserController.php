@@ -59,7 +59,7 @@ class UserController extends Controller
 
         $type_documents = TypeDocument::pluck('name', 'id');
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
-        $clients = Client::pluck('full_name_user as label', 'id as name');
+        $clients = Client::pluck('social_reason as label', 'id as name');
 
         $user = new User();
 
@@ -131,7 +131,7 @@ class UserController extends Controller
 
         $type_documents = TypeDocument::pluck('name as label', 'id as value');
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
-        $clients = Client::pluck('full_name_user as label', 'id as name');
+        $clients = Client::pluck('social_reason as label', 'id as name');
 
         $user = $this->model->find($user->id);
 
