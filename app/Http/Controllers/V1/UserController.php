@@ -92,11 +92,13 @@ class UserController extends Controller
 
         $clients = $request['id_cliente'];
 
-        foreach ($clients as $id_client) {
-            DB::table('clients_users')->insert([
-                'client_id' => $id_client,
-                'user_id' => $new_user->id,
-            ]);
+        if (!isset($clients) && !empty($clients)) {
+            foreach ($clients as $id_client) {
+                DB::table('clients_users')->insert([
+                    'client_id' => $id_client,
+                    'user_id' => $new_user->id,
+                ]);
+            }
         }
 
         $new_user->assignRole($request->id_role);
@@ -160,11 +162,13 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        foreach ($clients as $id_client) {
-            DB::table('clients_users')->insert([
-                'client_id' => $id_client,
-                'user_id' => $user->id,
-            ]);
+        if (!isset($clients) && !empty($clients)) {
+            foreach ($clients as $id_client) {
+                DB::table('clients_users')->insert([
+                    'client_id' => $id_client,
+                    'user_id' => $user->id,
+                ]);
+            }
         }
 
         $user->assignRole($request->id_role);
