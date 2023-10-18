@@ -158,9 +158,12 @@ class OperationController extends Controller
         $response_email = $this->sendEmail($operation->id);
 
         // Enviamos el SMS
-        $response_email = $this->sendSMS($operation->id);
+        $response_sms = $this->sendSMS($operation->id);
 
-        Log::info("Response email: " . $response_email);
+        Log::info("Response email: ");
+        Log::info($response_email);
+        Log::info("Response sms: ");
+        Log::info($response_sms);
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
