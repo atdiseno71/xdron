@@ -51,9 +51,16 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
+                    {{ Form::label('phone', 'Número de telefono') }}
+                    {{ Form::number('phone', $user->phone, ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'placeholder' => 'Número de telefono']) }}
+                    {!! $errors->first('phone', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
                     {{ Form::label('document_number', 'Número documento / Contraseña') }}
                     {{ Form::text('document_number', $user->document_number, ['class' => 'form-control' . ($errors->has('document_number') ? ' is-invalid' : ''), 'placeholder' => 'Número documento']) }}
-                    {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('document_number', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">

@@ -33,14 +33,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasRoles, SoftDeletes, Notifiable;
 
-    /* static $rules = [
-		'name' => 'required',
-		'email' => ['required', Rule::unique('users', 'email')->ignore($this->id)],
+    static $rules = [
+		'email' => 'required',
 		'username' => 'required',
 		'id_role' => 'required',
 		'id_type_document' => 'required',
 		'document_number' => 'required',
-    ]; */
+		'phone' => 'required|integer',
+    ];
 
     public function __construct(array $attributes = [])
     {
@@ -54,6 +54,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'phone',
         'name',
         'email',
         'username',

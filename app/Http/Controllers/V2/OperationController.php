@@ -12,6 +12,7 @@ use App\Models\FilesOperation;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
 use App\Models\TypeProduct;
+use App\Traits\Integration;
 use App\Traits\ImageTrait;
 use App\Models\Assistant;
 use App\Models\Operation;
@@ -19,7 +20,6 @@ use App\Traits\Template;
 use App\Models\Client;
 use App\Models\Estate;
 use App\Models\Status;
-use App\Traits\Email;
 use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Log;
 class OperationController extends Controller
 {
 
-    use Template, ImageTrait, Email;
+    use Template, ImageTrait, Integration;
 
     function __construct()
     {
@@ -155,7 +155,10 @@ class OperationController extends Controller
         $this->make_operation_notification($operation);
 
         // Enviamos el correo
-        $response_email = $this->send($operation->id);
+        $response_email = $this->sendEmail($operation->id);
+
+        // Enviamos el SMS
+        $response_email = $this->sendSMS($operation->id);
 
         Log::info("Response email: " . $response_email);
 

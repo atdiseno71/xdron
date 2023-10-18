@@ -77,6 +77,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+
         request()->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('users', 'email')],
@@ -84,6 +85,7 @@ class UserController extends Controller
             'id_role' => 'required',
             'id_type_document' => 'required',
             'document_number' => 'required',
+            'phone' => 'required|numeric|digits:10',
         ]);
 
         $request['password'] = Hash::make($request['document_number']);
