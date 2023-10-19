@@ -377,7 +377,6 @@
                     </div>
                 </div>
             </div>
-            <script src="{{ asset('js/views/previews/multiple.image_' . $key + 1 . '.js') }}"></script>
         @endforeach
         </div>
         <!-- Contenedor donde todo se va a copiar -->
@@ -451,8 +450,22 @@
                 var scriptElement = document.createElement("script");
                 scriptElement.src = scriptSrc;
                 document.body.appendChild(scriptElement);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Se agregó exitosamente el vuelo!',
+                    text: 'Al vuelo #' + keyCounter + ' puede continuar cargando la información',
+                    timer: 2000,
+                });
+
             });
         });
     </script>
-    <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
+
+    @forelse ($operation->details as $index => $detail)
+        <script src="{{ asset('js/views/previews/multiple.image_' . $index + 1 . '.js') }}"></script>
+    @empty
+        <script src="{{ asset('js/views/previews/multiple.image_1.js') }}"></script>
+    @endforelse
+
 </div>
