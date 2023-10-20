@@ -154,7 +154,7 @@ tr {
     border-color: inherit;
 }
 .table>:not(caption)>*>* {
-    padding: 0.5rem 0.5rem;
+    /* padding: 0.5rem 0.5rem; */
     background-color: #212529;
     border-bottom-width: 0px;
     box-shadow: inset 0 0 0 9999px transparent;
@@ -239,18 +239,23 @@ p {
 
 /* ESTILOS IMAGENES */
 .img-evidencia {
+    margin-top: 0;
     width: 100%;
-    /* height: 100vh; */
+    max-height: 100%; /* Esto permite que la imagen se ajuste al espacio disponible */
     padding: 0.5rem 0.5rem;
     margin-left: 2rem;
     border-bottom-width: 0px;
     box-shadow: inset 0 0 0 9999px transparent;
 }
 
+.img-large {
+    height: 47%; /* Tamaño de imagen al 47% del espacio disponible */
+}
+
 #main-header {
 	background: #198754/* #212529 */;
 	color: #000;
-	height: 80px;
+	height: 60px;
 }
 #main-header a {
     color: #000;
@@ -269,16 +274,16 @@ p {
 }
 
 #logo-header .site-name {
-    display: block;
+    /* display: block; */
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 #logo-header .site-desc {
     display: block;
-    font-weight: 300;
+    font-weight: 700;
     font-size: 0.8em;
-    color: #999;
+    color: #fff;
 }
 
 /*

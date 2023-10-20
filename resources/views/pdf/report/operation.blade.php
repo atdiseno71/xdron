@@ -12,17 +12,9 @@
             <span class="site-desc">{{ $operation->client?->social_reason ?? '' }} / {{ $operation->details[0]?->typeProduct?->name ?? '' }}</span>
         </a> <!-- / #logo-header -->
 
-        {{-- <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Acerca de</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </nav><!-- / nav --> --}}
-
     </header>
 
-    <h5 style="text-align: center"><strong>REPORTE GENERAL</strong></h5>
+    <h5 class="alineacion-center"><strong>REPORTE GENERAL</strong></h5>
     <table class="table">
         <thead class="table-dark">
             <tr>
@@ -61,7 +53,7 @@
             </ul>
         </div>
         @foreach ($detail->files_details as $file)
-            <img class="img-evidencia" src="{{ $file->src_file }}">
+            <img class="img-evidencia img-large" src="{{ $file->src_file }}">
         @endforeach
     @empty
         <p class="alineacion-center">No hay imagenes registratadas en la operación</p>

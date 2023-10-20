@@ -9,6 +9,10 @@
         <title>
             @yield('title', 'Reportes')
         </title>
+        <style>
+            /* Define clases CSS para ajustar el tamaño de las imágenes */
+
+        </style>
         {{-- Favicon --}}
         <link rel="shortcut icon" href="{{ public_path('img/config/favicon.ico') }}" />
         {{-- Custom Stylesheets --}}
