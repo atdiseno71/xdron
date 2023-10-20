@@ -81,7 +81,7 @@ class UserController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('users', 'email')],
-            'username' => 'required',
+            // 'username' => 'required',
             'id_role' => 'required',
             'id_type_document' => 'required',
             'document_number' => 'required',
