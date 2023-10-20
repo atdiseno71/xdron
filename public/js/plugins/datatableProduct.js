@@ -11,20 +11,6 @@ $(document).ready(function () {
         dom: 'Bfrtip',
         buttons: [
             {
-                extend: 'csvHtml5',
-                text: 'CSV <i class="fas fa-file-excel"></i> ',
-                titleAttr: 'Exportar a CSV',
-                className: 'btn btn-primary',
-                autoFilter: true,
-                sheetName: 'Index',
-                exportOptions: {
-                    modifier: {
-                    page: 'all',
-                    search: 'none'
-                    }
-                },
-            },
-            {
                 extend: 'excelHtml5',
                 text: 'Excel <i class="fas fa-file-excel"></i> ',
                 titleAttr: 'Exportar a Excel',
@@ -37,17 +23,6 @@ $(document).ready(function () {
                     },
                 },
 
-            },
-            {
-                extend: 'pdfHtml5',
-                text: 'PDF <i class="fas fa-file-pdf"></i> ',
-                titleAttr: 'Exportar a PDF',
-                className: 'btn btn-danger',
-                exportOptions: {
-                    modifier: {
-                        page: 'current'
-                    }
-                }
             },
             {
                 extend: 'print',

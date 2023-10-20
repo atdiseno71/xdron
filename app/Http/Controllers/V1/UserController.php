@@ -81,7 +81,6 @@ class UserController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('users', 'email')],
-            // 'username' => 'required',
             'id_role' => 'required',
             'id_type_document' => 'required',
             'document_number' => 'required',
@@ -158,7 +157,6 @@ class UserController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
-            'username' => 'required',
             'id_role' => 'required',
             'id_type_document' => 'required',
             'document_number' => 'required',

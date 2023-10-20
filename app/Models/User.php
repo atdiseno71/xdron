@@ -35,7 +35,6 @@ class User extends Authenticatable
 
     static $rules = [
 		'email' => 'required',
-		'username' => 'required',
 		'id_role' => 'required',
 		'id_type_document' => 'required',
 		'document_number' => 'required',
