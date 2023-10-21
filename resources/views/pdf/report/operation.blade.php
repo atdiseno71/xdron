@@ -11,10 +11,9 @@
             <span class="site-name">XDRON</span>
             <span class="site-desc">{{ $operation->client?->social_reason ?? '' }} / {{ $operation->details[0]?->typeProduct?->name ?? '' }}</span>
         </a> <!-- / #logo-header -->
-
     </header>
 
-    <h5 class="alineacion-center"><strong>REPORTE GENERAL</strong></h5>
+    <h5 class="alineacion-center title-report"><strong>REPORTE GENERAL</strong></h5>
     <table class="table">
         <thead class="table-dark">
             <tr>
@@ -43,6 +42,8 @@
             </tr>
         </tbody>
     </table>
+
+    <br><br>
 
     @forelse ($operation->details as $key => $detail)
         <div class="detail">
