@@ -268,7 +268,7 @@ p {
 #main-header {
 	background: #198754/* #212529 */;
 	color: #000;
-	height: 60px;
+	height: 45px;
 }
 #main-header a {
     color: #000;
@@ -293,7 +293,10 @@ p {
 }
 
 #logo-header .site-desc {
-    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15%;
+    right: 15%;
     font-weight: 700;
     font-size: 0.8em;
     color: #fff;
@@ -303,7 +306,11 @@ p {
  * Navegación
  */
 ul {
-    position: static;
+    /* Posicionar informe general */
+    position: absolute;
+    top: 160px;
+    left: 15%;
+    right: 15%;
     color: #000;
     text-align: center;
 
@@ -316,7 +323,7 @@ ul {
     /* -moz-border-radius: 105px 105px 105px 105px; */
 
     background: #198754/* #212529 */;
-    height: 1.5cm;
+    height: 1.4cm;
     margin: 0;
     padding: 0;
     list-style: none;

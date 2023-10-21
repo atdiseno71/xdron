@@ -53,6 +53,7 @@
                 </li>
             </ul>
         </div>
+        <br><br>
         @foreach ($detail->files_details as $file)
             <img class="img-evidencia img-large" src="{{ $file->src_file }}">
         @endforeach
