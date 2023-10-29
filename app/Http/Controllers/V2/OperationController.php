@@ -24,7 +24,6 @@ use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperationController
@@ -149,7 +148,19 @@ class OperationController extends Controller
         $operation->admin_by = Auth::id();
         $operation->status_id = config('status.CRE');
 
-        $operation->save();
+        $save = $operation->save();
+
+        if ($save) {
+            // Guardamos el archivo zip
+            $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
+            // Si no se guarda, me salte el error en la operacion
+            if ($response->getStatusCode() != 200) {
+                return redirect()->route('operations.index')
+                    ->with('error', $response->getData());
+            }
+            // Guardamos el zip en el campo
+            $operation->update(['file_evidence' => $response->getData()]);
+        }
 
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operation);
@@ -159,11 +170,6 @@ class OperationController extends Controller
 
         // Enviamos el SMS
         $response_sms = $this->sendSMS($operation->id);
-
-        Log::info("Response email: ");
-        Log::info($response_email);
-        Log::info("Response sms: ");
-        Log::info($response_sms);
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
@@ -186,6 +192,30 @@ class OperationController extends Controller
 
         $pdf->set_paper('letter', 'landscape');
         return $pdf->stream('reporte.pdf');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id)
+    {
+        // Buscamos la operacion
+        $operation = Operation::find($id);
+
+        if(is_null($operation->file_evidence)) {
+            return redirect()->route('operations.index')
+                ->with('error', 'No existe el archivo que intenta descargar.');
+        }
+
+        // Guardamos la ruta
+        $path = public_path($operation->file_evidence);
+
+        // Retornarmos la descarga
+        return response()->download($path);
+
     }
 
     /**
@@ -335,8 +365,15 @@ class OperationController extends Controller
             $operation->update($request->all());
             // subir archivo
             if ($request->has('file_evidence')) {
-                $handle_1 = $this->update_file($request, 'file_evidence', $folder, $operation->id, $operation->file_evidence);
-                $operation->update(['file_evidence' => $handle_1['response']['payload']]);
+                // Guardamos el archivo zip
+                $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
+                // Si no se guarda, me salte el error en la operacion
+                if ($response->getStatusCode() != 200) {
+                    return redirect()->route('operations.index')
+                        ->with('error', $response->getData());
+                }
+                // Guardamos el zip en el campo
+                $operation->update(['file_evidence' => $response->getData()]);
             }
         } else if ($role_user == config('roles.piloto')) {
             $operation->update(['status_id' => config('status.ENR')]);

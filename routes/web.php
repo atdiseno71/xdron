@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
 
+    // Descargar zip
+    Route::get('downloadZip/{id}', [OperationController::class, 'download'])->name('operations.download');
+
     // Subir registros desde los modals
     Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');
     Route::post('uploadTypeProduct', [TypeProductController::class, 'store'])->name('typeProduct.uploadTypeProduct');

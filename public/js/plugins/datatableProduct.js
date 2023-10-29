@@ -31,9 +31,13 @@ $(document).ready(function () {
                 className: 'btn btn-secondary',
             },
         ],
-        /* buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ], */
+        'columnDefs': [
+            {
+               'targets': [1, 2, 3, 4, 5],
+               'searchable': false
+            }
+        ],
+        'rowsGroup': [0,2,3],
         language: {
             "processing": "Procesando...",
             "lengthMenu": "Mostrar _MENU_ registros",
