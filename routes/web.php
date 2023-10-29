@@ -1,19 +1,26 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\V1\UserController;
-use App\Http\Controllers\V2\AssistantController;
-use App\Http\Controllers\V2\ClientController;
-use App\Http\Controllers\V2\DepartmentController;
-use App\Http\Controllers\V2\DronController;
-use App\Http\Controllers\V2\EstateController;
-use App\Http\Controllers\V2\LuckController;
 use App\Http\Controllers\V2\MunicipalityController;
-use App\Http\Controllers\V2\OperationController;
-use App\Http\Controllers\V2\ProductController;
-use App\Http\Controllers\V2\StatusController;
 use App\Http\Controllers\V2\TypeProductController;
+use App\Http\Controllers\V2\DepartmentController;
+use App\Http\Controllers\V2\AssistantController;
+use App\Http\Controllers\V2\OperationController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\V2\ProductController;
+use App\Http\Controllers\V2\ClientController;
+use App\Http\Controllers\V2\EstateController;
+use App\Http\Controllers\V2\StatusController;
+use App\Http\Controllers\V1\UserController;
+use App\Http\Controllers\V2\DronController;
+use App\Http\Controllers\V2\LuckController;
+use App\Http\Controllers\V2\MailController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/sendemail/{id}', [MailController::class, 'index'])->name('mail.index');
+
+// Aceptar operacion
+Route::get('/accept/{id}', [OperationController::class, 'acceptOperationIndex']);
+Route::post('/accept/{id}', [OperationController::class, 'acceptOperation'])->name('operation.accept');
 
 /* RUTA DE INICIO PARA LAS PWA */
 Route::get('/', function () {
@@ -52,6 +59,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('operations', OperationController::class)->names('operations');
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
+
+    // Descargar zip
+    Route::get('downloadZip/{id}', [OperationController::class, 'download'])->name('operations.download');
 
     // Subir registros desde los modals
     Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');

@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Operacion;
+use App\Models\Operation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,13 +13,15 @@ class OperationNotification extends Notification
     use Queueable;
 
     private $operation;
+    private $is_admin;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Operacion $operation)
+    public function __construct(Operation $operation, $is_admin)
     {
         $this->operation = $operation;
+        $this->is_admin = $is_admin;
     }
 
     /**
@@ -52,12 +54,16 @@ class OperationNotification extends Notification
     {
         return [
             'id' => $this->id,
-            'id_servicio' => $this->operation?->servicio?->name,
-            'descarga' => $this->operation?->descarga,
-            'fecha_ejecucion' => $this->operation?->fecha_ejecucion,
-            'id_piloto' => $this->operation?->user?->name,
-            'observations' => $this->operation?->observations,
-            'created_at' => $this->operation?->created_at,
+            'observation_admin' => $this->operation?->observation_admin,
+            'assistant_id_one' => $this->operation?->assistant_one?->name . ' ' . $this->operation?->assistant_one?->lastname,
+            'assistant_id_two' => $this->operation?->fecha_ejecucion,
+            'pilot_id' => $this->operation?->userPilot?->name,
+            'id_cliente' => $this->operation?->client?->social_reason,
+            'admin_by' => $this->operation?->userAdmin?->name,
+            'status_id' => $this->operation?->status?->name,
+            'file_evidence' => $this->operation?->file_evidence,
+            'created_at' => $this->operation?->created_at?->format('d/m/Y'),
+            'is_admin' => $this->is_admin,
         ];
     }
 }

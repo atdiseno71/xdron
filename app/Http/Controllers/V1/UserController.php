@@ -59,7 +59,7 @@ class UserController extends Controller
 
         $type_documents = TypeDocument::pluck('name', 'id');
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
-        $clients = Client::pluck('full_name_user as label', 'id as name');
+        $clients = Client::pluck('social_reason as label', 'id as name');
 
         $user = new User();
 
@@ -77,13 +77,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+
         request()->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('users', 'email')],
-            'username' => 'required',
             'id_role' => 'required',
             'id_type_document' => 'required',
             'document_number' => 'required',
+            'phone' => 'required|numeric|digits:10',
         ]);
 
         $request['password'] = Hash::make($request['document_number']);
@@ -92,11 +93,17 @@ class UserController extends Controller
 
         $clients = $request['id_cliente'];
 
-        foreach ($clients as $id_client) {
-            DB::table('clients_users')->insert([
-                'client_id' => $id_client,
-                'user_id' => $new_user->id,
-            ]);
+        if (isset($clients) && empty($clients)) {
+            // echo "La variable \$clients está definida pero está vacía.";
+        } elseif (!isset($clients)) {
+            // echo "La variable \$clients no está definida.";
+        } else {
+            foreach ($clients as $id_client) {
+                DB::table('clients_users')->insert([
+                    'client_id' => $id_client,
+                    'user_id' => $new_user->id,
+                ]);
+            }
         }
 
         $new_user->assignRole($request->id_role);
@@ -129,7 +136,7 @@ class UserController extends Controller
 
         $type_documents = TypeDocument::pluck('name as label', 'id as value');
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
-        $clients = Client::pluck('full_name_user as label', 'id as name');
+        $clients = Client::pluck('social_reason as label', 'id as name');
 
         $user = $this->model->find($user->id);
 
@@ -150,7 +157,6 @@ class UserController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
-            'username' => 'required',
             'id_role' => 'required',
             'id_type_document' => 'required',
             'document_number' => 'required',
@@ -160,11 +166,17 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        foreach ($clients as $id_client) {
-            DB::table('clients_users')->insert([
-                'client_id' => $id_client,
-                'user_id' => $user->id,
-            ]);
+        if (isset($clients) && empty($clients)) {
+            // echo "La variable \$clients está definida pero está vacía.";
+        } elseif (!isset($clients)) {
+            // echo "La variable \$clients no está definida.";
+        } else {
+            foreach ($clients as $id_client) {
+                DB::table('clients_users')->insert([
+                    'client_id' => $id_client,
+                    'user_id' => $user->id,
+                ]);
+            }
         }
 
         $user->assignRole($request->id_role);

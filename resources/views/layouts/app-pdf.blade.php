@@ -9,6 +9,10 @@
         <title>
             @yield('title', 'Reportes')
         </title>
+        <style>
+            /* Define clases CSS para ajustar el tamaño de las imágenes */
+
+        </style>
         {{-- Favicon --}}
         <link rel="shortcut icon" href="{{ public_path('img/config/favicon.ico') }}" />
         {{-- Custom Stylesheets --}}
@@ -18,12 +22,12 @@
     <body>
         <!-- Document body -->
         @yield('content')
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0
             </div>
             <strong>Copyright©2023.</strong> All rights reserved. <strong>Arte & Diseño</strong>
-        </footer>
+        </footer> --}}
         {{-- Custom Scripts --}}
         @yield('js')
     </body>

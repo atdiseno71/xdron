@@ -9,6 +9,7 @@ use App\Models\FilesOperation;
 use Illuminate\Http\Request;
 use App\Utilities\Resources;
 use Illuminate\Support\Str;
+use ZipArchive;
 use Exception;
 
 trait ImageTrait
@@ -175,6 +176,59 @@ trait ImageTrait
                 'response' => ['success' => false, 'payload' => $ex->getMessage()]
             ];
         }
+
+    }
+
+    // Subir archivos zip
+    public function uploadZip($request, $id, $model, $sub_model, $name_file) {
+
+        try {
+            // Traemos el archivo
+            $file = $request->file($name_file);
+            // Guardamos la ruta en la que va
+            $path = public_path("$model/_$id/$sub_model");
+            // Un nombre cualquiera de momento
+            $name = 'evidence';
+
+            if( $file->getSize() == 0 ) throw new Exception("No se ha recibido un archivo") ;
+
+            // creamos las carpetas
+            if( ! is_dir(public_path($model)) ) mkdir(public_path($model));
+            if( ! is_dir(public_path("$model/_$id")) ) mkdir(public_path("$model/_$id"));
+            if( ! is_dir(public_path("$model/_$id/$sub_model")) ) mkdir(public_path("$model/_$id/$sub_model"));
+
+            move_uploaded_file( $request[$name_file], "$path/$name.zip" );
+
+            $zipppito = new ZipArchive( );
+            $response = $zipppito->open( "$path/$name.zip", ZipArchive::RDONLY );
+
+            if( $response !== true ){
+                $errors = [
+                    ZipArchive::ER_EXISTS  =>  "El fichero ya existe.",
+                    ZipArchive::ER_INCONS  =>  "Archivo zip inconsistente.",
+                    ZipArchive::ER_INVAL  =>  "Argumento no válido.",
+                    ZipArchive::ER_MEMORY  =>  "Falló malloc.",
+                    ZipArchive::ER_NOENT  =>  "No existe el fichero.",
+                    ZipArchive::ER_NOZIP  =>  "No es un archivo zip.",
+                    ZipArchive::ER_OPEN  =>  "No se puede abrir el fichero.",
+                    ZipArchive::ER_READ  =>  "Error de lectura.",
+                    ZipArchive::ER_SEEK  =>  "Error de búsqueda."
+                ];
+
+                $message = $errors[ $response ];
+                throw new Exception("$message");
+            }
+
+            // Esto es para extraerlo
+            // $zipppito->extractTo("$path/$name");
+            // Aca cerramos el archivo zip
+            $zipppito->close();
+            // Retornamos que se guardo con exito
+            return response()->json("$model/_$id/$sub_model/$name.zip");
+        } catch (Exception $ex) {
+            return response()->json($ex->getMessage(), 422);
+        }
+
 
     }
 

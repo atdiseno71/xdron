@@ -1,9 +1,43 @@
-$(document).ready( function () {
-    $('.table').DataTable({
+$(document).ready(function () {
+    var table = $('.table').DataTable({
+        responsive: true,
         "searching": false,
         "paginate": false,
-        "lengthMenu": false,
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, 'All']
+        ],
         "info": false,
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Excel <i class="fas fa-file-excel"></i> ',
+                titleAttr: 'Exportar a Excel',
+                className: 'btn btn-success',
+                autoFilter: true,
+                sheetName: 'Index',
+                exportOptions: {
+                    modifier: {
+                        page: 'all',
+                    },
+                },
+
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print"></i> ',
+                titleAttr: 'Imprimir',
+                className: 'btn btn-secondary',
+            },
+        ],
+        'columnDefs': [
+            {
+               'targets': [1, 2, 3, 4, 5],
+               'searchable': false
+            }
+        ],
+        'rowsGroup': [0,2,3],
         language: {
             "processing": "Procesando...",
             "lengthMenu": "Mostrar _MENU_ registros",
@@ -247,4 +281,7 @@ $(document).ready( function () {
             }
         }
     });
+
+    table.rows( {page:'all'} ).data();
+
 });

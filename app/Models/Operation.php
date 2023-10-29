@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Operation
@@ -44,11 +45,18 @@ class Operation extends Model
         $this->perPage = config('global.num_pagination');
     }
 
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
     protected $table = "operation";
 
     static $rules = [
+        'id_cliente' => 'required',
+        'pilot_id' => 'required',
+        'assistant_id_one' => 'required',
+    ];
+
+    static $rulesAccept = [
+        'status_id' => 'required'
     ];
 
     /**
@@ -59,13 +67,13 @@ class Operation extends Model
     protected $fillable = [
         'download',
         'observation_admin',
+        'observation',
         'assistant_id_one',
         'assistant_id_two',
         'pilot_id',
         'id_cliente',
         'admin_by',
         'status_id',
-        'observation_admin',
         'file_evidence',
     ];
 

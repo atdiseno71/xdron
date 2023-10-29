@@ -57,11 +57,11 @@
 
                                         <td>
                                             @foreach ($user->clients as $key => $client)
-                                                {{ $client->full_name_user }}{{ $loop->last ? '' : ',' }}
+                                                {{ $client->social_reason }}{{ $loop->last ? '' : ',' }}
                                             @endforeach
                                         </td>
 
-                                        <td>{{ $user->roles[0]?->name }}</td>
+                                        <td>{{ $user->roles[0]?->name ?? 'No hay roles.' }}</td>
 
                                         <td>
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="form-delete">

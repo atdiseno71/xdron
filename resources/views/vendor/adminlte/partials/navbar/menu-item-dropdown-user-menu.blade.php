@@ -137,18 +137,39 @@
                 var respuesta = itemObj.data;
 
                 // Ahora puedes acceder a cada propiedad de la respuesta
-                var idServicio = respuesta.id_servicio;
-                var descarga = respuesta.descarga;
-                var fechaEjecucion = respuesta.fecha_ejecucion;
+                var pilot_id = respuesta.pilot_id;
+                var assistant_id_one = respuesta.assistant_id_one;
+                var assistant_id_two = respuesta.assistant_id_two;
+                var id_cliente = respuesta.id_cliente;
+                var is_admin = respuesta.is_admin;
+                var created_at = respuesta.created_at;
 
-                console.log(idServicio); // Mostrará: "servicio 1"
-                console.log(descarga); // Mostrará: "asd"
-                console.log(fechaEjecucion); // Mostrará: "2023-07-18"
+                /* console.log(pilot_id); // Mostrará: "piloto 1"
+                console.log(created_at); // Mostrará: "2023-07-18" */
 
-                modalContent += `
-                    <p>Se te asignó el servicio ${idServicio}, con una descarga ${descarga} y con la fecha de ejecución de ${fechaEjecucion}</p>
+                // console.log('respuesta', respuesta)
+
+                /* modalContent += `
+                    <p>Se te asignó una operación, ${pilot_id}, cuentas con la ayuda de ${assistant_id_one} y ${assistant_id_two}, esta operacion ha sido creada ${created_at}</p>
                     <hr>
-                `;
+                `; */
+                if (is_admin === 1) {
+                    // Nensaje para el admin
+                    modalContent += `
+                        <p>Hay cambios en la operacion del piloto, ${pilot_id}, para el cliente ${id_cliente},
+                            ${(assistant_id_two === null) ? `el asistente ${assistant_id_one}, esta operación ha sido creada ${created_at}` :
+                            `el asistente ${assistant_id_one} y ${assistant_id_two}, esta operación ha sido creada ${created_at}`}</p>
+                        <hr>
+                    `;
+                } else {
+                    // Nensaje para el piloto
+                    modalContent += `
+                        <p>Se te asignó una operación, ${pilot_id}, para el cliente ${id_cliente},
+                            ${(assistant_id_two === null) ? `cuentas con la ayuda de ${assistant_id_one}, esta operación ha sido creada ${created_at}` :
+                            `cuentas con la ayuda de ${assistant_id_one} y ${assistant_id_two}, esta operación ha sido creada ${created_at}`}</p>
+                        <hr>
+                    `;
+                }
             });
 
             // Creamos el modal usando Bootstrap y mostramos el contenido dentro de él

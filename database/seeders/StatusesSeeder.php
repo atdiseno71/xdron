@@ -18,13 +18,15 @@ class StatusesSeeder extends Seeder
             'Recibido',
             'En revisión',
             'Aprobado',
+            'Rechazado',
         ];
 
         $slug = [
             'CRE',
-            'REC',
+            'RECI',
             'ENR',
             'APR',
+            'REC',
         ];
 
         foreach ($names as $key => $value) {

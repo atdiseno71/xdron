@@ -188,3 +188,41 @@ function eventDrop(event) {
     // Only DEMO. Changes are redrawn.
     renderPreviews(filesList, multiSelectorUniqPreview, fileInputMulti);
 }
+// Modificar los botones ya cargados
+/* Buttons */
+const buttons = document.querySelectorAll(".btn-preview-image");
+
+buttons.forEach((button, index) => {
+
+    button.textContent = "X";
+    button.classList.add("btn");
+    button.classList.add("btn-danger");
+    button.classList.add("btn-preview-image");
+    button.setAttribute("type", 'button');
+
+    button.addEventListener("click", () => {
+        // lógica para eliminar el elemento y realizar otras acciones
+        // padre del botón donde se elimina
+        const parentElement = button.parentElement;
+        parentElement.remove();
+
+        // Donde se supone que deberia modificar la lista
+        /* filesList = deleteArrayElementByIndex(filesList, index);
+        inputFile.files = arrayFilesToFileList(filesList);
+        return renderPreviews(filesList, multiSelectorUniqPreview, inputFile); */
+        // Acceder al valor almacenado en el atributo data-src
+        const srcFile = button.getAttribute("data-src");
+        // Acceder al valor almacenado en el atributo data-src
+        const key = button.getAttribute("data-key");
+        // Agregar srcFile a tu lista
+        filesList.push(srcFile);
+        // Name input por cada detalle
+        const nameKey = "files_evidence_delete_" + key;
+        // Actualizar el valor del input con la lista actualizada
+        const inputElement = document.getElementById(nameKey);
+        console.log('inputElement',inputElement)
+        inputElement.value = JSON.stringify(filesList); // Guardar como JSON
+        console.log('inputElement.value',inputElement.value)
+
+    });
+});

@@ -37,56 +37,74 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" cellspacing="0" width="100%">
                             <thead class="thead">
                                 <tr>
-                                    <th>No</th>
 
-                                    {{-- <th>Tipo producto</th> --}}
+                                    <th>No</th>
+                                    <th>Acciones</th>
                                     <th>Hacienda</th>
                                     <th>Suerte</th>
-                                    <th>Tipo Producto</th>
+                                    <th>T. Producto</th>
                                     <th>Dron</th>
-                                    <th>Cant. vuelos</th>
+
+                                    <th>Hectareas/vuelos</th>
+                                    <th>Hectareas/Baterias</th>
+
+                                    <th>T Baterias</th>
+                                    <th>TH vuelos</th>
+                                    <th>T Hectareas</th>
+                                    <th>T vuelos</th>
+
                                     <th>Asistentes</th>
                                     <th>Piloto</th>
                                     <th>Cliente</th>
                                     <th>Administrador</th>
+                                    <th>Fecha creación</th>
+                                    <th>Fecha vuelo</th>
                                     <th>Estado</th>
 
-                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($operations as $key => $operation)
+                                @php
+                                    $number_flights = 0;
+                                    $hour_flights = 0;
+                                    $acres = 0;
+                                    foreach ($operation->details as $detail) {
+                                        $number_flights += $detail->number_flights;
+                                        $hour_flights += $detail->hour_flights;
+                                        $acres += $detail->acres;
+                                    }
+                                    /* Horas de vuelos */
+                                    if ($hour_flights != 0) {
+                                        $divide1 = $acres / $hour_flights;
+                                    } else {
+                                        $divide1 = 0;
+                                    }
+                                    /* Numero de vuelos */
+                                    if ($number_flights != 0) {
+                                        $divide2 = $acres / $number_flights;
+                                    } else {
+                                        $divide2 = 0;
+                                    }
+                                @endphp
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
 
-                                        <td>{{ $operation->details[0]?->estate->name ?? 'No hay vuelos.' }}</td>
-                                        <td>
-                                            @forelse ($operation->details as $index => $detail)
-                                                {{ $detail->luck }}
-                                                @if (!$loop->last)
-                                                    ,
-                                                @endif
-                                            @empty
-                                                No hay vuelos.
-                                            @endforelse
-                                        </td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'No hay vuelos.' }}</td>
-                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'No hay vuelos.' }}</td>
-                                        <td>{{ count($operation->details) }}</td>
-                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
-                                        <td>{{ $operation->userPilot?->name }}</td>
-                                        <td>{{ $operation->client?->social_reason }}</td>
-                                        <td>{{ $operation->userAdmin?->name }}</td>
-                                        <td>{{ $operation->status?->name }}</td>
+                                        <td>{{ $operation->id }}</td>
 
                                         <td>
                                             <form action="{{ route('operations.destroy', $operation->id) }}"
                                                 method="POST" class="form-delete">
                                                 @can('operations.show')
-                                                    <a class="btn btn-sm btn-primary " target="_blank"
+                                                    <a class="btn btn-sm btn-warning"
+                                                        href="{{ route('operations.download', $operation->id) }}">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M18.983 8.64168C18.9046 8.545 18.8055 8.46712 18.693 8.41376C18.5805 8.3604 18.4575 8.33293 18.333 8.33335H16.6663V7.50002C16.6663 6.83698 16.4029 6.20109 15.9341 5.73225C15.4653 5.26341 14.8294 5.00002 14.1663 5.00002H8.93301L8.66634 4.16669C8.49347 3.67771 8.1728 3.2546 7.74876 2.95599C7.32472 2.65737 6.8183 2.49802 6.29967 2.50002H3.33301C2.66997 2.50002 2.03408 2.76341 1.56524 3.23225C1.0964 3.70109 0.833008 4.33698 0.833008 5.00002V15C0.833008 15.6631 1.0964 16.2989 1.56524 16.7678C2.03408 17.2366 2.66997 17.5 3.33301 17.5H15.333C15.9007 17.4984 16.4509 17.3036 16.8931 16.9476C17.3354 16.5917 17.6433 16.0959 17.7663 15.5417L19.1663 9.35002C19.1917 9.22578 19.1883 9.0974 19.1566 8.97465C19.1248 8.85191 19.0654 8.73803 18.983 8.64168ZM4.47467 15.1833C4.43234 15.3713 4.32617 15.5388 4.17423 15.6574C4.02229 15.7759 3.83398 15.8381 3.64134 15.8334H3.33301C3.11199 15.8334 2.90003 15.7456 2.74375 15.5893C2.58747 15.433 2.49967 15.221 2.49967 15V5.00002C2.49967 4.779 2.58747 4.56704 2.74375 4.41076C2.90003 4.25448 3.11199 4.16669 3.33301 4.16669H6.29967C6.4814 4.1572 6.66123 4.20746 6.8117 4.30978C6.96218 4.4121 7.07502 4.56087 7.13301 4.73335L7.58301 6.10002C7.63648 6.25897 7.73667 6.39809 7.87048 6.49919C8.00429 6.60029 8.16549 6.65867 8.33301 6.66668H14.1663C14.3874 6.66668 14.5993 6.75448 14.7556 6.91076C14.9119 7.06704 14.9997 7.279 14.9997 7.50002V8.33335H6.66634C6.47371 8.32864 6.28539 8.39084 6.13345 8.50935C5.98151 8.62786 5.87534 8.79537 5.83301 8.98335L4.47467 15.1833ZM16.1413 15.1833C16.099 15.3713 15.9928 15.5388 15.8409 15.6574C15.689 15.7759 15.5006 15.8381 15.308 15.8334H6.00801C6.05105 15.7405 6.08186 15.6425 6.09967 15.5417L7.33301 10H17.333L16.1413 15.1833Z" fill="#FCFCFC"/>
+                                                        </svg>
+                                                    </a>
+                                                    <a class="btn btn-sm btn-primary" target="_blank"
                                                         href="{{ route('operations.show', $operation->id) }}">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M18.125 8.125H13.75V3.125C13.7495 2.62789 13.5517 2.15129 13.2002 1.79978C12.8487 1.44827 12.3721 1.25055 11.875 1.25H3.125C2.62789 1.25055 2.15129 1.44827 1.79978 1.79978C1.44827 2.15129 1.25055 2.62789 1.25 3.125V16.875C1.25055 17.3721 1.44827 17.8487 1.79978 18.2002C2.15129 18.5517 2.62789 18.7495 3.125 18.75H15.625C16.4535 18.749 17.2478 18.4195 17.8336 17.8336C18.4195 17.2478 18.749 16.4535 18.75 15.625V8.75C18.75 8.58424 18.6842 8.42527 18.5669 8.30806C18.4497 8.19085 18.2908 8.125 18.125 8.125ZM2.5 16.875V3.125C2.50015 2.95929 2.56604 2.8004 2.68322 2.68322C2.8004 2.56604 2.95929 2.50015 3.125 2.5H11.875C12.0407 2.50015 12.1996 2.56604 12.3168 2.68322C12.434 2.8004 12.4999 2.95929 12.5 3.125V17.5H3.125C2.95929 17.4999 2.8004 17.434 2.68322 17.3168C2.56604 17.1996 2.50015 17.0407 2.5 16.875V16.875ZM17.5 15.625C17.4995 16.1221 17.3017 16.5987 16.9502 16.9502C16.5987 17.3017 16.1221 17.4995 15.625 17.5H13.75V9.375H17.5V15.625Z" fill="white"/>
@@ -109,15 +127,43 @@
                                                 @endcan
                                             </form>
                                         </td>
+
+                                        <td>{{ $operation->details[0]?->estate->name ?? 'Sin vuelos.' }}</td>
+                                        <td>
+                                            @forelse ($operation->details as $index => $detail)
+                                                {{ $detail->luck }}
+                                                @if (!$loop->last)
+                                                    ,
+                                                @endif
+                                            @empty
+                                                Sin vuelos.
+                                            @endforelse
+                                        </td>
+                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $divide1 }}</td>
+                                        <td>{{ $divide2 }}</td>
+                                        <td>{{ $number_flights }}</td>
+                                        <td>{{ $hour_flights }}</td>
+                                        <td>{{ $acres }}</td>
+                                        <td>{{ count($operation->details) }}</td>
+                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
+                                        <td>{{ $operation->userPilot?->name }}</td>
+                                        <td>{{ $operation->client?->social_reason }}</td>
+                                        <td>{{ $operation->userAdmin?->name }}</td>
+                                        <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
+                                        <td>{{ count($operation->details) == 0 ? 'Sin vuelos.' : $operation->details[0]->created_at?->format('d/m/Y') }}</td>
+                                        <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
+                {{-- <div class="card-footer">
                     {{ $operations->appends(request()->except('page'))->links('vendor.pagination.custom') }}
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

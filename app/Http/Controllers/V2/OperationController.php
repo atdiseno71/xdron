@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V2;
 
 use App\Notifications\OperationNotification;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DetailOperation;
@@ -11,17 +12,18 @@ use App\Models\FilesOperation;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
 use App\Models\TypeProduct;
+use App\Traits\Integration;
 use App\Traits\ImageTrait;
 use App\Models\Assistant;
 use App\Models\Operation;
 use App\Traits\Template;
 use App\Models\Client;
 use App\Models\Estate;
+use App\Models\Status;
 use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
 use App\Models\Zone;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class OperationController
@@ -30,7 +32,7 @@ use Illuminate\Support\Facades\Log;
 class OperationController extends Controller
 {
 
-    use Template, ImageTrait;
+    use Template, ImageTrait, Integration;
 
     function __construct()
     {
@@ -146,10 +148,28 @@ class OperationController extends Controller
         $operation->admin_by = Auth::id();
         $operation->status_id = config('status.CRE');
 
-        $operation->save();
+        $save = $operation->save();
+
+        if ($save) {
+            // Guardamos el archivo zip
+            $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
+            // Si no se guarda, me salte el error en la operacion
+            if ($response->getStatusCode() != 200) {
+                return redirect()->route('operations.index')
+                    ->with('error', $response->getData());
+            }
+            // Guardamos el zip en el campo
+            $operation->update(['file_evidence' => $response->getData()]);
+        }
 
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operation);
+
+        // Enviamos el correo
+        $response_email = $this->sendEmail($operation->id);
+
+        // Enviamos el SMS
+        $response_sms = $this->sendSMS($operation->id);
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
@@ -172,6 +192,30 @@ class OperationController extends Controller
 
         $pdf->set_paper('letter', 'landscape');
         return $pdf->stream('reporte.pdf');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id)
+    {
+        // Buscamos la operacion
+        $operation = Operation::find($id);
+
+        if(is_null($operation->file_evidence)) {
+            return redirect()->route('operations.index')
+                ->with('error', 'No existe el archivo que intenta descargar.');
+        }
+
+        // Guardamos la ruta
+        $path = public_path($operation->file_evidence);
+
+        // Retornarmos la descarga
+        return response()->download($path);
+
     }
 
     /**
@@ -291,6 +335,22 @@ class OperationController extends Controller
                 $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
                 $detail_operation_new->update($detail_temp);
             }
+            // Preguntamos si hay imagenes por eliminar
+            $files_delete = json_decode($request->input('files_evidence_delete_' . $i), true);
+            if ($files_delete != null) {
+                foreach ($files_delete as $key => $file_delete) {
+                    $file_find = FilesOperation::where('src_file', $file_delete)
+                            ->whereHas('detailOperation', function ($query) use($detail_operation_new) {
+                                $query->where('detail_operation.id', $detail_operation_new->id);
+                            })->first();
+                    // Storage::disk('public')->delete($evidence->path);
+                    if (File::exists($file_find->src_file)) {
+                        // Elimina el archivo
+                        File::delete($file_find->src_file);
+                        $file_find->delete();
+                    }
+                }
+            }
             // Guardamos las imagenes despues de todo
             $file_name = "files_" . $i;
             if ($request->has($file_name)) {
@@ -301,16 +361,26 @@ class OperationController extends Controller
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
-            request()->validate(Operation::$rules);
+            // request()->validate(Operation::$rules);
             $operation->update($request->all());
             // subir archivo
             if ($request->has('file_evidence')) {
-                $handle_1 = $this->update_file($request, 'file_evidence', $folder, $operation->id, $operation->file_evidence);
-                $operation->update(['file_evidence' => $handle_1['response']['payload']]);
+                // Guardamos el archivo zip
+                $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
+                // Si no se guarda, me salte el error en la operacion
+                if ($response->getStatusCode() != 200) {
+                    return redirect()->route('operations.index')
+                        ->with('error', $response->getData());
+                }
+                // Guardamos el zip en el campo
+                $operation->update(['file_evidence' => $response->getData()]);
             }
         } else if ($role_user == config('roles.piloto')) {
             $operation->update(['status_id' => config('status.ENR')]);
         }
+
+        /* CREAMOS LA NOTIFICACION */
+        // $this->make_detail_operation_notification($operation);
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion actualizada con exito.');
@@ -330,12 +400,25 @@ class OperationController extends Controller
     }
 
     /* MANEJAR NOTIFICACIONES */
-    public function make_operation_notification($operation) {
+    public function make_operation_notification(Operation $operation) {
         try {
             /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
-            $user = User::find($operation->id_piloto);
+            $user = User::find($operation->pilot_id);
             if ($user) {
-                $user->notify(new OperationNotification($operation));
+                $user->notify(new OperationNotification($operation, 0)); // Notificacion de Operacion creada para el piloto
+            }
+        } catch (\Exception $ex) {
+            return response()->json('Error al generar la notificacion', 422);
+        }
+    }
+
+    /* MANEJAR NOTIFICACIONES */
+    public function make_detail_operation_notification($operation) {
+        try {
+            /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
+            $user = User::find($operation->admin_by);
+            if ($user) {
+                $user->notify(new OperationNotification($operation, 1)); // Notificacion de Operacion creada para el admin
             }
         } catch (\Exception $ex) {
             return response()->json('Error al generar la notificacion', 422);
@@ -361,6 +444,42 @@ class OperationController extends Controller
         $fincas = Luck::where('estate_id', $estate_id)->get();
 
         return response()->json($fincas);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function acceptOperationIndex($id)
+    {
+        $operation = Operation::find($id);
+
+        $clients = Client::where('id', $operation->id_cliente)->pluck('social_reason as label', 'id as value');
+
+        $assistents = Assistant::whereIn('id', [$operation->assistant_id_one, $operation->assistant_id_two])
+                    ->pluck('name as label', 'id as value');
+
+        $statuses = Status::whereIn('id', [config('status.RECI'), config('status.REC')])->pluck('name as label', 'id as value');
+
+        return view('operation.accept', compact('operation', 'clients', 'assistents', 'statuses'));
+
+    }
+
+    /* Aceptar operacion */
+    public function acceptOperation(Request $request, $id)
+    {
+        $operation = Operation::with('details')->find($id);
+
+        request()->validate(Operation::$rulesAccept);
+        $operation->update($request->all());
+
+        //Generamos el pdf
+        set_time_limit(30000);
+        return redirect()->route('home.welcome')
+            ->with('success', 'Puede continuar con su labor.');
+
     }
 
 }
