@@ -21,6 +21,7 @@
                 <th class="alineacion-center">Horas vuelos</th>
                 <th class="alineacion-center">Hectareas</th>
                 <th class="alineacion-center">Vuelos</th>
+                <th class="alineacion-center">Fecha</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@
                 <td>{{ $hour_flights }}</td>
                 <td>{{ $acres }}</td>
                 <td>{{ count($operation->details) }}</td>
+                <td>{{ $operation->created_at?->format('Y-m-d') }}</td>
             </tr>
         </tbody>
     </table>

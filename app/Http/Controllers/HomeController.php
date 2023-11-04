@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Operation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        // Capturamos el usuario logeado
+        $user_log = User::with('roles')->find(Auth::id());
+        // Capturamos el rol
+        $rol = $user_log->roles[0]?->id;
+
+        // Si es piloto
+        if (config('roles.piloto') == $rol) {
+            $operations = Operation::where('pilot_id', $user_log->id)->paginate();
+            return view('operation.index', compact('operations'))
+                    ->with('i', (request()->input('page', 1) - 1) * $operations->perPage());
+        } else {
+            return view('home');
+        }
+
     }
 }

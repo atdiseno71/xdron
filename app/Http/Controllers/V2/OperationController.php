@@ -151,15 +151,18 @@ class OperationController extends Controller
         $save = $operation->save();
 
         if ($save) {
-            // Guardamos el archivo zip
-            $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
-            // Si no se guarda, me salte el error en la operacion
-            if ($response->getStatusCode() != 200) {
-                return redirect()->route('operations.index')
-                    ->with('error', $response->getData());
+            // Preguntamos si vienen archivos
+            if ($request->hasFile("zip")) {
+                // Guardamos el archivo zip
+                $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
+                // Si no se guarda, me salte el error en la operacion
+                if ($response->getStatusCode() != 200) {
+                    return redirect()->route('operations.index')
+                        ->with('error', $response->getData());
+                }
+                // Guardamos el zip en el campo
+                $operation->update(['file_evidence' => $response->getData()]);
             }
-            // Guardamos el zip en el campo
-            $operation->update(['file_evidence' => $response->getData()]);
         }
 
         /* CREAMOS LA NOTIFICACION */

@@ -30,7 +30,7 @@ trait ImageTrait
                 $file = $request->file($input_name);
                 $rand = strtolower(Str::random(10));
                 $image = Image::make($file);
-                $image->encode('webp', 90);
+                $image->encode('webp', 70);
 
                 // RUTA DE LA IMAGEN
                 $path_image = $path . $name_file . '.webp';
@@ -65,7 +65,7 @@ trait ImageTrait
                     $file = $request->file($input_name);
                     $rand = strtolower(Str::random(10));
                     $image = Image::make($file);
-                    $image->encode('webp', 90);
+                    $image->encode('webp', 70);
 
                     // Create folder directory and save
                     Storage::disk('public')->makeDirectory($model . '/' . $id);
@@ -125,7 +125,7 @@ trait ImageTrait
                 foreach ($request->file($name_file) as $file) {
                     $rand = strtolower(Str::random(10));
                     $image = Image::make($file);
-                    $image->encode('webp', 90);
+                    $image->encode('webp', 70);
 
                     // RUTA DE LA IMAGEN
                     $path_image = $path . $rand . '.webp';
@@ -190,7 +190,7 @@ trait ImageTrait
             // Un nombre cualquiera de momento
             $name = 'evidence';
 
-            if( $file->getSize() == 0 ) throw new Exception("No se ha recibido un archivo") ;
+            if($file->getSize() == 0) throw new Exception("No se ha recibido un archivo");
 
             // creamos las carpetas
             if( ! is_dir(public_path($model)) ) mkdir(public_path($model));
