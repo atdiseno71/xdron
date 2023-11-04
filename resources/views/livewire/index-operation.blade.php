@@ -3,7 +3,6 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <p>{{ var_dump($operations) }}</p>
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <select wire:model="type" class="form-control" placeholder="Seleccione una opcion">
