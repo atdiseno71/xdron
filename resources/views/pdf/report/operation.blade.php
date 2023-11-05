@@ -8,13 +8,13 @@
     <header id="main-header">
 
         <a id="logo-header" href="#">
-            <span class="site-name">XDRON</span>
-            <span class="site-desc">{{ $operation->client?->social_reason ?? '' }} / {{ $operation->details[0]?->typeProduct?->name ?? '' }}</span>
+            <span class="site-name">INFORME OPERACION</span>
+            {{-- <span class="site-desc"> / {{ $operation->details[0]?->typeProduct?->name ?? '' }}</span> --}}
         </a> <!-- / #logo-header -->
     </header>
 
-    <h5 class="alineacion-center title-report"><strong>REPORTE GENERAL</strong></h5>
-    <table class="table">
+    <h5 class="alineacion-center title-report"><strong>{{ $operation->client?->social_reason ?? '' }}</strong></h5>
+    {{-- <table class="table">
         <thead class="table-dark">
             <tr>
                 <th class="alineacion-center">Baterias</th>
@@ -43,7 +43,7 @@
                 <td>{{ $operation->created_at?->format('Y-m-d') }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> --}}
 
     <br><br>
 

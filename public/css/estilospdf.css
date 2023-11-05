@@ -254,7 +254,7 @@ p {
 .img-evidencia {
     margin-top: 0;
     width: 100%;
-    max-height: 100%; /* Esto permite que la imagen se ajuste al espacio disponible */
+    /* max-height: 100%; */ /* Esto permite que la imagen se ajuste al espacio disponible */
     padding: 0.5rem 0.5rem;
     margin-left: 2rem;
     border-bottom-width: 0px;
