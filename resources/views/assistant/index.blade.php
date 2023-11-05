@@ -39,6 +39,8 @@
 
                                         <th>Nombre</th>
                                         <th>Apellido</th>
+                                        <th>Correo</th>
+                                        <th>Telefono</th>
                                         <th># Documento</th>
                                         <th>Creado por</th>
 
@@ -52,6 +54,8 @@
 
                                             <td>{{ $assistant->name }}</td>
                                             <td>{{ $assistant->lastname }}</td>
+                                            <td>{{ $assistant->phone }}</td>
+                                            <td>{{ $assistant->email }}</td>
                                             <td>{{ $assistant->document_number }}</td>
                                             <td>{{ $assistant->user?->name }}</td>
 

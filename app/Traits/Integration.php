@@ -2,20 +2,24 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Facades\Http;
-use App\Models\Operation;
-use App\Mail\DemoMail;
-use App\Models\User;
 use Mail;
+use App\Models\User;
+use App\Mail\PilotMail;
+use App\Models\Operation;
+use App\Models\Assistant;
+use App\Mail\AssitentMail;
+use Illuminate\Support\Facades\Http;
 
 trait Integration
 {
 
-    public function sendEmail($id){
+    public function sendEmail($id, $assistant_id){
 
         try {
             
             $operation = Operation::findOrFail($id);
+
+            $assistant = Assistant::find($assistant_id);
 
             $pilot = User::findOrFail($operation->pilot_id);
 
@@ -23,9 +27,14 @@ trait Integration
 
             $mailData = [
                 'data' => $operation,
+                'assistant' => $assistant ?? '',
             ];
 
-            Mail::to($pilot->email)->send(new DemoMail($mailData, $detail_message));
+            if ($assistant != null) {
+                Mail::to($assistant->email)->send(new AssitentMail($mailData, $detail_message));
+            } else {
+                Mail::to($pilot->email)->send(new PilotMail($mailData, $detail_message));
+            }
 
             return response()->json('Email send successfully', 200);
 
@@ -35,7 +44,7 @@ trait Integration
 
     }
 
-    public function sendSMS($id){
+    public function sendSMS($id, $assistant_id){
 
         try {
             $account = '10026962';
@@ -45,18 +54,32 @@ trait Integration
             // Buscar operacion
             $operation = Operation::findOrFail($id);
 
+            // Buscamos el asistente
+            $assistant = Assistant::find($assistant_id);
+
             // Estructura de informacion para el mensaje
+            $assistant_one = $operation->assistant_one?->name;
+            $assistant_two = $operation->assistant_two?->name;
+            $client = $operation->client?->social_reason;
             $client = $operation->client?->social_reason;
             $pilot = $operation->userPilot?->name;
-            $phone = "57" . $operation->userPilot?->phone;
             $created_at = $operation->created_at?->format('d/m/Y');
             $link = route('operation.accept', $operation->id);
-
-            // Mensaje de texto estructura
-            $sms = "Hola, " . $pilot .
-                ", Ha recibido una notificación para la operación " . $id . 
-                ", para el cliente " . $client . 
-                ", para continuar ingrese al siguiente enlace " . $link;
+            // Guardamos el número de telefono
+            if ($assistant != null) {
+                $phone = "57" . $assistant?->phone;
+                // Mensaje de texto estructura
+                $sms = "Hola, " . $assistant?->name .
+                    ", Ha recibido una notificación para la operación " . $id . 
+                    ", para el cliente " . $client . 
+                    ", acompañaras al piloto " . $pilot;
+            } else {
+                $phone = "57" . $operation->userPilot?->phone;
+                $sms = "Hola, " . $pilot .
+                    ", Ha recibido una notificación para la operación " . $id . 
+                    ", para el cliente " . $client . 
+                    ", para continuar ingrese al siguiente enlace " . $link;
+            }
             
             $data = [
                 'toNumber' => $phone,

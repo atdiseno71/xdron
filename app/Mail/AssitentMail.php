@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 
-class DemoMail extends Mailable
+class AssitentMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -41,7 +41,7 @@ class DemoMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.demomail',
+            view: 'emails.assistent-mail',
         );
     }
 
