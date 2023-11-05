@@ -262,7 +262,7 @@ p {
 }
 
 .img-large {
-    height: 48; /* Tamaño de imagen al 47% del espacio disponible */
+    height: 47%; /* Tamaño de imagen al 47% del espacio disponible */
 }
 
 #main-header {
