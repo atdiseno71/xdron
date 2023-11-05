@@ -9,6 +9,7 @@ use App\Models\Operation;
 use App\Models\Assistant;
 use App\Mail\AssitentMail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 trait Integration
 {
@@ -16,7 +17,7 @@ trait Integration
     public function sendEmail($id, $assistant_id){
 
         try {
-            
+
             $operation = Operation::findOrFail($id);
 
             $assistant = Assistant::find($assistant_id);
@@ -39,6 +40,7 @@ trait Integration
             return response()->json('Email send successfully', 200);
 
         } catch (\Throwable $th) {
+            Log::info("Response " . $th->getMessage());
             return response()->json($th->getMessage(), 500);
         }
 
@@ -70,17 +72,17 @@ trait Integration
                 $phone = "57" . $assistant?->phone;
                 // Mensaje de texto estructura
                 $sms = "Hola, " . $assistant?->name .
-                    ", Ha recibido una notificación para la operación " . $id . 
-                    ", para el cliente " . $client . 
+                    ", Ha recibido una notificación para la operación " . $id .
+                    ", para el cliente " . $client .
                     ", acompañaras al piloto " . $pilot;
             } else {
                 $phone = "57" . $operation->userPilot?->phone;
                 $sms = "Hola, " . $pilot .
-                    ", Ha recibido una notificación para la operación " . $id . 
-                    ", para el cliente " . $client . 
+                    ", Ha recibido una notificación para la operación " . $id .
+                    ", para el cliente " . $client .
                     ", para continuar ingrese al siguiente enlace " . $link;
             }
-            
+
             $data = [
                 'toNumber' => $phone,
                 'sms' => $sms,
