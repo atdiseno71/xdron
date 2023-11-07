@@ -52,6 +52,20 @@
                                         {!! $errors->first('lastname', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        {{ Form::label('phone', 'Número de telefono') }}
+                                        {{ Form::number('phone', '', ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'placeholder' => 'Número de telefono']) }}
+                                        {!! $errors->first('phone', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        {{ Form::label('email', 'Correo electrónico') }}
+                                        {{ Form::email('email', '', ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
+                                        {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @include('layouts.btn-submit')

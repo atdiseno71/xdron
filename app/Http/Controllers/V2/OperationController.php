@@ -54,13 +54,15 @@ class OperationController extends Controller
         $user_log = User::with('roles')->find(Auth::id());
         // Capturamos el rol
         $rol = $user_log->roles[0]?->id;
+        // ID del usuario
+        $id = $user_log->id;
 
         switch ($rol) {
             case config('roles.piloto'):
-                $operations = Operation::where('pilot_id', $user_log->id)->paginate();
+                $operations = Operation::where('pilot_id', $id)->paginate();
                 break;
             case config('roles.cliente'):
-                $operations = Operation::where('id_cliente', $user_log->id)->paginate();
+                $operations = Operation::where('id_cliente', $id)->paginate();
                 break;
             default:
                 $operations = Operation::paginate();
@@ -168,11 +170,29 @@ class OperationController extends Controller
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operation);
 
-        // Enviamos el correo
-        $response_email = $this->sendEmail($operation->id);
 
-        // Enviamos el SMS
-        $response_sms = $this->sendSMS($operation->id);
+        /**********************************
+        * Envio de alertas para el piloto *
+        **********************************/
+            // Enviamos el correo
+            $response_email = $this->sendEmail($operation->id, null);
+            // Enviamos el SMS
+            $response_sms = $this->sendSMS($operation->id, null);
+            /**************************************
+        * Envio de alertas para el asistentes *
+        **************************************/
+            if ($operation->assistant_one != NULL) {
+                // Enviamos el correo asistente uno
+                $response_email = $this->sendEmail($operation->id, $operation->assistant_one?->id);
+                // Enviamos el SMS asistente uno
+                $response_sms = $this->sendSMS($operation->id, $operation->assistant_one?->id);
+            }
+            if ($operation->assistant_two != NULL) {
+                // Enviamos el correo asistente dos
+                $response_email = $this->sendEmail($operation->id, $operation->assistant_two?->id);
+                // Enviamos el SMS asistente dos
+                $response_sms = $this->sendSMS($operation->id, $operation->assistant_two?->id);
+            }
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');

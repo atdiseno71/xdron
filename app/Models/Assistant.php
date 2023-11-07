@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -39,6 +40,9 @@ class Assistant extends Model
 
     static $rules = [
         'name' => 'required',
+        'phone' => 'required|numeric|digits:10',
+        'email' => 'required',
+        // 'email' => ['required', Rule::unique('assistants', 'email')],
         'lastname' => 'required',
         'type_document' => 'required',
         'document_number' => 'required',
@@ -49,7 +53,15 @@ class Assistant extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'lastname', 'type_document', 'document_number', 'created_by'];
+    protected $fillable = [
+        'name',
+        'phone',
+        'email',
+        'lastname',
+        'created_by',
+        'type_document',
+        'document_number',
+    ];
 
 
     /**

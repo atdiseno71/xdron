@@ -8,42 +8,11 @@
     <header id="main-header">
 
         <a id="logo-header" href="#">
-            <span class="site-name">XDRON</span>
-            <span class="site-desc">{{ $operation->client?->social_reason ?? '' }} / {{ $operation->details[0]?->typeProduct?->name ?? '' }}</span>
-        </a> <!-- / #logo-header -->
+            <span class="site-name">INFORME OPERACION</span>
+        </a>
     </header>
 
-    <h5 class="alineacion-center title-report"><strong>REPORTE GENERAL</strong></h5>
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th class="alineacion-center">Baterias</th>
-                <th class="alineacion-center">Horas vuelos</th>
-                <th class="alineacion-center">Hectareas</th>
-                <th class="alineacion-center">Vuelos</th>
-                <th class="alineacion-center">Fecha</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="alineacion-center">
-                @php
-                    $number_flights = 0;
-                    $hour_flights = 0;
-                    $acres = 0;
-                    foreach ($operation->details as $key => $detail) {
-                        $number_flights += $detail->number_flights;
-                        $hour_flights += $detail->hour_flights;
-                        $acres += $detail->acres;
-                    }
-                @endphp
-                <td>{{ $number_flights }}</td>
-                <td>{{ $hour_flights }}</td>
-                <td>{{ $acres }}</td>
-                <td>{{ count($operation->details) }}</td>
-                <td>{{ $operation->created_at?->format('Y-m-d') }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h5 class="alineacion-center title-report"><strong>Cliente:</strong><strong>{{ $operation->client?->social_reason ?? '' }}</strong></h5>
 
     <br><br>
 
@@ -51,14 +20,29 @@
         <div class="detail">
             <ul>
                 <li>
-                    <p><strong>Hacienda:</strong> {{ $detail->estate?->name }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<strong>Suerte:</strong> {{ $detail->luck }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<strong>Zona:</strong> {{ $detail->zone?->name }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<strong>Drone:</strong> {{ $detail->drone?->enrollment }}</p>
+                    <p>
+                        <strong>Hacienda:</strong> {{ $detail->estate?->name }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <strong>Suerte:</strong> {{ $detail->luck }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <strong>Zona:</strong> {{ $detail->zone?->name }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <strong>Drone:</strong> {{ $detail->drone?->enrollment }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <strong>Fecha:</strong> {{ $operation->created_at?->format('Y-m-d') }}
+                    </p>
                 </li>
             </ul>
         </div>
-        <br><br>
-        @foreach ($detail->files_details as $file)
-            <img class="img-evidencia img-large" src="{{ $file->src_file }}">
-        @endforeach
+        <br><br><br>
+        {{-- <div class="container">
+            @foreach ($detail->files_details as $file)
+                <img class="img-evidencia" src="{{ $file->src_file }}">
+            @endforeach
+        </div> --}}
+        <div class="container">
+            <div class="image-grid">
+                @foreach ($detail->files_details as $file)
+                    <img class="img-evidencia" src="{{ $file->src_file }}">
+                @endforeach
+            </div>
+        </div>
     @empty
         <p class="alineacion-center">No hay imagenes registratadas en la operación</p>
     @endforelse

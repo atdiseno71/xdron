@@ -104,6 +104,14 @@ class Operation extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
+    public function clients()
+    {
+        return $this->hasOne('App\Models\Client', 'id', 'id_cliente');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function product()
     {
         return $this->hasOne('App\Models\TypeProduct', 'id', 'type_product_id');

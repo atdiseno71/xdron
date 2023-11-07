@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\TypeDocument;
+use App\Models\ClientUsers;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\Role;
@@ -99,10 +100,10 @@ class UserController extends Controller
             // echo "La variable \$clients no está definida.";
         } else {
             foreach ($clients as $id_client) {
-                DB::table('clients_users')->insert([
+                ClientUsers::create(array(
                     'client_id' => $id_client,
                     'user_id' => $new_user->id,
-                ]);
+                ));
             }
         }
 
@@ -162,6 +163,8 @@ class UserController extends Controller
             'document_number' => 'required',
         ]);
 
+        $request['password'] = Hash::make($request['document_number']);
+        
         $clients = $request['id_cliente'];
 
         $user->update($request->all());
@@ -172,10 +175,10 @@ class UserController extends Controller
             // echo "La variable \$clients no está definida.";
         } else {
             foreach ($clients as $id_client) {
-                DB::table('clients_users')->insert([
+                ClientUsers::create(array(
                     'client_id' => $id_client,
                     'user_id' => $user->id,
-                ]);
+                ));
             }
         }
 
