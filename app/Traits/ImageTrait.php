@@ -125,6 +125,9 @@ trait ImageTrait
                 foreach ($request->file($name_file) as $file) {
                     $rand = strtolower(Str::random(10));
                     $image = Image::make($file);
+                    // Recorta la parte superior de la imagen a 720 de ancho y 1400 de alto
+                    $image->fit(720, 1560);
+                    $image->crop(720, 1400, 0, 160);
                     $image->encode('webp', 70);
 
                     // RUTA DE LA IMAGEN
