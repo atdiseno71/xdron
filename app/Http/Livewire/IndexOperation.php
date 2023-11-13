@@ -83,7 +83,29 @@ class IndexOperation extends Component
 
         })->paginate();
 
-        return view('livewire.index-operation', compact('operations'));
+        /************************************************
+         *              Calcular totales
+        ************************************************/
+        // hectáreas, baterías, horas de vuelo
+        $hectares = $batteries = $flight_hours = 0;
+
+        foreach ($operations as $operation) {
+            foreach ($operation->details as $detail) {
+                $hectares += $detail->acres;
+                $batteries += $detail->number_flights;
+                $flight_hours += $detail->hour_flights;
+            }
+        }
+
+        // $operations->each(function ($operation) use (&$hectares, &$batteries, &$flight_hours) {
+        //     $operation->details->each(function ($detail) use (&$hectares, &$batteries, &$flight_hours) {
+        //         $hectares += $detail->acres;
+        //         $batteries += $detail->number_flights;
+        //         $flight_hours += $detail->hour_flights;
+        //     });
+        // });
+
+        return view('livewire.index-operation', compact('operations','hectares','batteries','flight_hours'));
     }
 
     private function applyEstateNameFilter($query)
