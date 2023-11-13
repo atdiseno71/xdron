@@ -162,6 +162,28 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="table-responsive">
+                        <table class="table_2 table-striped table-hover" cellspacing="0" width="100%">
+                            <thead class="thead">
+                                <tr>
+
+                                    <th style="text-align: center;">Total Hectareas</th>
+                                    <th style="text-align: center;">Total Baterias</th>
+                                    <th style="text-align: center;">Total Horas Vuelos</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>{{ $hectares }}</td>
+                                    <td>{{ $batteries }}</td>
+                                    <td>{{ $flight_hours }}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 {{-- <div class="card-footer">
                     {{ $operations->appends(request()->except('page'))->links('vendor.pagination.custom') }}
