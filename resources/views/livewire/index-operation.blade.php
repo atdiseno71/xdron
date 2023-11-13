@@ -176,9 +176,9 @@
                             <tbody>
                                 <tr>
 
-                                    <td>{{ $hectares }}</td>
-                                    <td>{{ $batteries }}</td>
-                                    <td>{{ $flight_hours }}</td>
+                                    <td style="text-align: center;">{{ $hectares }}</td>
+                                    <td style="text-align: center;">{{ $batteries }}</td>
+                                    <td style="text-align: center;">{{ $flight_hours }}</td>
 
                                 </tr>
                             </tbody>
