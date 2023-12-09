@@ -162,32 +162,35 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table_2 table-striped table-hover" cellspacing="0" width="100%">
-                            <thead class="thead">
-                                <tr>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                {{ Form::label('hectares', 'Total Hectareas') }}
+                                {{ Form::text('hectares', $hectares, ['class' => 'form-control' . ($errors->has('hectares') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Hectareas']) }}
+                                {!! $errors->first('hectares', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
 
-                                    <th style="text-align: center;">Total Hectareas</th>
-                                    <th style="text-align: center;">Total Baterias</th>
-                                    <th style="text-align: center;">Total Horas Vuelos</th>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                {{ Form::label('batteries', 'Total Baterias') }}
+                                {{ Form::text('batteries', $batteries, ['class' => 'form-control' . ($errors->has('batteries') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Baterias']) }}
+                                {!! $errors->first('batteries', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                    <td style="text-align: center;">{{ $hectares }}</td>
-                                    <td style="text-align: center;">{{ $batteries }}</td>
-                                    <td style="text-align: center;">{{ $flight_hours }}</td>
-
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                {{ Form::label('flight_hours', 'Total Horas Vuelos') }}
+                                {{ Form::text('flight_hours', $flight_hours, ['class' => 'form-control' . ($errors->has('flight_hours') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
+                                {!! $errors->first('flight_hours', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {{-- <div class="card-footer">
+                <div class="card-footer">
                     {{ $operations->appends(request()->except('page'))->links('vendor.pagination.custom') }}
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
