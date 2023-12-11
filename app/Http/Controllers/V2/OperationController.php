@@ -50,6 +50,7 @@ class OperationController extends Controller
      */
     public function index()
     {
+        return null;
         // Capturamos el usuario logeado
         $user_log = User::with('roles')->find(Auth::id());
         // Capturamos el rol
