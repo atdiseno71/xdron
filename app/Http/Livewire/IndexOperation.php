@@ -7,7 +7,6 @@ use Livewire\WithPagination;
 use App\Models\Operation;
 use Livewire\Component;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class IndexOperation extends Component
 {
@@ -48,7 +47,9 @@ class IndexOperation extends Component
             if ($rol === config('roles.piloto')) {
                 $query->where('pilot_id', $user_log->id);
             } elseif ($rol === config('roles.cliente')) {
-                $query->where('id_cliente', $user_log->id);
+                $query->whereHas('client.users', function ($query) use ($user_log) {
+                    $query->where('user_id', $user_log->id);
+                });
             }
 
             switch ($type_option) {
@@ -97,14 +98,6 @@ class IndexOperation extends Component
             }
         }
 
-        // $operations->each(function ($operation) use (&$hectares, &$batteries, &$flight_hours) {
-        //     $operation->details->each(function ($detail) use (&$hectares, &$batteries, &$flight_hours) {
-        //         $hectares += $detail->acres;
-        //         $batteries += $detail->number_flights;
-        //         $flight_hours += $detail->hour_flights;
-        //     });
-        // });
-
         return view('livewire.index-operation', compact('operations','hectares','batteries','flight_hours'));
     }
 
@@ -145,10 +138,10 @@ class IndexOperation extends Component
     private function applyAsistentsFilter($query)
     {
         $query->orWhereHas('assistant_one', function ($query_type) {
-            $sub_query->orWhere('assistants.name', 'LIKE', '%' . $this->search . '%')
+            $query_type->orWhere('assistants.name', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('assistants.lastname', 'LIKE', '%' . $this->search . '%');
         })->orWhereHas('assistant_two', function ($query_type) {
-            $sub_query->orWhere('assistants.name', 'LIKE', '%' . $this->search . '%')
+            $query_type->orWhere('assistants.name', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('assistants.lastname', 'LIKE', '%' . $this->search . '%');
         });
     }
@@ -156,7 +149,7 @@ class IndexOperation extends Component
     private function applyPilotFilter($query)
     {
         $query->orWhereHas('userPilot', function ($query_type) {
-            $sub_query->where('users.name', 'LIKE', '%' . $this->search . '%')
+            $query_type->where('users.name', 'LIKE', '%' . $this->search . '%')
                 ->where('users.id_role', config('roles.piloto'));
         });
     }
@@ -164,14 +157,14 @@ class IndexOperation extends Component
     private function applyClientFilter($query)
     {
         $query->orWhereHas('client', function ($query_type) {
-            $sub_query->where('clients.social_reason', 'LIKE', '%' . $this->search . '%');
+            $query_type->where('clients.social_reason', 'LIKE', '%' . $this->search . '%');
         });
     }
 
     private function applyAdminFilter($query)
     {
         $query->orWhereHas('userAdmin', function ($query_type) {
-            $sub_query->where('users.name', 'LIKE', '%' . $this->search . '%')
+            $query_type->where('users.name', 'LIKE', '%' . $this->search . '%')
                 ->whereIn('users.id_role', [config('roles.super_root'), config('roles.root')]);
         });
     }
@@ -179,7 +172,7 @@ class IndexOperation extends Component
     private function applyStatusFilter($query)
     {
         $query->orWhereHas('status', function ($query_type) {
-            $sub_query->where('statuses.name', 'LIKE', '%' . $this->search . '%');
+            $query_type->where('statuses.name', 'LIKE', '%' . $this->search . '%');
         });
     }
 

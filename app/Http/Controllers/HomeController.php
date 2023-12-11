@@ -32,8 +32,8 @@ class HomeController extends Controller
         // Capturamos el rol
         $rol = $user_log->roles[0]?->id;
 
-        // Si es piloto
-        if (config('roles.piloto') == $rol) {
+        // Si es piloto o cliente
+        if (in_array($rol, [config('roles.cliente'), config('roles.piloto')])) {
             $operations = Operation::where('pilot_id', $user_log->id)->paginate();
             return view('operation.index', compact('operations'))
                     ->with('i', (request()->input('page', 1) - 1) * $operations->perPage());
