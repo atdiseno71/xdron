@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -141,8 +141,8 @@
                 </div>
 
             </div>
-        </div>
-        <div class="row">
+        </div> --}}
+        {{-- <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header border-0">
@@ -191,9 +191,6 @@
                     <div class="card-header border-0">
                         <h3 class="card-title">Pilotos</h3>
                         <div class="card-tools">
-                            {{-- <a href="#" class="btn btn-tool btn-sm">
-                                <i class="fas fa-download"></i>
-                            </a> --}}
                             <a href="#" class="btn btn-tool btn-sm">
                                 <i class="fas fa-bars"></i>
                             </a>
@@ -339,8 +336,7 @@
                 </div>
             </div>
 
-        </div>
-
+        </div> --}}
     </div>
 @endsection
 

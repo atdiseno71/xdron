@@ -79,18 +79,18 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('email', 'Correo electrónico') }}
+                    {{ Form::label('email', 'Correo electrónico / Login') }}
                     {{ Form::email('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
                     {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-12 col-md-6">
+            {{-- <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('username', 'Nombre de usuario') }}
                     {{ Form::text('username', $user->username, ['class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''), 'placeholder' => 'Nombre de usuario']) }}
                     {!! $errors->first('username', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-            </div>
+            </div> --}}
         </div>
 
     </div>
