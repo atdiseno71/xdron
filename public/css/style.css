@@ -75,8 +75,7 @@
     .separator-line {
         background: var(--separator-color);
         display: block;
-        margin-bottom: 1rem;
+        height: .3rem;
+        margin-top: 1rem;
         border-radius: .5rem;
-        word-wrap: break-word;
-        padding: .15rem;
     }

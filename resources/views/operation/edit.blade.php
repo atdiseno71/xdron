@@ -32,7 +32,7 @@
                                 @include('operation.form-admin')
                                 <div class="row">
                                     <div class="col-12 col-md-12">
-                                        <span class="separator-line">ss</span>
+                                        <span class="separator-line"></span>
                                         <br>
                                     </div>
                                 </div>
