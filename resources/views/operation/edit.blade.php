@@ -30,6 +30,7 @@
                             @csrf
                             @if ($role_user == 'super.root')
                                 @include('operation.form-admin')
+                                @include('operation.form-pilot')
                             @elseif ($role_user == 'piloto')
                                 @include('operation.form-pilot')
                             @endif
