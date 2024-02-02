@@ -1,3 +1,7 @@
+    :root {
+        --separator-color: #cccccc;
+    }
+    
     .img-logo, .imagen-banner {
         position: relative;
         /*width:50%;*/
@@ -66,4 +70,13 @@
     .product-front a img {
         height: 29.7vh;
         object-fit: scale-down;
+    }
+
+    .separator-line {
+        background: var(--separator-color);
+        display: block;
+        margin-bottom: 1rem;
+        border-radius: .5rem;
+        word-wrap: break-word;
+        padding: .15rem;
     }
