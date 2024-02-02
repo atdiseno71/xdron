@@ -197,7 +197,7 @@
                         {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('acres_'. $numberAreThere, 'Hectareas') }}
                         {{ Form::number('acres_'. $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'placeholder' => 'Ingrese cant. hectareas']) }}
@@ -267,7 +267,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="type_product_id_{{ $key + 1 }}">Tipo producto</label>
                         <select name="type_product_id_{{ $key + 1 }}" id="type_product_id_{{ $key + 1 }}"
@@ -364,7 +364,7 @@
                         {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('acres_' . $key + 1, 'Hectareas') }}
                         {{ Form::number('acres_' . $key + 1, $detail->acres, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $key + 1, 'placeholder' => 'Ingrese cant. hectareas']) }}
