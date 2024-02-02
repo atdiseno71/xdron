@@ -30,6 +30,12 @@
                             @csrf
                             @if ($role_user == 'super.root')
                                 @include('operation.form-admin')
+                                <div class="row">
+                                    <div class="col-12 col-md-12">
+                                        <span class="separator-line">ss</span>
+                                        <br>
+                                    </div>
+                                </div>
                                 @include('operation.form-pilot')
                             @elseif ($role_user == 'piloto')
                                 @include('operation.form-pilot')
