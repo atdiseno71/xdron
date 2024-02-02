@@ -76,6 +76,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <input name="id_detail_operation_{{ $numberAreThere }}" id="id_detail_operation_{{ $numberAreThere }}" type="text" value="0" hidden>
                 <div class="col-12 col-md-5">
                     <div class="form-group">
@@ -123,6 +124,7 @@
                         @endif
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('luck_' . $numberAreThere, 'Suerte') }}
@@ -148,6 +150,7 @@
                         @endif
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="download_{{ $numberAreThere }}">Descarga</label>
@@ -183,6 +186,7 @@
                         @endif
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('number_flights_' . $numberAreThere, 'Baterias') }}
@@ -197,6 +201,7 @@
                         {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('acres_'. $numberAreThere, 'Hectareas') }}
@@ -204,7 +209,7 @@
                         {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
-                <div class="col-12 col-md-6"></div>
+                {{-- Termina columna 12 --}}
                 {{-- INICIO DE ESPACIO PARA IMAGEN --}}
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-8 section-evidence">
@@ -217,6 +222,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-2"></div>
+                {{-- Termina columna 12 --}}
                 {{-- FIN DE ESPACIO PARA IMAGEN --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
@@ -225,6 +231,7 @@
                         {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
             </div>
         </div>
 
@@ -237,6 +244,7 @@
                     <br>
                     <h3 class="text-center fs-4 fw-bold">DETALLES DEL VUELO <strong id="number_{{ $key + 1 }}">#{{ $key + 1 }}</strong></h3>
                 </div>
+                {{-- Termina columna 12 --}}
                 <input name="id_detail_operation_{{ $key + 1 }}" id="id_detail_operation_{{ $key + 1 }}" type="text" value="{{ $detail->id }}" hidden>
                 <div class="col-12 col-md-5">
                     <div class="form-group">
@@ -286,6 +294,7 @@
                         @endif
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('luck_' . $key + 1, 'Suerte') }}
@@ -312,6 +321,7 @@
                         @endif
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="download_{{ $key + 1 }}">Descarga</label>
@@ -350,6 +360,7 @@
                         @endif
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('number_flights_' . $key + 1, 'Baterias') }}
@@ -364,6 +375,7 @@
                         {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('acres_' . $key + 1, 'Hectareas') }}
@@ -371,6 +383,7 @@
                         {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
                 {{-- INICIO DE ESPACIO PARA IMAGEN --}}
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-8 section-evidence">
@@ -396,6 +409,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-2"></div>
+                {{-- Termina columna 12 --}}
                 {{-- FIN DE ESPACIO PARA IMAGEN --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
@@ -404,6 +418,7 @@
                         {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
+                {{-- Termina columna 12 --}}
             </div>
         @endforeach
         </div>
