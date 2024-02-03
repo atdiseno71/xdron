@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* NOTIFICACIONES */
     Route::get('getNotifications', [UserController::class, 'getNotification']);
     /* LLENAR SELECTS */
-    Route::get('/get-fincas-by-cliente', [OperacionController::class, 'getFincasByCliente'])->name('get-fincas-by-cliente');
+    // Route::get('/get-fincas-by-cliente', [OperacionController::class, 'getFincasByCliente'])->name('get-fincas-by-cliente');
 
     /* ASISTENTES */
     Route::resource('assistants', AssistantController::class)->names('assistants');
