@@ -78,7 +78,7 @@
                 </div>
                 {{-- Termina columna 12 --}}
                 <input name="id_detail_operation_{{ $numberAreThere }}" id="id_detail_operation_{{ $numberAreThere }}" type="text" value="0" hidden>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="estate_id_{{ $numberAreThere }}">Hacienda</label>
                         <select name="estate_id_{{ $numberAreThere }}" id="estate_id_{{ $numberAreThere }}"
