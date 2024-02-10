@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $zone->name ?? "{{ Ver Zone" }}
+    {{ $zone->name ?? "Ver Zone" }}
 @endsection
 
 @section('content')

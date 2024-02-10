@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $user->name ?? "{{ Ver User" }}
+    {{ $user->name ?? "Ver User" }}
 @endsection
 
 @section('content')
