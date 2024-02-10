@@ -28,7 +28,7 @@
                         <form method="POST" action="{{ route('operations.store') }}" role="form"
                             enctype="multipart/form-data">
                             @csrf
-                            @if ($role_user == 'root')
+                            @if ($role_user == 'root' || $role_user == 'super.root')
                                 @include('operation.form-admin')
                             @elseif ($role_user == 'piloto')
                                 @include('operation.form-pilot')
