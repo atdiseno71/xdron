@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $filesOperation->name ?? "{{ Ver Files Operation" }}
+    {{ $filesOperation->name ?? "Ver Files Operation" }}
 @endsection
 
 @section('content')

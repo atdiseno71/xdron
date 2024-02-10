@@ -28,7 +28,7 @@
                         <form method="POST" action="{{ route('operations.update', $operation->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
-                            @if ($role_user == 'super.root')
+                            @if ($role_user == 'root' || $role_user == 'super.root')
                                 @include('operation.form-admin')
                                 <div class="row">
                                     <div class="col-12 col-md-12">

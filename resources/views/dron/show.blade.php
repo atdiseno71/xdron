@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $dron->name ?? "{{ Ver Dron" }}
+    {{ $dron->name ?? "Ver Dron" }}
 @endsection
 
 @section('content')

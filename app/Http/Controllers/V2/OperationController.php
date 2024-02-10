@@ -145,6 +145,7 @@ class OperationController extends Controller
         // $operation->type_product_id = $request['type_product_id'];
         $operation->assistant_id_one = $request['assistant_id_one'];
         $operation->assistant_id_two = $request['assistant_id_two'];
+        $operation->date_operation = $request['date_operation'];
         $operation->pilot_id = $request['pilot_id'];
         $operation->id_cliente = $request['id_cliente'];
         $operation->admin_by = Auth::id();

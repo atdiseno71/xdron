@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $department->name ?? "{{ Ver Department" }}
+    {{ $department->name ?? "Ver Department" }}
 @endsection
 
 @section('content')

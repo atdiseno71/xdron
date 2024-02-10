@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $operation->name ?? "{{ Ver Operation" }}
+    {{ $operation->name ?? "Ver Operation" }}
 @endsection
 
 @section('content')

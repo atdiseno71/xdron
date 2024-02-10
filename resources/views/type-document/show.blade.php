@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $typeDocument->name ?? "{{ Ver Type Document" }}
+    {{ $typeDocument->name ?? "Ver Type Document" }}
 @endsection
 
 @section('content')
