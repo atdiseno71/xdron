@@ -385,7 +385,7 @@ class OperationController extends Controller
         }
 
         if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
-            // request()->validate(Operation::$rules);
+            request()->validate(Operation::$rules);
             $operation->update($request->all());
             // subir archivo
             if ($request->has('file_evidence')) {
