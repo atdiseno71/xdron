@@ -83,6 +83,13 @@
                     </button>
                 </div>
             </div>
+            <div class="col-12 col-md-12">
+                <div class="form-group">
+                    {{ Form::label('date_operation', 'Fecha operacion') }}
+                    {{ Form::date('date_operation', $operation->date_operation, ['class' => 'form-control' . ($errors->has('date_operation') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
+                    {!! $errors->first('date_operation', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
         </div>
 
         {{-- INICIO DE ESPACIO PARA IMAGEN --}}

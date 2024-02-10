@@ -53,6 +53,7 @@ class Operation extends Model
         'id_cliente' => 'required',
         'pilot_id' => 'required',
         'assistant_id_one' => 'required',
+        'date_operation' => 'required',
     ];
 
     static $rulesAccept = [
@@ -75,6 +76,7 @@ class Operation extends Model
         'admin_by',
         'status_id',
         'file_evidence',
+        'date_operation',
     ];
 
     /**
