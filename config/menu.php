@@ -8,7 +8,7 @@ return [
         'can' => 'users.index'
     ],
     [
-        'text' => 'Asistentes',
+        'text' => 'Tanqueadores',
         'url' => 'assistants',
         'icon' => 'fas fa-fw fa-users',
         'can' => 'assistants.index'
