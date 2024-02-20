@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $assistant->name ?? "Ver asistente" }}
+    {{ $assistant->name ?? "Ver tanqueador" }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Ver asistente</span>
+                            <span class="card-title">Ver tanqueador</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-danger" href="{{ route('assistants.index') }}"> Volver</a>

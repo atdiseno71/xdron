@@ -67,7 +67,7 @@ class AssistantController extends Controller
         $assistant = Assistant::create($request->all());
 
         return redirect()->back()
-            ->with('success', 'Asistente creado con éxito.');
+            ->with('success', 'Tanqueador creado con éxito.');
     }
 
     /**
@@ -100,7 +100,7 @@ class AssistantController extends Controller
         $assistant = Assistant::create($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Asistente creado con exito.');
+            ->with('success', 'Tanqueador creado con exito.');
     }
 
     /**
@@ -135,7 +135,7 @@ class AssistantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Asistente$assistant
+     * @param  Tanqueador$assistant
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Assistant $assistant)
@@ -145,7 +145,7 @@ class AssistantController extends Controller
         $assistant->update($request->all());
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Asistente actualizado con exito.');
+            ->with('success', 'Tanqueador actualizado con exito.');
     }
 
     /**
@@ -158,6 +158,6 @@ class AssistantController extends Controller
         $assistant = Assistant::find($id)->delete();
 
         return redirect()->route('assistants.index')
-            ->with('success', 'Asistente eliminado con exito.');
+            ->with('success', 'Tanqueador eliminado con exito.');
     }
 }

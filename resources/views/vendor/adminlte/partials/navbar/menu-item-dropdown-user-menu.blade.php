@@ -157,8 +157,8 @@
                     // Nensaje para el admin
                     modalContent += `
                         <p>Hay cambios en la operacion del piloto, ${pilot_id}, para el cliente ${id_cliente},
-                            ${(assistant_id_two === null) ? `el asistente ${assistant_id_one}, esta operación ha sido creada ${created_at}` :
-                            `el asistente ${assistant_id_one} y ${assistant_id_two}, esta operación ha sido creada ${created_at}`}</p>
+                            ${(assistant_id_two === null) ? `el Tanqueador ${assistant_id_one}, esta operación ha sido creada ${created_at}` :
+                            `el Tanqueador ${assistant_id_one} y ${assistant_id_two}, esta operación ha sido creada ${created_at}`}</p>
                         <hr>
                     `;
                 } else {

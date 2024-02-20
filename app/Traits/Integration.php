@@ -56,7 +56,7 @@ trait Integration
             // Buscar operacion
             $operation = Operation::findOrFail($id);
 
-            // Buscamos el asistente
+            // Buscamos el Tanqueador
             $assistant = Assistant::find($assistant_id);
 
             // Estructura de informacion para el mensaje

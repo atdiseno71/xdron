@@ -11,7 +11,7 @@
                                 <option value="2">Suerte</option>
                                 <option value="3">Tipo Producto</option>
                                 <option value="4">Dron</option>
-                                <option value="5">Asistentes</option>
+                                <option value="5">Tanqueadores</option>
                                 <option value="6">Piloto</option>
                                 <option value="7">Cliente</option>
                                 <option value="8">Administrador</option>
@@ -56,7 +56,7 @@
                                     <th>T Hectareas</th>
                                     <th>T vuelos</th>
 
-                                    <th>Asistentes</th>
+                                    <th>Tanqueadores</th>
                                     <th>Piloto</th>
                                     <th>Cliente</th>
                                     <th>Administrador</th>

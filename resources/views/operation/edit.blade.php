@@ -107,7 +107,7 @@
                     }
                 });
             });
-            // Formulario para asistente
+            // Formulario para Tanqueador
             $('#formAsistentUser').on('submit', function(e) {
                 e.preventDefault(); // Evita el envío normal del formulario
                 // Obtener la URL completa
@@ -157,7 +157,7 @@
                     }
                 });
             });
-            // Formulario para tipos productos
+            // Formulario para tipos Tipo aplicación
             $('#formTypeProduct').on('submit', function(e) {
                 e.preventDefault(); // Evita el envío normal del formulario
                 var formData = $(this).serialize(); // Serializa el formulario
@@ -388,7 +388,7 @@
                 }
             });
         }
-        // CARGAR ASISTENTES
+        // CARGAR Tanqueadores
         function onloadAsistents() {
             // Obtener la URL completa
             var urlCompleta = window.location.href;
@@ -399,13 +399,13 @@
             // Obtener la URL base
             var urlBase = urlObjeto.origin;
 
-            // Recargar la lista de asistentes desde el servidor
+            // Recargar la lista de Tanqueadores desde el servidor
             $.ajax({
                 type: 'GET',
                 url: urlBase + '/getAsistents',
                 success: function(response) {
                     if (response && typeof response === 'object') {
-                        // Asistente dos
+                        // Tanqueador dos
                         var selectElementOne = document.getElementById('assistant_id_one');
                         selectElementOne.innerHTML = ''; // Limpiar el contenido actual
                         // Iterar sobre las claves del objeto JSON
@@ -417,7 +417,7 @@
                                 selectElementOne.appendChild(option);
                             }
                         }
-                        // Asistente dos
+                        // Tanqueador dos
                         var selectElementTwo = document.getElementById('assistant_id_two');
                         selectElementTwo.innerHTML = ''; // Limpiar el contenido actual
                         // Iterar sobre las claves del objeto JSON
@@ -439,7 +439,7 @@
                 },
                 error: function(xhr) {
                     // Manejar errores si es necesario
-                    console.error('Error al obtener la lista de asistentes:', xhr.status, xhr.statusText);
+                    console.error('Error al obtener la lista de Tanqueadores:', xhr.status, xhr.statusText);
                 }
             });
         }

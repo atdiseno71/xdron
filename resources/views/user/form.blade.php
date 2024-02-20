@@ -5,7 +5,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('id_role', 'Roles') }}
-                    {{ Form::select('id_role', $roles, $user->id_role, ['class' => 'form-control select2' . ($errors->has('id_role') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un rol']) }}
+                    {{ Form::select('id_role', $roles, $user->id_role, ['class' => 'form-control select2' . ($errors->has('id_role') ? ' is-invalid' : ''), 'id' => 'id_role', 'wire:click' => 'console.log("demo")', 'placeholder' => 'Seleccione un rol']) }}
                     {!! $errors->first('id_role', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

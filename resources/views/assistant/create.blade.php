@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Crear asistente
+    Crear tanqueador
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Crear asistente</span>
+                        <span class="card-title">Crear tanqueador</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('assistants.store') }}"  role="form" enctype="multipart/form-data">

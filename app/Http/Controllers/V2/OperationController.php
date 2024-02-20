@@ -180,18 +180,18 @@ class OperationController extends Controller
             // Enviamos el SMS
             $response_sms = $this->sendSMS($operation->id, null);
             /**************************************
-        * Envio de alertas para el asistentes *
+        * Envio de alertas para el Tanqueadors *
         **************************************/
             if ($operation->assistant_one != NULL) {
-                // Enviamos el correo asistente uno
+                // Enviamos el correo Tanqueador uno
                 $response_email = $this->sendEmail($operation->id, $operation->assistant_one?->id);
-                // Enviamos el SMS asistente uno
+                // Enviamos el SMS Tanqueador uno
                 $response_sms = $this->sendSMS($operation->id, $operation->assistant_one?->id);
             }
             if ($operation->assistant_two != NULL) {
-                // Enviamos el correo asistente dos
+                // Enviamos el correo Tanqueador dos
                 $response_email = $this->sendEmail($operation->id, $operation->assistant_two?->id);
-                // Enviamos el SMS asistente dos
+                // Enviamos el SMS Tanqueador dos
                 $response_sms = $this->sendSMS($operation->id, $operation->assistant_two?->id);
             }
 

@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* LLENAR SELECTS */
     // Route::get('/get-fincas-by-cliente', [OperacionController::class, 'getFincasByCliente'])->name('get-fincas-by-cliente');
 
-    /* ASISTENTES */
+    /* Tanqueadores */
     Route::resource('assistants', AssistantController::class)->names('assistants');
 
     Route::resource('clients', ClientController::class)->names('clients');

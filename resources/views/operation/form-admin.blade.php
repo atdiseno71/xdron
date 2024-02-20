@@ -39,8 +39,8 @@
             </div>
             <div class="col-12 col-md-5">
                 <div class="form-group">
-                    {{ Form::label('assistant_id_one', 'Asistente uno') }}
-                    {{ Form::select('assistant_id_one', $assistents, $operation->assistant_id_one, ['class' => 'form-control select2' . ($errors->has('assistant_id_one') ? ' is-invalid' : ''), 'id' => 'assistant_id_one', 'placeholder' => 'Seleccione asistente uno']) }}
+                    {{ Form::label('assistant_id_one', 'Tanqueador uno') }}
+                    {{ Form::select('assistant_id_one', $assistents, $operation->assistant_id_one, ['class' => 'form-control select2' . ($errors->has('assistant_id_one') ? ' is-invalid' : ''), 'id' => 'assistant_id_one', 'placeholder' => 'Seleccione Tanqueador uno']) }}
                     {!! $errors->first('assistant_id_one', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -62,8 +62,8 @@
             </div>
             <div class="col-12 col-md-5">
                 <div class="form-group">
-                    {{ Form::label('assistant_id_two', 'Asistente dos') }}
-                    {{ Form::select('assistant_id_two', $assistents, $operation->assistant_id_two, ['class' => 'form-control select2' . ($errors->has('assistant_id_two') ? ' is-invalid' : ''), 'id' => 'assistant_id_two', 'placeholder' => 'Seleccione asistente dos']) }}
+                    {{ Form::label('assistant_id_two', 'Tanqueador dos') }}
+                    {{ Form::select('assistant_id_two', $assistents, $operation->assistant_id_two, ['class' => 'form-control select2' . ($errors->has('assistant_id_two') ? ' is-invalid' : ''), 'id' => 'assistant_id_two', 'placeholder' => 'Seleccione Tanqueador dos']) }}
                     {!! $errors->first('assistant_id_two', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
