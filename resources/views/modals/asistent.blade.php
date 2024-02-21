@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="formAsistentLabel">Registrar nuevo asistente</h4>
+                <h4 class="modal-title" id="formAsistentLabel">Registrar nuevo tanqueador</h4>
                 <button type="button" id="closeModalAsistent" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>

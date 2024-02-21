@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Asistentes
+    Tanqueadores
 @endsection
 
 @section('content')
@@ -13,14 +13,14 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                Asistentes
+                                Tanqueadores
                             </span>
 
                             <div class="float-right">
                                 @can('assistants.create')
                                     <a href="{{ route('assistants.create') }}" class="btn btn-primary btn-sm float-right"
                                         data-placement="left">
-                                        Nuevo asistente
+                                        Nuevo tanqueador
                                     </a>
                                 @endcan
                             </div>

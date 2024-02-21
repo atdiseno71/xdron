@@ -1,6 +1,6 @@
 @extends('layouts.app-pdf')
 
-@section('title', 'Reporte de productos')
+@section('title', 'Reporte de Tipo aplicación')
 
 @section('content')
     {{-- @include('template.cabezote') --}}

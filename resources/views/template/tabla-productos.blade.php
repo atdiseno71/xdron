@@ -1,5 +1,5 @@
 <!--=====================================
-LA TABLA DE PRODUCTOS
+LA TABLA DE Tipo aplicación
 ======================================-->
 
 <div class="col-12 col-md-6">

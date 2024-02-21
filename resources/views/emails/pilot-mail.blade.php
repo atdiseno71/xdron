@@ -14,11 +14,11 @@
         Ha recibido una notificación
         para la operación #{{ $mailData['data']->id }}, para el cliente {{ $mailData['data']->client?->social_reason }}<br><br>
         @if ($mailData['data']->assistant_two != null)
-            <strong>Asistentes:</strong><br>
+            <strong>Tanqueadores:</strong><br>
             {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }} -
             {{ $mailData['data']->assistant_two?->name . ' ' . $mailData['data']->assistant_two?->lastname }}
         @else
-            <strong>Asistente:</strong><br>
+            <strong>Tanqueador:</strong><br>
             {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }}
         @endif
         <br><br>
