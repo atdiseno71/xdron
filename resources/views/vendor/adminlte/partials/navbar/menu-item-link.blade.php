@@ -1,4 +1,4 @@
-<li @isset($item['id']) id="{{ $item['id'] }}" @endisset class="nav-item">
+<li @isset($item['id']) id="{{ $item['id'] }}" @endisset class="{{ config('adminlte.classes_topnav_nav_per', 'nav-item') }}">
 
     <a class="nav-link {{ $item['class'] }}" href="{{ $item['href'] }}"
        @isset($item['target']) target="{{ $item['target'] }}" @endisset
