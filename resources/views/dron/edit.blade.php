@@ -13,7 +13,12 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Dron</span>
+                        <div class="float-left">
+                            <span class="card-title">Actualizar Dron</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-primary" href="{{ route('drons.index') }}"> Volver</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('drons.update', $dron->id) }}"  role="form" enctype="multipart/form-data">
