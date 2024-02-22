@@ -173,27 +173,27 @@ class OperationController extends Controller
 
 
         /**********************************
-        * Envio de alertas para el piloto *
-        **********************************/
-            // Enviamos el correo
-            $response_email = $this->sendEmail($operation->id, null);
-            // Enviamos el SMS
-            $response_sms = $this->sendSMS($operation->id, null);
-            /**************************************
-        * Envio de alertas para el Tanqueadors *
-        **************************************/
-            if ($operation->assistant_one != NULL) {
-                // Enviamos el correo Tanqueador uno
-                $response_email = $this->sendEmail($operation->id, $operation->assistant_one?->id);
-                // Enviamos el SMS Tanqueador uno
-                $response_sms = $this->sendSMS($operation->id, $operation->assistant_one?->id);
-            }
-            if ($operation->assistant_two != NULL) {
-                // Enviamos el correo Tanqueador dos
-                $response_email = $this->sendEmail($operation->id, $operation->assistant_two?->id);
-                // Enviamos el SMS Tanqueador dos
-                $response_sms = $this->sendSMS($operation->id, $operation->assistant_two?->id);
-            }
+         * Envio de alertas para el piloto *
+         **********************************/
+        // Enviamos el correo
+        $response_email = $this->sendEmail($operation->id, null);
+        // Enviamos el SMS
+        $response_sms = $this->sendSMS($operation->id, null);
+        /**************************************
+         * Envio de alertas para el Tanqueadors *
+         **************************************/
+        if ($operation->assistant_one != NULL) {
+            // Enviamos el correo Tanqueador uno
+            $response_email = $this->sendEmail($operation->id, $operation->assistant_one?->id);
+            // Enviamos el SMS Tanqueador uno
+            $response_sms = $this->sendSMS($operation->id, $operation->assistant_one?->id);
+        }
+        if ($operation->assistant_two != NULL) {
+            // Enviamos el correo Tanqueador dos
+            $response_email = $this->sendEmail($operation->id, $operation->assistant_two?->id);
+            // Enviamos el SMS Tanqueador dos
+            $response_sms = $this->sendSMS($operation->id, $operation->assistant_two?->id);
+        }
 
         return redirect()->route('operations.index')
             ->with('success', 'Operacion creada con exito.');
@@ -229,7 +229,7 @@ class OperationController extends Controller
         // Buscamos la operacion
         $operation = Operation::find($id);
 
-        if(is_null($operation->file_evidence)) {
+        if (is_null($operation->file_evidence)) {
             return redirect()->route('operations.index')
                 ->with('error', 'No existe el archivo que intenta descargar.');
         }
@@ -239,7 +239,6 @@ class OperationController extends Controller
 
         // Retornarmos la descarga
         return response()->download($path);
-
     }
 
     /**
@@ -251,8 +250,8 @@ class OperationController extends Controller
     public function edit($id)
     {
         $operation = Operation::with(['details' => function ($query) {
-                            $query->orderBy('id', 'DESC'); // Reemplaza 'column_name' con el nombre de la columna por la cual deseas ordenar
-                        }])->find($id);
+            $query->orderBy('id', 'DESC'); // Reemplaza 'column_name' con el nombre de la columna por la cual deseas ordenar
+        }])->find($id);
 
         $detail_operation = new DetailOperation();
 
@@ -310,104 +309,122 @@ class OperationController extends Controller
     public function update(Request $request, Operation $operation)
     {
 
-        $num_operation = (int)$request['detalleCounter'];
+        try {
+            $num_operation = (int)$request['detalleCounter'];
 
-        $user = User::where('id', Auth::id())->with('roles')->first();
+            $user = User::where('id', Auth::id())->with('roles')->first();
 
-        $role_user = $user->roles[0]?->id;
+            $role_user = $user->roles[0]?->id;
 
-        // $maxFields = config('global.max_operation'); // De momento no se usa, se tiene un contador en el front
+            $data = $request->all();
 
-        $name_inputs = [
-            'id_detail_operation',
-            'number_flights',
-            'hour_flights',
-            'acres',
-            'download',
-            'description',
-            'observation',
-            'estate_id',
-            'luck',
-            'zone_id',
-            'dron_id',
-            'type_product_id',
-        ];
+            if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
+                request()->validate(Operation::$rules);
+                // Modificar datos del cliente
+                $operation->id_cliente = $data['id_cliente'] ?? '';
+                $operation->pilot_id = $data['pilot_id'] ?? '';
+                $operation->assistant_id_one = $data['assistant_id_one'] ?? '';
+                $operation->assistant_id_two = $data['assistant_id_two'] ?? '';
+                $operation->date_operation = $data['date_operation'] ?? '';
+                $operation->file_evidence = $data['file_evidence'] ?? '';
+                $operation->observation_admin = $data['observation_admin'] ?? '';
 
-        // Folder donde se guardan las evidencias
-        $folder = 'evidences/_' . $operation->id . '/';
+                $save = $operation->save();
 
-        for ($i = 1; $i <= $num_operation; $i++) {
-            // Creo variable temporal para la informacion del detalle
-            $detail_temp = [];
-            // Guardo el id de la operacion
-            $detail_temp['operation_id'] = $operation->id;
-            foreach ($name_inputs as $input) {
-                $fieldName = $input . "_" . $i;
-                // Acceder al valor del campo en la solicitud
-                $value = $request->input($fieldName);
-                // Agregar el valor al arreglo de datos
-                if ($request->has($fieldName)) {
-                    $detail_temp[$input] = $value;
+                // subir archivo
+                if ($request->has('file_evidence')) {
+                    // Guardamos el archivo zip
+                    $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
+                    // Si no se guarda, me salte el error en la operacion
+                    if ($response->getStatusCode() != 200) {
+                        return redirect()->route('operations.index')
+                            ->with('error', $response->getData());
+                    }
+                    // Guardamos el zip en el campo
+                    $operation->update(['file_evidence' => $response->getData()]);
                 }
+            } else if ($role_user == config('roles.piloto')) {
+                $operation->update(['status_id' => config('status.ENR')]);
             }
-            // Creamos el detalle de la operacion
-            if ($detail_temp['id_detail_operation'] == 0 || $detail_temp['id_detail_operation'] == "0") {
-                // El campo clave es nulo, así que creamos un nuevo registro
-                $detail_operation_new = DetailOperation::create($detail_temp);
-            } else {
-                // El campo clave no es nulo, intentamos actualizar un registro existente
-                $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
-                $detail_operation_new->update($detail_temp);
-            }
-            // Preguntamos si hay imagenes por eliminar
-            $files_delete = json_decode($request->input('files_evidence_delete_' . $i), true);
-            if ($files_delete != null) {
-                foreach ($files_delete as $key => $file_delete) {
-                    $file_find = FilesOperation::where('src_file', $file_delete)
-                            ->whereHas('detailOperation', function ($query) use($detail_operation_new) {
-                                $query->where('detail_operation.id', $detail_operation_new->id);
-                            })->first();
-                    // Storage::disk('public')->delete($evidence->path);
-                    if (File::exists($file_find->src_file)) {
-                        // Elimina el archivo
-                        File::delete($file_find->src_file);
-                        $file_find->delete();
+
+            // $maxFields = config('global.max_operation'); // De momento no se usa, se tiene un contador en el front
+
+            $name_inputs = [
+                'id_detail_operation',
+                'number_flights',
+                'hour_flights',
+                'acres',
+                'download',
+                'description',
+                'observation',
+                'estate_id',
+                'luck',
+                'zone_id',
+                'dron_id',
+                'type_product_id',
+            ];
+
+            // Folder donde se guardan las evidencias
+            $folder = 'evidences/_' . $operation->id . '/';
+
+            for ($i = 1; $i <= $num_operation; $i++) {
+                // Creo variable temporal para la informacion del detalle
+                $detail_temp = [];
+                // Guardo el id de la operacion
+                $detail_temp['operation_id'] = $operation->id;
+                foreach ($name_inputs as $input) {
+                    $fieldName = $input . "_" . $i;
+                    // Acceder al valor del campo en la solicitud
+                    $value = $request->input($fieldName);
+                    // Agregar el valor al arreglo de datos
+                    if ($request->has($fieldName)) {
+                        $detail_temp[$input] = $value;
                     }
                 }
-            }
-            // Guardamos las imagenes despues de todo
-            $file_name = "files_" . $i;
-            if ($request->has($file_name)) {
-                // Guardamos lo que viene del request
-                $files = $request[$file_name];
-                $handle_1 = $this->updateAllFiles($request, $detail_operation_new->id, $folder, $file_name);
-            }
-        }
-
-        if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
-            request()->validate(Operation::$rules);
-            $operation->update($request->all());
-            // subir archivo
-            if ($request->has('file_evidence')) {
-                // Guardamos el archivo zip
-                $response = $this->uploadZip($request, $operation->id, "images/evidences", "zip", "file_evidence");
-                // Si no se guarda, me salte el error en la operacion
-                if ($response->getStatusCode() != 200) {
-                    return redirect()->route('operations.index')
-                        ->with('error', $response->getData());
+                // Creamos el detalle de la operacion
+                if ($detail_temp['id_detail_operation'] == 0 || $detail_temp['id_detail_operation'] == "0") {
+                    // El campo clave es nulo, así que creamos un nuevo registro
+                    $detail_operation_new = DetailOperation::create($detail_temp);
+                } else {
+                    // El campo clave no es nulo, intentamos actualizar un registro existente
+                    $detail_operation_new = DetailOperation::find($detail_temp['id_detail_operation']);
+                    $detail_operation_new->update($detail_temp);
                 }
-                // Guardamos el zip en el campo
-                $operation->update(['file_evidence' => $response->getData()]);
+                // Preguntamos si hay imagenes por eliminar
+                $files_delete = json_decode($request->input('files_evidence_delete_' . $i), true);
+                if ($files_delete != null) {
+                    foreach ($files_delete as $key => $file_delete) {
+                        $file_find = FilesOperation::where('src_file', $file_delete)
+                            ->whereHas('detailOperation', function ($query) use ($detail_operation_new) {
+                                $query->where('detail_operation.id', $detail_operation_new->id);
+                            })->first();
+                        // Storage::disk('public')->delete($evidence->path);
+                        if (File::exists($file_find->src_file)) {
+                            // Elimina el archivo
+                            File::delete($file_find->src_file);
+                            $file_find->delete();
+                        }
+                    }
+                }
+                // Guardamos las imagenes despues de todo
+                $file_name = "files_" . $i;
+                if ($request->has($file_name)) {
+                    // Guardamos lo que viene del request
+                    $files = $request[$file_name];
+                    $handle_1 = $this->updateAllFiles($request, $detail_operation_new->id, $folder, $file_name);
+                }
             }
-        } else if ($role_user == config('roles.piloto')) {
-            $operation->update(['status_id' => config('status.ENR')]);
+
+            /* CREAMOS LA NOTIFICACION */
+            // $this->make_detail_operation_notification($operation);
+
+            return redirect()->route('operations.index')
+                ->with('success', 'Operacion actualizada con exito.');
+        } catch (\Throwable $th) {
+            $message = $th->getMessage();
+            return redirect()->route('operations.index')
+                ->with('error', "Ups, algo surgio mientras guardabamos la información.");
         }
-
-        /* CREAMOS LA NOTIFICACION */
-        // $this->make_detail_operation_notification($operation);
-
-        return redirect()->route('operations.index')
-            ->with('success', 'Operacion actualizada con exito.');
     }
 
     /**
@@ -424,7 +441,8 @@ class OperationController extends Controller
     }
 
     /* MANEJAR NOTIFICACIONES */
-    public function make_operation_notification(Operation $operation) {
+    public function make_operation_notification(Operation $operation)
+    {
         try {
             /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
             $user = User::find($operation->pilot_id);
@@ -437,7 +455,8 @@ class OperationController extends Controller
     }
 
     /* MANEJAR NOTIFICACIONES */
-    public function make_detail_operation_notification($operation) {
+    public function make_detail_operation_notification($operation)
+    {
         try {
             /* GENERAR NOTIFICACION AL PILOTO CREADO EN LA NOTIFICACION */
             $user = User::find($operation->admin_by);
@@ -483,12 +502,11 @@ class OperationController extends Controller
         $clients = Client::where('id', $operation->id_cliente)->pluck('social_reason as label', 'id as value');
 
         $assistents = Assistant::whereIn('id', [$operation->assistant_id_one, $operation->assistant_id_two])
-                    ->pluck('name as label', 'id as value');
+            ->pluck('name as label', 'id as value');
 
         $statuses = Status::whereIn('id', [config('status.RECI'), config('status.REC')])->pluck('name as label', 'id as value');
 
         return view('operation.accept', compact('operation', 'clients', 'assistents', 'statuses'));
-
     }
 
     /* Aceptar operacion */
@@ -503,7 +521,5 @@ class OperationController extends Controller
         set_time_limit(30000);
         return redirect()->route('home.welcome')
             ->with('success', 'Puede continuar con su labor.');
-
     }
-
 }

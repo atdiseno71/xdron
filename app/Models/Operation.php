@@ -79,6 +79,10 @@ class Operation extends Model
         'date_operation',
     ];
 
+    protected $casts = [
+        'date_operation' => 'date:Y-m-d',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
