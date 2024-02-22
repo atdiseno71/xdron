@@ -111,10 +111,11 @@ header {
     /* Posicionar informe general */
     text-transform: uppercase;
     text-align: center;
+    align-items: center;
     position: absolute;
     top: 40px;
-    left: 40%;
-    right: 40%;
+    left: 12rem;
+    right: 12rem;
 }
 table {
     caption-side: bottom;
@@ -284,7 +285,7 @@ p {
 ul {
     /* Posicionar informe general */
     position: absolute;
-    top: 70px;
+    top: 100px;
     left: 0%;
     right: 0%;
     color: #000;
@@ -323,3 +324,20 @@ ul li {
     page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
 }
 
+.title-fixe {
+    /* Posicionar informe general */
+    text-transform: uppercase;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    left: 0%;
+    right: 0%;
+
+    background: #198754/* #212529 */;
+    height: .8cm;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}

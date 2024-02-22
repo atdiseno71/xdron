@@ -12,7 +12,23 @@
         </a>
     </header>
 
-    <h5 class="alineacion-center title-report"><strong>Cliente:</strong><strong>{{ $operation->client?->social_reason ?? '' }}</strong></h5>
+    <h5 class="alineacion-center title-report">
+        <strong>CLIENTE:</strong>{{ $operation->client?->social_reason ?? '' }}
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <strong>FECHA VUELO:</strong>{{ $operation->date_operation?->format('d/m/Y') }}
+    </h5>
+
+    <h5 class="alineacion-center title-fixe">
+        <strong>PILOTO:</strong>{{ $operation->client?->social_reason ?? '' }}
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <strong>DRON:</strong>{{ $operation->client?->social_reason ?? '' }}
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <strong>TOTAL HAS:</strong>{{ $operation->client?->social_reason ?? '' }}
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <strong>DESCARGA:</strong>{{ $operation->client?->social_reason ?? '' }}
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <strong>ZONA:</strong>{{ $operation->client?->social_reason ?? '' }}
+    </h5>
 
     <br><br>
 
