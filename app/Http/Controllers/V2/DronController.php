@@ -61,7 +61,7 @@ class DronController extends Controller
 
         $dron = Dron::create($request->all());
 
-        return redirect()->back()
+        return redirect()->route('drons.index')
             ->with('success', 'Dron creado con exito.');
     }
 
