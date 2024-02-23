@@ -9,7 +9,7 @@
                                 <option value="0" disabled>Seleccione una opcion</option>
                                 <option value="1">Hacienda</option>
                                 <option value="2">Suerte</option>
-                                <option value="3">Tipo Producto</option>
+                                <option value="3">Tipo aplicación</option>
                                 <option value="4">Dron</option>
                                 <option value="5">Tanqueadores</option>
                                 <option value="6">Piloto</option>

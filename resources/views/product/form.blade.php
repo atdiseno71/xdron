@@ -11,8 +11,8 @@
             </div>
             <div class="col-12 col-md-5">
                 <div class="form-group">
-                    {{ Form::label('type_id', 'Tipo producto') }}
-                    {{ Form::select('type_id', $type_products, $product->type_id, ['class' => 'form-control select2' . ($errors->has('type_id') ? ' is-invalid' : ''), 'id' => 'type_id', 'placeholder' => 'Seleccione el tipo producto']) }}
+                    {{ Form::label('type_id', 'Tipo aplicación') }}
+                    {{ Form::select('type_id', $type_products, $product->type_id, ['class' => 'form-control select2' . ($errors->has('type_id') ? ' is-invalid' : ''), 'id' => 'type_id', 'placeholder' => 'Seleccione el Tipo aplicación']) }}
                     {!! $errors->first('type_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
