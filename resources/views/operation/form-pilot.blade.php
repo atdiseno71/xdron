@@ -84,7 +84,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('download', 'Descarga') }}
-                    {{ Form::select('download', ["Selecciona una opcion", 5, 10, 15, 20], $operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una opcion']) }}
+                    {{ Form::select('download', [5 => 5, 10 => 10, 15 => 15, 20 => 20], $operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una opcion']) }}
                     {!! $errors->first('download', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
