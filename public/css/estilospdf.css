@@ -111,10 +111,11 @@ header {
     /* Posicionar informe general */
     text-transform: uppercase;
     text-align: center;
+    align-items: center;
     position: absolute;
     top: 40px;
-    left: 40%;
-    right: 40%;
+    left: 1rem;
+    right: 1rem;
 }
 table {
     caption-side: bottom;
@@ -284,7 +285,7 @@ p {
 ul {
     /* Posicionar informe general */
     position: absolute;
-    top: 70px;
+    top: 100px;
     left: 0%;
     right: 0%;
     color: #000;
@@ -323,3 +324,46 @@ ul li {
     page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
 }
 
+.evidence_record {
+
+    position: absolute;
+    top: 130px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    width: 100%;
+    /* height: 2350px; */
+
+    page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
+}
+
+.evidence_aplication {
+
+    /* position: absolute; */
+    /* top: 130px; */
+    /* bottom: 20px; */
+    /* left: 20px; */
+    /* right: 20px; */
+    width: 100%;
+    /* height: 2350px; */
+
+    page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
+}
+
+.title-fixe {
+    /* Posicionar informe general */
+    text-transform: uppercase;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    left: 0%;
+    right: 0%;
+
+    background: #198754/* #212529 */;
+    height: 3.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}

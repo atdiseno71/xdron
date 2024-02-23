@@ -9,7 +9,7 @@
                                 <option value="0" disabled>Seleccione una opcion</option>
                                 <option value="1">Hacienda</option>
                                 <option value="2">Suerte</option>
-                                <option value="3">Tipo Producto</option>
+                                <option value="3">Tipo aplicación</option>
                                 <option value="4">Dron</option>
                                 <option value="5">Tanqueadores</option>
                                 <option value="6">Piloto</option>
@@ -43,10 +43,17 @@
 
                                     <th>No</th>
                                     <th>Acciones</th>
-                                    <th>Hacienda</th>
-                                    <th>Suerte</th>
+                                    <th>Administrador</th>
+                                    <th>Cliente</th>
+                                    <th>Piloto</th>
+                                    <th>Tanqueadores</th>
                                     <th>T. Producto</th>
                                     <th>Dron</th>
+                                    <th>Fecha vuelo</th>
+                                    <th>Fecha creación</th>
+                                    <th>Estado</th>
+                                    <th>Hacienda</th>
+                                    <th>Suerte</th>
 
                                     <th>Hectareas/vuelos</th>
                                     <th>Hectareas/Baterias</th>
@@ -56,13 +63,6 @@
                                     <th>T Hectareas</th>
                                     <th>T vuelos</th>
 
-                                    <th>Tanqueadores</th>
-                                    <th>Piloto</th>
-                                    <th>Cliente</th>
-                                    <th>Administrador</th>
-                                    <th>Fecha creación</th>
-                                    <th>Fecha vuelo</th>
-                                    <th>Estado</th>
 
                                 </tr>
                             </thead>
@@ -130,6 +130,15 @@
                                             </form>
                                         </td>
 
+                                        <td>{{ $operation->userAdmin?->name }}</td>
+                                        <td>{{ $operation->client?->social_reason }}</td>
+                                        <td>{{ $operation->userPilot?->name }}</td>
+                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
+                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->date_operation?->format('d/m/Y') }}</td>
+                                        <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
+                                        <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
                                         <td>{{ $operation->details[0]?->estate->name ?? 'Sin vuelos.' }}</td>
                                         <td>
                                             @forelse ($operation->details as $index => $detail)
@@ -141,21 +150,13 @@
                                                 Sin vuelos.
                                             @endforelse
                                         </td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
-                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'Sin vuelos.' }}</td>
                                         <td>{{ $divide1 }}</td>
                                         <td>{{ $divide2 }}</td>
                                         <td>{{ $number_flights }}</td>
                                         <td>{{ $hour_flights }}</td>
                                         <td>{{ $acres }}</td>
                                         <td>{{ count($operation->details) }}</td>
-                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
-                                        <td>{{ $operation->userPilot?->name }}</td>
-                                        <td>{{ $operation->client?->social_reason }}</td>
-                                        <td>{{ $operation->userAdmin?->name }}</td>
-                                        <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
-                                        <td>{{ count($operation->details) == 0 ? 'Sin vuelos.' : $operation->details[0]->created_at?->format('d/m/Y') }}</td>
-                                        <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
+                                        {{-- <td>{{ count($operation->details) == 0 ? 'Sin vuelos.' : $operation->details[0]->created_at?->format('d/m/Y') }}</td> --}}
 
                                     </tr>
                                 @endforeach

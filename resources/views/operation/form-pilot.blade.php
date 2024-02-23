@@ -28,19 +28,92 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('assistant_id_one', 'Tanqueador uno') }}
+                    {{ Form::label('assistant_id_one', 'Tanqueador 1') }}
                     {{ Form::select('assistant_id_one', $assistents, $operation->assistant_id_one, ['class' => 'form-control ' . ($errors->has('assistant_id_one') ? ' is-invalid' : ''), 'id' => 'assistant_id_one', 'placeholder' => 'Seleccione Tanqueador uno', 'disabled' => 'disabled']) }}
                     {!! $errors->first('assistant_id_one', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('assistant_id_two', 'Tanqueador dos') }}
+                    {{ Form::label('assistant_id_two', 'Tanqueador 2') }}
                     {{ Form::select('assistant_id_two', $assistents, $operation->assistant_id_two, ['class' => 'form-control ' . ($errors->has('assistant_id_two') ? ' is-invalid' : ''), 'id' => 'assistant_id_two', 'placeholder' => 'Seleccione Tanqueador dos', 'disabled' => 'disabled']) }}
                     {!! $errors->first('assistant_id_two', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <!-- File para el logo del proyecto -->
+                <div class="form-group">
+                    <label for="input-logo">{{__('Subir record')}}:</label>
+                    <div class="card img-logo">
+                        <input type="file" name="evidence_record" class="input-img-logo" accept="image/*" id="input-icono" value="{{$operation->evidence_record ?? 'images/default.png'}}"/>
+                        <img id="img-icono" src="{{asset($operation->evidence_record ?? 'images/default.png')}}" height="100px"/>
+                        <div class="icon-wrapper">
+                            <i class="fa fa-upload fa-5x"></i>
+                        </div>
+                    </div>
+                    {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <!-- File para el logo del proyecto -->
+                <div class="form-group">
+                    <label for="input-logo">{{__('Subir informe de lavado')}}:</label>
+                    <div class="card img-logo">
+                        <input type="file" name="evidence_aplication" class="input-img-logo" accept="image/*" id="input-icono" value="{{$operation->evidence_aplication ?? 'images/default.png'}}"/>
+                        <img id="img-icono" src="{{asset($operation->evidence_aplication ?? 'images/default.png')}}" height="100px"/>
+                        <div class="icon-wrapper">
+                            <i class="fa fa-upload fa-5x"></i>
+                        </div>
+                    </div>
+                    {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('id_dron', 'Drones') }}
+                    {{ Form::select('id_dron', $drones, $operation->id_dron, ['class' => 'form-control select2' . ($errors->has('id_dron') ? ' is-invalid' : ''), 'id' => 'id_dron', 'placeholder' => 'Seleccione un drone']) }}
+                    {!! $errors->first('id_dron', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('download', 'Descarga') }}
+                    {{ Form::select('download', ["Selecciona una opcion", 5, 10, 15, 20], $operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una opcion']) }}
+                    {!! $errors->first('download', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            {{-- Termina columna 12 --}}
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('id_zone', 'Zona') }}
+                    {{ Form::select('id_zone', $zones, $operation->id_zone, ['class' => 'form-control select2' . ($errors->has('id_zone') ? ' is-invalid' : ''), 'id' => 'id_zone', 'placeholder' => 'Seleccione una opcion']) }}
+                    {!! $errors->first('id_zone', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('number_flights', 'Baterias') }}
+                    {{ Form::number('number_flights', $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights', 'placeholder' => 'Ingrese cant. Baterias']) }}
+                    {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            {{-- Termina columna 12 --}}
+            <div class="col-12 col-md-12">
+                <div class="form-group">
+                    {{ Form::label('hour_flights', 'Horas vuelos') }}
+                    {{ Form::number('hour_flights', $detail_operation->hour_flights_1, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights', 'placeholder' => 'Ingrese cant. horas vuelos']) }}
+                    {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            {{-- Termina columna 12 --}}
+        </div>
+
         <!-- Agrega un input hidden para rastrear el contador -->
         <input type="hidden" name="detalleCounter" id="detalleCounter" value="{{ count($operation->details) != 0 ? count($operation->details) : 1 }}">
         {{-- boton para duplicar --}}
@@ -72,7 +145,6 @@
                         </div>
                         <div class="col-2">
                             <button class="btn btn-danger eliminarDetalleOperacion" type="button">X</button>
-                            {{-- <button class="btn btn-danger btn-preview-image eliminarDetalleOperacion" type="button">X</button> --}}
                         </div>
                     </div>
                 </div>
@@ -96,19 +168,9 @@
                         @endif
                     </div>
                 </div>
-                {{-- <div class="col-12 col-md-1">
-                    <div class="form-group btn-modal">
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formEstate">
-                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div> --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="type_product_id_{{ $numberAreThere }}">Tipo producto</label>
+                        <label for="type_product_id_{{ $numberAreThere }}">Tipo aplicación</label>
                         <select name="type_product_id_{{ $numberAreThere }}" id="type_product_id_{{ $numberAreThere }}"
                             class="form-control {{ $errors->has('type_product_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione el tipo de producto">
@@ -132,75 +194,7 @@
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="dron_id_{{ $numberAreThere }}">Drones</label>
-                        <select name="dron_id_{{ $numberAreThere }}" id="dron_id_{{ $numberAreThere }}"
-                            class="form-control {{ $errors->has('dron_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una drone">
-                            <option value="0" selected>Selecciona una opcion</option>
-                            @foreach ($drones as $dronKey => $dronValue)
-                                <option value="{{ $dronKey }}">
-                                    {{ $dronValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('dron_id'))
-                            <div class="invalid-feedback">{{ $errors->first('dron_id') }}</div>
-                        @endif
-                    </div>
-                </div>
-                {{-- Termina columna 12 --}}
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="download_{{ $numberAreThere }}">Descarga</label>
-                        <select name="download_{{ $numberAreThere }}" id="download_{{ $numberAreThere }}"
-                            class="form-control {{ $errors->has('download') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una descarga">
-                            @foreach (["Selecciona una opcion", 5, 10, 15, 20] as $value)
-                                <option value="{{ $value }}">
-                                    {{ $value }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('download'))
-                            <div class="invalid-feedback">{{ $errors->first('download') }}</div>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="zone_id_{{ $numberAreThere }}">Zona</label>
-                        <select name="zone_id_{{ $numberAreThere }}" id="zone_id_{{ $numberAreThere }}"
-                            class="form-control {{ $errors->has('zone_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una zona">
-                            <option value="0" selected>Selecciona una opcion</option>
-                            @foreach ($zones as $zoneKey => $zoneValue)
-                                <option value="{{ $zoneKey }}">
-                                    {{ $zoneValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('zone_id'))
-                            <div class="invalid-feedback">{{ $errors->first('zone_id') }}</div>
-                        @endif
-                    </div>
-                </div>
-                {{-- Termina columna 12 --}}
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('number_flights_' . $numberAreThere, 'Baterias') }}
-                        {{ Form::number('number_flights_' . $numberAreThere, $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights_' . $numberAreThere, 'placeholder' => 'Ingrese cant. Baterias']) }}
-                        {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('hour_flights_' . $numberAreThere, 'Horas vuelos') }}
-                        {{ Form::number('hour_flights_' . $numberAreThere, $detail_operation->hour_flights_1, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights_' . $numberAreThere, 'placeholder' => 'Ingrese cant. horas vuelos']) }}
-                        {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
+                
                 {{-- Termina columna 12 --}}
                 <div class="col-12 col-md-12">
                     <div class="form-group">
@@ -265,19 +259,9 @@
                         @endif
                     </div>
                 </div>
-                {{-- <div class="col-12 col-md-1">
-                    <div class="form-group btn-modal">
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#formEstate">
-                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z" fill="#FCFCFC"/>
-                                <path d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z" fill="#FCFCFC"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div> --}}
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="type_product_id_{{ $key + 1 }}">Tipo producto</label>
+                        <label for="type_product_id_{{ $key + 1 }}">Tipo aplicación</label>
                         <select name="type_product_id_{{ $key + 1 }}" id="type_product_id_{{ $key + 1 }}"
                             class="form-control {{ $errors->has('type_product_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione el tipo de producto">
@@ -300,72 +284,6 @@
                         {{ Form::label('luck_' . $key + 1, 'Suerte') }}
                         {{ Form::text('luck_' . $key + 1, $detail->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $key + 1, 'placeholder' => 'Ingrese la suerte']) }}
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="dron_id_{{ $key + 1 }}">Drones</label>
-                        <select name="dron_id_{{ $key + 1 }}" id="dron_id_{{ $key + 1 }}"
-                            class="form-control {{ $errors->has('dron_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una drone">
-                            <option value="0" selected>Selecciona una opcion</option>
-                            @foreach ($drones as $dronKey => $dronValue)
-                                <option value="{{ $dronKey }}"
-                                    {{ $detail->dron_id == $dronKey ? 'selected' : '' }}>
-                                    {{ $dronValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('dron_id'))
-                            <div class="invalid-feedback">{{ $errors->first('dron_id') }}</div>
-                        @endif
-                    </div>
-                </div>
-                {{-- Termina columna 12 --}}
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="download_{{ $key + 1 }}">Descarga</label>
-                        <select name="download_{{ $key + 1 }}" id="download_{{ $key + 1 }}"
-                            class="form-control {{ $errors->has('download') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una descarga">
-                            {{-- <option value="0" selected>Selecciona una opcion</option> --}}
-                            @foreach (["Selecciona una opcion", 5, 10, 15, 20] as $value)
-                                <option value="{{ $value }}"
-                                    {{ $detail->download == $value ? 'selected' : '' }}>
-                                    {{ $value }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('download'))
-                            <div class="invalid-feedback">{{ $errors->first('download') }}</div>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="zone_id_{{ $key + 1 }}">Zona</label>
-                        <select name="zone_id_{{ $key + 1 }}" id="zone_id_{{ $key + 1 }}"
-                            class="form-control {{ $errors->has('zone_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una zona">
-                            <option value="0" selected>Selecciona una opcion</option>
-                            @foreach ($zones as $zoneKey => $zoneValue)
-                                <option value="{{ $zoneKey }}"
-                                    {{ $detail->zone_id == $zoneKey ? 'selected' : '' }}>
-                                    {{ $zoneValue }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('zone_id'))
-                            <div class="invalid-feedback">{{ $errors->first('zone_id') }}</div>
-                        @endif
-                    </div>
-                </div>
-                {{-- Termina columna 12 --}}
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('number_flights_' . $key + 1, 'Baterias') }}
-                        {{ Form::number('number_flights_' . $key + 1, $detail->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights_' . $key + 1, 'placeholder' => 'Ingrese cant. Baterias']) }}
-                        {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
