@@ -24,7 +24,6 @@ return new class extends Migration
 
             $table->string('number_flights')->nullable();
             $table->string('hour_flights')->nullable();
-            $table->string('download')->nullable();
         });
     }
 

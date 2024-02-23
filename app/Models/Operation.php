@@ -79,6 +79,10 @@ class Operation extends Model
         'date_operation',
         'evidence_record',
         'evidence_aplication',
+        'dron_id',
+        'zone_id',
+        'number_flights',
+        'hour_flights',
     ];
 
     protected $casts = [
@@ -147,6 +151,22 @@ class Operation extends Model
     public function details()
     {
         return $this->hasMany('App\Models\DetailOperation', 'operation_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function zone()
+    {
+        return $this->hasOne('App\Models\Zone', 'id', 'zone_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function drone()
+    {
+        return $this->hasOne('App\Models\Dron', 'id', 'dron_id');
     }
 
 }
