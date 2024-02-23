@@ -150,7 +150,7 @@ class Operation extends Model
      */
     public function details()
     {
-        return $this->hasMany('App\Models\DetailOperation', 'operation_id', 'id');
+        return $this->hasMany(DetailOperation::class, 'operation_id', 'id');
     }
 
     /**
