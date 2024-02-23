@@ -77,6 +77,8 @@ class Operation extends Model
         'status_id',
         'file_evidence',
         'date_operation',
+        'evidence_record',
+        'evidence_aplication',
     ];
 
     protected $casts = [

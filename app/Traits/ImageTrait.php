@@ -156,6 +156,51 @@ trait ImageTrait
         }
     }
 
+    /* SUBIR DOCUMENTOS A TRAVES DEL DROPZONE */
+    public function uploadImage($request, $id, $model, $name_file) {
+
+        $file = $request->file($name_file);
+        // If the variable '$file' is not empty, we update the registry with the new images
+        if (!empty($file)) {
+            try {
+                // Validate that the name and image format are present.
+                $request->validate([
+                    "$name_file.*" => 'bail|required|mimes:jpeg,png,gif,pdf|max:10048',
+                ]);
+                // We receive one or more images and update them.
+                $path = public_path("images/$model");
+                $rand = strtolower(Str::random(10));
+                $image = Image::make($file);
+                // Recorta la parte superior de la imagen a 720 de ancho y 1400 de alto
+                // $image->fit(720, 1560);
+                // $image->crop(700, 1400, 0, 160);
+                // $image->encode('webp', 70);
+
+                // RUTA DE LA IMAGEN
+                $path_image = $path . $rand . '.webp';
+
+                // Verificar si el directorio ya existe
+                if (!file_exists($path)) {
+                    // Si no existe, crear el directorio
+                    mkdir($path, 0777, true);
+                }
+                $image->save($path_image);
+                // // Save in database with relation
+                // FilesOperation::create([
+                //     'src_file' => "images/$model" . $rand . '.webp',
+                //     'detail_operation_id' => $id,
+                // ]);
+                return [
+                    'response' => ['status' => true, 'name' => "images/$model" . $rand . '.webp', 'message' => 'Se ha guardado con éxito']
+                ];
+            } catch (\Exception $ex) {
+                return [
+                    'response' => ['status' => false, 'name' => $ex->getMessage(), 'message' => $ex->getMessage()]
+                ];
+            }
+        }
+    }
+
     /* ACTUALIZAR DOCUMENTOS QUE VIENEN A TRAVES DEL DROPZONE */
     public function updateAllFiles($request, $id, $model, $name_file) {
 

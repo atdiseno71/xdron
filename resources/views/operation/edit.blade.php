@@ -56,6 +56,20 @@
 
 @section('js')
     <script>
+
+        // Vista previa icono en configuracion
+        $("#input-icono").on("change", function () {
+            const img = new Image();
+            const image = this.files[0];
+            if (!image) return;
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                img.src = reader.result;
+                $(`#img-icono`).attr("src", reader.result);
+            });
+            reader.readAsDataURL(image);
+        });
+
         $(document).ready(function() {
             // Formulario para cliente
             $('#formClienteUser').on('submit', function(e) {

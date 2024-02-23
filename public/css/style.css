@@ -1,7 +1,7 @@
     :root {
         --separator-color: #cccccc;
     }
-    
+
     .img-logo, .imagen-banner {
         position: relative;
         /*width:50%;*/
@@ -31,7 +31,7 @@
         color:#fff;
         text-align:center;
         width:100%;
-        padding:7px;
+        padding:5px;
     }
 
     /*.img-logo, .imagen-banner img {
@@ -51,10 +51,10 @@
         height:100%;
     }
 
-    .img-logo {
+    /* .img-logo {
         width: 250px;
-        height: 204px;
-    }
+        height: 250px;
+    } */
     .logo {
         width: 266px;
         height: 66px;
@@ -70,6 +70,10 @@
     .product-front a img {
         height: 29.7vh;
         object-fit: scale-down;
+    }
+
+    .fa-5x {
+        font-size: 3em !important;
     }
 
     .separator-line {

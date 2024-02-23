@@ -415,6 +415,22 @@ class OperationController extends Controller
                 }
             }
 
+            // Verificamos si hay imaganes de evidencia record
+            if ($request->has('evidence_record')) {
+                // Guardamos lo que viene del request
+                $files = $request['evidence_record'];
+                $handle_1 = $this->uploadImage($request, $detail_operation_new->id, $folder, 'evidence_record');
+                $operation->update(['evidence_record' => $handle_1['response']['name']]);
+            }
+
+            // Verificamos si hay imaganes de evidencia de lavado
+            if ($request->has('evidence_aplication')) {
+                // Guardamos lo que viene del request
+                $files = $request['evidence_aplication'];
+                $handle_1 = $this->uploadImage($request, $detail_operation_new->id, $folder, 'evidence_aplication');
+                $operation->update(['evidence_aplication' => $handle_1['response']['name']]);
+            }
+
             /* CREAMOS LA NOTIFICACION */
             // $this->make_detail_operation_notification($operation);
 

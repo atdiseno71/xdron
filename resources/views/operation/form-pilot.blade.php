@@ -41,6 +41,55 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <!-- File para el logo del proyecto -->
+                <div class="form-group">
+                    <label for="input-logo">{{__('Subir record')}}:</label>
+                    <div class="card img-logo">
+                        <input type="file" name="evidence_record" class="input-img-logo" accept="image/*" id="input-icono" value="{{$operation->evidence_record ?? 'images/default.png'}}"/>
+                        <img id="img-icono" src="{{asset($operation->evidence_record ?? 'images/default.png')}}" height="100px"/>
+                        <div class="icon-wrapper">
+                            <i class="fa fa-upload fa-5x"></i>
+                        </div>
+                    </div>
+                    {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <!-- File para el logo del proyecto -->
+                <div class="form-group">
+                    <label for="input-logo">{{__('Subir informe de lavado')}}:</label>
+                    <div class="card img-logo">
+                        <input type="file" name="evidence_aplication" class="input-img-logo" accept="image/*" id="input-icono" value="{{$operation->evidence_aplication ?? 'images/default.png'}}"/>
+                        <img id="img-icono" src="{{asset($operation->evidence_aplication ?? 'images/default.png')}}" height="100px"/>
+                        <div class="icon-wrapper">
+                            <i class="fa fa-upload fa-5x"></i>
+                        </div>
+                    </div>
+                    {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="row">
+            <div class="col-12 col-md-12">
+                <!-- File para el logo del proyecto -->
+                <div class="form-group">
+                    <label for="input-logo">{{__('Upload file')}}:</label>
+                    <div class="card img-logo">
+                        <input type="file" name="evidence_aplication" class="input-img-logo" id="input-icono" value="{{$operation->evidence_aplication ?? 'images/default.png'}}"/>
+                        <img id="img-icono" src="{{asset($operation->evidence_aplication ?? 'images/default.png')}}" />
+                        <div class="icon-wrapper">
+                            <i class="fa fa-upload fa-5x"></i>
+                        </div>
+                    </div>
+                    {!! $errors->first('icono', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+        </div> --}}
+
         <!-- Agrega un input hidden para rastrear el contador -->
         <input type="hidden" name="detalleCounter" id="detalleCounter" value="{{ count($operation->details) != 0 ? count($operation->details) : 1 }}">
         {{-- boton para duplicar --}}
