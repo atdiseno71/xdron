@@ -114,8 +114,8 @@ header {
     align-items: center;
     position: absolute;
     top: 40px;
-    left: 12rem;
-    right: 12rem;
+    left: 1rem;
+    right: 1rem;
 }
 table {
     caption-side: bottom;
@@ -324,6 +324,32 @@ ul li {
     page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
 }
 
+.evidence_record {
+
+    position: absolute;
+    top: 130px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    width: 100%;
+    /* height: 2350px; */
+
+    page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
+}
+
+.evidence_aplication {
+
+    /* position: absolute; */
+    /* top: 130px; */
+    /* bottom: 20px; */
+    /* left: 20px; */
+    /* right: 20px; */
+    width: 100%;
+    /* height: 2350px; */
+
+    page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
+}
+
 .title-fixe {
     /* Posicionar informe general */
     text-transform: uppercase;
@@ -335,7 +361,7 @@ ul li {
     right: 0%;
 
     background: #198754/* #212529 */;
-    height: .8cm;
+    height: 3.6rem;
     margin: 0;
     padding: 0;
     list-style: none;

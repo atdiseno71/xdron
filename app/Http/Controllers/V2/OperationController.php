@@ -214,7 +214,7 @@ class OperationController extends Controller
         // return view('pdf.report.operation', compact('operation'));
         $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
 
-        $pdf->set_paper('letter', 'landscape');
+        $pdf->set_paper('A4', 'portrait');
         return $pdf->stream('reporte.pdf');
     }
 
