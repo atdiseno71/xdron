@@ -246,7 +246,8 @@ class OperationController extends Controller
         // Buscamos la operacion
         $operation = Operation::find($id);
 
-        if (is_null($operation->file_evidence)) {
+        if (is_null($operation->file_evidence) || empty($operation->file_evidence)) {
+
             return redirect()->route('operations.index')
                 ->with('error', 'No existe el archivo que intenta descargar.');
         }
