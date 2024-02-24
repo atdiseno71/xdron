@@ -21,11 +21,10 @@ class OperationFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'pilot_id ' => 2,
-            'id_cliente' => random_int(2, 4),
-            'admin_by' => random_int(2, 3),
-            // 'status_id ' => random_int(2, 4),
-            'created_at' => now(),
+            'id_cliente' => '1',
+            'pilot_id' => '1',
+            'assistant_id_one' => '1',
+            'date_operation' => '2024-02-28',
         ];
     }
 
