@@ -1,4 +1,5 @@
 <div class="container-fluid">
+
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -41,71 +42,122 @@
                             <thead class="thead">
                                 <tr>
 
+                                    <th></th>
                                     <th>No</th>
-                                    <th>Acciones</th>
-                                    <th>Administrador</th>
-                                    <th>Cliente</th>
-                                    <th>Piloto</th>
-                                    <th>Tanqueadores</th>
-                                    <th>T. Producto</th>
-                                    <th>Dron</th>
                                     <th>Fecha vuelo</th>
-                                    <th>Fecha creación</th>
-                                    <th>Estado</th>
+                                    <th>Piloto</th>
+                                    <th>Tanqueador 1</th>
+                                    <th>Tanqueador 2</th>
+                                    <th>Dron</th>
+                                    <th>Cliente</th>
+                                    <th>T. Aplicacion</th>
+                                    <th>Descarga LTS</th>
+
+                                    <th>T Hectareas</th>
                                     <th>Hacienda</th>
                                     <th>Suerte</th>
 
-                                    <th>Hectareas/vuelos</th>
-                                    <th>Hectareas/Baterias</th>
-
                                     <th>T Baterias</th>
                                     <th>TH vuelos</th>
-                                    <th>T Hectareas</th>
-                                    <th>T vuelos</th>
 
+                                    <th>Hectareas/horas</th>
+                                    <th>Hectareas/Baterias</th>
+
+                                    {{-- <th>Observación</th> --}}
+                                    <th>Fecha creación</th>
+                                    <th>Estado</th>
+
+                                    <th>Acciones</th>
+                                    <th>Archivo ZIP</th>
+                                    <th>Administrador</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($operations as $key => $operation)
                                 @php
-                                    $number_flights = 0;
-                                    $hour_flights = 0;
+                                    $number_flights = $operation->number_flights;
+                                    $hour_flights = $operation->hour_flights;
                                     $acres = 0;
                                     foreach ($operation->details as $detail) {
-                                        $number_flights += $detail->number_flights;
-                                        $hour_flights += $detail->hour_flights;
                                         $acres += $detail->acres;
                                     }
-                                    /* Horas de vuelos */
+                                    /* Hectareas/horas */
                                     if ($hour_flights != 0) {
-                                        $divide1 = $acres / $hour_flights;
+                                        $divide1 = number_format($acres / $hour_flights, 2, ',', ' ');
                                     } else {
                                         $divide1 = 0;
                                     }
-                                    /* Numero de vuelos */
+                                    /* Hectareas/Baterias */
                                     if ($number_flights != 0) {
-                                        $divide2 = $acres / $number_flights;
+                                        $divide2 = number_format($acres / $number_flights, 2, ',', ' ');
                                     } else {
                                         $divide2 = 0;
                                     }
                                 @endphp
                                     <tr>
 
+                                        <td>
+                                            <button wire:click="$emitTo('operation-modal', 'display-modal', {{ $operation->id }})" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formLuck">
+                                                <svg width="28" height="29" viewBox="0 0 28 29" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
+                                                        fill="#FCFCFC" />
+                                                    <path
+                                                        d="M19.0746 13.3626H15.1371V9.4251C15.1371 8.8126 14.6121 8.2876 13.9996 8.2876C13.3871 8.2876 12.8621 8.8126 12.8621 9.4251V13.3626H8.92461C8.31211 13.3626 7.78711 13.8876 7.78711 14.5001C7.78711 15.1126 8.31211 15.6376 8.92461 15.6376H12.8621V19.5751C12.8621 20.1876 13.3871 20.7126 13.9996 20.7126C14.6121 20.7126 15.1371 20.1876 15.1371 19.5751V15.6376H19.0746C19.6871 15.6376 20.2121 15.1126 20.2121 14.5001C20.2121 13.8876 19.6871 13.3626 19.0746 13.3626Z"
+                                                        fill="#FCFCFC" />
+                                                </svg>
+                                            </button>
+                                        </td>
+
                                         <td>{{ $operation->id }}</td>
+
+                                        <td>{{ $operation->date_operation?->format('d/m/Y') }}</td>
+                                        <td>{{ $operation->userPilot?->name }}</td>
+                                        <td>{{ $operation->assistant_one?->name }}</td>
+                                        <td>{{ $operation->assistant_two?->name }}</td>
+                                        <td>{{ $operation->drone->enrollment ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->client?->social_reason }}</td>
+                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->download }}</td>
+
+                                        <td>{{ $acres }}</td>
+                                        <td>
+                                            @forelse ($operation->details as $index => $detail)
+                                                {{ $detail->estate?->name }}
+                                                @if (!$loop->last)
+                                                ,
+                                                @endif
+                                            @empty
+                                                Sin vuelos.
+                                            @endforelse
+                                        </td>
+                                        <td>
+                                            @forelse ($operation->details as $index => $detail)
+                                                {{ $detail->luck }}
+                                                @if (!$loop->last)
+                                                ,
+                                                @endif
+                                            @empty
+                                                Sin vuelos.
+                                            @endforelse
+                                        </td>
+
+                                        <td>{{ $number_flights }}</td>
+                                        <td>{{ $hour_flights }}</td>
+
+                                        <td>{{ $divide1 }}</td>
+                                        <td>{{ $divide2 }}</td>
+
+                                        {{-- <td>{{ $operation->observation_admin }}</td> --}}
+                                        <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
+                                        <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
 
                                         <td>
                                             <form action="{{ route('operations.destroy', $operation->id) }}"
                                                 method="POST" class="form-delete">
                                                 @can('operations.show')
-                                                    @if(auth()->user()->hasRole('super.root') || auth()->user()->hasRole('root') || auth()->user()->hasRole('cliente'))
-                                                        <a class="btn btn-sm btn-warning"
-                                                            href="{{ route('operations.download', $operation->id) }}">
-                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M18.983 8.64168C18.9046 8.545 18.8055 8.46712 18.693 8.41376C18.5805 8.3604 18.4575 8.33293 18.333 8.33335H16.6663V7.50002C16.6663 6.83698 16.4029 6.20109 15.9341 5.73225C15.4653 5.26341 14.8294 5.00002 14.1663 5.00002H8.93301L8.66634 4.16669C8.49347 3.67771 8.1728 3.2546 7.74876 2.95599C7.32472 2.65737 6.8183 2.49802 6.29967 2.50002H3.33301C2.66997 2.50002 2.03408 2.76341 1.56524 3.23225C1.0964 3.70109 0.833008 4.33698 0.833008 5.00002V15C0.833008 15.6631 1.0964 16.2989 1.56524 16.7678C2.03408 17.2366 2.66997 17.5 3.33301 17.5H15.333C15.9007 17.4984 16.4509 17.3036 16.8931 16.9476C17.3354 16.5917 17.6433 16.0959 17.7663 15.5417L19.1663 9.35002C19.1917 9.22578 19.1883 9.0974 19.1566 8.97465C19.1248 8.85191 19.0654 8.73803 18.983 8.64168ZM4.47467 15.1833C4.43234 15.3713 4.32617 15.5388 4.17423 15.6574C4.02229 15.7759 3.83398 15.8381 3.64134 15.8334H3.33301C3.11199 15.8334 2.90003 15.7456 2.74375 15.5893C2.58747 15.433 2.49967 15.221 2.49967 15V5.00002C2.49967 4.779 2.58747 4.56704 2.74375 4.41076C2.90003 4.25448 3.11199 4.16669 3.33301 4.16669H6.29967C6.4814 4.1572 6.66123 4.20746 6.8117 4.30978C6.96218 4.4121 7.07502 4.56087 7.13301 4.73335L7.58301 6.10002C7.63648 6.25897 7.73667 6.39809 7.87048 6.49919C8.00429 6.60029 8.16549 6.65867 8.33301 6.66668H14.1663C14.3874 6.66668 14.5993 6.75448 14.7556 6.91076C14.9119 7.06704 14.9997 7.279 14.9997 7.50002V8.33335H6.66634C6.47371 8.32864 6.28539 8.39084 6.13345 8.50935C5.98151 8.62786 5.87534 8.79537 5.83301 8.98335L4.47467 15.1833ZM16.1413 15.1833C16.099 15.3713 15.9928 15.5388 15.8409 15.6574C15.689 15.7759 15.5006 15.8381 15.308 15.8334H6.00801C6.05105 15.7405 6.08186 15.6425 6.09967 15.5417L7.33301 10H17.333L16.1413 15.1833Z" fill="#FCFCFC"/>
-                                                            </svg>
-                                                        </a>
-                                                    @endif
                                                     <a class="btn btn-sm btn-primary" target="_blank"
                                                         href="{{ route('operations.show', $operation->id) }}">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,34 +182,18 @@
                                             </form>
                                         </td>
 
-                                        <td>{{ $operation->userAdmin?->name }}</td>
-                                        <td>{{ $operation->client?->social_reason }}</td>
-                                        <td>{{ $operation->userPilot?->name }}</td>
-                                        <td>{{ $operation->assistant_one?->name . ', ' . $operation->assistant_two?->name }}</td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
-                                        <td>{{ $operation->details[0]?->drone->enrollment ?? 'Sin vuelos.' }}</td>
-                                        <td>{{ $operation->date_operation?->format('d/m/Y') }}</td>
-                                        <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
-                                        <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
-                                        <td>{{ $operation->details[0]?->estate->name ?? 'Sin vuelos.' }}</td>
                                         <td>
-                                            @forelse ($operation->details as $index => $detail)
-                                                {{ $detail->luck }}
-                                                @if (!$loop->last)
-                                                    ,
-                                                @endif
-                                            @empty
-                                                Sin vuelos.
-                                            @endforelse
+                                            @if(auth()->user()->hasRole('super.root') || auth()->user()->hasRole('root') || auth()->user()->hasRole('cliente'))
+                                                <a class="btn btn-sm btn-warning"
+                                                    href="{{ route('operations.download', $operation->id) }}">
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M18.983 8.64168C18.9046 8.545 18.8055 8.46712 18.693 8.41376C18.5805 8.3604 18.4575 8.33293 18.333 8.33335H16.6663V7.50002C16.6663 6.83698 16.4029 6.20109 15.9341 5.73225C15.4653 5.26341 14.8294 5.00002 14.1663 5.00002H8.93301L8.66634 4.16669C8.49347 3.67771 8.1728 3.2546 7.74876 2.95599C7.32472 2.65737 6.8183 2.49802 6.29967 2.50002H3.33301C2.66997 2.50002 2.03408 2.76341 1.56524 3.23225C1.0964 3.70109 0.833008 4.33698 0.833008 5.00002V15C0.833008 15.6631 1.0964 16.2989 1.56524 16.7678C2.03408 17.2366 2.66997 17.5 3.33301 17.5H15.333C15.9007 17.4984 16.4509 17.3036 16.8931 16.9476C17.3354 16.5917 17.6433 16.0959 17.7663 15.5417L19.1663 9.35002C19.1917 9.22578 19.1883 9.0974 19.1566 8.97465C19.1248 8.85191 19.0654 8.73803 18.983 8.64168ZM4.47467 15.1833C4.43234 15.3713 4.32617 15.5388 4.17423 15.6574C4.02229 15.7759 3.83398 15.8381 3.64134 15.8334H3.33301C3.11199 15.8334 2.90003 15.7456 2.74375 15.5893C2.58747 15.433 2.49967 15.221 2.49967 15V5.00002C2.49967 4.779 2.58747 4.56704 2.74375 4.41076C2.90003 4.25448 3.11199 4.16669 3.33301 4.16669H6.29967C6.4814 4.1572 6.66123 4.20746 6.8117 4.30978C6.96218 4.4121 7.07502 4.56087 7.13301 4.73335L7.58301 6.10002C7.63648 6.25897 7.73667 6.39809 7.87048 6.49919C8.00429 6.60029 8.16549 6.65867 8.33301 6.66668H14.1663C14.3874 6.66668 14.5993 6.75448 14.7556 6.91076C14.9119 7.06704 14.9997 7.279 14.9997 7.50002V8.33335H6.66634C6.47371 8.32864 6.28539 8.39084 6.13345 8.50935C5.98151 8.62786 5.87534 8.79537 5.83301 8.98335L4.47467 15.1833ZM16.1413 15.1833C16.099 15.3713 15.9928 15.5388 15.8409 15.6574C15.689 15.7759 15.5006 15.8381 15.308 15.8334H6.00801C6.05105 15.7405 6.08186 15.6425 6.09967 15.5417L7.33301 10H17.333L16.1413 15.1833Z" fill="#FCFCFC"/>
+                                                    </svg>
+                                                </a>
+                                            @endif
                                         </td>
-                                        <td>{{ $divide1 }}</td>
-                                        <td>{{ $divide2 }}</td>
-                                        <td>{{ $number_flights }}</td>
-                                        <td>{{ $hour_flights }}</td>
-                                        <td>{{ $acres }}</td>
-                                        <td>{{ count($operation->details) }}</td>
-                                        {{-- <td>{{ count($operation->details) == 0 ? 'Sin vuelos.' : $operation->details[0]->created_at?->format('d/m/Y') }}</td> --}}
 
+                                        <td>{{ $operation->userAdmin?->name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -196,3 +232,5 @@
         </div>
     </div>
 </div>
+
+@livewire('operation-modal')

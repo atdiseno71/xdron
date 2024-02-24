@@ -76,30 +76,30 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('id_dron', 'Drones') }}
-                    {{ Form::select('id_dron', $drones, $operation->id_dron, ['class' => 'form-control select2' . ($errors->has('id_dron') ? ' is-invalid' : ''), 'id' => 'id_dron', 'placeholder' => 'Seleccione un drone']) }}
-                    {!! $errors->first('id_dron', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('dron_id', 'Drones') }}
+                    {{ Form::select('dron_id', $drones, $operation->dron_id, ['class' => 'form-control select2' . ($errors->has('dron_id') ? ' is-invalid' : ''), 'id' => 'dron_id', 'placeholder' => 'Seleccione un drone']) }}
+                    {!! $errors->first('dron_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('download', 'Descarga') }}
-                    {{ Form::select('download', ["Selecciona una opcion", 5, 10, 15, 20], $operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una opcion']) }}
+                    {{ Form::select('download', [5 => 5, 10 => 10, 15 => 15, 20 => 20], $operation->download, ['class' => 'form-control select2' . ($errors->has('download') ? ' is-invalid' : ''), 'id' => 'download', 'placeholder' => 'Seleccione una opcion']) }}
                     {!! $errors->first('download', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             {{-- Termina columna 12 --}}
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    {{ Form::label('id_zone', 'Zona') }}
-                    {{ Form::select('id_zone', $zones, $operation->id_zone, ['class' => 'form-control select2' . ($errors->has('id_zone') ? ' is-invalid' : ''), 'id' => 'id_zone', 'placeholder' => 'Seleccione una opcion']) }}
-                    {!! $errors->first('id_zone', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('zone_id', 'Zona') }}
+                    {{ Form::select('zone_id', $zones, $operation->zone_id, ['class' => 'form-control select2' . ($errors->has('zone_id') ? ' is-invalid' : ''), 'id' => 'zone_id', 'placeholder' => 'Seleccione una opcion']) }}
+                    {!! $errors->first('zone_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('number_flights', 'Baterias') }}
-                    {{ Form::number('number_flights', $detail_operation->number_flights_1, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights', 'placeholder' => 'Ingrese cant. Baterias']) }}
+                    {{ Form::number('number_flights', $operation->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights', 'placeholder' => 'Ingrese cant. Baterias']) }}
                     {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -107,7 +107,7 @@
             <div class="col-12 col-md-12">
                 <div class="form-group">
                     {{ Form::label('hour_flights', 'Horas vuelos') }}
-                    {{ Form::number('hour_flights', $detail_operation->hour_flights_1, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights', 'placeholder' => 'Ingrese cant. horas vuelos']) }}
+                    {{ Form::number('hour_flights', $operation->hour_flights, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights', 'placeholder' => 'Ingrese cant. horas vuelos']) }}
                     {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -194,9 +194,7 @@
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
-                
-                {{-- Termina columna 12 --}}
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('acres_'. $numberAreThere, 'Hectareas') }}
                         {{ Form::number('acres_'. $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'placeholder' => 'Ingrese cant. hectareas']) }}
@@ -287,14 +285,6 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('hour_flights_' . $key + 1, 'Horas vuelos') }}
-                        {{ Form::number('hour_flights_' . $key + 1, $detail->hour_flights, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights_' . $key + 1, 'placeholder' => 'Ingrese cant. horas vuelos']) }}
-                        {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
-                {{-- Termina columna 12 --}}
-                <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('acres_' . $key + 1, 'Hectareas') }}
                         {{ Form::number('acres_' . $key + 1, $detail->acres, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $key + 1, 'placeholder' => 'Ingrese cant. hectareas']) }}

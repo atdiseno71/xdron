@@ -166,6 +166,23 @@ class OperationController extends Controller
                 // Guardamos el zip en el campo
                 $operation->update(['file_evidence' => $response->getData()]);
             }
+            // Folder donde se guardan las evidencias
+            $folder = 'evidences/_' . $operation->id . '/';
+            // Verificamos si hay imaganes de evidencia record
+            if ($request->has('evidence_record')) {
+                // Guardamos lo que viene del request
+                $files = $request['evidence_record'];
+                $handle_1 = $this->uploadImage($request, $operation->id, $folder, 'evidence_record');
+                $operation->update(['evidence_record' => $handle_1['response']['name']]);
+            }
+
+            // Verificamos si hay imaganes de evidencia de lavado
+            if ($request->has('evidence_aplication')) {
+                // Guardamos lo que viene del request
+                $files = $request['evidence_aplication'];
+                $handle_1 = $this->uploadImage($request, $operation->id, $folder, 'evidence_aplication');
+                $operation->update(['evidence_aplication' => $handle_1['response']['name']]);
+            }
         }
 
         /* CREAMOS LA NOTIFICACION */
@@ -229,7 +246,8 @@ class OperationController extends Controller
         // Buscamos la operacion
         $operation = Operation::find($id);
 
-        if (is_null($operation->file_evidence)) {
+        if (is_null($operation->file_evidence) || empty($operation->file_evidence)) {
+
             return redirect()->route('operations.index')
                 ->with('error', 'No existe el archivo que intenta descargar.');
         }
@@ -308,6 +326,8 @@ class OperationController extends Controller
      */
     public function update(Request $request, Operation $operation)
     {
+        
+        $data = $request->all();
 
         try {
             $num_operation = (int)$request['detalleCounter'];
@@ -316,18 +336,10 @@ class OperationController extends Controller
 
             $role_user = $user->roles[0]?->id;
 
-            $data = $request->all();
-
             if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
                 request()->validate(Operation::$rules);
-                // Modificar datos del cliente
-                $operation->id_cliente = $data['id_cliente'] ?? '';
-                $operation->pilot_id = $data['pilot_id'] ?? '';
-                $operation->assistant_id_one = $data['assistant_id_one'] ?? '';
-                $operation->assistant_id_two = $data['assistant_id_two'] ?? '';
-                $operation->date_operation = $data['date_operation'] ?? '';
-                $operation->file_evidence = $data['file_evidence'] ?? '';
-                $operation->observation_admin = $data['observation_admin'] ?? '';
+                
+                $operation->fill($data);
 
                 $save = $operation->save();
 
@@ -344,6 +356,8 @@ class OperationController extends Controller
                     $operation->update(['file_evidence' => $response->getData()]);
                 }
             } else if ($role_user == config('roles.piloto')) {
+                $operation->fill($data);
+                $save = $operation->save();
                 $operation->update(['status_id' => config('status.ENR')]);
             }
 
@@ -351,16 +365,11 @@ class OperationController extends Controller
 
             $name_inputs = [
                 'id_detail_operation',
-                'number_flights',
-                'hour_flights',
                 'acres',
-                'download',
                 'description',
                 'observation',
                 'estate_id',
                 'luck',
-                'zone_id',
-                'dron_id',
                 'type_product_id',
             ];
 
