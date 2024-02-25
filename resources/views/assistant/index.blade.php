@@ -39,8 +39,8 @@
 
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Correo</th>
                                         <th>Telefono</th>
+                                        <th>Correo</th>
                                         <th># Documento</th>
                                         <th>Creado por</th>
 
