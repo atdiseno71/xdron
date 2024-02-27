@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property $id
  * @property $download
- * @property $observation_admin
- * @property $observation_pilot
  * @property $observation_assistant_one
  * @property $observation_assistant_two
  * @property $type_product_id
@@ -54,6 +52,7 @@ class Operation extends Model
         'pilot_id' => 'required',
         'assistant_id_one' => 'required',
         'date_operation' => 'required',
+        'type_product_id' => 'required',
     ];
 
     static $rulesAccept = [
@@ -67,8 +66,6 @@ class Operation extends Model
      */
     protected $fillable = [
         'download',
-        'observation_admin',
-        'observation',
         'assistant_id_one',
         'assistant_id_two',
         'pilot_id',
@@ -83,6 +80,7 @@ class Operation extends Model
         'zone_id',
         'number_flights',
         'hour_flights',
+        'type_product_id',
     ];
 
     protected $casts = [
@@ -143,6 +141,14 @@ class Operation extends Model
     public function userPilot()
     {
         return $this->hasOne('App\Models\User', 'id', 'pilot_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function observations()
+    {
+        return $this->hasOne('App\Models\ObservationOperation', 'id', 'operation_id');
     }
 
     /**
