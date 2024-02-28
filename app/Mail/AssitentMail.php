@@ -31,7 +31,8 @@ class AssitentMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notificación operación ' . $this->detail,
+            // subject: 'Notificación operación ' . $this->detail,
+            subject: 'PROGRAMA APLICACIÓN DRON ' . $this->detail,
         );
     }
 

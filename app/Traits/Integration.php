@@ -24,7 +24,7 @@ trait Integration
 
             $pilot = User::findOrFail($operation->pilot_id);
 
-            $detail_message = "#$operation->id para el cliente " . $operation->client?->social_reason;
+            $detail_message = "#$operation->id";
 
             $mailData = [
                 'data' => $operation,
@@ -63,24 +63,42 @@ trait Integration
             $assistant_one = $operation->assistant_one?->name;
             $assistant_two = $operation->assistant_two?->name;
             $client = $operation->client?->social_reason;
-            $client = $operation->client?->social_reason;
             $pilot = $operation->userPilot?->name;
-            $created_at = $operation->created_at?->format('d/m/Y');
+            $date_operation = $operation->date_operation?->format('d/m/Y');
+            $observation_admin = $operation->observation?->observation_admin;
+            $observation_asistent_one = $operation->observation?->observation_asistent_one;
+            $type_product = $operation->product?->name;
             $link = route('operation.accept', $operation->id);
             // Guardamos el número de telefono
             if ($assistant != null) {
                 $phone = "57" . $assistant?->phone;
                 // Mensaje de texto estructura
-                $sms = "Hola, " . $assistant?->name .
-                    ", Ha recibido una notificación para la operación " . $id .
-                    ", para el cliente " . $client .
-                    ", acompañaras al piloto " . $pilot;
+                $sms = "Operación No. $operation->id, " .
+                    "Fecha operación. $date_operation, " .
+                    "Cliente. $client, " .
+                    "Piloto. $pilot, " .
+                    "Tipo aplicación. $type_product, " .
+                    "Observación. $observation_asistent_one";
             } else {
                 $phone = "57" . $operation->userPilot?->phone;
-                $sms = "Hola, " . $pilot .
-                    ", Ha recibido una notificación para la operación " . $id .
-                    ", para el cliente " . $client .
-                    ", para continuar ingrese al siguiente enlace " . $link;
+                // Mensaje de texto estructura
+                if ($operation->assistant_two != null) {
+                    $sms = "Operación No. $operation->id, " .
+                        "Fecha operación. $date_operation, " .
+                        "Cliente. $client, " .
+                        "Tanqueador 1. $assistant_one, " .
+                        "Tanqueador 2. $assistant_two, " .
+                        "Tipo aplicación. $type_product, " .
+                        "Observación. $observation_admin, ";
+                } else {
+                    $sms = "Operación No. $operation->id, " .
+                        "Fecha operación. $date_operation, " .
+                        "Cliente. $client, " .
+                        "Tanqueador 1. $assistant_one, " .
+                        "Tipo aplicación. $type_product, " .
+                        "Observación. $observation_admin, ";
+                }
+
             }
 
             $data = [
