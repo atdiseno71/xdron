@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,20 +9,37 @@
 </head>
 
 <body>
-    <p>Hola, <strong>{{ $mailData['data']->userPilot?->name }}</strong>,<br><br> 
-        Ha recibido una notificación
-        para la operación #{{ $mailData['data']->id }}, para el cliente {{ $mailData['data']->client?->social_reason }}<br><br>
+
+    <p>
+        <strong>OPERACION NO:</strong> {{ $mailData['data']->id }}
+    </p>
+
+    <p>
+        <strong>FECHA OPERACIÓN:</strong> {{ $mailData['data']->date_operation?->format('d/m/Y') }}
+    </p>
+
+    <p>
+        <strong>CLIENTE:</strong> {{ $mailData['data']->client?->social_reason }}
+    </p>
+
+    <p>
         @if ($mailData['data']->assistant_two != null)
-            <strong>Tanqueadores:</strong><br>
-            {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }} -
+            <strong>TANQUEADOR 1:</strong><br>
+            {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }}<br>
+            <strong>TANQUEADOR 2:</strong><br>
             {{ $mailData['data']->assistant_two?->name . ' ' . $mailData['data']->assistant_two?->lastname }}
         @else
-            <strong>Tanqueador:</strong><br>
+            <strong>TANQUEADOR 1:</strong><br>
             {{ $mailData['data']->assistant_one?->name . ' ' . $mailData['data']->assistant_one?->lastname }}
         @endif
-        <br><br>
-        <strong>Fecha:</strong> {{ $mailData['data']->created_at?->format('d/m/Y') }}<br><br>
-        Para confirmar haga click <a class="btn btn-sm btn-primary " href="{{ route('operation.accept', $mailData['data']->id) }}">aqui</a>
+    </p>
+
+    <p>
+        <strong>TIPO DE APLICACION:</strong> {{ $mailData['data']->product?->name }}
+    </p>
+
+    <p>
+        <strong>OBSERVACION:</strong> {{ $mailData['data']->observation?->observation_admin }}
     </p>
 
 </body>

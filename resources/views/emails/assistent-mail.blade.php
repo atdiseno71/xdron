@@ -9,11 +9,29 @@
 </head>
 
 <body>
-    <p>Hola, <strong>{{ $mailData['assistant']->name }}</strong>,<br><br> 
-        Ha recibido una notificación de una operación, <strong>Fecha:</strong> {{ $mailData['data']->created_at?->format('d/m/Y') }}<br><br>
-        para la operación #{{ $mailData['data']->id }}, para el cliente {{ $mailData['data']->client?->social_reason }}<br><br>
-        El piloto que acompañaras será <strong>{{ $mailData['data']->userPilot?->name }}</strong>
-        <br><br>
+
+    <p>
+        OPERACION NO: {{ $mailData['data']->id }}
+    </p>
+
+    <p>
+        <strong>FECHA OPERACIÓN:</strong> {{ $mailData['data']->date_operation?->format('d/m/Y') }}
+    </p>
+
+    <p>
+        <strong>CLIENTE:</strong> {{ $mailData['data']->client?->social_reason }}
+    </p>
+
+    <p>
+        <strong>PILOTO:</strong> {{ $mailData['data']->userPilot?->name . ' ' . $mailData['data']->userPilot?->lastname }}
+    </p>
+
+    <p>
+        <strong>TIPO DE APLICACION:</strong> {{ $mailData['data']->product?->name }}
+    </p>
+
+    <p>
+        <strong>OBSERVACION:</strong> {{ $mailData['data']->observation?->observation_asistent_one }}
     </p>
 
 </body>
