@@ -40,11 +40,15 @@
             <strong>SUERTE:</strong> {{ $detail->luck }}&nbsp;&nbsp;|&nbsp;&nbsp;
             <strong>HAS:</strong> {{ $detail->acres }}
         </p>
-        @foreach ($detail->files_details as $file)
+        @foreach ($detail->files_details as $keys => $file)
             <img class="img-detail" src="{{ $file->src_file }}" height="850px">
+            {{-- Saltar pagina cuando saque todos los archivos --}}
+            @if ((count($detail->files_details) - 1) != $keys)
+                <hr>
+            @endif
         @endforeach
         {{-- PARTE DE OBSERVACIONES DEL PILOTO --}}
-        <p style="text-align: left">
+        <p style="text-align: left; position: absolute; left: 8mm; right: 8mm; bottom: 0%">
             <strong>OBSERVACIONES:</strong> {{ $detail->observation }}
         </p>
         {{-- Saltar pagina cuando saque todos los archivos --}}
