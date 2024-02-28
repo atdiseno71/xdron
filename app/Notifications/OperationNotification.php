@@ -54,6 +54,7 @@ class OperationNotification extends Notification
     {
         return [
             'id' => $this->id,
+            'observations' => $this->operation?->observation_admin,
             'observation_admin' => $this->operation?->observation_admin,
             'assistant_id_one' => $this->operation?->assistant_one?->name . ' ' . $this->operation?->assistant_one?->lastname,
             'assistant_id_two' => $this->operation?->fecha_ejecucion,

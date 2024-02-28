@@ -6,12 +6,13 @@ use App\Notifications\OperationNotification;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use App\Models\DetailOperation;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\FilesOperation;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
-use App\Models\TypeProduct;
+use App\Models\Observation;
 use App\Traits\Integration;
 use App\Traits\ImageTrait;
 use App\Models\Assistant;
@@ -20,10 +21,8 @@ use App\Traits\Template;
 use App\Models\Client;
 use App\Models\Estate;
 use App\Models\Status;
-use App\Models\Dron;
 use App\Models\Luck;
 use App\Models\User;
-use App\Models\Zone;
 
 /**
  * Class OperationController
@@ -82,50 +81,14 @@ class OperationController extends Controller
     {
         $operation = new Operation();
 
-        $detail_operation = new DetailOperation();
-
-        $files_operation = new FilesOperation();
-
         $user = User::where('id', Auth::id())->with('roles')->first();
 
         $role_user = $user->roles[0]->name;
-
-        $type_products = TypeProduct::pluck('name as label', 'id as value');
-
-        $assistents = Assistant::pluck('name as label', 'id as value');
-
-        $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
-
-        $clients = Client::pluck('social_reason as label', 'id as value');
-
-        $estates = Estate::pluck('name as label', 'id as value');
-
-        $lucks = Luck::pluck('name as label', 'id as value');
-
-        $zones = Zone::pluck('name as label', 'id as value');
-
-        $drones = Dron::pluck('enrollment as label', 'id as value');
-
+        
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
-        return view(
-            'operation.create',
-            compact(
-                'operation',
-                'detail_operation',
-                'role_user',
-                'type_products',
-                'assistents',
-                'pilots',
-                'clients',
-                'estates',
-                'drones',
-                'lucks',
-                'zones',
-                'files_operation',
-                'types_documents',
-            )
-        );
+
+        return view('operation.create', compact('operation', 'role_user', 'types_documents'));
     }
 
     /**
@@ -137,12 +100,12 @@ class OperationController extends Controller
     public function store(Request $request)
     {
 
+        $request['type_product_id'] = $request['type_product'];
+
         request()->validate(Operation::$rules);
 
         $operation = new Operation();
 
-        $operation->observation_admin = $request['observation_admin'];
-        // $operation->type_product_id = $request['type_product_id'];
         $operation->assistant_id_one = $request['assistant_id_one'];
         $operation->assistant_id_two = $request['assistant_id_two'];
         $operation->date_operation = $request['date_operation'];
@@ -150,8 +113,11 @@ class OperationController extends Controller
         $operation->id_cliente = $request['id_cliente'];
         $operation->admin_by = Auth::id();
         $operation->status_id = config('status.CRE');
+        $operation->type_product_id = $request['type_product_id'];
 
         $save = $operation->save();
+
+        $this->storeObservations($request, true, $operation->id); // Registramos las observaciones
 
         if ($save) {
             // Preguntamos si vienen archivos
@@ -267,54 +233,18 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::with(['details' => function ($query) {
+        $operation = Operation::with(['observation', 'details' => function ($query) {
             $query->orderBy('id', 'DESC'); // Reemplaza 'column_name' con el nombre de la columna por la cual deseas ordenar
         }])->find($id);
-
-        $detail_operation = new DetailOperation();
-
-        $files_operation = new FilesOperation();
 
         $user = User::where('id', Auth::id())->with('roles')->first();
 
         $role_user = $user->roles[0]->name;
-
-        $type_products = TypeProduct::pluck('name as label', 'id as value');
-
-        $assistents = Assistant::pluck('name as label', 'id as value');
-
-        $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
-
-        $clients = Client::pluck('social_reason as label', 'id as value');
-
-        $estates = Estate::where('cliente_id', $operation->id_cliente)->pluck('name as label', 'id as value');
-
-        $lucks = Luck::pluck('name as label', 'id as value');
-
-        $zones = Zone::pluck('name as label', 'id as value');
-
-        $drones = Dron::pluck('enrollment as label', 'id as value');
-
+        
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
-        return view(
-            'operation.edit',
-            compact(
-                'operation',
-                'detail_operation',
-                'role_user',
-                'type_products',
-                'assistents',
-                'pilots',
-                'clients',
-                'estates',
-                'drones',
-                'lucks',
-                'zones',
-                'files_operation',
-                'types_documents',
-            )
-        );
+        return view('operation.edit', compact('operation', 'role_user', 'types_documents'));
+
     }
 
     /**
@@ -326,7 +256,8 @@ class OperationController extends Controller
      */
     public function update(Request $request, Operation $operation)
     {
-        
+
+        $request['type_product_id'] = $request['type_product'];
         $data = $request->all();
 
         try {
@@ -342,6 +273,8 @@ class OperationController extends Controller
                 $operation->fill($data);
 
                 $save = $operation->save();
+
+                $this->storeObservations($request, false, $operation->id); // Registramos las observaciones
 
                 // subir archivo
                 if ($request->has('file_evidence')) {
@@ -361,8 +294,6 @@ class OperationController extends Controller
                 $operation->update(['status_id' => config('status.ENR')]);
             }
 
-            // $maxFields = config('global.max_operation'); // De momento no se usa, se tiene un contador en el front
-
             $name_inputs = [
                 'id_detail_operation',
                 'acres',
@@ -370,7 +301,6 @@ class OperationController extends Controller
                 'observation',
                 'estate_id',
                 'luck',
-                'type_product_id',
             ];
 
             // Folder donde se guardan las evidencias
@@ -426,16 +356,12 @@ class OperationController extends Controller
 
             // Verificamos si hay imaganes de evidencia record
             if ($request->has('evidence_record')) {
-                // Guardamos lo que viene del request
-                $files = $request['evidence_record'];
                 $handle_1 = $this->uploadImage($request, $detail_operation_new->id, $folder, 'evidence_record');
                 $operation->update(['evidence_record' => $handle_1['response']['name']]);
             }
 
             // Verificamos si hay imaganes de evidencia de lavado
             if ($request->has('evidence_aplication')) {
-                // Guardamos lo que viene del request
-                $files = $request['evidence_aplication'];
                 $handle_1 = $this->uploadImage($request, $detail_operation_new->id, $folder, 'evidence_aplication');
                 $operation->update(['evidence_aplication' => $handle_1['response']['name']]);
             }
@@ -447,8 +373,9 @@ class OperationController extends Controller
                 ->with('success', 'Operacion actualizada con exito.');
         } catch (\Throwable $th) {
             $message = $th->getMessage();
+            Log::info($message);
             return redirect()->route('operations.index')
-                ->with('error', "Ups, algo surgio mientras guardabamos la información.");
+                ->with('error', "Ups, algo surgio mientras guardabamos la información");
         }
     }
 
@@ -547,4 +474,25 @@ class OperationController extends Controller
         return redirect()->route('home.welcome')
             ->with('success', 'Puede continuar con su labor.');
     }
+
+    public function storeObservations(Request $request, $is_new, $id) {
+
+        $data = $request->all();
+        $data['operation_id'] = $id;
+
+        if ($is_new) {
+            $observations = new Observation();
+            $observations->fill($data);
+            $observations->save();
+        } else {
+            $observations = Observation::where('operation_id', $id)->first();
+            if ($observations == null) {
+                $this->storeObservations($request, true, $id); // Si no hay nada, registre
+            }
+            $observations->fill($data);
+            $observations->save();
+        }
+
+    }
+
 }

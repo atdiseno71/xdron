@@ -83,7 +83,14 @@
                     </button>
                 </div>
             </div>
-            <div class="col-12 col-md-12">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('type_product', 'Tipo aplicación') }}
+                    {{ Form::select('type_product', $type_products, $operation->type_product_id, ['class' => 'form-control select2' . ($errors->has('type_product_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione una opcion']) }}
+                    {!! $errors->first('type_product_id', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('date_operation', 'Fecha operacion') }}
                     {{ Form::date('date_operation', $operation->date_operation, ['class' => 'form-control' . ($errors->has('date_operation') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
@@ -93,29 +100,37 @@
         </div>
 
         {{-- INICIO DE ESPACIO PARA IMAGEN --}}
-        <div class="col-12 col-md-12 section-evidence">
-            <div class="form-group">
-                {{ Form::label('file_evidence', 'Subir Evidencia (zip)') }}
-                <section id="multi-selector-uniq">
-                    <input class="form-control" id="file_evidence" name="file_evidence" type="file" accept=".zip,.rar,.7zip">
-                    @if (!empty($operation->file_evidence) || !is_null($operation->file_evidence))
-                        <ul id="preview-files">
-                            <li draggable="true" class="section-evidence-preview-zip">
-                                <p>Ya ha subido un archivo zip.</p>
-                            </li>
-                        </ul>
-                    @endif                    
-                </section>
-            </div>
-        </div>
-        {{-- FIN DE ESPACIO PARA IMAGEN --}}
-
-        <div class="row">
-            <div class="col-12 col-md-12">
+        @if ($operation->id != null)
+            <div class="col-12 col-md-12 section-evidence">
                 <div class="form-group">
-                    {{ Form::label('observation_admin', 'Observaciones administrador') }}
-                    {{ Form::textArea('observation_admin', $operation->observation_admin, ['class' => 'form-control' . ($errors->has('observation_admin') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
+                    {{ Form::label('file_evidence', 'Subir Evidencia (zip)') }}
+                    <section id="multi-selector-uniq">
+                        <input class="form-control" id="file_evidence" name="file_evidence" type="file" accept=".zip,.rar,.7zip">
+                        @if (!empty($operation->file_evidence) || !is_null($operation->file_evidence))
+                            <ul id="preview-files">
+                                <li draggable="true" class="section-evidence-preview-zip">
+                                    <p>Ya ha subido un archivo zip.</p>
+                                </li>
+                            </ul>
+                        @endif                    
+                    </section>
+                </div>
+            </div>
+        @endif        
+        {{-- FIN DE ESPACIO PARA IMAGEN --}}
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('observation_admin', 'Observaciones para piloto') }}
+                    {{ Form::textArea('observation_admin', $operation->observation?->observation_admin, ['class' => 'form-control' . ($errors->has('observation_admin') ? ' is-invalid' : ''), 'rows' => '2', 'placeholder' => 'Observaciones']) }}
                     {!! $errors->first('observation_admin', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    {{ Form::label('observation_asistent_one', 'Observaciones para tanqueadores') }}
+                    {{ Form::textArea('observation_asistent_one', $operation->observation?->observation_asistent_one, ['class' => 'form-control' . ($errors->has('observation_asistent_one') ? ' is-invalid' : ''), 'rows' => '2', 'placeholder' => 'Observaciones']) }}
+                    {!! $errors->first('observation_asistent_one', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>

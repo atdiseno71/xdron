@@ -29,9 +29,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             @if ($role_user == 'root' || $role_user == 'super.root')
-                                @include('operation.form-admin')
-                            @elseif ($role_user == 'piloto')
-                                @include('operation.form-pilot')
+                                @livewire('form-admin', ['id_operation' => null])
                             @endif
                         </form>
                     </div>
@@ -42,6 +40,7 @@
         @include('modals.client')
         @include('modals.asistent')
     </section>
+    @livewireScripts
 @endsection
 
 @section('js')

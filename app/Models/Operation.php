@@ -146,9 +146,9 @@ class Operation extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function observations()
+    public function observation()
     {
-        return $this->hasOne('App\Models\ObservationOperation', 'id', 'operation_id');
+        return $this->hasOne(Observation::class, 'operation_id', 'id');
     }
 
     /**

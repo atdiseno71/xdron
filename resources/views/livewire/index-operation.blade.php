@@ -150,7 +150,6 @@
                                         <td>{{ $divide1 }}</td>
                                         <td>{{ $divide2 }}</td>
 
-                                        {{-- <td>{{ $operation->observation_admin }}</td> --}}
                                         <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
                                         <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
 

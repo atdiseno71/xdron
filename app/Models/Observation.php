@@ -4,31 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class FilesOperation
+ * Class ObservationOperation
  *
  * @property $id
- * @property $record
- * @property $track
- * @property $map
- * @property $detail_operation_id
+ * @property $operation_id
+ * @property $observation_admin
+ * @property $observation_pilot
+ * @property $observation_asistent_one
+ * @property $observation_asistent_two
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
  *
- * @property DetailOperation $detailOperation
+ * @property Operation $operation
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class ObservationOperation extends Model
+class Observation extends Model
 {
-    // use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
-    protected $table = "files_operation";
-
-    static $rules = [
-    ];
+    protected $table = "observation_operation";
 
     public function __construct(array $attributes = [])
     {
@@ -46,17 +45,16 @@ class ObservationOperation extends Model
         'observation_admin',
         'observation_pilot',
         'observation_asistent_one',
-        'observation_asistent_two',
+        'observation_asistent_two'
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-
     public function operation()
     {
-        return $this->hasOne('App\Models\Operation', 'id', 'operation_id');
+        return $this->hasOne(Operation::class, 'operation_id', 'id');
     }
 
 }
