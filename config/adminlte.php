@@ -195,7 +195,7 @@ return [
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-gray navbar-dark',
-    'classes_topnav_nav_per' => 'nav-item d-none d-sm-inline-block',
+    'classes_topnav_nav_per' => 'nav-item', //  d-none d-sm-inline-block
     'classes_topnav_nav' => 'navbar-expand-md',
     'classes_topnav_container' => 'container-fluid',
 
