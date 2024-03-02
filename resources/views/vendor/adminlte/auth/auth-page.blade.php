@@ -36,12 +36,15 @@
                             height="{{ config('adminlte.auth_logo.img.height') }}"
                          @endif>
                 @else
-                    <img src="{{ asset(config('adminlte.logo_img')) }}"
-                         alt="{{ config('adminlte.logo_img_alt') }}" height="50">
-                @endif
+                    
+                    <img src="{{ asset(config('adminlte.logo_img')) }}" class="img-circle"
+                            alt="{{ config('adminlte.logo_img_alt') }}" height="50">
+                    {{-- Logo Label --}}
+                    {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                    <img src="{{ asset(config('adminlte.logo_img_other')) }}"
+                        alt="{{ config('adminlte.logo_img_alt_other') }}" height="50">
 
-                {{-- Logo Label --}}
-                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                @endif
 
             </a>
         </div>
