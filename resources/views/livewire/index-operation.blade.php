@@ -52,23 +52,37 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
-                                    {{ Form::label('type_product', 'Producto') }}
-                                    {{ Form::select('type_product', $type_products, '', ['class' => 'form-control' . ($errors->has('type_product') ? ' is-invalid' : ''), 'wire:model' => 'typeProduct', 'placeholder' => 'Seleccione el tipo producto']) }}
+                                    {{ Form::label('type_product', 'Tipo aplicación') }}
+                                    {{ Form::select('type_product', $type_products, '', ['class' => 'form-control' . ($errors->has('type_product') ? ' is-invalid' : ''), 'wire:model' => 'typeProduct', 'placeholder' => 'Seleccione el tipo aplicación']) }}
                                     {!! $errors->first('type_product', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
-                                    {{ Form::label('user', 'Usuario') }}
-                                    {{ Form::select('user', $users, '', ['class' => 'form-control' . ($errors->has('user') ? ' is-invalid' : ''), 'wire:model' => 'user', 'placeholder' => 'Seleccione el usuario']) }}
+                                    {{ Form::label('user', 'Piloto') }}
+                                    {{ Form::select('user', $pilots, '', ['class' => 'form-control' . ($errors->has('user') ? ' is-invalid' : ''), 'wire:model' => 'user', 'placeholder' => 'Seleccione el piloto']) }}
                                     {!! $errors->first('user', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                            </div>                            
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('enrollment', 'Dron') }}
+                                    {{ Form::select('enrollment', $enrollments, '', ['class' => 'form-control' . ($errors->has('enrollment') ? ' is-invalid' : ''), 'wire:model' => 'enrollment', 'placeholder' => 'Seleccione la matricula']) }}
+                                    {!! $errors->first('enrollment', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
-                                    {{ Form::label('enrollment', 'Matricula') }}
-                                    {{ Form::select('enrollment', $enrollments, '', ['class' => 'form-control' . ($errors->has('enrollment') ? ' is-invalid' : ''), 'wire:model' => 'enrollment', 'placeholder' => 'Seleccione la matricula']) }}
-                                    {!! $errors->first('enrollment', '<div class="invalid-feedback">:message</div>') !!}
+                                    {{ Form::label('assistent_one', 'Tanqueador 1') }}
+                                    {{ Form::select('assistent_one', $assistents, '', ['class' => 'form-control' . ($errors->has('assistent_one') ? ' is-invalid' : ''), 'wire:model' => 'assistent_one', 'placeholder' => 'Seleccione el tanqueador 1']) }}
+                                    {!! $errors->first('assistent_one', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('assistent_two', 'Tanqueador 2') }}
+                                    {{ Form::select('assistent_two', $assistents, '', ['class' => 'form-control' . ($errors->has('assistent_two') ? ' is-invalid' : ''), 'wire:model' => 'assistent_two', 'placeholder' => 'Seleccione el tanqueador 2']) }}
+                                    {!! $errors->first('assistent_two', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
                             {{-- <div class="col-12 col-md-12">
