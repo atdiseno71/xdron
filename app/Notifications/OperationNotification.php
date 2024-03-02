@@ -58,7 +58,7 @@ class OperationNotification extends Notification
             'observation_admin' => $this->operation?->observation_admin,
             'assistant_id_one' => $this->operation?->assistant_one?->name . ' ' . $this->operation?->assistant_one?->lastname,
             'assistant_id_two' => $this->operation?->fecha_ejecucion,
-            'pilot_id' => $this->operation?->userPilot?->name,
+            'pilot_id' => $this->operation?->user_pilot?->name,
             'id_cliente' => $this->operation?->client?->social_reason,
             'admin_by' => $this->operation?->userAdmin?->name,
             'status_id' => $this->operation?->status?->name,

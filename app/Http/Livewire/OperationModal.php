@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Operation;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class OperationModal extends Component
@@ -13,9 +14,13 @@ class OperationModal extends Component
     public function toggleModal($id) {
 
         try {
-            $operation = Operation::findOrFail($id);
 
-            $this->dispatchBrowserEvent("show-modal", ["operation"=> $operation]);
+            $admin_user = Auth::id();
+
+            $operation = Operation::with('drone', 'zone', 'observation', 'user_pilot', 'userAdmin', 'product', 'client', 'assistant_two', 'assistant_one')
+                                    ->findOrFail($id);
+
+            $this->dispatchBrowserEvent("show-modal", ["operation"=> $operation, 'id_auth' => $admin_user]);
         } catch (\Throwable $th) {
             return redirect()->route('operations.index')
                 ->with('error', 'No existe la operación que intenta buscar.');

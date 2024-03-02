@@ -92,7 +92,7 @@ class Operation extends Model
      */
     public function assistant_one()
     {
-        return $this->hasOne('App\Models\Assistant', 'id', 'assistant_id_one');
+        return $this->hasOne(Assistant::class, 'id', 'assistant_id_one');
     }
 
     /**
@@ -100,7 +100,7 @@ class Operation extends Model
      */
     public function assistant_two()
     {
-        return $this->hasOne('App\Models\Assistant', 'id', 'assistant_id_two');
+        return $this->hasOne(Assistant::class, 'id', 'assistant_id_two');
     }
 
     /**
@@ -108,7 +108,7 @@ class Operation extends Model
      */
     public function client()
     {
-        return $this->hasOne('App\Models\Client', 'id', 'id_cliente');
+        return $this->hasOne(Client::class, 'id', 'id_cliente');
     }
 
     /**
@@ -116,7 +116,7 @@ class Operation extends Model
      */
     public function product()
     {
-        return $this->hasOne('App\Models\TypeProduct', 'id', 'type_product_id');
+        return $this->hasOne(TypeProduct::class, 'id', 'type_product_id');
     }
 
     /**
@@ -124,7 +124,7 @@ class Operation extends Model
      */
     public function status()
     {
-        return $this->hasOne('App\Models\Status', 'id', 'status_id');
+        return $this->hasOne(Status::class, 'id', 'status_id');
     }
 
     /**
@@ -132,15 +132,15 @@ class Operation extends Model
      */
     public function userAdmin()
     {
-        return $this->hasOne('App\Models\User', 'id', 'admin_by');
+        return $this->hasOne(User::class, 'id', 'admin_by');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function userPilot()
+    public function user_pilot()
     {
-        return $this->hasOne('App\Models\User', 'id', 'pilot_id');
+        return $this->hasOne(User::class, 'id', 'pilot_id');
     }
 
     /**
@@ -164,7 +164,7 @@ class Operation extends Model
      */
     public function zone()
     {
-        return $this->hasOne('App\Models\Zone', 'id', 'zone_id');
+        return $this->hasOne(Zone::class, 'id', 'zone_id');
     }
 
     /**
@@ -172,7 +172,7 @@ class Operation extends Model
      */
     public function drone()
     {
-        return $this->hasOne('App\Models\Dron', 'id', 'dron_id');
+        return $this->hasOne(Dron::class, 'id', 'dron_id');
     }
 
 }

@@ -19,7 +19,7 @@
     </h5>
 
     <h5 class="alineacion-center title-fixe">
-        <strong>PILOTO:</strong>{{ $operation->userPilot?->name ?? '' }}
+        <strong>PILOTO:</strong>{{ $operation->user_pilot?->name ?? '' }}
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
         <strong>DRON:</strong>{{ $operation->drone?->enrollment ?? '' }}
         <br>
