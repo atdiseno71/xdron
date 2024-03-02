@@ -63,7 +63,7 @@ trait Integration
             $assistant_one = $operation->assistant_one?->name;
             $assistant_two = $operation->assistant_two?->name;
             $client = $operation->client?->social_reason;
-            $pilot = $operation->userPilot?->name;
+            $pilot = $operation->user_pilot?->name;
             $date_operation = $operation->date_operation?->format('d/m/Y');
             $observation_admin = $operation->observation?->observation_admin;
             $observation_asistent_one = $operation->observation?->observation_asistent_one;
@@ -80,7 +80,7 @@ trait Integration
                     "Tipo aplicación. $type_product, " .
                     "Observación. $observation_asistent_one";
             } else {
-                $phone = "57" . $operation->userPilot?->phone;
+                $phone = "57" . $operation->user_pilot?->phone;
                 // Mensaje de texto estructura
                 if ($operation->assistant_two != null) {
                     $sms = "Operación No. $operation->id, " .
