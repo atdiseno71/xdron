@@ -137,7 +137,4 @@
     </div>
     <br>
     @include('layouts.btn-submit')
-    <script>
-
-    </script>
 </div>
