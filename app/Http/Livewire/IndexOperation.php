@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Assistant;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 use App\Models\TypeProduct;
@@ -17,6 +18,8 @@ class IndexOperation extends Component
 
     use WithPagination;
 
+    public $assistent_one;
+    public $assistent_two;
     public $typeProduct;
     public $enrollment;
     public $dateStart;
@@ -40,6 +43,8 @@ class IndexOperation extends Component
         // Capturamos el rol
         $rol = $user_log->roles[0]?->id;
 
+        $assistent_one = $this->assistent_one;
+        $assistent_two = $this->assistent_two;
         $type_product = $this->typeProduct;
         $enrollment = $this->enrollment;
         $date_start = $this->dateStart;
@@ -47,7 +52,7 @@ class IndexOperation extends Component
         $client = $this->client;
         $user = $this->user;
 
-        $operations = Operation::where(function ($query) use ($rol, $user_log, $type_product, $enrollment, $date_start, $date_end, $client, $user) {
+        $operations = Operation::where(function ($query) use ($rol, $user_log, $type_product, $enrollment, $date_start, $date_end, $client, $user, $assistent_one, $assistent_two) {
 
             if ($rol === config('roles.piloto')) {
                 $query->where('pilot_id', $user_log->id);
@@ -58,6 +63,8 @@ class IndexOperation extends Component
             }
 
             $useFilters = [
+                'assistent_one' => null,
+                'assistent_two' => null,
                 'type_product' => null,
                 'enrollment' => null,
                 'date_start' => null,
@@ -67,6 +74,14 @@ class IndexOperation extends Component
             ];
 
             // Agregamos a useFilters lo que esta usando el cliente actualmente
+            if ($assistent_one) {
+                $useFilters['assistent_one'] = $assistent_one;
+            }
+
+            if ($assistent_two) {
+                $useFilters['assistent_two'] = $assistent_two;
+            }
+
             if ($type_product) {
                 $useFilters['type_product'] = $type_product;
             }
@@ -110,12 +125,13 @@ class IndexOperation extends Component
         }
 
         // Relaciones para los filtros
+        $assistents = Assistant::pluck('name as label', 'id as value');
         $clients = Client::pluck('social_reason as label', 'id as value');
         $type_products = TypeProduct::pluck('name as label', 'id as value');
-        $users = User::pluck('name as label', 'id as value');
         $enrollments = $drones = Dron::pluck('enrollment as label', 'id as value');
+        $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        return view('livewire.index-operation', compact('operations', 'hectares', 'batteries', 'flight_hours', 'clients', 'type_products', 'users', 'enrollments'));
+        return view('livewire.index-operation', compact('operations', 'hectares', 'batteries', 'flight_hours', 'clients', 'type_products', 'pilots', 'enrollments', 'assistents'));
     }
 
     private function applyFilter($query, $filters)
@@ -123,6 +139,8 @@ class IndexOperation extends Component
 
         // Lista de filtros
         $list = [
+            'assistant_id_one',
+            'assistant_id_two',
             'type_product_id',
             'dron_id',
             'date_operation',
@@ -140,8 +158,6 @@ class IndexOperation extends Component
                     $query->where($list[$cont], '>=', $value);
                 } else if ($key == 'date_end') {
                     $query->where($list[$cont], '<=', $value);
-                } else if ($key == 'user') {
-                    $query->orWhere('pilot_id', $value)->orWhere('admin_by', $value);
                 } else {
                     $query->where($list[$cont], $value);
                 }
