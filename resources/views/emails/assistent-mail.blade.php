@@ -23,7 +23,7 @@
     </p>
 
     <p>
-        <strong>PILOTO:</strong> {{ $mailData['data']->userPilot?->name . ' ' . $mailData['data']->userPilot?->lastname }}
+        <strong>PILOTO:</strong> {{ $mailData['data']->user_pilot?->name . ' ' . $mailData['data']->user_pilot?->lastname }}
     </p>
 
     <p>
