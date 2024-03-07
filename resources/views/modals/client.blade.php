@@ -29,7 +29,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('social_reason', 'Razón social') }}
-                                        {{ Form::text('social_reason', '', ['class' => 'form-control' . ($errors->has('social_reason') ? ' is-invalid' : ''), 'placeholder' => 'Social Reason']) }}
+                                        {{ Form::text('social_reason', '', ['class' => 'form-control' . ($errors->has('social_reason') ? ' is-invalid' : ''), 'placeholder' => 'Razón social']) }}
                                         {!! $errors->first('social_reason', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
@@ -38,14 +38,14 @@
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('address', 'Dirección') }}
-                                        {{ Form::text('address', '', ['class' => 'form-control' . ($errors->has('address') ? ' is-invalid' : ''), 'placeholder' => 'Address']) }}
+                                        {{ Form::text('address', '', ['class' => 'form-control' . ($errors->has('address') ? ' is-invalid' : ''), 'placeholder' => 'Dirección']) }}
                                         {!! $errors->first('address', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('phone', 'Telefono') }}
-                                        {{ Form::text('phone', '', ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'placeholder' => 'Phone']) }}
+                                        {{ Form::text('phone', '', ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
                                         {!! $errors->first('phone', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
@@ -54,14 +54,14 @@
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('email_enterprise', 'Email de la empresa #1') }}
-                                        {{ Form::email('email_enterprise', '', ['class' => 'form-control' . ($errors->has('email_enterprise') ? ' is-invalid' : ''), 'placeholder' => 'Email Enterprise']) }}
+                                        {{ Form::email('email_enterprise', '', ['class' => 'form-control' . ($errors->has('email_enterprise') ? ' is-invalid' : ''), 'placeholder' => 'Email de la empresa #1']) }}
                                         {!! $errors->first('email_enterprise', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('email_enterprise2', 'Email de la empresa #2') }}
-                                        {{ Form::email('email_enterprise2', '', ['class' => 'form-control' . ($errors->has('email_enterprise2') ? ' is-invalid' : ''), 'placeholder' => 'Email Enterprise2']) }}
+                                        {{ Form::email('email_enterprise2', '', ['class' => 'form-control' . ($errors->has('email_enterprise2') ? ' is-invalid' : ''), 'placeholder' => 'Email de la empresa #2']) }}
                                         {!! $errors->first('email_enterprise2', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('email_user', 'Email del usuario') }}
-                                        {{ Form::email('email_user', '', ['class' => 'form-control' . ($errors->has('email_user') ? ' is-invalid' : ''), 'placeholder' => 'Email User']) }}
+                                        {{ Form::email('email_user', '', ['class' => 'form-control' . ($errors->has('email_user') ? ' is-invalid' : ''), 'placeholder' => 'Email del usuario']) }}
                                         {!! $errors->first('email_user', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
