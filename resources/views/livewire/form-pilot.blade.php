@@ -103,7 +103,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('type_product_id', 'Tipo aplicación') }}
-                    {{ Form::select('type_product_id', $zones, $operation->type_product_id, ['class' => 'form-control select2' . ($errors->has('type_product_id') ? ' is-invalid' : ''), 'id' => 'type_product_id', 'placeholder' => 'Seleccione una opcion']) }}
+                    {{ Form::select('type_product_id', $type_products, $operation->type_product_id, ['class' => 'form-control select2' . ($errors->has('type_product_id') ? ' is-invalid' : ''), 'id' => 'type_product_id', 'placeholder' => 'Seleccione una opcion']) }}
                     {!! $errors->first('type_product_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
