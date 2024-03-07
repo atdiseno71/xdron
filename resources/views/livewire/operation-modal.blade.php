@@ -54,7 +54,7 @@
                                 <div class="col-12 col-md-6">
                                     <!-- File para el logo del proyecto -->
                                     <div class="form-group">
-                                        <label for="input-logo">{{ __('Informe de lavado') }}:</label>
+                                        <label for="input-logo">{{ __('Informe de operación') }}:</label>
                                         <div class="card img-logo">
                                             <img id="evidence_aplication" src="{{ asset('images/default.png') }}"/>
                                         </div>
