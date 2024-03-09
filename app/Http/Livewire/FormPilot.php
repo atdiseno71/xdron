@@ -24,8 +24,6 @@ class FormPilot extends Component
 
         try {
 
-            $clients = Client::pluck('social_reason as label', 'id as value');
-
             $detail_operation = new DetailOperation();
 
             $files_operation = new FilesOperation();

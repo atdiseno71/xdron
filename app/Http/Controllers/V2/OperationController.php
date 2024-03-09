@@ -243,7 +243,9 @@ class OperationController extends Controller
         
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
-        return view('operation.edit', compact('operation', 'role_user', 'types_documents'));
+        $clients = Client::pluck('social_reason as label', 'id as value');
+
+        return view('operation.edit', compact('operation', 'role_user', 'types_documents', 'clients'));
 
     }
 
