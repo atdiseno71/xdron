@@ -24,6 +24,8 @@ class FormPilot extends Component
 
         try {
 
+            $clients = Client::pluck('social_reason as label', 'id as value');
+
             $detail_operation = new DetailOperation();
 
             $files_operation = new FilesOperation();
@@ -54,6 +56,7 @@ class FormPilot extends Component
                 'type_products',
                 'assistents',
                 'pilots',
+                'clients',
                 'estates',
                 'drones',
                 'lucks',
