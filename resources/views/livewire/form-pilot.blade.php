@@ -428,5 +428,3 @@
     @endforelse
 
 </div>
-
-@include('modals.estate')

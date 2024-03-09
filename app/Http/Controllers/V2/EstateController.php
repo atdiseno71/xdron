@@ -63,8 +63,6 @@ class EstateController extends Controller
 
         $request['created_by'] = Auth::id();
 
-        return $request->all();
-
         $estate = Estate::create($request->all());
 
         return redirect()->back()
