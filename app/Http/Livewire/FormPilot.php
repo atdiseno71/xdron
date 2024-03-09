@@ -54,7 +54,6 @@ class FormPilot extends Component
                 'type_products',
                 'assistents',
                 'pilots',
-                'clients',
                 'estates',
                 'drones',
                 'lucks',
