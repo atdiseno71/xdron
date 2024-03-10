@@ -197,7 +197,7 @@ class OperationController extends Controller
         // return view('pdf.report.operation', compact('operation'));
         $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
 
-        $pdf->set_paper('A4', 'portrait');
+        $pdf->set_paper('letter', 'portrait');
         return $pdf->stream('reporte.pdf');
     }
 
@@ -243,7 +243,9 @@ class OperationController extends Controller
         
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
-        return view('operation.edit', compact('operation', 'role_user', 'types_documents'));
+        $clients = Client::pluck('social_reason as label', 'id as value');
+
+        return view('operation.edit', compact('operation', 'role_user', 'types_documents', 'clients'));
 
     }
 

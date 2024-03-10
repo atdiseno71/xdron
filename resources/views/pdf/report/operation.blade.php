@@ -31,6 +31,7 @@
     </h5>
 
     <br>
+    <br>
     <img class="evidence_record" src="{{ $operation->evidence_record }}" height="900px">
     <hr>
 

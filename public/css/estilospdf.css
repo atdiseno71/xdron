@@ -121,6 +121,8 @@ header {
     top: 40px;
     left: 1rem;
     right: 1rem;
+
+    font-size: .9rem !important;
 }
 table {
     caption-side: bottom;
@@ -350,10 +352,12 @@ ul li {
     right: 0%;
 
     background: #C6E0B4/* #212529 */;
-    height: 3.6rem;
+    height: 2.8rem;
     margin: 0;
-    padding: 0;
+    padding: 5px;
     list-style: none;
+
+    font-size: .9rem !important;
 }
 
 .img-detail {
