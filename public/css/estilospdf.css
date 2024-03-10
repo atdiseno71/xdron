@@ -352,10 +352,12 @@ ul li {
     right: 0%;
 
     background: #C6E0B4/* #212529 */;
-    height: 3.6rem;
+    height: 3rem;
     margin: 0;
-    padding: 0;
+    padding: 2px;
     list-style: none;
+
+    margin-bottom: 1rem;
 
     font-size: .9rem !important;
 }
