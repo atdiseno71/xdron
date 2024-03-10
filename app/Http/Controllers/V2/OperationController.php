@@ -194,10 +194,10 @@ class OperationController extends Controller
 
         //Generamos el pdf
         set_time_limit(30000);
-        // return view('pdf.report.operation', compact('operation'));
+        return view('pdf.report.operation', compact('operation'));
         $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
 
-        $pdf->set_paper('A4', 'portrait');
+        $pdf->set_paper('letter', 'portrait');
         return $pdf->stream('reporte.pdf');
     }
 

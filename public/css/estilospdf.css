@@ -121,8 +121,8 @@ header {
     top: 40px;
     left: 1rem;
     right: 1rem;
-    
-    font-size: .5rem !important;
+
+    font-size: .7rem !important;
 }
 table {
     caption-side: bottom;
@@ -357,7 +357,7 @@ ul li {
     padding: 0;
     list-style: none;
 
-    font-size: .5rem !important;
+    font-size: .7rem !important;
 }
 
 .img-detail {
