@@ -399,3 +399,8 @@ hr {
     margin: 10px 0 0 0;
     padding: 0;
 }
+
+.consecutive {
+    position: absolute;
+    right: 8mm;
+}

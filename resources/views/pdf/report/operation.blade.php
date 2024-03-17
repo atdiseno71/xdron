@@ -10,6 +10,9 @@
         <a id="logo-header" href="#">
             <span class="site-name">INFORME OPERACION</span>
         </a>
+
+        <strong class="consecutive">{{ $operation->consecutive }}</strong>
+
     </header>
 
     <h5 class="alineacion-center title-report">
