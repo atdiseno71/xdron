@@ -87,8 +87,9 @@ class OperationController extends Controller
         
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
+        $consecutive = $this->getConsecutive();
 
-        return view('operation.create', compact('operation', 'role_user', 'types_documents'));
+        return view('operation.create', compact('operation', 'role_user', 'types_documents', 'consecutive'));
     }
 
     /**
@@ -106,6 +107,7 @@ class OperationController extends Controller
 
         $operation = new Operation();
 
+        $operation->consecutive = $this->getConsecutive();
         $operation->assistant_id_one = $request['assistant_id_one'];
         $operation->assistant_id_two = $request['assistant_id_two'];
         $operation->date_operation = $request['date_operation'];
@@ -153,7 +155,6 @@ class OperationController extends Controller
 
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operation);
-
 
         /**********************************
          * Envio de alertas para el piloto *

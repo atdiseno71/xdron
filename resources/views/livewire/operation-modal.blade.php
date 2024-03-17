@@ -167,8 +167,8 @@
             const evidence_record = $('#evidence_record');
             const evidence_aplication = $('#evidence_aplication');
 
-            evidence_record.attr("src", operation.evidence_record);
-            evidence_aplication.attr("src", operation.evidence_aplication);
+            evidence_record.attr("src", operation.evidence_record ?? 'images/default.png');
+            evidence_aplication.attr("src", operation.evidence_aplication ?? 'images/default.png');
 
             $('#dron_id').val(operation.drone?.enrollment);
             $('#download').val(operation.download);

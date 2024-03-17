@@ -134,8 +134,8 @@ class IndexOperation extends Component
         }
 
         // Damos formato de dos decimales a todo
-        $hectares_hours = number_format($hectares / $flight_hours, 2, ',', ' ');
-        $hectares_batteries = number_format($hectares / $batteries, 2, ',', ' ');
+        $hectares_hours = number_format($flight_hours != 0 ?($hectares / $flight_hours) : 0, 2, ',', ' ');
+        $hectares_batteries = number_format($batteries != 0 ?($hectares / $batteries) : 0, 2, ',', ' ');
         $hectares = number_format($hectares, 2, ',', ' ');
         $batteries = number_format($batteries, 2, ',', ' ');
         $flight_hours = number_format($flight_hours, 2, ',', ' ');

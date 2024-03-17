@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Cliente;
+use App\Models\Operation;
 use App\Models\Producto;
 use App\Models\User;
 use App\Models\Venta;
@@ -11,6 +12,18 @@ use Illuminate\Http\Request;
 
 trait Template
 {
+
+    public static function getConsecutive(){
+        // Obtener el último registro
+        $last_record = Operation::orderBy('id', 'desc')->first();
+        $last_code = $last_record ? $last_record->consecutive : 'OP 00000';
+        // Extraer el número del código OP
+        $number = (int) substr($last_record, 3);
+        // Generar el nuevo código OP
+        $new_consecutive = 'OP ' . sprintf('%05d', $number + 1);
+        return $new_consecutive;
+    }
+
     //script para subir o mover la imagen
     public static function moveImage(Request $request, $filename, $endFilename, $basePath){
 
