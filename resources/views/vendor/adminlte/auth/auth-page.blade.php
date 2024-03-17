@@ -41,7 +41,7 @@
                             alt="{{ config('adminlte.logo_img_alt') }}" height="50">
                     {{-- Logo Label --}}
                     {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
-                    <img src="{{ asset(config('adminlte.logo_img_other')) }}"
+                    <img src="{{ asset(config('adminlte.logo_img_other')) }}" class="img-circle"
                         alt="{{ config('adminlte.logo_img_alt_other') }}" height="50">
 
                 @endif
