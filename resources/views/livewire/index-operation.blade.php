@@ -85,9 +85,13 @@
                                     {!! $errors->first('assistent_two', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
-                            {{-- <div class="col-12 col-md-12">
-                                <button type="submit" wire:click="$emit('updatePage')" class="btn btn-primary btn-block">Buscar</button>
-                            </div> --}}
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('estate', 'Haciendas') }}
+                                    {{ Form::select('estate', $estates, '', ['class' => 'form-control' . ($errors->has('estate') ? ' is-invalid' : ''), 'wire:model' => 'estate', 'placeholder' => 'Seleccione el tipo aplicación']) }}
+                                    {!! $errors->first('estate', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
