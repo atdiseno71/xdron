@@ -192,10 +192,18 @@ class OperationController extends Controller
     {
         $operation = Operation::with('details')->find($id);
 
+        // Definimos el inicio del contador en cero
+        $hectares = 0;
+        // Calculamos los totales
+        foreach ($operation->details as $detail) {
+            $hectares += $detail->acres;
+        }
+        // Le damos un formato
+        $hectares = number_format($hectares, 2, ',', ' ');
         //Generamos el pdf
         set_time_limit(30000);
         // return view('pdf.report.operation', compact('operation'));
-        $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
+        $pdf = PDF::loadview('pdf.report.operation', compact('operation', 'hectares'), ['dpi' => '200']);
 
         $pdf->set_paper('letter', 'portrait');
         return $pdf->stream('reporte.pdf');
