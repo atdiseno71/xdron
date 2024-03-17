@@ -117,12 +117,17 @@ class IndexOperation extends Component
         $hectares = $batteries = $flight_hours = 0;
 
         foreach ($operations as $operation) {
+            // Valores por operacion
+            $batteries += $operation->number_flights;
+            $flight_hours += $operation->hour_flights;
+            // Valores por vuelo
             foreach ($operation->details as $detail) {
                 $hectares += $detail->acres;
-                $batteries += $detail->number_flights;
-                $flight_hours += $detail->hour_flights;
             }
         }
+
+        $hectares_hours = number_format($hectares / $flight_hours, 2, ',', ' ');
+        $hectares_batteries = number_format($hectares / $batteries, 2, ',', ' ');
 
         // Relaciones para los filtros
         $assistents = Assistant::pluck('name as label', 'id as value');
@@ -131,7 +136,8 @@ class IndexOperation extends Component
         $enrollments = $drones = Dron::pluck('enrollment as label', 'id as value');
         $pilots = User::where('id_role', config('roles.piloto'))->pluck('name as label', 'id as value');
 
-        return view('livewire.index-operation', compact('operations', 'hectares', 'batteries', 'flight_hours', 'clients', 'type_products', 'pilots', 'enrollments', 'assistents'));
+        return view('livewire.index-operation', compact('operations', 'hectares', 'batteries', 'flight_hours', 
+        'clients', 'type_products', 'pilots', 'enrollments', 'assistents', 'hectares_hours', 'hectares_batteries'));
     }
 
     private function applyFilter($query, $filters)

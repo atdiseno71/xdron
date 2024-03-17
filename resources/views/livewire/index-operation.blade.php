@@ -275,7 +275,7 @@
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 {{ Form::label('hectares', 'Total Hectareas') }}
                                 {{ Form::text('hectares', $hectares, ['class' => 'form-control' . ($errors->has('hectares') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Hectareas']) }}
@@ -283,7 +283,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 {{ Form::label('batteries', 'Total Baterias') }}
                                 {{ Form::text('batteries', $batteries, ['class' => 'form-control' . ($errors->has('batteries') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Baterias']) }}
@@ -291,11 +291,27 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 {{ Form::label('flight_hours', 'Total Horas Vuelos') }}
                                 {{ Form::text('flight_hours', $flight_hours, ['class' => 'form-control' . ($errors->has('flight_hours') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
                                 {!! $errors->first('flight_hours', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                {{ Form::label('hectares_hours', 'Total Hectareas/Horas') }}
+                                {{ Form::text('hectares_hours', $hectares_hours, ['class' => 'form-control' . ($errors->has('hectares_hours') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
+                                {!! $errors->first('hectares_hours', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                {{ Form::label('hectares_batteries', 'Total Hectareas/Baterias') }}
+                                {{ Form::text('hectares_batteries', $hectares_batteries, ['class' => 'form-control' . ($errors->has('hectares_batteries') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
+                                {!! $errors->first('hectares_batteries', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                         </div>
                     </div>
