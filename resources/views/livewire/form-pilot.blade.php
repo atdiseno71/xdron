@@ -110,7 +110,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('number_flights', 'Baterias') }}
-                    {{ Form::number('number_flights', $operation->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights', 'placeholder' => 'Ingrese cant. Baterias']) }}
+                    {{ Form::number('number_flights', $operation->number_flights, ['class' => 'form-control' . ($errors->has('number_flights') ? ' is-invalid' : ''), 'id' => 'number_flights', 'step' => 'any', 'min' => '0.1', 'placeholder' => 'Ingrese cant. Baterias']) }}
                     {!! $errors->first('number_flights', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -118,7 +118,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     {{ Form::label('hour_flights', 'Horas vuelos') }}
-                    {{ Form::number('hour_flights', $operation->hour_flights, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights', 'placeholder' => 'Ingrese cant. horas vuelos']) }}
+                    {{ Form::number('hour_flights', $operation->hour_flights, ['class' => 'form-control' . ($errors->has('hour_flights') ? ' is-invalid' : ''), 'id' => 'hour_flights', 'step' => 'any', 'min' => '0.1', 'placeholder' => 'Ingrese cant. horas vuelos']) }}
                     {!! $errors->first('hour_flights', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -193,7 +193,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('acres_' . $numberAreThere, 'Hectareas') }}
-                        {{ Form::number('acres_' . $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'placeholder' => 'Ingrese cant. hectareas']) }}
+                        {{ Form::number('acres_' . $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'step' => 'any', 'min' => '0.1', 'placeholder' => 'Ingrese cant. hectareas']) }}
                         {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -267,7 +267,7 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             {{ Form::label('acres_' . $key + 1, 'Hectareas') }}
-                            {{ Form::number('acres_' . $key + 1, $detail->acres, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $key + 1, 'placeholder' => 'Ingrese cant. hectareas']) }}
+                            {{ Form::number('acres_' . $key + 1, $detail->acres, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $key + 1, 'step' => 'any', 'min' => '0.1', 'placeholder' => 'Ingrese cant. hectareas']) }}
                             {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                         </div>
                     </div>
