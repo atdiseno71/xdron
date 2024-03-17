@@ -66,7 +66,7 @@ return [
     'logo' => '<b>X</b>Gron',
     'logo_img' => 'images/icon-white.png',
     'logo_img_other' => 'images/icon-white-other.jpeg',
-    'logo_img_class_other' => 'brand-image elevation-3',
+    'logo_img_class_other' => 'brand-image img-circle elevation-3',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
