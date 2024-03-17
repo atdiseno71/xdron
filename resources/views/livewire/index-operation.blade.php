@@ -88,7 +88,7 @@
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
                                     {{ Form::label('estate', 'Hacienda') }}
-                                    {{ Form::select('estate', $estates, '', ['class' => 'form-control' . ($errors->has('estate') ? ' is-invalid' : ''), 'wire:model' => 'estate', 'placeholder' => 'Seleccione el tipo aplicación']) }}
+                                    {{ Form::select('estate', $estates, '', ['class' => 'form-control' . ($errors->has('estate') ? ' is-invalid' : ''), 'wire:model' => 'estate', 'placeholder' => 'Seleccione una hacienda']) }}
                                     {!! $errors->first('estate', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
