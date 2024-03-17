@@ -87,8 +87,9 @@ class OperationController extends Controller
         
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
+        $consecutive = $this->getConsecutive();
 
-        return view('operation.create', compact('operation', 'role_user', 'types_documents'));
+        return view('operation.create', compact('operation', 'role_user', 'types_documents', 'consecutive'));
     }
 
     /**
@@ -106,6 +107,7 @@ class OperationController extends Controller
 
         $operation = new Operation();
 
+        $operation->consecutive = $this->getConsecutive();
         $operation->assistant_id_one = $request['assistant_id_one'];
         $operation->assistant_id_two = $request['assistant_id_two'];
         $operation->date_operation = $request['date_operation'];
@@ -154,7 +156,6 @@ class OperationController extends Controller
         /* CREAMOS LA NOTIFICACION */
         $this->make_operation_notification($operation);
 
-
         /**********************************
          * Envio de alertas para el piloto *
          **********************************/
@@ -192,10 +193,18 @@ class OperationController extends Controller
     {
         $operation = Operation::with('details')->find($id);
 
+        // Definimos el inicio del contador en cero
+        $hectares = 0;
+        // Calculamos los totales
+        foreach ($operation->details as $detail) {
+            $hectares += $detail->acres;
+        }
+        // Le damos un formato
+        $hectares = number_format($hectares, 2, ',', ' ');
         //Generamos el pdf
         set_time_limit(30000);
         // return view('pdf.report.operation', compact('operation'));
-        $pdf = PDF::loadview('pdf.report.operation', compact('operation'), ['dpi' => '200']);
+        $pdf = PDF::loadview('pdf.report.operation', compact('operation', 'hectares'), ['dpi' => '200']);
 
         $pdf->set_paper('letter', 'portrait');
         return $pdf->stream('reporte.pdf');

@@ -85,9 +85,13 @@
                                     {!! $errors->first('assistent_two', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
-                            {{-- <div class="col-12 col-md-12">
-                                <button type="submit" wire:click="$emit('updatePage')" class="btn btn-primary btn-block">Buscar</button>
-                            </div> --}}
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('estate', 'Hacienda') }}
+                                    {{ Form::select('estate', $estates, '', ['class' => 'form-control' . ($errors->has('estate') ? ' is-invalid' : ''), 'wire:model' => 'estate', 'placeholder' => 'Seleccione una hacienda']) }}
+                                    {!! $errors->first('estate', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -103,8 +107,8 @@
                             <thead class="thead">
                                 <tr>
 
+                                    <th>No</th>
                                     <th></th>
-                                    {{-- <th>No</th> --}}
                                     <th>Fecha vuelo</th>
                                     <th>Piloto</th>
                                     <th>Tanqueador 1</th>
@@ -158,6 +162,7 @@
                                     @endphp
                                     <tr>
 
+                                        <td>{{ $operation->consecutive }}</td>
                                         <td>
                                             <button
                                                 wire:click="$emitTo('operation-modal', 'display-modal', {{ $operation->id }})"
@@ -175,15 +180,13 @@
                                             </button>
                                         </td>
 
-                                        {{-- <td>{{ $operation->id }}</td> --}}
-
                                         <td>{{ $operation->date_operation?->format('d/m/Y') }}</td>
                                         <td>{{ $operation->user_pilot?->name }}</td>
                                         <td>{{ $operation->assistant_one?->name }}</td>
                                         <td>{{ $operation->assistant_two?->name }}</td>
                                         <td>{{ $operation->drone->enrollment ?? 'Sin vuelos.' }}</td>
                                         <td>{{ $operation->client?->social_reason }}</td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->product?->name }}</td>
                                         <td>{{ $operation->download }}</td>
 
                                         <td>{{ $acres }}</td>
@@ -275,7 +278,7 @@
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 {{ Form::label('hectares', 'Total Hectareas') }}
                                 {{ Form::text('hectares', $hectares, ['class' => 'form-control' . ($errors->has('hectares') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Hectareas']) }}
@@ -283,7 +286,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 {{ Form::label('batteries', 'Total Baterias') }}
                                 {{ Form::text('batteries', $batteries, ['class' => 'form-control' . ($errors->has('batteries') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Baterias']) }}
@@ -291,11 +294,27 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 {{ Form::label('flight_hours', 'Total Horas Vuelos') }}
                                 {{ Form::text('flight_hours', $flight_hours, ['class' => 'form-control' . ($errors->has('flight_hours') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
                                 {!! $errors->first('flight_hours', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                {{ Form::label('hectares_hours', 'Total Hectareas/Horas') }}
+                                {{ Form::text('hectares_hours', $hectares_hours, ['class' => 'form-control' . ($errors->has('hectares_hours') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
+                                {!! $errors->first('hectares_hours', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                {{ Form::label('hectares_batteries', 'Total Hectareas/Baterias') }}
+                                {{ Form::text('hectares_batteries', $hectares_batteries, ['class' => 'form-control' . ($errors->has('hectares_batteries') ? ' is-invalid' : ''), 'disabled' => 'disabled', 'placeholder' => 'Total Horas Vuelos']) }}
+                                {!! $errors->first('hectares_batteries', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                         </div>
                     </div>

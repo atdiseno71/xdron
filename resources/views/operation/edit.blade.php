@@ -17,10 +17,9 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <div class="float-left">
+                        <div class="d-flex justify-content-between">
                             <span class="card-title">Actualizar operacion</span>
-                        </div>
-                        <div class="float-right">
+                            <span class="card-title"><strong>#{{ $operation->consecutive }}</strong></span>
                             <a class="btn btn-danger" href="{{ route('operations.index') }}"> Volver</a>
                         </div>
                     </div>

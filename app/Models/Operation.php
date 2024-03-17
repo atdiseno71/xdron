@@ -65,6 +65,7 @@ class Operation extends Model
      * @var array
      */
     protected $fillable = [
+        'consecutive',
         'download',
         'assistant_id_one',
         'assistant_id_two',

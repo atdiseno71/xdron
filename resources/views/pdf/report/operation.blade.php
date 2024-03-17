@@ -10,24 +10,27 @@
         <a id="logo-header" href="#">
             <span class="site-name">INFORME OPERACION</span>
         </a>
+
+        <strong class="consecutive">{{ $operation->consecutive }}</strong>
+
     </header>
 
     <h5 class="alineacion-center title-report">
-        <strong>CLIENTE:</strong>{{ $operation->client?->social_reason ?? '' }}
+        <strong>CLIENTE: {{ $operation->client?->social_reason ?? '' }}</strong>
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        <strong>FECHA VUELO:</strong>{{ $operation->date_operation?->format('d/m/Y') }}
+        <strong>FECHA VUELO: {{ $operation->date_operation?->format('d/m/Y') }}</strong>
     </h5>
 
     <h5 class="alineacion-center title-fixe">
-        <strong>PILOTO:</strong>{{ $operation->user_pilot?->name ?? '' }}
+        <strong>PILOTO: {{ $operation->user_pilot?->name ?? '' }}</strong>
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        <strong>DRON:</strong>{{ $operation->drone?->enrollment ?? '' }}
+        <strong>DRON: {{ $operation->drone?->enrollment ?? '' }}</strong>
         <br>
-        <strong>TOTAL HAS:</strong>{{ $operation->client?->social_reason ?? '' }}
+        <strong>TOTAL HAS: {{ $hectares }}</strong>
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        <strong>DESCARGA:</strong>{{ $operation->client?->social_reason ?? '' }}
+        <strong>DESCARGA: {{ $operation->download }}</strong>
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        <strong>ZONA:</strong>{{ $operation->zone?->name ?? '' }}
+        <strong>ZONA: {{ $operation->zone?->name ?? '' }}</strong>
     </h5>
 
     <br>
@@ -37,9 +40,9 @@
 
     @forelse ($operation->details as $key => $detail)
         <p class="detail-flight">
-            <strong>HACIENDA:</strong> {{ $detail->estate?->name }}&nbsp;&nbsp;|&nbsp;&nbsp;
-            <strong>SUERTE:</strong> {{ $detail->luck }}&nbsp;&nbsp;|&nbsp;&nbsp;
-            <strong>HAS:</strong> {{ $detail->acres }}
+            <strong>HACIENDA: {{ $detail->estate?->name }}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <strong>SUERTE: {{ $detail->luck }}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <strong>HAS: {{ $detail->acres }}</strong>
         </p>
         @foreach ($detail->files_details as $keys => $file)
             <img class="img-detail" src="{{ $file->src_file }}" height="850px">
@@ -50,7 +53,7 @@
         @endforeach
         {{-- PARTE DE OBSERVACIONES DEL PILOTO --}}
         <p style="text-align: left; position: absolute; left: 8mm; right: 8mm; bottom: 0%">
-            <strong>OBSERVACIONES:</strong> {{ $detail->observation }}
+            <strong>OBSERVACIONES: {{ $detail->observation }}</strong>
         </p>
         {{-- Saltar pagina cuando saque todos los archivos --}}
         @if ((count($operation->details) - 1) != $key)
