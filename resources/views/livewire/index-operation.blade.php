@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
-                                    {{ Form::label('estate', 'Haciendas') }}
+                                    {{ Form::label('estate', 'Hacienda') }}
                                     {{ Form::select('estate', $estates, '', ['class' => 'form-control' . ($errors->has('estate') ? ' is-invalid' : ''), 'wire:model' => 'estate', 'placeholder' => 'Seleccione el tipo aplicación']) }}
                                     {!! $errors->first('estate', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
@@ -107,8 +107,8 @@
                             <thead class="thead">
                                 <tr>
 
+                                    <th>No</th>
                                     <th></th>
-                                    {{-- <th>No</th> --}}
                                     <th>Fecha vuelo</th>
                                     <th>Piloto</th>
                                     <th>Tanqueador 1</th>
@@ -162,6 +162,7 @@
                                     @endphp
                                     <tr>
 
+                                        <td>{{ $operation->consecutive }}</td>
                                         <td>
                                             <button
                                                 wire:click="$emitTo('operation-modal', 'display-modal', {{ $operation->id }})"
@@ -178,8 +179,6 @@
                                                 </svg>
                                             </button>
                                         </td>
-
-                                        {{-- <td>{{ $operation->id }}</td> --}}
 
                                         <td>{{ $operation->date_operation?->format('d/m/Y') }}</td>
                                         <td>{{ $operation->user_pilot?->name }}</td>

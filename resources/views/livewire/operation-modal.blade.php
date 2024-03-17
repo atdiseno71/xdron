@@ -17,6 +17,23 @@
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
+                                        {{ Form::label('type_product_id', 'Tipo aplicación') }}
+                                        <input type="text" class="form-control" name="type_product_id"
+                                            id="type_product_id" placeholder="Tipo aplicación registrada" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        {{ Form::label('consecutive', 'Consecutivo') }}
+                                        <input type="text" class="form-control" name="consecutive"
+                                            id="consecutive" placeholder="Consecutivo registrada" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
                                         {{ Form::label('id_cliente', 'Cliente') }}
                                         <input type="text" class="form-control" name="id_cliente" id="id_cliente"
                                             placeholder="Cliente registrado" disabled>
@@ -127,14 +144,6 @@
                                     </div>
                                 </div>
                                 {{-- Termina columna 12 --}}
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        {{ Form::label('type_product_id', 'Tipo aplicación') }}
-                                        <input type="text" class="form-control" name="type_product_id"
-                                            id="type_product_id" placeholder="Tipo aplicación registrada" disabled>
-                                    </div>
-                                </div>
-                                {{-- Termina columna 12 --}}
                                 <div class="col-12 col-md-12">
                                     <div class="form-group">
                                         {{ Form::label('end_observation', 'Última observación') }}
@@ -159,6 +168,7 @@
             // Capturamos los datos de la operacion
             const operation = event.detail?.operation;
             // Llenamos los campos a mostrar
+            $('#consecutive').val(operation.consecutive);
             $('#id_cliente').val(operation.client?.social_reason);
             $('#pilot_id').val(operation.user_pilot?.name);
             $('#assistant_id_one').val(operation.assistant_one?.name);
