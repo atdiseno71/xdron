@@ -183,7 +183,7 @@
                                         <td>{{ $operation->assistant_two?->name }}</td>
                                         <td>{{ $operation->drone->enrollment ?? 'Sin vuelos.' }}</td>
                                         <td>{{ $operation->client?->social_reason }}</td>
-                                        <td>{{ $operation->details[0]?->typeProduct->name ?? 'Sin vuelos.' }}</td>
+                                        <td>{{ $operation->product?->name }}</td>
                                         <td>{{ $operation->download }}</td>
 
                                         <td>{{ $acres }}</td>
