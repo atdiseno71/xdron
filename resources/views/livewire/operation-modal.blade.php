@@ -29,6 +29,13 @@
                                             id="consecutive" placeholder="Consecutivo registrada" disabled>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="form-group">
+                                        {{ Form::label('hectares_input', 'Total Hectareas') }}
+                                        <input type="text" class="form-control" name="hectares_input"
+                                            id="hectares_input" placeholder="Hectareas registradas" disabled>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
@@ -167,8 +174,10 @@
             $('#showOperation').modal('show');
             // Capturamos los datos de la operacion
             const operation = event.detail?.operation;
+            const hectares = event.detail?.hectares;
             // Llenamos los campos a mostrar
             $('#consecutive').val(operation.consecutive);
+            $('#hectares_input').val(hectares);
             $('#id_cliente').val(operation.client?.social_reason);
             $('#pilot_id').val(operation.user_pilot?.name);
             $('#assistant_id_one').val(operation.assistant_one?.name);

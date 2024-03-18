@@ -22,7 +22,17 @@ class OperationModal extends Component
                 'userAdmin', 'product', 'client', 'assistant_two', 'assistant_one', 'details', 'details.estate')
                                     ->findOrFail($id);
 
-            $this->dispatchBrowserEvent("show-modal", ["operation"=> $operation, 'id_auth' => $admin_user]);
+            /************************************************
+             *              Calcular totales
+             ************************************************/
+            // hectáreas, baterías, horas de vuelo
+            $hectares = 0;
+            // Valores por vuelo
+            foreach ($operation->details as $detail) {
+                $hectares += $detail->acres;
+            }
+
+            $this->dispatchBrowserEvent("show-modal", ["operation"=> $operation, 'hectares' => $hectares, 'id_auth' => $admin_user]);
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return redirect()->route('operations.index')
