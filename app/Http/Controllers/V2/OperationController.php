@@ -203,8 +203,8 @@ class OperationController extends Controller
         $hectares = number_format($hectares, 2, ',', ' ');
         //Generamos el pdf
         set_time_limit(30000);
-        // return view('pdf.report.operation', compact('operation'));
-        $pdf = PDF::loadview('pdf.report.operation', compact('operation', 'hectares'), ['dpi' => '200']);
+        return view('pdf.report.informe', compact('operation', 'hectares'));
+        // $pdf = PDF::loadview('pdf.report.informe', compact('operation', 'hectares'), ['dpi' => '200']);
 
         $pdf->set_paper('letter', 'portrait');
         return $pdf->stream('reporte.pdf');
