@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- @include('template.cabezote') --}}
-
+<main class="main_content">
     <header id="main-header">
 
         <a id="logo-header" href="#">
@@ -71,5 +71,6 @@
     </p>
     {{-- Mostrar última evidencia --}}
     <img class="evidence_aplication" src="{{ $operation->evidence_aplication }}" height="900px">
+</main>
 
 @endsection
