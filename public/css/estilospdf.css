@@ -77,6 +77,10 @@ header {
     line-height: 30px;
 }
 
+.container-demo {
+    width: 800px;
+}
+
 /* Estilos de texto */
 .h5, h5 {
     font-size: 1.25rem;

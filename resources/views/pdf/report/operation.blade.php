@@ -44,13 +44,15 @@
             <strong>SUERTE: {{ $detail->luck }}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
             <strong>HAS: {{ $detail->acres }}</strong>
         </p>
-        @foreach ($detail->files_details as $keys => $file)
-            <img class="img-detail" src="{{ $file->src_file }}" height="850px">
-            {{-- Saltar pagina cuando saque todos los archivos --}}
-            @if ((count($detail->files_details) - 1) != $keys)
-                <hr>
-            @endif
-        @endforeach
+        <div class="container-demo">
+            @foreach ($detail->files_details as $keys => $file)
+                <img class="img-detail" src="{{ $file->src_file }}">
+                {{-- Saltar pagina cuando saque todos los archivos --}}
+                @if ((count($detail->files_details) - 1) != $keys)
+                    <hr>
+                @endif
+            @endforeach
+        </div>
         {{-- PARTE DE OBSERVACIONES DEL PILOTO --}}
         <p style="text-align: left; position: absolute; left: 8mm; right: 8mm; bottom: 0%">
             <strong>OBSERVACIONES: {{ $detail->observation }}</strong>
