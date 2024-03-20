@@ -104,7 +104,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-hover" cellspacing="0" width="100%"
                             style="font-size: .7rem">
-                            <thead class="thead">
+                            <thead class="thead" style="text-transform: uppercase;">
                                 <tr>
 
                                     <th>No</th>
