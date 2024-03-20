@@ -371,6 +371,8 @@ ul li {
     position: absolute;
     left: 4cm;
     right: 4cm;
+
+    page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
     
 }
 
