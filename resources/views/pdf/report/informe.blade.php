@@ -49,11 +49,11 @@
             @forelse ($detail->files_details as $keys => $file)
                 @if ($loop->last)
                     <div class="container-evidence-fixe mt-3">
-                        <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="600px">
+                        <img class="evidence_detail" style="border: blue solid 5px;" src="{{ asset($file->src_file) }}" height="600px">
                     </div>
                 @else
                     <div class="container-evidence-fixe mt-2">
-                        <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="700px">
+                        <img class="evidence_detail" style="border: red solid 5px;" src="{{ asset($file->src_file) }}" height="700px">
                     </div>
                 @endif
             @empty
