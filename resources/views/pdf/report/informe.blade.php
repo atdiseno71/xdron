@@ -24,15 +24,13 @@
             <span class="title">Informe Operacion</span>
             <strong class="consecutive">{{ $operation->consecutive }}</strong>
             <h5 class="sub-title spacing">
-                CLIENTE: {{ $operation->client ? $operation->client->social_reason : '' }} | FECHA VUELO:
-                {{ optional($operation->date_operation)->format('d/m/Y') }}
-                PILOTO: {{ $operation->user_pilot ? $operation->user_pilot->name : '' }} | DRON:
-                {{ $operation->drone ? $operation->drone->enrollment : '' }}
-                TOTAL HAS: {{ $hectares }} | DESCARGA: {{ $operation->download }}
+                CLIENTE: {{ $operation->client ? $operation->client->social_reason : '' }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;FECHA VUELO: {{ optional($operation->date_operation)->format('d/m/Y') }}
+                PILOTO: {{ $operation->user_pilot ? $operation->user_pilot->name : '' }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;DRON: {{ $operation->drone ? $operation->drone->enrollment : '' }}
+                TOTAL HAS: {{ $hectares }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;DESCARGA: {{ $operation->download }}
             </h5>
         </div>
         <div class="container-evidence-fixe mt-3">
-            <img class="evidence_record" src="{{ asset($operation->evidence_record) }}" height="650px">
+            <img class="evidence_record" src="{{ asset($operation->evidence_record) }}" height="700px">
         </div>
         {{-- end:header del informe --}}
         {{-- begin:vuelos --}}
@@ -49,11 +47,11 @@
             @forelse ($detail->files_details as $keys => $file)
                 @if ($loop->last)
                     <div class="container-evidence-fixe mt-3">
-                        <img class="evidence_detail" style="border: blue solid 5px;" src="{{ asset($file->src_file) }}" height="600px">
+                        <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="600px">
                     </div>
                 @else
                     <div class="container-evidence-fixe mt-2">
-                        <img class="evidence_detail" style="border: red solid 5px;" src="{{ asset($file->src_file) }}" height="700px">
+                        <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="700px">
                     </div>
                 @endif
             @empty
