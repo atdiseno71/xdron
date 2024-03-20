@@ -8,7 +8,7 @@
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     {{-- Title --}}
     <title>
-        @yield('title', 'Reportes')
+        @yield('title', 'Reporte de Tipo aplicación')
     </title>
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
@@ -91,7 +91,7 @@
             html2pdf()
                 .from(container)
                 .set({
-                    filename: 'documento.pdf',
+                    filename: 'Reporte-de-tipo-aplicacion.pdf',
                     html2canvas: {
                         scale: 1,
                         logging: true,
