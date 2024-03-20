@@ -79,6 +79,7 @@ header {
 
 .container-demo {
     width: 800px;
+    padding: 0 50;
 }
 
 /* Estilos de texto */
