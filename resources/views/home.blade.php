@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        {{-- <div class="row">
+    {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -142,7 +141,7 @@
 
             </div>
         </div> --}}
-        {{-- <div class="row">
+    {{-- <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header border-0">
@@ -334,36 +333,217 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </div> --}}
+            </div> --}}
     </div>
 @endsection
 
 
 @section('js')
     <script>
-        $(function(){'use strict'
-        var salesChartCanvas=$('#salesChart').get(0).getContext('2d')
-        var salesChartData={labels:['January','February','March','April','May','June','July'],datasets:[{label:'Digital Goods',backgroundColor:'rgba(60,141,188,0.9)',borderColor:'rgba(60,141,188,0.8)',pointRadius:false,pointColor:'#3b8bba',pointStrokeColor:'rgba(60,141,188,1)',pointHighlightFill:'#fff',pointHighlightStroke:'rgba(60,141,188,1)',data:[28,48,40,19,86,27,90]},{label:'Electronics',backgroundColor:'rgba(210, 214, 222, 1)',borderColor:'rgba(210, 214, 222, 1)',pointRadius:false,pointColor:'rgba(210, 214, 222, 1)',pointStrokeColor:'#c1c7d1',pointHighlightFill:'#fff',pointHighlightStroke:'rgba(220,220,220,1)',data:[65,59,80,81,56,55,40]}]}
-        var salesChartOptions={maintainAspectRatio:false,responsive:true,legend:{display:false},scales:{xAxes:[{gridLines:{display:false}}],yAxes:[{gridLines:{display:false}}]}}
-        var salesChart=new Chart(salesChartCanvas,{type:'line',data:salesChartData,options:salesChartOptions})
-        var pieChartCanvas=$('#pieChart').get(0).getContext('2d')
-        var pieData={labels:['Chrome','IE','FireFox','Safari','Opera','Navigator'],datasets:[{data:[700,500,400,600,300,100],backgroundColor:['#f56954','#00a65a','#f39c12','#00c0ef','#3c8dbc','#d2d6de']}]}
-        var pieOptions={legend:{display:false}}
-        var pieChart=new Chart(pieChartCanvas,{type:'doughnut',data:pieData,options:pieOptions})
-        $('#world-map-markers').mapael({map:{name:'usa_states',zoom:{enabled:true,maxLevel:10}}})})
+        $(function() {
+            'use strict'
+            var salesChartCanvas = $('#salesChart').get(0).getContext('2d')
+            var salesChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Digital Goods',
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }, {
+                    label: 'Electronics',
+                    backgroundColor: 'rgba(210, 214, 222, 1)',
+                    borderColor: 'rgba(210, 214, 222, 1)',
+                    pointRadius: false,
+                    pointColor: 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor: '#c1c7d1',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                }]
+            }
+            var salesChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                }
+            }
+            var salesChart = new Chart(salesChartCanvas, {
+                type: 'line',
+                data: salesChartData,
+                options: salesChartOptions
+            })
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = {
+                labels: ['Chrome', 'IE', 'FireFox', 'Safari', 'Opera', 'Navigator'],
+                datasets: [{
+                    data: [700, 500, 400, 600, 300, 100],
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
+                }]
+            }
+            var pieOptions = {
+                legend: {
+                    display: false
+                }
+            }
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'doughnut',
+                data: pieData,
+                options: pieOptions
+            })
+            $('#world-map-markers').mapael({
+                map: {
+                    name: 'usa_states',
+                    zoom: {
+                        enabled: true,
+                        maxLevel: 10
+                    }
+                }
+            })
+        })
 
         /*  */
-        $(function(){'use strict'
-        var ticksStyle={fontColor:'#495057',fontStyle:'bold'}
-        var mode='index'
-        var intersect=true
-        var $salesChart=$('#sales-chart')
-        var salesChart=new Chart($salesChart,{type:'bar',data:{labels:['JUN','JUL','AUG','SEP','OCT','NOV','DEC'],datasets:[{backgroundColor:'#007bff',borderColor:'#007bff',data:[1000,2000,3000,2500,2700,2500,3000]},{backgroundColor:'#ced4da',borderColor:'#ced4da',data:[700,1700,2700,2000,1800,1500,2000]}]},options:{maintainAspectRatio:false,tooltips:{mode:mode,intersect:intersect},hover:{mode:mode,intersect:intersect},legend:{display:false},scales:{yAxes:[{gridLines:{display:true,lineWidth:'4px',color:'rgba(0, 0, 0, .2)',zeroLineColor:'transparent'},ticks:$.extend({beginAtZero:true,callback:function(value){if(value>=1000){value/=1000
-        value+='k'}
-        return '$'+value}},ticksStyle)}],xAxes:[{display:true,gridLines:{display:false},ticks:ticksStyle}]}}})
-        var $visitorsChart=$('#visitors-chart')
-        var visitorsChart=new Chart($visitorsChart,{data:{labels:['18th','20th','22nd','24th','26th','28th','30th'],datasets:[{type:'line',data:[100,120,170,167,180,177,160],backgroundColor:'transparent',borderColor:'#007bff',pointBorderColor:'#007bff',pointBackgroundColor:'#007bff',fill:false},{type:'line',data:[60,80,70,67,80,77,100],backgroundColor:'tansparent',borderColor:'#ced4da',pointBorderColor:'#ced4da',pointBackgroundColor:'#ced4da',fill:false}]},options:{maintainAspectRatio:false,tooltips:{mode:mode,intersect:intersect},hover:{mode:mode,intersect:intersect},legend:{display:false},scales:{yAxes:[{gridLines:{display:true,lineWidth:'4px',color:'rgba(0, 0, 0, .2)',zeroLineColor:'transparent'},ticks:$.extend({beginAtZero:true,suggestedMax:200},ticksStyle)}],xAxes:[{display:true,gridLines:{display:false},ticks:ticksStyle}]}}})})
+        $(function() {
+            'use strict'
+            var ticksStyle = {
+                fontColor: '#495057',
+                fontStyle: 'bold'
+            }
+            var mode = 'index'
+            var intersect = true
+            var $salesChart = $('#sales-chart')
+            var salesChart = new Chart($salesChart, {
+                type: 'bar',
+                data: {
+                    labels: ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                    datasets: [{
+                        backgroundColor: '#007bff',
+                        borderColor: '#007bff',
+                        data: [1000, 2000, 3000, 2500, 2700, 2500, 3000]
+                    }, {
+                        backgroundColor: '#ced4da',
+                        borderColor: '#ced4da',
+                        data: [700, 1700, 2700, 2000, 1800, 1500, 2000]
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        mode: mode,
+                        intersect: intersect
+                    },
+                    hover: {
+                        mode: mode,
+                        intersect: intersect
+                    },
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: true,
+                                lineWidth: '4px',
+                                color: 'rgba(0, 0, 0, .2)',
+                                zeroLineColor: 'transparent'
+                            },
+                            ticks: $.extend({
+                                beginAtZero: true,
+                                callback: function(value) {
+                                    if (value >= 1000) {
+                                        value /= 1000
+                                        value += 'k'
+                                    }
+                                    return '$' + value
+                                }
+                            }, ticksStyle)
+                        }],
+                        xAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: ticksStyle
+                        }]
+                    }
+                }
+            })
+            var $visitorsChart = $('#visitors-chart')
+            var visitorsChart = new Chart($visitorsChart, {
+                data: {
+                    labels: ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
+                    datasets: [{
+                        type: 'line',
+                        data: [100, 120, 170, 167, 180, 177, 160],
+                        backgroundColor: 'transparent',
+                        borderColor: '#007bff',
+                        pointBorderColor: '#007bff',
+                        pointBackgroundColor: '#007bff',
+                        fill: false
+                    }, {
+                        type: 'line',
+                        data: [60, 80, 70, 67, 80, 77, 100],
+                        backgroundColor: 'tansparent',
+                        borderColor: '#ced4da',
+                        pointBorderColor: '#ced4da',
+                        pointBackgroundColor: '#ced4da',
+                        fill: false
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        mode: mode,
+                        intersect: intersect
+                    },
+                    hover: {
+                        mode: mode,
+                        intersect: intersect
+                    },
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: true,
+                                lineWidth: '4px',
+                                color: 'rgba(0, 0, 0, .2)',
+                                zeroLineColor: 'transparent'
+                            },
+                            ticks: $.extend({
+                                beginAtZero: true,
+                                suggestedMax: 200
+                            }, ticksStyle)
+                        }],
+                        xAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: ticksStyle
+                        }]
+                    }
+                }
+            })
+        })
     </script>
 @endsection

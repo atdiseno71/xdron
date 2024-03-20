@@ -66,6 +66,10 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+.main_content{
+    width: 100%;
+}
+
 header {
     position: absolute;
     top: 0cm;
@@ -75,6 +79,14 @@ header {
     color: white;
     text-align: center;
     line-height: 30px;
+}
+
+.container-demo {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    padding: 50px 20px;
+    margin: 0 0 50px 0;
 }
 
 /* Estilos de texto */
@@ -361,19 +373,9 @@ ul li {
 }
 
 .img-detail {
-    /* width: 100%; */
-    /* padding: 0; */
-    /* margin: 0; */
-    vertical-align: middle; /* Centra verticalmente */
-    max-width: 100%; /* Asegura que la imagen no se desborde del contenedor */
-    max-height: 100%; /* Asegura que la imagen no se desborde del contenedor */
-    
-    position: absolute;
-    left: 4cm;
-    right: 4cm;
-
-    page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
-    
+    width: 70%; 
+    max-width: 70%; 
+    /*height: auto;*/
 }
 
 hr {
