@@ -60,7 +60,7 @@ p.observation {
 }
 
 .container-evidence-fixe.mt-2 {
-    margin: 0 auto 20mm auto;
+    margin: 0 auto 18mm auto;
 }
 
 .container-evidence-fixe.mt-3 {
@@ -77,7 +77,7 @@ p.observation {
     width: 50%;
     max-width: 50%;
     page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
-    /* padding: 5px; */
+    padding: 5px;
 }
 
 /* Estilos para los textos */
@@ -118,7 +118,7 @@ p.observation {
     text-align: center;
 
     background: var(--color-main);
-    height: .8cm;
+    height: .7cm;
     margin: auto;
     padding: 0;
 }
