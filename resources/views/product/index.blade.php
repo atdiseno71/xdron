@@ -5,84 +5,82 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <span id="card_title">
-                                Producto
-                            </span>
+                        <span id="card_title">
+                            Producto
+                        </span>
 
-                            <div class="float-right">
-                                @can('products.create')
-                                    <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"
-                                        data-placement="left">
-                                        Crear nuevo
-                                    </a>
-                                @endcan
-                            </div>
+                        <div class="float-right">
+                            @can('products.create')
+                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    Crear nuevo
+                                </a>
+                            @endcan
                         </div>
                     </div>
+                </div>
 
-                    {{-- Plantilla mensajes --}}
-                    @include('layouts.message')
+                {{-- Plantilla mensajes --}}
+                @include('layouts.message')
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="thead">
+                                <tr>
+                                    <th>No</th>
+
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Creado por</th>
+
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products as $product)
                                     <tr>
-                                        <th>No</th>
+                                        <td>{{ ++$i }}</td>
 
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Creado por</th>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->typeProduct?->name }}</td>
+                                        <td>{{ $product->creator?->name }}</td>
 
-                                        <th>Acciones</th>
+                                        <td>
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                                class="form-delete">
+                                                @can('products.show')
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('products.show', $product->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i></a>
+                                                @endcan
+                                                @can('products.edit')
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('products.edit', $product->id) }}"><i
+                                                            class="fa fa-fw fa-edit"></i></a>
+                                                @endcan
+                                                @csrf
+                                                @method('DELETE')
+                                                @can('products.destroy')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i></button>
+                                                @endcan
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($products as $product)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-
-                                            <td>{{ $product->name }}</td>
-                                            <td>{{ $product->typeProduct?->name }}</td>
-                                            <td>{{ $product->creator?->name }}</td>
-
-                                            <td>
-                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                                                    class="form-delete">
-                                                    @can('products.show')
-                                                        <a class="btn btn-sm btn-primary "
-                                                            href="{{ route('products.show', $product->id) }}"><i
-                                                                class="fa fa-fw fa-eye"></i></a>
-                                                    @endcan
-                                                    @can('products.edit')
-                                                        <a class="btn btn-sm btn-success"
-                                                            href="{{ route('products.edit', $product->id) }}"><i
-                                                                class="fa fa-fw fa-edit"></i></a>
-                                                    @endcan
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @can('products.destroy')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa fa-fw fa-trash"></i></button>
-                                                    @endcan
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="card-footer">
-                        {{ $products->appends(request()->except('page'))->links('vendor.pagination.custom') }}
-                    </div>
+                </div>
+                <div class="card-footer">
+                    {{ $products->appends(request()->except('page'))->links('vendor.pagination.custom') }}
                 </div>
             </div>
         </div>
