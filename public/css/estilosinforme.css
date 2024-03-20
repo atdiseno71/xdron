@@ -78,7 +78,6 @@ p.observation {
     max-width: 50%;
     page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
     /* padding: 5px; */
-    border: red solid 5px;
 }
 
 /* Estilos para los textos */
