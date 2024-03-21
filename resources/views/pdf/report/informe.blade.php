@@ -21,14 +21,65 @@
     <div class="container" id="container">
         {{-- begin:header del informe --}}
         <div class="title-main">
+            {{-- begin:section 1 --}}
+            <a href="{{ route('home.index') }}" class="navbar-brand {{ config('adminlte.classes_brand') }}">
+
+                {{-- Small brand logo --}}
+                <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}"
+                    alt="{{ config('adminlte.logo_img_alt', 'AdminLTE') }}"
+                    class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}"
+                    style="opacity:.8">
+
+                {{-- Brand text --}}
+                <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
+                    {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                </span>
+
+                {{-- Small brand logo --}}
+                <img src="{{ asset(config('adminlte.logo_img_other', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}"
+                    alt="{{ config('adminlte.logo_img_alt_other', 'logo_img_alt_other') }}"
+                    class="{{ config('adminlte.logo_img_class_other', 'brand-image img-circle elevation-3') }}"
+                    style="opacity:.8">
+            </a>
             <span class="title">Informe Operacion</span>
             <strong class="consecutive">{{ $operation->consecutive }}</strong>
-            <h5 class="sub-title spacing">
-                CLIENTE: {{ $operation->client ? $operation->client->social_reason : '' }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;FECHA VUELO: {{ optional($operation->date_operation)->format('d/m/Y') }}
-                PILOTO: {{ $operation->user_pilot ? $operation->user_pilot->name : '' }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;DRON: {{ $operation->drone ? $operation->drone->enrollment : '' }}
-                TOTAL HAS: {{ $hectares }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;DESCARGA: {{ $operation->download }}
-            </h5>
+            {{-- end:section 1 --}}
+            {{-- begin:separador --}}
+            <span class="separator-line"></span>
+            {{-- end:separador --}}
+            <ul class="detail">
+                <li>
+                    <span class="detail-tile">FECHA VUELO:</span>
+                    <span class="detail-subtile">{{ optional($operation->date_operation)->format('d/m/Y') }}</span>
+                </li>
+                <li>
+                    <span class="detail-tile">CLIENTE:</span>
+                    <span class="detail-subtile">{{ $operation->client ? $operation->client->social_reason : '' }}</span>
+                </li>
+                <li>
+                    <span class="detail-tile">PILOTO:</span>
+                    <span class="detail-subtile">{{ $operation->user_pilot ? $operation->user_pilot->name . ' ' . $operation->user_pilot->lastname : '' }}</span>
+                </li>
+                <li>
+                    <span class="detail-tile">DRONE:</span>
+                    <span class="detail-subtile">{{ $operation->drone ? $operation->drone->enrollment : '' }}</span>
+                </li>
+                <li>
+                    <span class="detail-tile">TIPO APLICACION:</span>
+                    <span class="detail-subtile">{{ $operation->product ? $operation->product->name : '' }}</span>
+                </li>
+                <li>
+                    <span class="detail-tile">TOTAL HAS:</span>
+                    <span class="detail-subtile">{{ $hectares }}</span>
+                </li>
+                <li>
+                    <span class="detail-tile">DESCARGA:</span>
+                    <span class="detail-subtile">{{ $operation->download }}</span>
+                </li>
+            </ul>
         </div>
+
+
         <div class="container-evidence-fixe mt-3">
             <img class="evidence_record" src="{{ asset($operation->evidence_record) }}" height="700px">
         </div>
