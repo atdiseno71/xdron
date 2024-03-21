@@ -81,7 +81,7 @@
 
 
         <div class="container-evidence-fixe mt-3">
-            <img class="evidence_record" src="{{ asset($operation->evidence_record) }}" height="700px">
+            <img class="evidence_record" src="{{ asset($operation->evidence_record) }}" height="715px">
         </div>
         {{-- end:header del informe --}}
         {{-- begin:vuelos --}}
