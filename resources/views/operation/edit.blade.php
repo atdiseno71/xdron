@@ -46,9 +46,6 @@
         @include('modals.client')
         @include('modals.asistent')
         @include('modals.estate')
-        {{-- @include('modals.estate') --}}
-        {{-- @include('modals.luck') --}}
-        {{-- @include('modals.dron') --}}
     </section>
 @endsection
 

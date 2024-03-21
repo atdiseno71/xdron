@@ -8,6 +8,8 @@
             </div>
         </div>
 
+        <input type="text" id="thereFlights" value="{{ count($operation->details) == 0 ? 1 : 0 }}" hidden>
+
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group">
@@ -335,6 +337,7 @@
     </div>
     <br>
     @include('layouts.btn-submit')
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
     <script>
         // V2 para duplicar el form de vuelos
         document.addEventListener('DOMContentLoaded', function() {
@@ -419,6 +422,16 @@
 
             });
         });
+        // Validar si no hay vuelos, mostrar alerta de hacienda
+        window.onload = function() {
+            var miInput = document.getElementById('thereFlights');
+            
+            // Verificar el valor al cargar la página
+            if (miInput.value.trim().toLowerCase() === '1') {
+                alertCustom('info', '¡Atención! ', 'Antes de ingresar cualquier registro, asegúrate de registrar primero tu hacienda para evitar perder información importante.');
+                // alert('¡El valor es true!');
+            }
+        };
     </script>
 
     @forelse ($operation->details as $index => $detail)
