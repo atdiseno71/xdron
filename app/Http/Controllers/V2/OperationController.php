@@ -272,8 +272,7 @@ class OperationController extends Controller
         ini_set('memory_limit', '20000M');
         ini_set('upload_max_filesize', '20M');
         ini_set('post_max_size', '21M');
-
-        $request['type_product_id'] = $request['type_product'];
+        
         $data = $request->all();
 
         try {

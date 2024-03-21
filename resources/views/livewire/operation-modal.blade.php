@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="operationShowLabel">Registrar nueva suerte</h4>
+                    <h4 class="modal-title" id="operationShowLabel">Resumen operación</h4>
                     <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Cerrar"
                         wire:click="$emitTo('operation-modal', 'close-modal')">
                         <span aria-hidden="true">&times;</span>
