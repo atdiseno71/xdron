@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>X</b>Gron <b>/ A</b>viacaña',
+    'logo' => '<strong>XGRON / AVIACAÑA</strong>',
     'logo_img' => 'images/icon-white.png',
     'logo_img_other' => 'images/icon-white-other.jpeg',
     'logo_img_class_other' => 'brand-image img-circle elevation-3',
