@@ -14,3 +14,11 @@ $('.form-delete').submit(function(e){
     }
     })
 });
+
+function alertCustom(type = 'success', title = '', message) {
+    Swal.fire({
+        icon: type,
+        title: title,
+        text: message,
+    });
+}
