@@ -86,7 +86,6 @@
                 </ul>
             </div>
 
-
             <div class="container-evidence-fixe mt-3">
                 <img class="evidence_record" src="{{ asset($operation->evidence_record) }}" height="715px">
             </div>
@@ -108,11 +107,11 @@
                 @forelse ($detail->files_details as $keys => $file)
                     @if ($loop->last)
                         <div class="container-evidence-fixe mt-3">
-                            <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="600px">
+                            <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="850px">
                         </div>
                     @else
                         <div class="container-evidence-fixe mt-2">
-                            <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="700px">
+                            <img class="evidence_detail" src="{{ asset($file->src_file) }}" height="1000px">
                         </div>
                     @endif
                 @empty
@@ -141,53 +140,8 @@
     </div>
 
     {{-- begin:btn guardar PDF --}}
-    <a class="savepdf" id="savePdf">PDF</a>
+    <a class="savepdf" id="savePdf">Descargar</a>
     {{-- end:btn guardar PDF --}}
-
-    <script>
-        /* document.getElementById('savePdf').addEventListener('click', function() {
-                                        const container_horizontal = document.getElementById('container-horizontal');
-                                        const container_vertical = document.getElementById('container-vertical');
-
-                                        html2pdf()
-                                            .from(container_horizontal)
-                                            .set({
-                                                filename: 'primera_parte.pdf',
-                                                html2canvas: {
-                                                    scale: 1,
-                                                    logging: true,
-                                                    imageTimeout: 0,
-                                                    useCORS: true
-                                                },
-                                                jsPDF: {
-                                                    orientation: 'l',
-                                                    format: 'a4',
-                                                    pagesplit: true,
-                                                    pagesPerSheet: 1
-                                                }
-                                            })
-                                            .save();
-
-                                        html2pdf()
-                                            .from(container_vertical)
-                                            .set({
-                                                filename: 'segunda_parte.pdf',
-                                                html2canvas: {
-                                                    scale: 1,
-                                                    logging: true,
-                                                    imageTimeout: 0,
-                                                    useCORS: true
-                                                },
-                                                jsPDF: {
-                                                    orientation: 'p',
-                                                    format: 'a4',
-                                                    pagesplit: true,
-                                                    pagesPerSheet: 1
-                                                }
-                                            })
-                                            .save();
-                                    }); */
-    </script>
 
     <script>
         document.getElementById('savePdf').addEventListener('click', async function() {
@@ -218,30 +172,33 @@
             }
 
             // Generar los archivos PDF por separado
-            const primeraPartePDF = await generatePDF(container_horizontal, 'primera_parte.pdf', 'l');
-            const segundaPartePDF = await generatePDF(container_vertical, 'segunda_parte.pdf', 'p');
+            const horizontalPDF = await generatePDF(container_horizontal, 'horizontalPDF.pdf', 'l');
+            const verticalPDF = await generatePDF(container_vertical, 'verticalPDF.pdf', 'p');
 
             // Combinar los archivos PDF en uno solo
-            const combinedPDF = await PDFLib.PDFDocument.create();
-            const primeraParteDoc = await PDFLib.PDFDocument.load(primeraPartePDF);
-            const segundaParteDoc = await PDFLib.PDFDocument.load(segundaPartePDF);
+            const unionPDF = await PDFLib.PDFDocument.create();
+            const firstDoc = await PDFLib.PDFDocument.load(horizontalPDF);
+            const secondDoc = await PDFLib.PDFDocument.load(verticalPDF);
 
-            const primeraPartePages = await combinedPDF.copyPages(primeraParteDoc, primeraParteDoc
+            // Copiar paginas por cada parte
+            const firstPages = await unionPDF.copyPages(firstDoc, firstDoc
                 .getPageIndices());
-            const segundaPartePages = await combinedPDF.copyPages(segundaParteDoc, segundaParteDoc
+            const secondPages = await unionPDF.copyPages(secondDoc, secondDoc
                 .getPageIndices());
 
-            primeraPartePages.forEach(page => combinedPDF.addPage(page));
-            segundaPartePages.forEach(page => combinedPDF.addPage(page));
+            // Se agregan las paginas por cada parte
+            firstPages.forEach(page => unionPDF.addPage(page));
+            secondPages.forEach(page => unionPDF.addPage(page));
 
             // Guardar el PDF combinado
-            const combinedPdfBytes = await combinedPDF.save();
-            const blob = new Blob([combinedPdfBytes], {
+            const unionPDFBytes = await unionPDF.save();
+            const blob = new Blob([unionPDFBytes], {
                 type: 'application/pdf'
             });
+            // Descargar la combinacion de archivos
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'combined_file.pdf';
+            link.download = 'Reporte_tipo_aplicacion.pdf';
             link.click();
 
         });

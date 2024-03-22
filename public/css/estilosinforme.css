@@ -11,7 +11,7 @@ p {
 
 p.observation {
     text-align: left;
-    height: 30mm;
+    height: 60mm;
     padding: 2mm;
 }
 
@@ -76,8 +76,8 @@ p.observation {
 
 .evidence_detail {
     /* height: auto; */
-    width: 50%;
-    max-width: 50%;
+    width: 80%;
+    max-width: 80%;
     page-break-inside: avoid; /* Evitar que las imágenes se dividan en páginas diferentes */
     padding: 5px;
 }
