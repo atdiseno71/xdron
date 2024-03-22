@@ -16,6 +16,21 @@
     <link href="{{ asset('css/estilosinforme.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Eras ITC';
+            src: url('https://fonts.gstatic.com/s/erasitc/v14/3JnuSDZSvJx-gg0K5p4CIhTejCtRJUMF.ttf');
+        }
+    
+        @font-face {
+            font-family: 'Eras Light ITC';
+            src: url('https://fonts.gstatic.com/s/eraslightitc/v12/8QIQdiGbxzLRvMfJM4B6f6fAid5r7Tby.ttf');
+        }
+    
+        body {
+            font-family: 'Eras ITC', 'Eras Light ITC', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
