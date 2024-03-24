@@ -13,6 +13,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+
         $role1 = Role::create(['name' => 'super.root']);
         $role2 = Role::create(['name' => 'root']);
         $role3 = Role::create(['name' => 'piloto']);
@@ -65,11 +66,11 @@ class RoleSeeder extends Seeder
             $indexPermission = Permission::create(['name' => "$view.index"]);
             $createPermission = Permission::create(['name' => "$view.create"]);
             if (in_array($view, $viewsPilotCreate)) {
-                $createPermission->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+                $createPermission->syncRoles([$role1, $role2, $role3, $role5]);
                 $indexPermission->syncRoles([$role3]);
             } else {
-                $createPermission->syncRoles([$role1, $role2, $role4, $role5]);
-                $indexPermission->syncRoles([$role1, $role2, $role4, $role5]);
+                $createPermission->syncRoles([$role1, $role2, $role5]);
+                $indexPermission->syncRoles([$role1, $role2, $role5]);
             }
             Permission::create(['name' => "$view.edit"])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
             Permission::create(['name' => "$view.show"])->syncRoles([$role1, $role2, $role3, $role4, $role5]);

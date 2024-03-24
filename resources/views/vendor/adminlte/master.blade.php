@@ -140,6 +140,12 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    <style>
+        .login-logo, .register-logo {
+            font-size: 1.8rem !important;
+        }
+    </style>
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
