@@ -93,7 +93,7 @@ class LoginController extends Controller
     } */
 
     //cerrar la sesion creada
-    public function logout()
+    public function logout(Request $request)
     {
 
         // Creamos una copia de seguridad de la base de datos
