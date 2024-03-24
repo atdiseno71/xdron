@@ -40,10 +40,7 @@ class HomeController extends Controller
 
             // Si es piloto o cliente
             if (in_array($rol, [config('roles.cliente'), config('roles.piloto')])) {
-
-                $operations = Operation::where('pilot_id', $user_log->id)->paginate();
-                return view('operation.index', compact('operations'))
-                    ->with('i', (request()->input('page', 1) - 1) * $operations->perPage());
+                return redirect()->route('operations.index');
             } else {
                 return view('home');
             }
