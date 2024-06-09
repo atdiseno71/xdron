@@ -42,7 +42,8 @@ class HomeController extends Controller
             if (in_array($rol, [config('roles.cliente'), config('roles.piloto')])) {
                 return redirect()->route('operations.index');
             } else {
-                return view('home');
+                return redirect()->route('operations.index');
+                // return view('home');
             }
         } catch (Exception $ex) {
             if ($ex->getMessage() == "No tiene un rol asignado") {

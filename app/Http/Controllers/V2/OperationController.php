@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V2;
 
 use App\Notifications\OperationNotification;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -232,6 +233,23 @@ class OperationController extends Controller
 
         // Retornarmos la descarga
         return response()->download($path);
+    }
+
+    /**
+     * Export data products and save from storage.
+     */
+    public function downloadExcelOperacion($id)
+    {
+        // Llamamos la librería para exportar
+        $res = $this->exportAtteses('operations.csv', '', false, 'operations');
+        
+        // Validamos que no hayan errores
+        if ($res['error']) {
+            return response()->json($res['message'], 500);
+        }
+
+        // Descargar el archivo
+        return Response::download($res['csv_path'], $res['csv_name_file']);
     }
 
     /**
