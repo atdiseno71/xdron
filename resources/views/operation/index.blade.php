@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('css')
+    <style>
+
+    </style>
+@endsection
+
 @section('title')
     Operaciones
 @endsection

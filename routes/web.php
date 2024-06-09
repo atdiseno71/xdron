@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Descargar zip
     Route::get('downloadZip/{id}', [OperationController::class, 'download'])->name('operations.download');
+    // Descargar excel
+    Route::get('downloadExcelOperacion', [OperationController::class, 'downloadExcelOperacion'])->name('downloadExcelOperacion');
 
     // Subir registros desde los modals
     Route::post('uploadClient', [ClientController::class, 'storeFromUser'])->name('clients.uploadClient');

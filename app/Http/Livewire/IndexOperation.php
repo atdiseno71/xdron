@@ -115,7 +115,24 @@ class IndexOperation extends Component
 
             // Filtrar
             $this->applyFilter($query, $useFilters);
-        })->paginate();
+        });
+
+        // PASAR DATOS SIN PAGINAR
+        // Obtener una colección sin la paginación
+        $operations_collection = $operations
+            ->with(
+                'user_pilot',
+                'assistant_one',
+                'assistant_two',
+                'drone',
+                'client',
+                'product',
+                'details.estate',
+                'status',
+                'userAdmin',
+            )->get();
+        // Páginamos
+        $operations = $operations->paginate();
 
         /************************************************
          *              Calcular totales
@@ -149,6 +166,7 @@ class IndexOperation extends Component
         $estates = Estate::pluck('name as label', 'id as value');
 
         return view('livewire.index-operation', compact(
+            'operations_collection',
             'operations',
             'hectares',
             'batteries',

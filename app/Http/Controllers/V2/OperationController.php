@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\V2;
 
+use App\Exports\OperationExport;
 use App\Notifications\OperationNotification;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
 use App\Models\DetailOperation;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -232,6 +235,19 @@ class OperationController extends Controller
 
         // Retornarmos la descarga
         return response()->download($path);
+    }
+
+    /**
+     * Export data products and save from storage.
+     */
+    public function downloadExcelOperacion(Request $request)
+    {
+        // Traemos la collection de datos
+        $operations = json_decode($request->operationsJson);
+
+        // return $operations;
+
+        return Excel::download(new OperationExport($operations), 'operaciones.xlsx');
     }
 
     /**

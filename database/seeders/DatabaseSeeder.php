@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ZonesSeeder::class,
             StatusesSeeder::class,
             UserSeeder::class,
-            TypeProductSeeder::class,
+            // TypeProductSeeder::class,
             ClientSeeder::class,
             OperationSeeder::class,
         ]);
