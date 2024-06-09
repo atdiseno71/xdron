@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\V2;
 
+use App\Exports\OperationExport;
 use App\Notifications\OperationNotification;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
 use App\Models\DetailOperation;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -238,18 +240,14 @@ class OperationController extends Controller
     /**
      * Export data products and save from storage.
      */
-    public function downloadExcelOperacion($id)
+    public function downloadExcelOperacion(Request $request)
     {
-        // Llamamos la librería para exportar
-        $res = $this->exportAtteses('operations.csv', '', false, 'operations');
-        
-        // Validamos que no hayan errores
-        if ($res['error']) {
-            return response()->json($res['message'], 500);
-        }
+        // Traemos la collection de datos
+        $operations = json_decode($request->operationsJson);
 
-        // Descargar el archivo
-        return Response::download($res['csv_path'], $res['csv_name_file']);
+        // return $operations;
+
+        return Excel::download(new OperationExport($operations), 'operaciones.xlsx');
     }
 
     /**

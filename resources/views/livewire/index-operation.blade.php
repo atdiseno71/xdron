@@ -19,8 +19,11 @@
                             </svg>
                         </a>
                     </div>
+                    @php
+                        $operationsJson = $operations_collection->toJson();
+                    @endphp
                     <div class="col-md-2">
-                        <a href="{{ route('downloadExcelOperacion') }}" class="dt-button buttons-excel buttons-html5 btn btn-success" data-placement="left">
+                        <a target="_blank" href="{{ route('downloadExcelOperacion', ['operationsJson' => $operationsJson]) }}" class="dt-button buttons-excel buttons-html5 btn btn-success" data-placement="left">
                             <span>Excel <i class="fas fa-file-excel"></i></span>
                         </a>
                     </div>
