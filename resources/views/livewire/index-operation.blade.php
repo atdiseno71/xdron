@@ -142,8 +142,8 @@
                                 <th>Fecha creación</th>
                                 <th>Estado</th>
 
-                                <th>Acciones</th>
-                                <th>Archivos</th>
+                                <th colspan="2">Acciones</th>
+                                <th colspan="2">Archivos</th>
                                 <th>Administrador</th>
                             </tr>
                         </thead>
@@ -230,13 +230,16 @@
                                     <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
 
                                     <td>
+                                        @can('operations.edit')
+                                            <a class="btn btn-sm btn-success"
+                                                href="{{ route('operations.edit', $operation->id) }}"><i
+                                                    class="fa fa-fw fa-edit"></i></a>
+                                        @endcan
+                                    </td>
+
+                                    <td>
                                         <form action="{{ route('operations.destroy', $operation->id) }}" method="POST"
                                             class="form-delete">
-                                            @can('operations.edit')
-                                                <a class="btn btn-sm btn-success"
-                                                    href="{{ route('operations.edit', $operation->id) }}"><i
-                                                        class="fa fa-fw fa-edit"></i></a>
-                                            @endcan
                                             @csrf
                                             @method('DELETE')
                                             @can('operations.destroy')
@@ -267,6 +270,9 @@
                                                 </svg>
                                             </a>
                                         @endcan
+                                    </td>
+
+                                    <td>
                                         @if (auth()->user()->hasRole('super.root') || auth()->user()->hasRole('root') || auth()->user()->hasRole('cliente'))
                                             <a class="btn btn-sm btn-warning"
                                                 href="{{ route('operations.download', $operation->id) }}">
