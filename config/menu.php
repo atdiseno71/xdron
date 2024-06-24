@@ -44,9 +44,9 @@ return [
         'can' => 'operations.index'
     ],
     [
-        'text' => 'Tipo aplicación',
-        'url' => 'products',
+        'text' => 'Producto',
+        'url' => 'type-products',
         'icon' => 'fas fa-box',
-        'can' => 'products.index'
+        'can' => 'type-products.index'
     ],
 ];
