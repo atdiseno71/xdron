@@ -35,8 +35,15 @@ class TypeProduct extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = [
+      'name',
+      'observations',
+      'created_by',
+    ];
 
-
+    public function creator()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
+    }
 
 }

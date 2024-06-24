@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('operations', OperationController::class)->names('operations');
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
+    Route::resource('type-products', TypeProductController::class)->names('type-products');
 
     // Descargar zip
     Route::get('downloadZip/{id}', [OperationController::class, 'download'])->name('operations.download');

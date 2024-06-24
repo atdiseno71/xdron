@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Models\TypeProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class TypeProductController
@@ -68,6 +69,8 @@ class TypeProductController extends Controller
     {
         request()->validate(TypeProduct::$rules);
 
+        $request['created_by'] = Auth::id();
+
         $typeProduct = TypeProduct::create($request->all());
 
         return redirect()->back()
@@ -114,7 +117,7 @@ class TypeProductController extends Controller
         $typeProduct->update($request->all());
 
         return redirect()->route('type-products.index')
-            ->with('success', 'TypeProduct updated successfully');
+            ->with('success', 'Tipo de producto  actualizado con exito.');
     }
 
     /**
@@ -127,6 +130,6 @@ class TypeProductController extends Controller
         $typeProduct = TypeProduct::find($id)->delete();
 
         return redirect()->route('type-products.index')
-            ->with('success', 'TypeProduct deleted successfully');
+            ->with('success', 'Tipo producto eliminado con exito');
     }
 }
