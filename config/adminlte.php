@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'XGRON',
+    'title' => 'Software TOA - Trazabilidad en Operaciones Agricolas',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,8 @@ return [
     |
     */
 
-    'logo' => '<strong>XGRON/AVIACAÑA</strong>',
+    // 'logo' => '<strong>XGRON/AVIACAÑA</strong>',
+    'logo' => 'Software TOA',
     'logo_img' => 'images/icon-white.png',
     'logo_img_other' => 'images/icon-white-other.jpeg',
     'logo_img_class_other' => 'brand-image img-circle elevation-3',
