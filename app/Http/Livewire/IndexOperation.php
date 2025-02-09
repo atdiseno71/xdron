@@ -115,22 +115,11 @@ class IndexOperation extends Component
 
             // Filtrar
             $this->applyFilter($query, $useFilters);
-        });
-
+        })->orderBy('id', 'DESC');
         // PASAR DATOS SIN PAGINAR
         // Obtener una colección sin la paginación
-        $operations_collection = $operations
-            ->with(
-                'user_pilot',
-                'assistant_one',
-                'assistant_two',
-                'drone',
-                'client',
-                'product',
-                'details.estate',
-                'status',
-                'userAdmin',
-            )->get();
+        $sql = vsprintf(str_replace('?', "'%s'", $operations->toSql()), $operations->getBindings());
+        $operations_collection = $sql ?? '';
         // Páginamos
         $operations = $operations->paginate();
 
@@ -215,6 +204,12 @@ class IndexOperation extends Component
                         break;
                     case 'date_end':
                         $query->where($list[$cont], '<=', $value);
+                        break;
+                    case 'user':
+                        $query->where('pilot_id', $value);
+                        break;
+                    case 'client':
+                        $query->where('id_cliente', $value);
                         break;
                     default:
                         $query->where($list[$cont], $value);
