@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\V2;
 
-use App\Exports\OperationExport;
 use App\Notifications\OperationNotification;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
@@ -10,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use App\Exports\OperationExport;
 use App\Models\DetailOperation;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\FilesOperation;
@@ -59,17 +60,18 @@ class OperationController extends Controller
         // ID del usuario
         $id = $user_log->id;
 
-        switch ($rol) {
-            case config('roles.piloto'):
-                $operations = Operation::where('pilot_id', $id)->paginate();
-                break;
-            case config('roles.cliente'):
-                $operations = Operation::where('id_cliente', $id)->paginate();
-                break;
-            default:
-                $operations = Operation::paginate();
-                break;
+        // quey
+        $query = Operation::query();
+
+        // Filtramos según el rol
+        if ($rol === config('roles.piloto')) {
+            $query->where('pilot_id', $id);
+        } elseif ($rol === config('roles.cliente')) {
+            $query->where('id_cliente', $id);
         }
+
+        // Paginamos el resultado
+        $operations = $query->orderBy('id', 'DESC')->paginate();
 
         return view('operation.index', compact('operations'))
             ->with('i', (request()->input('page', 1) - 1) * $operations->perPage());
@@ -243,9 +245,19 @@ class OperationController extends Controller
     public function downloadExcelOperacion(Request $request)
     {
         // Traemos la collection de datos
-        $operations = json_decode($request->operationsJson);
+        // $operations = json_decode($request->operationsJson);
 
-        // return $operations;
+        $sql = $request?->cXVlcnk;
+
+        // Usamos regex para extraer solo la parte del WHERE
+        preg_match('/where (.*?) order by/i', $sql, $matches);
+
+        // Si se encontró un WHERE, lo extraemos
+        $where_clause = $matches[1] ?? 'No WHERE found';
+
+        $operations = Operation::whereRaw($where_clause)
+                ->orderBy('id', 'DESC')
+                ->get();      
 
         return Excel::download(new OperationExport($operations), 'operaciones.xlsx');
     }
