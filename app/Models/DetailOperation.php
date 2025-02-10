@@ -101,10 +101,10 @@ class DetailOperation extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    /* public function zone()
+    public function zone()
     {
         return $this->hasOne('App\Models\Zone', 'id', 'zone_id');
-    } */
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

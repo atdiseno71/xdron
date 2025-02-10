@@ -151,38 +151,42 @@
                         <div class="col-md-2">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle-column" data-column="9" checked>
-                                <label class="form-check-label"> Tot Has</label>
+                                <label class="form-check-label"> Zona</label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle-column" data-column="10" checked>
-                                <label class="form-check-label"> Hda</label>
+                                <label class="form-check-label"> Tot Has</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="11">
-                                <label class="form-check-label"> Ste</label>
+                                <input type="checkbox" class="form-check-input toggle-column" data-column="11" checked>
+                                <label class="form-check-label"> Hda</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="12" checked>
-                                <label class="form-check-label"> Tot Bat/Vls</label>
+                                <input type="checkbox" class="form-check-input toggle-column" data-column="12">
+                                <label class="form-check-label"> Ste</label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle-column" data-column="13" checked>
-                                <label class="form-check-label"> Tot Hrs</label>
+                                <label class="form-check-label"> Tot Bat/Vls</label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle-column" data-column="14" checked>
-                                <label class="form-check-label"> Has/hrs</label>
+                                <label class="form-check-label"> Tot Hrs</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle-column" data-column="15" checked>
-                                <label class="form-check-label"> Has/bat</label>
+                                <label class="form-check-label"> Has/hrs</label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle-column" data-column="16" checked>
+                                <label class="form-check-label"> Has/bat</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input toggle-column" data-column="17" checked>
                                 <label class="form-check-label"> Fecha prog</label>
                             </div>
                         </div>
@@ -210,6 +214,7 @@
                                 <th>Cliente</th>
                                 <th>T. Aplic</th>
                                 <th>Desc LTS</th>
+                                <th>Zona</th>
 
                                 <th>Tot Has</th>
                                 <th>Hda</th>
@@ -302,6 +307,7 @@
                                     <td title="{{ $product_name }}">{{ $product_name }}</td>
                                     <td title="{{ $download }}">{{ $download }}</td>
 
+                                    <td title="{{ $operation->zone?->name }}">{{ $operation->zone?->name }}</td>
                                     <td title="{{ $acres }}">{{ $acres }}</td>
                                     <td title="{{ $names_states }}">
                                         {{ $names_states }}
