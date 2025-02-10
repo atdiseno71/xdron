@@ -2,13 +2,13 @@
     <div class="box-body">
 
         <div class="form-group">
-            {{ Form::label('name') }}
-            {{ Form::text('name', $zone->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+            {{ Form::label('name', 'Nombre') }}
+            {{ Form::text('name', $zone->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Nombre']) }}
             {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('observations') }}
-            {{ Form::text('observations', $zone->observations, ['class' => 'form-control' . ($errors->has('observations') ? ' is-invalid' : ''), 'placeholder' => 'Observations']) }}
+            {{ Form::label('observations', 'Observaciones') }}
+            {{ Form::textArea('observations', $zone->observations, ['class' => 'form-control' . ($errors->has('observations') ? ' is-invalid' : ''), 'id' => 'observations', 'placeholder' => 'Ingrese observaciones']) }}
             {!! $errors->first('observations', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

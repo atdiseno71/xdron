@@ -14,6 +14,7 @@ use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\V2\DronController;
 use App\Http\Controllers\V2\LuckController;
 use App\Http\Controllers\V2\MailController;
+use App\Http\Controllers\V2\ZoneController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sendemail/{id}', [MailController::class, 'index'])->name('mail.index');
@@ -60,6 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('statuses', StatusController::class)->names('statuses');
     Route::resource('type-products', TypeProductController::class)->names('type-products');
+    Route::resource('zones', ZoneController::class)->names('zones');
 
     // Descargar zip
     Route::get('downloadZip/{id}', [OperationController::class, 'download'])->name('operations.download');
