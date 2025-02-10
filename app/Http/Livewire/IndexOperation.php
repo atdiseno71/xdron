@@ -44,6 +44,10 @@ class IndexOperation extends Component
         // Capturamos el rol
         $rol = $user_log->roles[0]?->id;
 
+        // es piloto
+        $is_pilot = $rol === config('roles.piloto');
+        $is_client = $rol === config('roles.cliente');
+
         $assistent_one = $this->assistent_one;
         $assistent_two = $this->assistent_two;
         $type_product = $this->typeProduct;
@@ -167,7 +171,9 @@ class IndexOperation extends Component
             'enrollments',
             'assistents',
             'hectares_hours',
-            'hectares_batteries'
+            'hectares_batteries',
+            'is_pilot',
+            'is_client',
         ));
     }
 
