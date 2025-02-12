@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $zone->name ?? "Ver Zone" }}
+    {{ $zone->name ?? "Ver Zona" }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Ver Zone</span>
+                            <span class="card-title">Ver Zona</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('zones.index') }}"> Volver</a>
@@ -21,11 +21,11 @@
                     <div class="card-body">
 
                         <div class="form-group">
-                            <strong>Name:</strong>
+                            <strong>Nombre:</strong>
                             {{ $zone->name }}
                         </div>
                         <div class="form-group">
-                            <strong>Observations:</strong>
+                            <strong>Observaciones:</strong>
                             {{ $zone->observations }}
                         </div>
 

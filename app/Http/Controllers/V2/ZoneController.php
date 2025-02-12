@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Operation;
 
 /**
  * Class ZoneController
@@ -59,7 +60,7 @@ class ZoneController extends Controller
         $zone = Zone::create($request->all());
 
         return redirect()->route('zones.index')
-            ->with('success', 'Zone creado con exito.');
+            ->with('success', 'Zona creado con exito.');
     }
 
     /**
@@ -102,7 +103,7 @@ class ZoneController extends Controller
         $zone->update($request->all());
 
         return redirect()->route('zones.index')
-            ->with('success', 'Zone actualizado con exito.');
+            ->with('success', 'Zona actualizado con exito.');
     }
 
     /**
@@ -112,9 +113,17 @@ class ZoneController extends Controller
      */
     public function destroy($id)
     {
+
+        $operations = Operation::where('zone_id', $id)->count();
+
+        if($operations>0) {
+            return redirect()->route('zones.index')
+                ->with('error', 'No se puede eliminar la zona, tiene operaciones relacionadas.');
+        }
+
         $zone = Zone::find($id)->delete();
 
         return redirect()->route('zones.index')
-            ->with('success', 'Zone eliminado con exito.');
+            ->with('success', 'Zona eliminado con exito.');
     }
 }

@@ -3,6 +3,7 @@
         <div class="card">
             <div class="card-header">
 
+
                 <div class="row">
                     <div class="col-md-5">
                         <a class="btn btn-primary btn-sm float-left" data-bs-toggle="collapse"
@@ -20,14 +21,16 @@
                         </a>
                     </div>
                     @php
-                        $operationsJson = $operations_collection/* ->toJson() */;
+                        $operationsJson = $operations_collection;
                     @endphp
                     <div class="col-md-2">
-                        <a target="_blank"
-                            href="{{ route('downloadExcelOperacion', ['cXVlcnk' => $operationsJson]) }}"
-                            class="dt-button buttons-excel buttons-html5 btn btn-success" data-placement="left">
-                            <span>Excel <i class="fas fa-file-excel"></i></span>
-                        </a>
+                        @if (!$is_client)
+                            <a target="_blank"
+                                href="{{ route('downloadExcelOperacion', ['cXVlcnk' => $operationsJson]) }}"
+                                class="dt-button buttons-excel buttons-html5 btn btn-success" data-placement="left">
+                                <span>Excel <i class="fas fa-file-excel"></i></span>
+                            </a>
+                        @endif
                     </div>
                     <div class="col-md-5">
                         @can('operations.create')
@@ -105,88 +108,108 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="0" checked>
-                                <label class="form-check-label"> No</label>
+                    @unless ($is_client)
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="0" checked>
+                                    <label class="form-check-label"> No</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="1" checked>
+                                    <label class="form-check-label"> Fecha Aplic</label>
+                                </div>
+                                @unless (!$is_pilot)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input toggle-column" data-column="2" checked>
+                                        <label class="form-check-label"> Piloto</label>
+                                    </div>
+                                @endunless
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="1" checked>
-                                <label class="form-check-label"> Fecha Aplic</label>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="3" checked>
+                                    <label class="form-check-label"> TANQ</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="4">
+                                    <label class="form-check-label"> TANQ 2</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="5" checked>
+                                    <label class="form-check-label"> Dron</label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="2" checked>
-                                <label class="form-check-label"> Piloto</label>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="6" checked>
+                                    <label class="form-check-label"> Cliente</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="7"
+                                        checked>
+                                    <label class="form-check-label"> T. Aplic</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="8"
+                                        checked>
+                                    <label class="form-check-label"> Desc LTS</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="9"
+                                        checked>
+                                    <label class="form-check-label"> Zona</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="10"
+                                        checked>
+                                    <label class="form-check-label"> Tot Has</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="11"
+                                        checked>
+                                    <label class="form-check-label"> Hda</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="12">
+                                    <label class="form-check-label"> Ste</label>
+                                </div>
+                                @unless (!$is_pilot)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input toggle-column" data-column="13"
+                                            checked>
+                                        <label class="form-check-label"> Tot Bat/Vls</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input toggle-column" data-column="14"
+                                            checked>
+                                        <label class="form-check-label"> Tot Hrs</label>
+                                    </div>
+                                @endunless
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="15"
+                                        checked>
+                                    <label class="form-check-label"> Has/hrs</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="16"
+                                        checked>
+                                    <label class="form-check-label"> Has/bat</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input toggle-column" data-column="17"
+                                        checked>
+                                    <label class="form-check-label"> Fecha prog</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="3" checked>
-                                <label class="form-check-label"> TANQ</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="4">
-                                <label class="form-check-label"> TANQ 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="5" checked>
-                                <label class="form-check-label"> Dron</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="6" checked>
-                                <label class="form-check-label"> Cliente</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="7" checked>
-                                <label class="form-check-label"> T. Aplic</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="8" checked>
-                                <label class="form-check-label"> Desc LTS</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="9" checked>
-                                <label class="form-check-label"> Tot Has</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="10" checked>
-                                <label class="form-check-label"> Hda</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="11">
-                                <label class="form-check-label"> Ste</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="12" checked>
-                                <label class="form-check-label"> Tot Bat/Vls</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="13" checked>
-                                <label class="form-check-label"> Tot Hrs</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="14" checked>
-                                <label class="form-check-label"> Has/hrs</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="15" checked>
-                                <label class="form-check-label"> Has/bat</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input toggle-column" data-column="16" checked>
-                                <label class="form-check-label"> Fecha prog</label>
-                            </div>
-                        </div>
-                    </div>
+                    @endunless
                 </div>
 
             </div>
@@ -203,33 +226,92 @@
                                 <th>No</th>
                                 {{-- <th></th> --}}
                                 <th>Fecha Aplic</th>
-                                <th>Piloto</th>
+                                @unless (!$is_pilot && !$is_client)
+                                    <th>Piloto</th>
+                                @endunless
                                 <th>TANQ</th>
                                 <th>TANQ 2</th>
                                 <th>Dron</th>
                                 <th>Cliente</th>
                                 <th>T. Aplic</th>
                                 <th>Desc LTS</th>
+                                <th>Zona</th>
 
                                 <th>Tot Has</th>
                                 <th>Hda</th>
                                 <th>Ste</th>
 
-                                <th>Tot Bat/Vls</th>
-                                <th>Tot Hrs</th>
-
+                                @unless (!$is_pilot && !$is_client)
+                                    <th>Tot Bat/Vls</th>
+                                    <th>Tot Hrs</th>
+                                @endunless
                                 <th>Has/hrs</th>
                                 <th>Has/bat</th>
 
                                 {{-- <th>Observación</th> --}}
                                 <th>Fecha prog</th>
                                 <th>Estado</th>
-
-                                <th colspan="2">Acciones</th>
+                                <th colspan="2">
+                                    @can('operations.edit')
+                                        Acciones
+                                    @endcan
+                                </th>
                                 <th colspan="2">Archivos</th>
                                 <th>Administrador</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                {{-- BEGIN:TOTAL HECTAREAS --}}
+                                <td colspan="9"></td>
+                                <td><strong>TOT HAS</strong></td>
+                                <td></td>
+                                {{-- END:TOTAL HECTAREAS --}}
+                                @can('operations.store')
+                                    {{-- BEGIN:TOTAL BATERIAS --}}
+                                    <td><strong>TOT Bat/Vls</strong></td>
+                                    <td></td>
+                                    {{-- END:TOTAL BATERIAS --}}
+                                    {{-- BEGIN:TOTAL HORAS VUELVO --}}
+                                    <td><strong>TOT HRS</strong></td>
+                                    {{-- END:TOTAL HORAS VUELVO --}}
+                                    {{-- BEGIN:TOTAL HECTAREAS/HORAS --}}
+                                    <td><strong>TOT HAS/HRS</strong></td>
+                                    {{-- END:TOTAL HECTAREAS/HORAS --}}
+                                    {{-- BEGIN:TOTAL HECTAREAS/BATERIAS --}}
+                                    <td><strong>TOT HAS/BAT</strong></td>
+                                    <td colspan="7"></td>
+                                    {{-- END:TOTAL HECTAREAS/BATERIAS --}}
+                                @else
+                                    <td colspan="{{ $is_client ? '11' : '12' }}"></td>
+                                @endcan
+                            </tr>
+                            <tr>
+                                {{-- BEGIN:TOTAL HECTAREAS --}}
+                                <td colspan="9"></td>
+                                <td>{{ $hectares }}</td>
+                                <td></td>
+                                {{-- END:TOTAL HECTAREAS --}}
+                                @can('operations.store')
+                                    {{-- BEGIN:TOTAL BATERIAS --}}
+                                    <td>{{ $batteries }}</td>
+                                    <td></td>
+                                    {{-- END:TOTAL BATERIAS --}}
+                                    {{-- BEGIN:TOTAL HORAS VUELVO --}}
+                                    <td>{{ $flight_hours }}</td>
+                                    {{-- END:TOTAL HORAS VUELVO --}}
+                                    {{-- BEGIN:TOTAL HECTAREAS/HORAS --}}
+                                    <td>{{ $hectares_hours }}</td>
+                                    {{-- END:TOTAL HECTAREAS/HORAS --}}
+                                    {{-- BEGIN:TOTAL HECTAREAS/BATERIAS --}}
+                                    <td>{{ $hectares_batteries }}</td>
+                                    <td colspan="7"></td>
+                                    {{-- END:TOTAL HECTAREAS/BATERIAS --}}
+                                @else
+                                    <td colspan="{{ $is_client ? '11' : '12' }}"></td>
+                                @endcan
+                            </tr>
+                        </tfoot>
                         <tbody>
                             @foreach ($operations as $key => $operation)
                                 @php
@@ -294,7 +376,9 @@
                                     </td> --}}
 
                                     <td title="{{ $date_operation }}">{{ $date_operation }}</td>
-                                    <td title="{{ $name_pilot }}">{{ $name_pilot }}</td>
+                                    @unless (!$is_pilot && !$is_client)
+                                        <td title="{{ $name_pilot }}">{{ $name_pilot }}</td>
+                                    @endunless
                                     <td title="{{ $name_assistant_one }}">{{ $name_assistant_one }}</td>
                                     <td title="{{ $name_assistant_two }}">{{ $name_assistant_two }}</td>
                                     <td title="{{ $drone_enrollment }}">{{ $drone_enrollment }}</td>
@@ -302,6 +386,7 @@
                                     <td title="{{ $product_name }}">{{ $product_name }}</td>
                                     <td title="{{ $download }}">{{ $download }}</td>
 
+                                    <td title="{{ $operation->zone?->name }}">{{ $operation->zone?->name }}</td>
                                     <td title="{{ $acres }}">{{ $acres }}</td>
                                     <td title="{{ $names_states }}">
                                         {{ $names_states }}
@@ -310,8 +395,10 @@
                                         {{ $names_lucks }}
                                     </td>
 
-                                    <td>{{ $number_flights }}</td>
-                                    <td>{{ $hour_flights }}</td>
+                                    @unless (!$is_pilot && !$is_client)
+                                        <td>{{ $number_flights }}</td>
+                                        <td>{{ $hour_flights }}</td>
+                                    @endunless
 
                                     <td>{{ $divide1 }}</td>
                                     <td>{{ $divide2 }}</td>
@@ -328,8 +415,8 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ route('operations.destroy', $operation->id) }}" method="POST"
-                                            class="form-delete">
+                                        <form action="{{ route('operations.destroy', $operation->id) }}"
+                                            method="POST" class="form-delete">
                                             @csrf
                                             @method('DELETE')
                                             @can('operations.destroy')
@@ -358,13 +445,14 @@
                                                         d="M10 13.125H4.375C4.20924 13.125 4.05027 13.1908 3.93306 13.3081C3.81585 13.4253 3.75 13.5842 3.75 13.75C3.75 13.9158 3.81585 14.0747 3.93306 14.1919C4.05027 14.3092 4.20924 14.375 4.375 14.375H10C10.1658 14.375 10.3247 14.3092 10.4419 14.1919C10.5592 14.0747 10.625 13.9158 10.625 13.75C10.625 13.5842 10.5592 13.4253 10.4419 13.3081C10.3247 13.1908 10.1658 13.125 10 13.125Z"
                                                         fill="white" />
                                                 </svg>
+                                                Info
                                             </a>
                                         @endcan
                                     </td>
 
                                     <td>
                                         @if (auth()->user()->hasRole('super.root') || auth()->user()->hasRole('root') || auth()->user()->hasRole('cliente'))
-                                            <a class="btn btn-sm btn-warning"
+                                            <a class="btn btn-sm btn-warning text-white"
                                                 href="{{ route('operations.download', $operation->id) }}">
                                                 <svg width="18" height="18" viewBox="0 0 18 18"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -372,17 +460,18 @@
                                                         d="M18.983 8.64168C18.9046 8.545 18.8055 8.46712 18.693 8.41376C18.5805 8.3604 18.4575 8.33293 18.333 8.33335H16.6663V7.50002C16.6663 6.83698 16.4029 6.20109 15.9341 5.73225C15.4653 5.26341 14.8294 5.00002 14.1663 5.00002H8.93301L8.66634 4.16669C8.49347 3.67771 8.1728 3.2546 7.74876 2.95599C7.32472 2.65737 6.8183 2.49802 6.29967 2.50002H3.33301C2.66997 2.50002 2.03408 2.76341 1.56524 3.23225C1.0964 3.70109 0.833008 4.33698 0.833008 5.00002V15C0.833008 15.6631 1.0964 16.2989 1.56524 16.7678C2.03408 17.2366 2.66997 17.5 3.33301 17.5H15.333C15.9007 17.4984 16.4509 17.3036 16.8931 16.9476C17.3354 16.5917 17.6433 16.0959 17.7663 15.5417L19.1663 9.35002C19.1917 9.22578 19.1883 9.0974 19.1566 8.97465C19.1248 8.85191 19.0654 8.73803 18.983 8.64168ZM4.47467 15.1833C4.43234 15.3713 4.32617 15.5388 4.17423 15.6574C4.02229 15.7759 3.83398 15.8381 3.64134 15.8334H3.33301C3.11199 15.8334 2.90003 15.7456 2.74375 15.5893C2.58747 15.433 2.49967 15.221 2.49967 15V5.00002C2.49967 4.779 2.58747 4.56704 2.74375 4.41076C2.90003 4.25448 3.11199 4.16669 3.33301 4.16669H6.29967C6.4814 4.1572 6.66123 4.20746 6.8117 4.30978C6.96218 4.4121 7.07502 4.56087 7.13301 4.73335L7.58301 6.10002C7.63648 6.25897 7.73667 6.39809 7.87048 6.49919C8.00429 6.60029 8.16549 6.65867 8.33301 6.66668H14.1663C14.3874 6.66668 14.5993 6.75448 14.7556 6.91076C14.9119 7.06704 14.9997 7.279 14.9997 7.50002V8.33335H6.66634C6.47371 8.32864 6.28539 8.39084 6.13345 8.50935C5.98151 8.62786 5.87534 8.79537 5.83301 8.98335L4.47467 15.1833ZM16.1413 15.1833C16.099 15.3713 15.9928 15.5388 15.8409 15.6574C15.689 15.7759 15.5006 15.8381 15.308 15.8334H6.00801C6.05105 15.7405 6.08186 15.6425 6.09967 15.5417L7.33301 10H17.333L16.1413 15.1833Z"
                                                         fill="#FCFCFC" />
                                                 </svg>
+                                                GPS
                                             </a>
                                         @endif
                                     </td>
 
-                                    <td>{{ $operation->userAdmin?->name }}</td>
+                                    <td class="text-center">{{ $operation->userAdmin?->name }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-12 col-md-2">
                         <div class="form-group">
                             {{ Form::label('hectares', 'Total Hectareas') }}
@@ -423,51 +512,51 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                {{ $operations->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+            </div> --}}
+                <div class="card-footer">
+                    {{ $operations->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@livewire('operation-modal')
+    @livewire('operation-modal')
 
-<script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
-<script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
 
-<script>
-    function toggleColumnsOnLoad() {
-        document.querySelectorAll(".toggle-column").forEach(checkbox => {
-            let column = checkbox.getAttribute("data-column");
-            let table = document.querySelector(".table_3");
-
-            table.querySelectorAll("tr").forEach(row => {
-                let cell = row.children[column];
-                if (cell) {
-                    cell.classList.toggle("hidden", !checkbox.checked);
-                }
-            });
-        });
-    }
-
-    // Se ejecuta inmediatamente antes de que la página se muestre
-    toggleColumnsOnLoad();
-
-    // Agrega los eventos después de que el DOM cargue
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".toggle-column").forEach(function (checkbox) {
-            checkbox.addEventListener("change", function () {
-                let column = this.getAttribute("data-column");
+    <script>
+        function toggleColumnsOnLoad() {
+            document.querySelectorAll(".toggle-column").forEach(checkbox => {
+                let column = checkbox.getAttribute("data-column");
                 let table = document.querySelector(".table_3");
 
                 table.querySelectorAll("tr").forEach(row => {
                     let cell = row.children[column];
                     if (cell) {
-                        cell.classList.toggle("hidden", !this.checked);
+                        cell.classList.toggle("hidden", !checkbox.checked);
                     }
                 });
             });
+        }
+
+        // Se ejecuta inmediatamente antes de que la página se muestre
+        toggleColumnsOnLoad();
+
+        // Agrega los eventos después de que el DOM cargue
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".toggle-column").forEach(function(checkbox) {
+                checkbox.addEventListener("change", function() {
+                    let column = this.getAttribute("data-column");
+                    let table = document.querySelector(".table_3");
+
+                    table.querySelectorAll("tr").forEach(row => {
+                        let cell = row.children[column];
+                        if (cell) {
+                            cell.classList.toggle("hidden", !this.checked);
+                        }
+                    });
+                });
+            });
         });
-    });
-</script>
+    </script>

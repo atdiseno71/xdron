@@ -28,6 +28,21 @@
         .table_3 th.hidden {
             display: none;
         }
+
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .table_3 tfoot tr {
+            height: 2rem;
+        }
+
+        .table_3 tfoot tr td {
+            font-size: .7rem;
+        }
     </style>
 @endsection
 

@@ -49,4 +49,10 @@ return [
         'icon' => 'fas fa-box',
         'can' => 'type-products.index'
     ],
+    [
+        'text' => 'Zona',
+        'url' => 'zones',
+        'icon' => 'fas fa-map',
+        'can' => 'zones.index'
+    ],
 ];

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Zone
+Zonas
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
 
                         <span id="card_title">
-                            {{ __('Zone') }}
+                            {{ __('Zonas') }}
                         </span>
 
                         <div class="float-right">
@@ -35,23 +35,17 @@
                             <thead class="thead">
                                 <tr>
                                     <th>No</th>
-
-                                    <th>Name</th>
-                                    <th>Observations</th>
-
-                                    <th></th>
+                                    <th>Nombre</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($zones as $zone)
                                     <tr>
                                         <td>{{ ++$i }}</td>
-
                                         <td>{{ $zone->name }}</td>
-                                        <td>{{ $zone->observations }}</td>
-
                                         <td>
-                                            <form action="{{ route('zones.destroy', $zone->id) }}" method="POST">
+                                            <form action="{{ route('zones.destroy', $zone->id) }}" method="POST" class="form-delete">
                                                 @can('zones.show')
                                                     <a class="btn btn-sm btn-primary "
                                                         href="{{ route('zones.show', $zone->id) }}"><i
@@ -76,8 +70,15 @@
                         </table>
                     </div>
                 </div>
+                <div class="card-footer">
+                    {{ $zones->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                </div>
             </div>
-            {!! $zones->links() !!}
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/plugins/sweetalert.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatableProduct.js') }}"></script>
 @endsection
