@@ -51,9 +51,9 @@
                     <label for="input-logo">{{ __('Subir record') }}:</label>
                     <div class="card img-logo">
                         <input type="file" name="evidence_record" class="input-img-logo" accept="image/*"
-                            id="input-icono" value="{{ $operation->evidence_record ?? 'images/default.png' }}" />
-                        <img id="img-icono" src="{{ asset($operation->evidence_record ?? 'images/default.png') }}"
-                            height="100px" />
+                            id="input_evidence_record" value="{{ $operation->evidence_record ?? 'images/default.png' }}" />
+                        <img id="img-icono" class="icono_evidence_record" src="{{ asset($operation->evidence_record ?? 'images/default.png') }}"
+                            height="110px" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
@@ -67,9 +67,9 @@
                     <label for="input-logo">{{ __('Subir informe de lavado') }}:</label>
                     <div class="card img-logo">
                         <input type="file" name="evidence_aplication" class="input-img-logo" accept="image/*"
-                            id="input-icono" value="{{ $operation->evidence_aplication ?? 'images/default.png' }}" />
-                        <img id="img-icono" src="{{ asset($operation->evidence_aplication ?? 'images/default.png') }}"
-                            height="100px" />
+                            id="input_evidence_aplication" value="{{ $operation->evidence_aplication ?? 'images/default.png' }}" />
+                        <img id="img-icono" class="icono_evidence_aplication" src="{{ asset($operation->evidence_aplication ?? 'images/default.png') }}"
+                            height="110px" />
                         <div class="icon-wrapper">
                             <i class="fa fa-upload fa-5x"></i>
                         </div>
