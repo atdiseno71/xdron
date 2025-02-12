@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 trait Template
 {
 
+    function containsString(string $haystack, string $needle): bool
+    {
+        return str_contains($haystack, $needle);
+    }
+
     public static function getConsecutive(){
         // Obtener el último registro
         $last_record = Operation::orderBy('id', 'desc')->first();
