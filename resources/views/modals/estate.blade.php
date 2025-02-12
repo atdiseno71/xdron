@@ -11,13 +11,11 @@
             </div>
             <div class="modal-body">
                 <!-- Aquí coloca el formulario del modal -->
-                <form method="POST" action="{{ route('estates.uploadEstate') }}" role="form"
-                    enctype="multipart/form-data" id="formEstate">
+                <form action="{{ route('estates.uploadEstate') }}"
+                    enctype="multipart/form-data" id="form_Estate">
                     @csrf
-
                     <div class="box box-info padding-1">
                         <div class="box-body">
-
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group">
@@ -46,7 +44,6 @@
                         </div>
                         @include('layouts.btn-submit')
                     </div>
-
                 </form>
             </div>
         </div>

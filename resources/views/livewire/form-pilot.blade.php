@@ -170,7 +170,7 @@
                     <div class="form-group">
                         <label for="estate_id_{{ $numberAreThere }}">Hacienda</label>
                         <select name="estate_id_{{ $numberAreThere }}" id="estate_id_{{ $numberAreThere }}"
-                            class="form-control estate-selector {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
+                            class="estate_id form-control estate-selector {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
                             placeholder="Seleccione una hacienda" data-key="{{ $numberAreThere }}">
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($estates as $estateKey => $estateValue)
@@ -425,7 +425,7 @@
         // Validar si no hay vuelos, mostrar alerta de hacienda
         window.onload = function() {
             var miInput = document.getElementById('thereFlights');
-            
+
             // Verificar el valor al cargar la página
             if (miInput.value.trim().toLowerCase() === '1') {
                 alertCustom('info', '¡Atención! ', 'Antes de ingresar cualquier registro, asegúrate de registrar primero tu hacienda para evitar perder información importante.');
