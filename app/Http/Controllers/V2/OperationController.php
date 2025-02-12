@@ -142,19 +142,22 @@ class OperationController extends Controller
             // Folder donde se guardan las evidencias
             $folder = 'evidences/_' . $operation->id . '/';
             // Verificamos si hay imaganes de evidencia record
-            if ($request->has('evidence_record')) {
+            if ($request->hasFile('evidence_record')) {
                 // Guardamos lo que viene del request
-                $files = $request['evidence_record'];
                 $handle_1 = $this->uploadImage($request, $operation->id, $folder, 'evidence_record');
-                $operation->update(['evidence_record' => $handle_1['response']['name']]);
+                $file_name_1 = $handle_1['response']['name'];
+                if (!$this->containsString($file_name_1, '.tmp')) {
+                    $operation->update(['evidence_record' => $handle_1['response']['name']]);
+                }
             }
-
             // Verificamos si hay imaganes de evidencia de lavado
-            if ($request->has('evidence_aplication')) {
+            if ($request->hasFile('evidence_aplication')) {
                 // Guardamos lo que viene del request
-                $files = $request['evidence_aplication'];
-                $handle_1 = $this->uploadImage($request, $operation->id, $folder, 'evidence_aplication');
-                $operation->update(['evidence_aplication' => $handle_1['response']['name']]);
+                $handle_2 = $this->uploadImage($request, $operation->id, $folder, 'evidence_aplication');
+                $file_name_2 = $handle_2['response']['name'];
+                if (!$this->containsString($file_name_2, '.tmp')) {
+                    $operation->update(['evidence_aplication' => $handle_2['response']['name']]);
+                }
             }
         }
 
@@ -312,7 +315,7 @@ class OperationController extends Controller
 
             if ($role_user == config('roles.super_root') || $role_user == config('roles.root')) {
                 request()->validate(Operation::$rules);
-                
+                unset($data['evidence_record'], $data['evidence_aplication']);
                 $operation->fill($data);
 
                 $save = $operation->save();
@@ -332,6 +335,7 @@ class OperationController extends Controller
                     $operation->update(['file_evidence' => $response->getData()]);
                 }
             } else if ($role_user == config('roles.piloto')) {
+                unset($data['evidence_record'], $data['evidence_aplication']);
                 $operation->fill($data);
                 $save = $operation->save();
                 $operation->update(['status_id' => config('status.ENR')]);
@@ -398,15 +402,23 @@ class OperationController extends Controller
             }
 
             // Verificamos si hay imaganes de evidencia record
-            if ($request->has('evidence_record')) {
-                $handle_1 = $this->uploadImage($request, $detail_operation_new->id, $folder, 'evidence_record');
-                $operation->update(['evidence_record' => $handle_1['response']['name']]);
+            if ($request->hasFile('evidence_record')) {
+                // Guardamos lo que viene del request
+                $handle_1 = $this->uploadImage($request, $operation->id, $folder, 'evidence_record');
+                $file_name_1 = $handle_1['response']['name'];
+                if (!$this->containsString($file_name_1, '.tmp')) {
+                    $operation->update(['evidence_record' => $handle_1['response']['name']]);
+                }
             }
 
             // Verificamos si hay imaganes de evidencia de lavado
-            if ($request->has('evidence_aplication')) {
-                $handle_1 = $this->uploadImage($request, $detail_operation_new->id, $folder, 'evidence_aplication');
-                $operation->update(['evidence_aplication' => $handle_1['response']['name']]);
+            if ($request->hasFile('evidence_aplication')) {
+                // Guardamos lo que viene del request
+                $handle_2 = $this->uploadImage($request, $operation->id, $folder, 'evidence_aplication');
+                $file_name_2 = $handle_2['response']['name'];
+                if (!$this->containsString($file_name_2, '.tmp')) {
+                    $operation->update(['evidence_aplication' => $handle_2['response']['name']]);
+                }
             }
 
             /* CREAMOS LA NOTIFICACION */
