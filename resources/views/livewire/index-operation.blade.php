@@ -24,7 +24,7 @@
                         $operationsJson = $operations_collection;
                     @endphp
                     <div class="col-md-2">
-                        @if (!$is_client)
+                        @if ($is_root || $is_pilot)
                             <a target="_blank"
                                 href="{{ route('downloadExcelOperacion', ['cXVlcnk' => $operationsJson]) }}"
                                 class="dt-button buttons-excel buttons-html5 btn btn-success" data-placement="left">
@@ -119,12 +119,13 @@
                                     <input type="checkbox" class="form-check-input toggle-column" data-column="1" checked>
                                     <label class="form-check-label"> Fecha Aplic</label>
                                 </div>
-                                @unless (!$is_pilot)
+                                @if ($is_root)
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input toggle-column" data-column="2" checked>
+                                        <input type="checkbox" class="form-check-input toggle-column" data-column="2"
+                                            checked>
                                         <label class="form-check-label"> Piloto</label>
                                     </div>
-                                @endunless
+                                @endif
                             </div>
                             <div class="col-md-2">
                                 <div class="form-check">
@@ -178,7 +179,7 @@
                                     <input type="checkbox" class="form-check-input toggle-column" data-column="12">
                                     <label class="form-check-label"> Ste</label>
                                 </div>
-                                @unless (!$is_pilot)
+                                @if ($is_root)
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input toggle-column" data-column="13"
                                             checked>
@@ -189,7 +190,7 @@
                                             checked>
                                         <label class="form-check-label"> Tot Hrs</label>
                                     </div>
-                                @endunless
+                                @endif
                             </div>
                             <div class="col-md-2">
                                 <div class="form-check">
@@ -226,9 +227,9 @@
                                 <th>No</th>
                                 {{-- <th></th> --}}
                                 <th>Fecha Aplic</th>
-                                @unless (!$is_pilot && !$is_client)
+                                @if ($is_root)
                                     <th>Piloto</th>
-                                @endunless
+                                @endif
                                 <th>TANQ</th>
                                 <th>TANQ 2</th>
                                 <th>Dron</th>
@@ -241,10 +242,10 @@
                                 <th>Hda</th>
                                 <th>Ste</th>
 
-                                @unless (!$is_pilot && !$is_client)
+                                @if ($is_root)
                                     <th>Tot Bat/Vls</th>
                                     <th>Tot Hrs</th>
-                                @endunless
+                                @endif
                                 <th>Has/hrs</th>
                                 <th>Has/bat</th>
 
@@ -267,7 +268,7 @@
                                 <td><strong>TOT HAS</strong></td>
                                 <td></td>
                                 {{-- END:TOTAL HECTAREAS --}}
-                                @can('operations.store')
+                                @if ($is_root)
                                     {{-- BEGIN:TOTAL BATERIAS --}}
                                     <td><strong>TOT Bat/Vls</strong></td>
                                     <td></td>
@@ -284,7 +285,7 @@
                                     {{-- END:TOTAL HECTAREAS/BATERIAS --}}
                                 @else
                                     <td colspan="{{ $is_client ? '11' : '12' }}"></td>
-                                @endcan
+                                @endif
                             </tr>
                             <tr>
                                 {{-- BEGIN:TOTAL HECTAREAS --}}
@@ -292,7 +293,7 @@
                                 <td>{{ $hectares }}</td>
                                 <td></td>
                                 {{-- END:TOTAL HECTAREAS --}}
-                                @can('operations.store')
+                                @if ($is_root)
                                     {{-- BEGIN:TOTAL BATERIAS --}}
                                     <td>{{ $batteries }}</td>
                                     <td></td>
@@ -309,7 +310,7 @@
                                     {{-- END:TOTAL HECTAREAS/BATERIAS --}}
                                 @else
                                     <td colspan="{{ $is_client ? '11' : '12' }}"></td>
-                                @endcan
+                                @endif
                             </tr>
                         </tfoot>
                         <tbody>
@@ -376,9 +377,9 @@
                                     </td> --}}
 
                                     <td title="{{ $date_operation }}">{{ $date_operation }}</td>
-                                    @unless (!$is_pilot && !$is_client)
+                                    @if ($is_root)
                                         <td title="{{ $name_pilot }}">{{ $name_pilot }}</td>
-                                    @endunless
+                                    @endif
                                     <td title="{{ $name_assistant_one }}">{{ $name_assistant_one }}</td>
                                     <td title="{{ $name_assistant_two }}">{{ $name_assistant_two }}</td>
                                     <td title="{{ $drone_enrollment }}">{{ $drone_enrollment }}</td>
@@ -395,16 +396,16 @@
                                         {{ $names_lucks }}
                                     </td>
 
-                                    @unless (!$is_pilot && !$is_client)
+                                    @if ($is_root)
                                         <td>{{ $number_flights }}</td>
                                         <td>{{ $hour_flights }}</td>
-                                    @endunless
+                                    @endif
 
                                     <td>{{ $divide1 }}</td>
                                     <td>{{ $divide2 }}</td>
 
                                     <td>{{ $operation->created_at?->format('d/m/Y') }}</td>
-                                    <td>{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
+                                    <td class="{{ $operation->status_id == 4 ? 'text-green' : 'text-red' }}">{{ $operation->status?->name ?? 'Sin vuelos.' }}</td>
 
                                     <td>
                                         @can('operations.edit')
@@ -451,7 +452,7 @@
                                     </td>
 
                                     <td>
-                                        @if (auth()->user()->hasRole('super.root') || auth()->user()->hasRole('root') || auth()->user()->hasRole('cliente'))
+                                        @if ($is_root || $is_client)
                                             <a class="btn btn-sm btn-warning text-white"
                                                 href="{{ route('operations.download', $operation->id) }}">
                                                 <svg width="18" height="18" viewBox="0 0 18 18"

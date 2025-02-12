@@ -48,6 +48,8 @@ class IndexOperation extends Component
         $is_pilot = $rol === config('roles.piloto');
         $is_client = $rol === config('roles.cliente');
 
+        $is_root = ($rol === config('roles.super_root') || $rol === config('roles.root'));
+
         $assistent_one = $this->assistent_one;
         $assistent_two = $this->assistent_two;
         $type_product = $this->typeProduct;
@@ -174,6 +176,7 @@ class IndexOperation extends Component
             'hectares_batteries',
             'is_pilot',
             'is_client',
+            'is_root',
         ));
     }
 
