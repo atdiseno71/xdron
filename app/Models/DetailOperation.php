@@ -36,6 +36,7 @@ class DetailOperation extends Model
     protected $table = "detail_operation";
 
     static $rules = [
+        'observation' => 'required',
     ];
 
     public function __construct(array $attributes = [])

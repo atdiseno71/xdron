@@ -218,7 +218,7 @@
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('observation_' . $numberAreThere, 'Observaciones') }}
-                        {{ Form::textArea('observation_' . $numberAreThere, $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $numberAreThere, 'placeholder' => 'Ingrese observaciones de la operacion']) }}
+                        {{ Form::textArea('observation_' . $numberAreThere, $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $numberAreThere, 'placeholder' => 'Ingrese observaciones de la operacion', 'required' => 'required']) }}
                         {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                     <div class="col-12 col-md-12">
                         <div class="form-group">
                             {{ Form::label('observation_' . $key + 1, 'Observaciones') }}
-                            {{ Form::textArea('observation_' . $key + 1, $detail->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $key + 1, 'placeholder' => 'Ingrese observaciones de la operacion']) }}
+                            {{ Form::textArea('observation_' . $key + 1, $detail->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $key + 1, 'placeholder' => 'Ingrese observaciones de la operacion', 'required' => 'required']) }}
                             {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                         </div>
                     </div>
