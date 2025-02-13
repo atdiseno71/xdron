@@ -429,7 +429,7 @@
 
                                     <td>
                                         @can('operations.show')
-                                            <a class="btn btn-sm btn-primary btn-actions" target="_blank"
+                                            <a class="btn btn-sm btn-primary text-white btn-actions d-flex align-items-center gap-1" target="_blank"
                                                 href="{{ route('operations.show', $operation->id) }}">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -453,7 +453,7 @@
 
                                     <td>
                                         @if ($is_root || $is_client)
-                                            <a class="btn btn-sm btn-warning text-white btn-actions"
+                                            <a class="btn btn-sm btn-warning text-white btn-actions d-flex align-items-center gap-1"
                                                 href="{{ route('operations.downloadzip', ['id' => $operation->id, 'type' => 'downloadzip']) }}">
                                                 <svg width="18" height="18" viewBox="0 0 18 18"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -467,9 +467,8 @@
                                     </td>
                                     <td>
                                         @if ($is_root || $is_client)
-                                            <a class="btn btn-sm btn-secondary text-white btn-actions"
-                                                href="{{ route('operations.downloadpdf', ['id' => $operation->id, 'type' => 'downloadpdf']) }}"><i class="fa fa-fw fa-file-pdf"></i>
-                                                PDF
+                                            <a class="btn btn-sm btn-secondary text-white btn-actions d-flex align-items-center gap-1"
+                                                href="{{ route('operations.downloadpdf', ['id' => $operation->id, 'type' => 'downloadpdf']) }}"><i class="fa fa-fw fa-file-pdf"></i>PDF
                                             </a>
                                         @endif
                                     </td>
