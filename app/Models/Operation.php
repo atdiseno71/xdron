@@ -52,7 +52,13 @@ class Operation extends Model
         'pilot_id' => 'required',
         'assistant_id_one' => 'required',
         'date_operation' => 'required',
+        // nuevos
+        'dron_id' => 'required',
+        'download' => 'required',
+        'zone_id' => 'required',
         'type_product_id' => 'required',
+        'number_flights' => 'required',
+        'hour_flights' => 'required',
     ];
 
     static $rulesAccept = [
