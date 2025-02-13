@@ -43,6 +43,12 @@
         .table_3 tfoot tr td {
             font-size: .7rem;
         }
+
+        .btn-actions {
+            padding: 0 !important;
+            /* margin: 0 !important; */
+            margin-left: 2px !important;
+        }
     </style>
 @endsection
 

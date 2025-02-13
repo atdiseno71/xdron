@@ -89,7 +89,7 @@ class OperationController extends Controller
         $user = User::where('id', Auth::id())->with('roles')->first();
 
         $role_user = $user->roles[0]->name;
-        
+
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
         $consecutive = $this->getConsecutive();
@@ -159,6 +159,15 @@ class OperationController extends Controller
                     $operation->update(['evidence_aplication' => $handle_2['response']['name']]);
                 }
             }
+            // Verificamos si hay imaganes de evidencia de lavado
+            if ($request->hasFile('evidence_pdf')) {
+                // Guardamos lo que viene del request
+                $handle_3 = $this->uploadPdf($request, $operation->id, $folder, 'evidence_pdf');
+                $file_name_3 = $handle_3['response']['name'];
+                if (!$this->containsString($file_name_3, '.tmp')) {
+                    $operation->update(['evidence_pdf' => $handle_3['response']['name']]);
+                }
+            }
         }
 
         /* CREAMOS LA NOTIFICACION */
@@ -224,21 +233,35 @@ class OperationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function download($id)
+    public function downloadZip($id)
     {
-        // Buscamos la operacion
+        return $this->handleDownload($id, 'file_evidence', 'ZIP');
+    }
+
+    public function downloadPdf($id)
+    {
+        return $this->handleDownload($id, 'evidence_pdf', 'PDF');
+    }
+
+    private function handleDownload($id, $field, $fileType)
+    {
+        // Buscamos la operación
         $operation = Operation::find($id);
 
-        if (is_null($operation->file_evidence) || empty($operation->file_evidence)) {
-
+        if (!$operation || empty($operation->$field)) {
             return redirect()->route('operations.index')
-                ->with('error', 'No existe el archivo que intenta descargar.');
+                ->with('error', "No existe el archivo $fileType que intenta descargar.");
         }
 
-        // Guardamos la ruta
-        $path = public_path($operation->file_evidence);
+        // Definimos la ruta del archivo
+        $path = public_path($operation->$field);
 
-        // Retornarmos la descarga
+        if (!file_exists($path)) {
+            return redirect()->route('operations.index')
+                ->with('error', "El archivo $fileType no se encuentra en el servidor.");
+        }
+
+        // Retornamos la descarga
         return response()->download($path);
     }
 
@@ -259,8 +282,8 @@ class OperationController extends Controller
         $where_clause = $matches[1] ?? 'No WHERE found';
 
         $operations = Operation::whereRaw($where_clause)
-                ->orderBy('id', 'DESC')
-                ->get();      
+            ->orderBy('id', 'DESC')
+            ->get();
 
         return Excel::download(new OperationExport($operations), 'operaciones.xlsx');
     }
@@ -280,13 +303,12 @@ class OperationController extends Controller
         $user = User::where('id', Auth::id())->with('roles')->first();
 
         $role_user = $user->roles[0]->name;
-        
+
         $types_documents = TypeDocument::pluck('name as label', 'id as value');
 
         $clients = Client::pluck('social_reason as label', 'id as value');
 
         return view('operation.edit', compact('operation', 'role_user', 'types_documents', 'clients'));
-
     }
 
     /**
@@ -303,7 +325,7 @@ class OperationController extends Controller
         ini_set('memory_limit', '20000M');
         ini_set('upload_max_filesize', '20M');
         ini_set('post_max_size', '21M');
-        
+
         $data = $request->all();
 
         try {
@@ -334,8 +356,21 @@ class OperationController extends Controller
                     // Guardamos el zip en el campo
                     $operation->update(['file_evidence' => $response->getData()]);
                 }
+
+                // subir pdf
+                if ($request->has('evidence_pdf')) {
+                    // Guardamos el archivo pdf
+                    $response = $this->uploadPdf($request, $operation->id, "images/evidences", "evidence_pdf");
+                    // Si no se guarda, me salte el error en la operacion
+                    if (!($response['status'] == 1 || $response['status'] == '1' || $response['status'])) {
+                        return redirect()->route('operations.index')
+                            ->with('error', $response['message'] . " - " . $response['status']);
+                    }
+                    // Guardamos el pdf en el campo
+                    $operation->update(['evidence_pdf' => $response['name']]);
+                }
             } else if ($role_user == config('roles.piloto')) {
-                unset($data['evidence_record'], $data['evidence_aplication']);
+                unset($data['evidence_record'], $data['evidence_aplication'], $data['evidence_pdf']);
                 $operation->fill($data);
                 $save = $operation->save();
                 $operation->update(['status_id' => config('status.ENR')]);
@@ -530,7 +565,8 @@ class OperationController extends Controller
             ->with('success', 'Puede continuar con su labor.');
     }
 
-    public function storeObservations(Request $request, $is_new, $id) {
+    public function storeObservations(Request $request, $is_new, $id)
+    {
 
         $data = $request->all();
         $data['operation_id'] = $id;
@@ -547,7 +583,5 @@ class OperationController extends Controller
             $observations->fill($data);
             $observations->save();
         }
-
     }
-
 }

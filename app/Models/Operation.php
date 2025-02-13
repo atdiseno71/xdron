@@ -77,6 +77,7 @@ class Operation extends Model
         'date_operation',
         'evidence_record',
         'evidence_aplication',
+        'evidence_pdf',
         'dron_id',
         'zone_id',
         'number_flights',

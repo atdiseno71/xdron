@@ -50,26 +50,26 @@
 
 @section('js')
     <script>
-      $(document).ready(function() {
+        $(document).ready(function() {
 
             function handleFileInputChange(inputSelector, imageSelector) {
-               const inputElement = $(inputSelector);
+                const inputElement = $(inputSelector);
 
-               if (inputElement.length) {
-                  inputElement.on('change', function(event) {
+                if (inputElement.length) {
+                    inputElement.on('change', function(event) {
                         const file = event.target.files[0];
                         if (file) {
-                           const reader = new FileReader();
-                           reader.onload = function(e) {
-                              $(imageSelector).attr('src', e.target.result);
-                              console.log('Imagen cargada correctamente.');
-                           };
-                           reader.readAsDataURL(file);
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                $(imageSelector).attr('src', e.target.result);
+                                console.log('Imagen cargada correctamente.');
+                            };
+                            reader.readAsDataURL(file);
                         }
-                  });
-               } else {
-                  console.error(`Elemento con ID '${inputSelector}' no encontrado.`);
-               }
+                    });
+                } else {
+                    console.error(`Elemento con ID '${inputSelector}' no encontrado.`);
+                }
             }
 
             // Cargar eventos de previsualizar imagenes

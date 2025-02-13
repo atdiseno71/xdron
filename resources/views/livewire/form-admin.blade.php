@@ -115,6 +115,21 @@
                         @endif                    
                     </section>
                 </div>
+            </div><br>
+            <div class="col-12 col-md-12 section-evidence">
+                <div class="form-group">
+                    {{ Form::label('evidence_pdf', 'Subir Evidencia (PDF)') }}
+                    <section id="multi-selector-uniq">
+                        <input class="form-control" id="evidence_pdf" name="evidence_pdf" type="file" accept="application/pdf">
+                        @if (!empty($operation->evidence_pdf) || !is_null($operation->evidence_pdf))
+                            <ul id="preview-files">
+                                <li draggable="true" class="section-evidence-preview-zip">
+                                    <p>Ya ha subido un archivo (PDF).</p>
+                                </li>
+                            </ul>
+                        @endif                    
+                    </section>
+                </div>
             </div>
         @endif        
         {{-- FIN DE ESPACIO PARA IMAGEN --}}

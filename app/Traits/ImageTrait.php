@@ -60,7 +60,7 @@ trait ImageTrait
         $doc_path = "$model/$id/";
 
         try {
-            if (Resources::isImagen($request->file($input_name)->getMimeType())){
+            if (Resources::isImagen($request->file($input_name)->getMimeType())) {
                 if ($request->hasFile($input_name)) {
                     $file = $request->file($input_name);
                     $rand = strtolower(Str::random(10));
@@ -110,7 +110,8 @@ trait ImageTrait
     }
 
     /* SUBIR DOCUMENTOS A TRAVES DEL DROPZONE */
-    public function uploadAll($request, $id, $model, $name_file) {
+    public function uploadAll($request, $id, $model, $name_file)
+    {
 
         $files = $request->file($name_file);
         // If the variable '$files' is not empty, we update the registry with the new images
@@ -157,7 +158,8 @@ trait ImageTrait
     }
 
     /* SUBIR DOCUMENTOS A TRAVES DEL DROPZONE */
-    public function uploadImage($request, $id, $model, $name_file) {
+    public function uploadImage($request, $id, $model, $name_file)
+    {
 
         $file = $request->file($name_file);
         // If the variable '$file' is not empty, we update the registry with the new images
@@ -201,8 +203,54 @@ trait ImageTrait
         }
     }
 
+    // subir pdfs
+    public function uploadPdf($request, $id, $model, $name_file)
+    {
+        $file = $request->file($name_file);
+
+        // Si el archivo no está presente, retornamos false
+        if (!$file) {
+            return [
+                'status' => false,
+                'name' => null,
+                'message' => 'No se ha proporcionado ningún archivo.'
+            ];
+        }
+
+        try {
+            // Validación del archivo
+            $request->validate([
+                "$name_file" => 'bail|required|mimes:pdf|max:10048',
+            ]);
+
+            $path = public_path("$model/");
+
+            if (!File::exists($path)) {
+                File::makeDirectory($path, 0777, true, true);
+            }
+
+            $filename = strtolower(Str::random(10)) . '.pdf';
+
+            // Mover el archivo a la carpeta deseada
+            $file->move($path, $filename);
+
+            return [
+                'status' => true,
+                'name' => "$model/$filename",
+                'message' => 'Se ha guardado con éxito'
+            ];
+        } catch (\Exception $ex) {
+            return [
+                'status' => false,
+                'name' => null,
+                'message' => 'Error al guardar el archivo: ' . $ex->getMessage()
+            ];
+        }
+    }
+
     /* ACTUALIZAR DOCUMENTOS QUE VIENEN A TRAVES DEL DROPZONE */
-    public function updateAllFiles($request, $id, $model, $name_file) {
+    public function updateAllFiles($request, $id, $model, $name_file)
+    {
 
         try {
             $files = $request->file($name_file);
@@ -224,11 +272,11 @@ trait ImageTrait
                 'response' => ['success' => false, 'payload' => $ex->getMessage()]
             ];
         }
-
     }
 
     // Subir archivos zip
-    public function uploadZip($request, $id, $model, $sub_model, $name_file) {
+    public function uploadZip($request, $id, $model, $sub_model, $name_file)
+    {
 
         try {
             // Traemos el archivo
@@ -238,19 +286,19 @@ trait ImageTrait
             // Un nombre cualquiera de momento
             $name = 'evidence';
 
-            if($file->getSize() == 0) throw new Exception("No se ha recibido un archivo");
+            if ($file->getSize() == 0) throw new Exception("No se ha recibido un archivo");
 
             // creamos las carpetas
-            if( ! is_dir(public_path($model)) ) mkdir(public_path($model));
-            if( ! is_dir(public_path("$model/_$id")) ) mkdir(public_path("$model/_$id"));
-            if( ! is_dir(public_path("$model/_$id/$sub_model")) ) mkdir(public_path("$model/_$id/$sub_model"));
+            if (! is_dir(public_path($model))) mkdir(public_path($model));
+            if (! is_dir(public_path("$model/_$id"))) mkdir(public_path("$model/_$id"));
+            if (! is_dir(public_path("$model/_$id/$sub_model"))) mkdir(public_path("$model/_$id/$sub_model"));
 
-            move_uploaded_file( $request[$name_file], "$path/$name.zip" );
+            move_uploaded_file($request[$name_file], "$path/$name.zip");
 
-            $zipppito = new ZipArchive( );
-            $response = $zipppito->open( "$path/$name.zip", ZipArchive::RDONLY );
+            $zipppito = new ZipArchive();
+            $response = $zipppito->open("$path/$name.zip", ZipArchive::RDONLY);
 
-            if( $response !== true ){
+            if ($response !== true) {
                 $errors = [
                     ZipArchive::ER_EXISTS  =>  "El fichero ya existe.",
                     ZipArchive::ER_INCONS  =>  "Archivo zip inconsistente.",
@@ -263,7 +311,7 @@ trait ImageTrait
                     ZipArchive::ER_SEEK  =>  "Error de búsqueda."
                 ];
 
-                $message = $errors[ $response ];
+                $message = $errors[$response];
                 throw new Exception("$message");
             }
 
@@ -276,8 +324,5 @@ trait ImageTrait
         } catch (Exception $ex) {
             return response()->json($ex->getMessage(), 422);
         }
-
-
     }
-
 }

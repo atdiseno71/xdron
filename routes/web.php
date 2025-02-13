@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /* USUARIOS */
     Route::resource('users', UserController::class)
-        ->only(['index','create','store','edit','update','destroy'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
         ->names('users');
     // Asignar roles a usuarios
     Route::post('users/{id}', [UserController::class, 'active'])->name('users.active');
@@ -63,8 +63,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('type-products', TypeProductController::class)->names('type-products');
     Route::resource('zones', ZoneController::class)->names('zones');
 
-    // Descargar zip
-    Route::get('downloadZip/{id}', [OperationController::class, 'download'])->name('operations.download');
+    // Descargar ZIP
+    Route::get('downloadZip/{id}', [OperationController::class, 'downloadZip'])->name('operations.downloadzip');
+
+    // Descargar PDF
+    Route::get('downloadPdf/{id}', [OperationController::class, 'downloadPdf'])->name('operations.downloadpdf');
     // Descargar excel
     Route::get('downloadExcelOperacion', [OperationController::class, 'downloadExcelOperacion'])->name('downloadExcelOperacion');
 
@@ -84,12 +87,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getLucks', [LuckController::class, 'getSelects']);
     Route::get('getDrons', [DronController::class, 'getSelects']);
     Route::get('getLucks', [OperationController::class, 'getLucksByClient'])->name('lucks.getLucks');
-
 });
 
 // Auth::routes();
 //Personalizamos las vistas del Auth
-Route::namespace('Auth')->group(function(){
+Route::namespace('Auth')->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login']);
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');

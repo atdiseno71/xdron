@@ -257,7 +257,7 @@
                                         Acciones
                                     @endcan
                                 </th>
-                                <th colspan="2">Archivos</th>
+                                <th colspan="3">Archivos</th>
                                 <th>Administrador</th>
                             </tr>
                         </thead>
@@ -284,7 +284,7 @@
                                     <td colspan="7"></td>
                                     {{-- END:TOTAL HECTAREAS/BATERIAS --}}
                                 @else
-                                    <td colspan="{{ $is_client ? '11' : '12' }}"></td>
+                                    <td colspan="{{ $is_client ? '12' : '13' }}"></td>
                                 @endif
                             </tr>
                             <tr>
@@ -429,7 +429,7 @@
 
                                     <td>
                                         @can('operations.show')
-                                            <a class="btn btn-sm btn-primary" target="_blank"
+                                            <a class="btn btn-sm btn-primary btn-actions" target="_blank"
                                                 href="{{ route('operations.show', $operation->id) }}">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -453,8 +453,8 @@
 
                                     <td>
                                         @if ($is_root || $is_client)
-                                            <a class="btn btn-sm btn-warning text-white"
-                                                href="{{ route('operations.download', $operation->id) }}">
+                                            <a class="btn btn-sm btn-warning text-white btn-actions"
+                                                href="{{ route('operations.downloadzip', ['id' => $operation->id, 'type' => 'downloadzip']) }}">
                                                 <svg width="18" height="18" viewBox="0 0 18 18"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -462,6 +462,14 @@
                                                         fill="#FCFCFC" />
                                                 </svg>
                                                 GPS
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($is_root || $is_client)
+                                            <a class="btn btn-sm btn-secondary text-white btn-actions"
+                                                href="{{ route('operations.downloadpdf', ['id' => $operation->id, 'type' => 'downloadpdf']) }}"><i class="fa fa-fw fa-file-pdf"></i>
+                                                PDF
                                             </a>
                                         @endif
                                     </td>
