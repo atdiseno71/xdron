@@ -408,6 +408,41 @@
                 });
             }
 
+            // Bloquear el boton enviar del final
+            $('.btn-submit:eq(1)').prop('disabled', true);
+
+            // Verificar cuando cambien los valores en inputs y selects
+            $('#dron_id, #download, #zone_id, #number_flights, #hour_flights').on('input change', checkFields);
+
+            // Ejecutar la verificación al cargar la página
+            checkFields();
+
+            function checkFields() {
+                var dronId = $('#dron_id').val();
+                var download = $('#download').val();
+                var zone_id = $('#zone_id').val();
+                var numberFlights = $('#number_flights').val();
+                var hour_flights = $('#hour_flights').val();
+
+                if (dronId && download && zone_id && numberFlights && hour_flights) {
+                    $('.duplicarDetalleOperacion').prop('disabled', false);
+                    $('#estate_id_1').prop('disabled', false);
+                    $('#luck_1').prop('disabled', false);
+                    $('#acres_1').prop('disabled', false);
+                    $('#files_1').prop('disabled', false);
+                    $('#observation_1').prop('disabled', false);
+                    $('.btn-submit:eq(1)').prop('disabled', false);
+                } else {
+                    $('.duplicarDetalleOperacion').prop('disabled', true);
+                    $('#estate_id_1').prop('disabled', true);
+                    $('#luck_1').prop('disabled', true);
+                    $('#acres_1').prop('disabled', true);
+                    $('#files_1').prop('disabled', true);
+                    $('#observation_1').prop('disabled', true);
+                    $('.btn-submit:eq(1)').prop('disabled', true);
+                }
+            }
+
         });
     </script>
 @endsection

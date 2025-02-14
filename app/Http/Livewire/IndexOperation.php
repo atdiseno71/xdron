@@ -206,7 +206,7 @@ class IndexOperation extends Component
                     case 'estate':
                         $query->whereHas('details.estate', function ($subquery) use ($list, $cont, $value) {
                             $subquery->where('estate.id', $value);
-                        });                        
+                        });
                         break;
                     case 'date_start':
                         $query->where($list[$cont], '>=', $value);
