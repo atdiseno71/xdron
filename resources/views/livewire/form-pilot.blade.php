@@ -132,7 +132,7 @@
             value="{{ count($operation->details) != 0 ? count($operation->details) : 1 }}">
         {{-- boton para duplicar --}}
         <button type="button" class="btn btn-success btn-block duplicarDetalleOperacion"
-            data-target=".detail-operation">
+            data-target=".detail-operation" disabled>
             <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M14 4C8.225 4 3.5 8.725 3.5 14.5C3.5 20.275 8.225 25 14 25C19.775 25 24.5 20.275 24.5 14.5C24.5 8.725 19.775 4 14 4ZM14 22.8125C9.45 22.8125 5.6875 19.05 5.6875 14.5C5.6875 9.95 9.45 6.1875 14 6.1875C18.55 6.1875 22.3125 9.95 22.3125 14.5C22.3125 19.05 18.55 22.8125 14 22.8125Z"
@@ -171,7 +171,7 @@
                         <label for="estate_id_{{ $numberAreThere }}">Hacienda</label>
                         <select name="estate_id_{{ $numberAreThere }}" id="estate_id_{{ $numberAreThere }}"
                             class="estate_id form-control estate-selector {{ $errors->has('estate_id') ? ' is-invalid' : '' }}"
-                            placeholder="Seleccione una hacienda" data-key="{{ $numberAreThere }}">
+                            placeholder="Seleccione una hacienda" data-key="{{ $numberAreThere }}" disabled>
                             <option value="0" selected>Selecciona una opcion</option>
                             @foreach ($estates as $estateKey => $estateValue)
                                 <option value="{{ $estateKey }}">
@@ -188,14 +188,14 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('luck_' . $numberAreThere, 'Suerte') }}
-                        {{ Form::text('luck_' . $numberAreThere, $detail_operation->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $numberAreThere, 'placeholder' => 'Ingrese la suerte']) }}
+                        {{ Form::text('luck_' . $numberAreThere, $detail_operation->luck, ['class' => 'form-control' . ($errors->has('luck') ? ' is-invalid' : ''), 'id' => 'luck_' . $numberAreThere, 'placeholder' => 'Ingrese la suerte', 'disabled' => 'disabled']) }}
                         {!! $errors->first('luck_', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         {{ Form::label('acres_' . $numberAreThere, 'Hectareas') }}
-                        {{ Form::number('acres_' . $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'step' => 'any', 'min' => '0.1', 'placeholder' => 'Ingrese cant. hectareas']) }}
+                        {{ Form::number('acres_' . $numberAreThere, $detail_operation->acres_1, ['class' => 'form-control' . ($errors->has('acres') ? ' is-invalid' : ''), 'id' => 'acres_' . $numberAreThere, 'step' => 'any', 'min' => '0.1', 'placeholder' => 'Ingrese cant. hectareas', 'disabled' => 'disabled']) }}
                         {!! $errors->first('acres', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -207,7 +207,7 @@
                         {{ Form::label('files_' . $numberAreThere, 'Subir Evidencias (Máximo 7)') }}
                         <section id="multi-selector-uniq">
                             <input class="form-control" id="files_{{ $numberAreThere }}"
-                                name="files_{{ $numberAreThere }}[]" type="file" multiple accept="image/*">
+                                name="files_{{ $numberAreThere }}[]" type="file" multiple accept="image/*" disabled>
                             <ul id="preview-files_{{ $numberAreThere }}"></ul>
                         </section>
                     </div>
@@ -218,7 +218,7 @@
                 <div class="col-12 col-md-12">
                     <div class="form-group">
                         {{ Form::label('observation_' . $numberAreThere, 'Observaciones') }}
-                        {{ Form::textArea('observation_' . $numberAreThere, $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $numberAreThere, 'placeholder' => 'Ingrese observaciones de la operacion', 'required' => 'required']) }}
+                        {{ Form::textArea('observation_' . $numberAreThere, $detail_operation->observation, ['class' => 'form-control' . ($errors->has('observation') ? ' is-invalid' : ''), 'id' => 'observation_' . $numberAreThere, 'placeholder' => 'Ingrese observaciones de la operacion', 'required' => 'required', 'disabled' => 'disabled']) }}
                         {!! $errors->first('observation', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
@@ -432,6 +432,7 @@
                 // alert('¡El valor es true!');
             }
         };
+
     </script>
 
     @forelse ($operation->details as $index => $detail)
